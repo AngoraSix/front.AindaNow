@@ -1,0 +1,63 @@
+.App__Container .Navbar__ProgressBar {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+}
+
+.App__Container--isLoading .Navbar__ProgressBar {
+  display: block;
+}
+
+.App__Container .Navbar__Container {
+  z-index: 1101;
+}
+
+.Navbar__Column {
+  margin: 0 auto;
+}
+
+.Navbar__Column:first-child {
+  margin-left: 0;
+}
+
+.Navbar__Column:last-child {
+  margin-right: 0;
+}
+
+.Navbar__User {
+  display: none;
+}
+
+.Navbar__MenuIcon svg {
+  color: #fff;
+}
+
+.NavbarMenu {
+  z-index: 10 !important;
+}
+
+.Navbar__Logo {
+  width: auto;
+  height: 50px;
+  object-fit: contain;
+}
+
+@media (min-width: 768px) {
+  .Navbar__User {
+    display: block;
+    margin: 0 0 0 auto;
+  }
+
+  .NavbarMenu {
+    display: none !important;
+  }
+
+  .Navbar__Container > div {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}

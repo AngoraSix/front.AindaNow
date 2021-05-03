@@ -1,0 +1,61 @@
+.VehiclesList__Container {
+  padding: 0 20px;
+}
+
+.VehiclesList__Content {
+  position: relative;
+}
+
+.VehiclesList__Toolbar {
+  overflow: hidden;
+  width: calc(100% + 40px);
+  padding: 10px 20px;
+  margin-left: -20px;
+  background-color: #fff;
+  border-bottom: 2px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.DefaultLayout__Body .VehiclesList__Container {
+  padding: 0;
+}
+
+.DefaultLayout__Body .VehiclesList__Toolbar {
+  top: 64px;
+}
+
+.VehiclesList__Toolbar__Column {
+  display: flex;
+}
+
+.VehiclesList__Toolbar__Column > * {
+  margin-top: auto;
+}
+
+.VehiclesList__Grid {
+  display: grid;
+  grid: auto / auto;
+  row-gap: 20px;
+  column-gap: 20px;
+  padding: 20px 0;
+}
+
+.VehiclesList__LoadMore {
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .VehiclesList__Grid {
+    grid: auto / repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 992px) {
+  .VehiclesList__Grid {
+    grid: auto / repeat(4, 1fr);
+  }
+}

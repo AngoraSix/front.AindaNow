@@ -1,0 +1,135 @@
+.ViewVehicle__Container {
+  padding: 0 20px;
+}
+
+.ViewVehicle__Header {
+  padding: 10px;
+  margin: 0;
+  background-color: #fff;
+  border-bottom: 2px solid #eee;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.DefaultLayout__Body .ViewVehicle__Container {
+  padding: 0;
+}
+
+.DefaultLayout__Body .ViewVehicle__Header {
+  padding: 10px 16px;
+  margin: 0 -16px;
+  top: 64px;
+}
+
+.ViewVehicle__Images {
+  width: 100%;
+  height: 100%;
+  background-color: #eee;
+  margin: 0 auto;
+}
+
+.ViewVehicle__Images img {
+  object-fit: cover;
+  vertical-align: middle;
+}
+
+.ViewVehicle__Grid {
+  display: grid;
+  grid: auto / auto;
+  row-gap: 20px;
+  column-gap: 20px;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.ViewVehicle__Grid:last-child {
+  border: 0;
+}
+
+.VehicleData__Row {
+  display: grid;
+  grid: auto / auto;
+}
+
+.VehicleData__Data .VehicleData__Row {
+  grid: auto / repeat(2, 1fr);
+}
+
+.VehicleData__Row--full {
+  display: block;
+}
+
+.VehicleData__Group {
+  margin: 10px 0;
+}
+
+.VehicleData__Group__Label {
+  font-size: 1rem;
+  color: #444;
+}
+
+.VehicleData__Group__Value {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #111;
+}
+
+.VehicleData__Group__Value--light {
+  font-weight: 400;
+}
+
+.VehicleData__Group__Value--noData {
+  font-weight: 400;
+  color: #666;
+}
+
+.VehicleData__ComfortItems,
+.VehicleData__SecurityItems {
+  margin: 30px 0 20px;
+}
+
+.VehicleData__ComfortItems__Content,
+.VehicleData__SecurityItems__Content {
+  display: grid;
+  grid: auto / auto;
+  grid-gap: 20px 0;
+  margin-top: 10px;
+}
+
+.VehicleData__ComfortItems__Item,
+.VehicleData__SecurityItems__Item {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #111;
+}
+
+.VehicleData__ComfortItems__EmptyMessage,
+.VehicleData__SecurityItems__EmptyMessage {
+  margin: 10px 0;
+}
+
+@media (min-width: 1024px) {
+  .ViewVehicle__Header {
+    padding: 20px 20px;
+    margin: 0 -20px;
+  }
+
+  .ViewVehicle__Grid {
+    grid: auto / 2fr 1fr;
+  }
+
+  .ViewVehicle__Grid--11 {
+    grid: auto / repeat(2, 1fr);
+  }
+
+  .VehicleData__Row,
+  .VehicleData__Data .VehicleData__Row {
+    grid: auto / repeat(2, 1fr);
+  }
+
+  .VehicleData__ComfortItems__Content,
+  .VehicleData__SecurityItems__Content {
+    grid: auto / repeat(2, 1fr);
+  }
+}

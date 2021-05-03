@@ -1,0 +1,49 @@
+.VehicleCard__Container {
+  padding: 10px 12px;
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.VehicleCard__Image__Container {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  overflow: hidden;
+  background: #ccc;
+}
+
+.VehicleCard__Image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.VehicleCard__Image--active {
+  opacity: 1;
+}
+
+.VehicleCard__Data__Title {
+  padding: 10px 0;
+}
+
+.VehicleCard__Data__Row {
+  display: grid;
+  grid: auto / repeat(2, 1fr);
+  row-gap: 10px;
+  column-gap: 10px;
+}
+
+.VehicleCard__Label {
+  color: #777;
+}
+
+.VehicleCard__Data__Value {
+  font-weight: 500;
+}
