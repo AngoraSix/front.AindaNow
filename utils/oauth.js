@@ -1,103 +1,33 @@
-import { Log, UserManager, WebStorageStateStore } from "oidc-client";
-import config from '../config';
+const base64urlencode = (byteArray) => {
+  const stringCode = String.fromCharCode.apply(null, byteArray);
+  const base64Encoded = btoa(stringCode);
+  const base64urlEncoded = base64Encoded
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=/g, '');
+  return base64urlEncoded;
+};
 
-export default class OAuthService {
-    UserManager;
+const randomString = (len) => {
+  var arr = new Uint8Array(len);
+  window.crypto.getRandomValues(arr);
+  var str = base64urlencode(arr);
+  return str.substring(0, len);
+};
 
-    constructor() {
-        this.UserManager = new UserManager({
-            ...config.oauth.oauthConfig,
-            userStore: new WebStorageStateStore({ store: window.sessionStorage }),
-            metadata: {
-                ...config.oauth.providerConfig
-            }
-        });
-        // Logger
-        Log.logger = console;
-        Log.level = Log.DEBUG;
-        this.UserManager.events.addUserLoaded((user) => {
-            if (window.location.href.indexOf("oauth/login/callback") !== -1) {
-                this.navigateToScreen();
-            }
-        });
-        this.UserManager.events.addSilentRenewError((e) => {
-            console.log("silent renew error", e.message);
-        });
+export const generateState = () => {
+  return randomString(48);
+};
 
-        this.UserManager.events.addAccessTokenExpired(() => {
-            console.log("token expired");
-            this.signinSilent();
-        });
-    }
+export const generateCodeVerifier = () => {
+  let randomByteArray = new Uint8Array(32);
+  window.crypto.getRandomValues(randomByteArray);
+  return base64urlencode(randomByteArray);
+};
 
-    signinRedirectCallback = () => {
-        this.UserManager.signinRedirectCallback().then(() => {
-            "";
-        });
-    };
-
-
-    getUser = async () => {
-        const user = await this.UserManager.getUser();
-        if (!user) {
-            return await this.UserManager.signinRedirectCallback();
-        }
-        return user;
-    };
-
-    parseJwt = (token) => {
-        const base64Url = token.split(".")[1];
-        const base64 = base64Url.replace("-", "+").replace("_", "/");
-        return JSON.parse(window.atob(base64));
-    };
-
-
-    signinRedirect = () => {
-        localStorage.setItem("redirectUri", window.location.pathname);
-        this.UserManager.signinRedirect({});
-    };
-
-
-    navigateToScreen = () => {
-        window.location.replace("/homeger");
-    };
-
-
-    isAuthenticated = () => {
-        const oidcStorage = JSON.parse(sessionStorage.getItem(`oidc.user:${config.oauth.oauthConfig.authority}:${config.oauth.oauthConfig.client_id}`))
-
-        return (!!oidcStorage && !!oidcStorage.access_token)
-    };
-
-    signinSilent = () => {
-        this.UserManager.signinSilent()
-            .then((user) => {
-                console.log("signed in", user);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    };
-    signinSilentCallback = () => {
-        this.UserManager.signinSilentCallback();
-    };
-
-    createSigninRequest = () => {
-        return this.UserManager.createSigninRequest();
-    };
-
-    logout = () => {
-        this.UserManager.signoutRedirect({
-            id_token_hint: localStorage.getItem("id_token")
-        });
-        this.UserManager.clearStaleState();
-    };
-
-    signoutRedirectCallback = () => {
-        this.UserManager.signoutRedirectCallback().then(() => {
-            localStorage.clear();
-            window.location.replace("localgost:9081/oauth/logout/callback?");
-        });
-        this.UserManager.clearStaleState();
-    };
-}
+export const generateCodeChallenge = async (codeVerifier) => {
+  const strBuffer = new TextEncoder('utf-8').encode(codeVerifier);
+  const hashBuffer = await window.crypto.subtle.digest('SHA-256', strBuffer);
+  const hashedByteArray = Array.from(new Uint8Array(hashBuffer));
+  return base64urlencode(hashedByteArray);
+};

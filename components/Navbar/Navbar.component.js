@@ -1,6 +1,6 @@
 import { AppBar, LinearProgress, Toolbar } from '@material-ui/core';
 import React from 'react';
-import config from '../../config';
+import Login from '../Login';
 
 const Navbar = () => (
   <React.Fragment>
@@ -9,18 +9,21 @@ const Navbar = () => (
     <AppBar className="Navbar Navbar__Container" position="fixed">
       <Toolbar>
         <div className="Navbar__Column Navbar__CompanySelector__Container">
-          <img
+          {/* <img
             className="Navbar__Logo"
             src={config.site.head.image.logo}
             alt="Para Concesionarias"
             title="paraConcesionarias"
-          />
+          /> */}
         </div>
-        <div className="Navbar__Column" />
+        {/* <div className="Navbar__Column" />
 
         <div className="Navbar__Column Navbar__User"></div>
 
-        <div className="Navbar__Column Navbar__MenuIcon"></div>
+        <div className="Navbar__Column Navbar__MenuIcon"></div> */}
+        <div className="Navbar__Column Navbar__Login">
+          <Login />
+        </div>
       </Toolbar>
     </AppBar>
 

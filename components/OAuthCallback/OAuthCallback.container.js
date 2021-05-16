@@ -3,7 +3,6 @@
 // import { useOAuthContext } from '../../hooks/oauth';
 import PropTypes from 'prop-types';
 import React from 'react';
-import config from '../../config';
 import OAuthCallback from './OAuthCallback.component';
 
 const OAuthCallbackContainer = ({accessToken}) => {
@@ -12,7 +11,7 @@ const OAuthCallbackContainer = ({accessToken}) => {
 // // signingRedirectCallback();
 console.log("EN CONTAINER!");
 console.log(accessToken);
-console.log(config.crypto);
+// console.log(config.crypto);
 // setAuthCookie("asd");
 
 

@@ -17,6 +17,7 @@ class OAuth {
       clientId: env.OAUTH_CLIENT_ID || 'clientId',
       redirectUri: env.OAUTH_REDIRECT_URI || 'http://localhost:5000/callback',
       clientSecret: env.OAUTH_CLIENT_SECRET || 'clientSecret',
+      scopes: env.OAUTH_CLIENT_SCOPES || 'profile openid',
     }),
       (this.providerConfig = {
         issuer: env.OAUTH_ISSUER || 'http://localost:9081',

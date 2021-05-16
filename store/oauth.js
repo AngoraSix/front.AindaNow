@@ -1,64 +1,60 @@
-const OAUTH_SETUP = 'OAUTH/OAUTH_LOAD';
-// const COMPANIES_SELECT_COMPANY = 'COMPANIES/COMPANIES_SELECT_COMPANY';
-// const COMPANIES_UPDATE_COMPANY = 'COMPANIES/COMPANIES_UPDATE_COMPANY';
+import OAuthError from '../utils/error/OAuthError';
+
+const OAUTH_INITIATED = 'OAUTH/OAUTH_INITIATED';
+const OAUTH_RECEIVED_AUTH_CODE = 'OAUTH/OAUTH_RECEIVED_AUTH_CODE';
+const OAUTH_EXCHANGED_CODE = 'OAUTH/OAUTH_EXCHANGED_CODE';
 
 // ACTIONS
-export const setupOAuthContext = (payload) => ({
-  type: OAUTH_SETUP,
+export const initiated = (payload) => ({
+  type: OAUTH_INITIATED,
   payload,
 });
-// export const selectCompanyAction = (payload) => ({
-//   type: COMPANIES_SELECT_COMPANY,
-//   payload,
-// });
-// export const updateCompanyAction = (payload) => ({
-//   type: COMPANIES_UPDATE_COMPANY,
-//   payload,
-// });
+export const receivedAuthCode = (payload) => ({
+  type: OAUTH_RECEIVED_AUTH_CODE,
+  payload,
+});
+export const exchangedCode = (payload) => ({
+  type: OAUTH_EXCHANGED_CODE,
+  payload,
+});
 
 const INITIAL_STATE = {
-    signinRedirectCallback: () => ({}),
-    logout: () => ({}),
-    signoutRedirectCallback: () => ({}),
-    isAuthenticated: () => ({}),
-    signinRedirect: () => ({}),
-    signinSilentCallback: () => ({}),
-    createSigninRequest: () => ({})
+  codeVerifier: null,
+  stateParam: null,
+  modalRef: null,
+  authCode: null,
+  accessToken: null,
+  error: null,
+  exchangingCode: false,
 };
 
 const OAuthReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case OAUTH_SETUP:
+    case OAUTH_INITIATED:
+      const { codeVerifier, stateParam, modalRef } = action.payload;
+      return {
+        ...INITIAL_STATE,
+        codeVerifier,
+        stateParam,
+        modalRef,
+      };
+    case OAUTH_RECEIVED_AUTH_CODE:
+      if (payload.receivedState !== state.stateParam) {
+        throw new OAuthError('Invalid state', 'STATE_INVALID');
+      }
       return {
         ...state,
-        oauthContext: action.payload,
+        codeVerifier: null,
+        stateParam: null,
+        modalRef: null,
+        authCode: payload.code,
+        exchangingCode: true,
       };
-    // case COMPANIES_SELECT_COMPANY:
-    //   return {
-    //     ...state,
-    //     selectedCompany: action.payload,
-    //   };
-    // case COMPANIES_UPDATE_COMPANY: {
-    //   let companies = [...state.companies];
-
-    //   const companyIndex = companies.findIndex(
-    //     ({ id }) => id === action.payload.id
-    //   );
-
-    //   if (companyIndex >= 0) {
-    //     const companyUpdated = {
-    //       ...state.companies[companyIndex],
-    //       ...action.payload,
-    //     };
-    //     companies[companyIndex] = companyUpdated;
-    //   }
-
-    //   return {
-    //     ...state,
-    //     companies,
-    //   };
-    // }
-
+    case OAUTH_EXCHANGED_CODE:
+      return {
+        ...INITIAL_STATE,
+        accessToken: action.payload,
+      };
     default:
       return state;
   }
