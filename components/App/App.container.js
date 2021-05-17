@@ -4,8 +4,7 @@ import { useDispatch } from 'react-redux';
 import api from '../../api';
 import { useLoading } from '../../hooks/app';
 import { useCurrentUser } from '../../hooks/user';
-import { setupOAuthContext } from '../../store/oauth';
-import OAuthService from '../../utils/oauth';
+// import OAuthService from '../../utils/oauth';
 import App from './App.component';
 
 const AppContainer = (props) => {
@@ -27,8 +26,8 @@ const AppContainer = (props) => {
     }
 
     // Setup OAuth Context
-    const oauthContext = new OAuthService();
-    reduxDispatch(setupOAuthContext(oauthContext));
+    // const oauthContext = new OAuthService();
+    // reduxDispatch(setupOAuthContext(oauthContext));
 
     router.events.on('beforeHistoryChange', startLoading);
     router.events.on('routeChangeStart', startLoading);

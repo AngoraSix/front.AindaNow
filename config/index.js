@@ -3,7 +3,6 @@ import App from './app';
 import Auth from './auth';
 import Companies from './companies';
 import Crypto from './crypto';
-import OAuth from './oauth';
 import Publications from './publications';
 import Server from './server';
 import Site from './site';
@@ -21,9 +20,9 @@ class HOCConfig {
     return this.authConfig;
   }
 
-  get oauth() {
-    return this.oauthConfig;
-  }
+  // get oauth() {
+  //   return this.oauthConfig;
+  // }
 
   get crypto() {
     return this.cryptoConfig;
@@ -53,7 +52,7 @@ class HOCConfig {
     this.buildNo = env.BUILD || 'dev';
     this.serverConfig = new Server(env);
     this.authConfig = new Auth(env);
-    this.oauthConfig = new OAuth(env);
+    // this.oauthConfig = new OAuth(env);
     this.cryptoConfig = new Crypto(env);
     this.companiesConfig = new Companies(env);
     this.siteConfig = new Site(env);

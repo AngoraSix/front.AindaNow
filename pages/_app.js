@@ -1,3 +1,4 @@
+import { Provider as NextAuthProvider } from "next-auth/client";
 import PropTypes from 'prop-types';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from 'redux';
@@ -33,9 +34,11 @@ const HOCWebApp = ({ Component, pageProps, preloadedState, env }) => {
 
   return (
     <ReduxProvider store={store}>
+      <NextAuthProvider session={pageProps.session}>
       <App>
         <Component {...pageProps} />
       </App>
+      </NextAuthProvider>
     </ReduxProvider>
   );
 };
