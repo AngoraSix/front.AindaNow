@@ -1,5 +1,5 @@
 .Home__Container {
-  background: rgb(69, 39, 160);
+  background: #7F969C;
   height: 100vh;
   width: 100vw;
   overflow: hidden;
@@ -31,22 +31,22 @@
   display: block;
 }
 
-.Home__Container::after,
+/* .Home__Container::after,
 .Home__Container::before {
   content: '';
   position: absolute;
-}
+} */
 
-.Home__Container::before {
+/* .Home__Container::before {
   border-right: 100vmin solid transparent;
   border-top: 100vmin solid rgba(0, 0, 0, 0.2);
   top: 0;
   left: 0;
-}
+} */
 
-.Home__Container::after {
+/* .Home__Container::after {
   border-left: 100vmin solid transparent;
   border-bottom: 100vmin solid rgba(0, 0, 0, 0.2);
   bottom: 0;
   right: 0;
-}
+} */

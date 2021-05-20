@@ -7,7 +7,8 @@ const HomePage = () => (
     <Head>
       <title>{config.site.head.title}</title>
       <link rel="icon" href="/favicon.ico" />
-      <link rel="stylesheet" href="/fonts/AdventPro.css" />
+      <link rel="stylesheet" href="/fonts/Ruluko.css" />
+      <link rel="stylesheet" href="/fonts/ZCool.css" />
     </Head>
 
     <Home />

@@ -12,8 +12,8 @@ const Navbar = () => (
           <img
             className="Navbar__Logo"
             src={config.site.head.image.logo}
-            alt="Para Concesionarias"
-            title="paraConcesionarias"
+            alt="AngoraSix"
+            title="AngoraSix"
           />
         </div>
         <div className="Navbar__Column" />

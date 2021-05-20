@@ -3,7 +3,7 @@ const LOGO_IMAGE_URI = '/logos/paraconcesionarias2-largo-blanco.png';
 class Site {
   constructor(env) {
     this.head = {
-      title: 'paraConcesionarias',
+      title: 'AngoraSix',
       description:
         'Toda la ayuda que necesitas para administrar tu concesionaria, en un solo lugar',
       image: { logo: LOGO_IMAGE_URI },

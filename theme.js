@@ -1,25 +1,38 @@
-import blue from '@material-ui/core/colors/blue';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#734F9F',
-      main: '#603499',
-      dark: '#521C99',
+      light: '#A4B7BD',
+      main: '#7F969C',
+      dark: '#47626B',
       contrastText: '#fff',
     },
-    secondary: blue,
+    secondary: {
+      light: '#62a8de',
+      main: '#3F6E91',
+      dark: '#29475e',
+      contrastText: '#fff',
+    },
   },
   typography: {
     fontFamily: [
-      '"Advent Pro"',
+      '"Ruluko"',
       '"Roboto"',
       '"Helvetica"',
       '"Arial"',
       'sans-serif',
     ].join(','),
     fontSize: 18,
+    title1: {
+      fontFamily: [
+        '"ZCool"',
+        '"Roboto"',
+        '"Helvetica"',
+        '"Arial"',
+        'sans-serif',
+      ].join(','),
+    }
   }
 });
 

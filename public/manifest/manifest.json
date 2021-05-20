@@ -1,8 +1,8 @@
 {
-  "name": "paraConcesionarias",
-  "short_name": "PC",
-  "theme_color": "#4527a0",
-  "background_color": "#4527a0",
+  "name": "AngoraSix",
+  "short_name": "A6",
+  "theme_color": "#3F6E91",
+  "background_color": "#7F969C",
   "display": "minimal-ui",
   "scope": "/",
   "start_url": "/",

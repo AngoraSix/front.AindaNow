@@ -15,7 +15,7 @@ const CompanyVehiclesLayout = ({ company, children }) => {
   let headData = {};
   if (company) {
     headData = {
-      title: `${company.name} - ParaConcesionarias`,
+      title: `${company.name} - AngoraSix`,
       description: `Todos los vehículos de ${company.name}`,
     };
     if (!!company.images && !!company.images.length)
