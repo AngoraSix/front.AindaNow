@@ -1,21 +1,21 @@
 import PropTypes from 'prop-types';
 import api from '../../../api';
-import VehiclesList from '../../../components/VehiclesList';
-import CompanyVehiclesLayout from '../../../layouts/CompanyVehiclesLayout/CompanyVehiclesLayout';
+import ProjectsList from '../../../components/ProjectsList';
+import ProjectsLayout from '../../../layouts/ProjectsLayout/ProjectsLayout';
 
-const CompanyVehiclesList = ({ company, data }) => {
+const CompanyProjectsList = ({ company, data }) => {
   return (
-    <CompanyVehiclesLayout company={company}>
-      <VehiclesList data={data} />
-    </CompanyVehiclesLayout>
+    <ProjectsLayout company={company}>
+      <ProjectsList data={data} />
+    </ProjectsLayout>
   );
 };
 
-CompanyVehiclesList.defaultProps = {
+CompanyProjectsList.defaultProps = {
   company: null,
 };
 
-CompanyVehiclesList.propTypes = {
+CompanyProjectsList.propTypes = {
   company: PropTypes.object,
 };
 
@@ -24,16 +24,16 @@ export const getServerSideProps = async (ctx) => {
 
   const { companyId }= ctx.params;
   try {
-    const company = await api.companies.getCompanyById(companyId);
+    const company = await api.companies.fetchProjects(companyId);
 
-    const vehiclesListData = await api.vehicles.listCompanyVehicles(companyId);
+    const ProjectsListData = await api.vehicles.listCompanyVehicles(companyId);
 
     props = {
       ...props,
       company,
       data: {
-        ...vehiclesListData,
-        vehicles: vehiclesListData.data || [],
+        ...ProjectsListData,
+        vehicles: ProjectsListData.data || [],
       },
     };
   } catch (err) {
@@ -45,4 +45,4 @@ export const getServerSideProps = async (ctx) => {
   };
 };
 
-export default CompanyVehiclesList
+export default CompanyProjectsList

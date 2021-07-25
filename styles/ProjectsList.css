@@ -1,12 +1,12 @@
-.VehiclesList__Container {
+.ProjectsList__Container {
   padding: 0 20px;
 }
 
-.VehiclesList__Content {
+.ProjectsList__Content {
   position: relative;
 }
 
-.VehiclesList__Toolbar {
+.ProjectsList__Toolbar {
   overflow: hidden;
   width: calc(100% + 40px);
   padding: 10px 20px;
@@ -20,23 +20,23 @@
   z-index: 10;
 }
 
-.DefaultLayout__Body .VehiclesList__Container {
+.DefaultLayout__Body .ProjectsList__Container {
   padding: 0;
 }
 
-.DefaultLayout__Body .VehiclesList__Toolbar {
+.DefaultLayout__Body .ProjectsList__Toolbar {
   top: 64px;
 }
 
-.VehiclesList__Toolbar__Column {
+.ProjectsList__Toolbar__Column {
   display: flex;
 }
 
-.VehiclesList__Toolbar__Column > * {
+.ProjectsList__Toolbar__Column > * {
   margin-top: auto;
 }
 
-.VehiclesList__Grid {
+.ProjectsList__Grid {
   display: grid;
   grid: auto / auto;
   row-gap: 20px;
@@ -44,18 +44,18 @@
   padding: 20px 0;
 }
 
-.VehiclesList__LoadMore {
+.ProjectsList__LoadMore {
   text-align: center;
 }
 
 @media (min-width: 768px) {
-  .VehiclesList__Grid {
+  .ProjectsList__Grid {
     grid: auto / repeat(3, 1fr);
   }
 }
 
 @media (min-width: 992px) {
-  .VehiclesList__Grid {
+  .ProjectsList__Grid {
     grid: auto / repeat(4, 1fr);
   }
 }

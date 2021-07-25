@@ -19,9 +19,9 @@ import '../styles/Home.css';
 import '../styles/LandingLayout.css';
 import '../styles/Menu.css';
 import '../styles/Navbar.css';
+import '../styles/ProjectsList.css';
 import '../styles/VehicleCard.css';
 import '../styles/Vehicles.css';
-import '../styles/VehiclesList.css';
 import '../styles/ViewVehicle.css';
 import { getEnv } from '../utils/env';
 
