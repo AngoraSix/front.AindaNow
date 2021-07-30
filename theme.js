@@ -16,24 +16,16 @@ const theme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: [
-      '"Ruluko"',
-      '"Roboto"',
-      '"Helvetica"',
-      '"Arial"',
-      'sans-serif',
-    ].join(','),
+    fontFamily: ['Ruluko', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(
+      ','
+    ),
     fontSize: 18,
     title1: {
-      fontFamily: [
-        '"ZCool"',
-        '"Roboto"',
-        '"Helvetica"',
-        '"Arial"',
-        'sans-serif',
-      ].join(','),
-    }
-  }
+      fontFamily: ['ZCool', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'].join(
+        ','
+      ),
+    },
+  },
 });
 
 export default theme;
