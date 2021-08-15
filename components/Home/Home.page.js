@@ -1,12 +1,10 @@
 import Button from '@material-ui/core/Button';
 import { signIn, signOut, useSession } from 'next-auth/client';
 import React from 'react';
-import oauthConfig from '../../config/oauth';
 import LandingLayout from '../../layouts/LandingLayout';
 
 const Home = () => {
   const [session, loading] = useSession();
-  console.log(oauthConfig.clientSecret);
   return (
     <LandingLayout className="Home Home__Container">
       <img

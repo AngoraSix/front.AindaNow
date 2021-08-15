@@ -13,8 +13,6 @@ class OAuthAPI {
   }
 
   async exchangeAuthCode(authCode, redirectUri, clientId, clientSecret) {
-    // const { data } = await this.axios.post('/auth/realms/Angorasix/protocol/openid-connect/token', {
-      console.log(config.oauth.providerConfig.tokenEndpoint);
     const { data } = await this.axios.post(
       config.oauth.providerConfig.tokenEndpoint,
       querystring.stringify({
@@ -32,7 +30,7 @@ class OAuthAPI {
       }
     );
 
-    console.log("POSTPOSTPOSTPOST");
+    console.log('POSTPOSTPOSTPOST');
 
     this.setAuthorizationToken(data.access_token);
 

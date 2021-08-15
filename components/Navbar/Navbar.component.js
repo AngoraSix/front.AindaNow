@@ -5,7 +5,6 @@ import config from '../../config';
 
 const Navbar = () => {
   const [session, loading] = useSession();
-  console.log(session && session.user);
   return (
     <React.Fragment>
       <LinearProgress className="Navbar__ProgressBar" color="primary" />
