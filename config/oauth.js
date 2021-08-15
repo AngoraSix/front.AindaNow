@@ -1,3 +1,9 @@
+export const oauthFrameworkConfig = {
+  debug:
+    process.env.A6_APP_OAUTH_FW_DEBUG &&
+    process.env.A6_APP_OAUTH_FW_DEBUG === 'true',
+};
+
 const oauthConfig = {
   id: 'angorasixkeycloak',
   name: 'AngorasixKeycloak',

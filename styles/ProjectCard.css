@@ -1,10 +1,10 @@
-.VehicleCard__Container {
+.ProjectCard__Container {
   padding: 10px 12px;
   overflow: hidden;
   text-decoration: none;
 }
 
-.VehicleCard__Image__Container {
+.ProjectCard__Image__Container {
   position: relative;
   width: 100%;
   padding-top: 75%;
@@ -12,7 +12,7 @@
   background: #ccc;
 }
 
-.VehicleCard__Image {
+.ProjectCard__Image {
   position: absolute;
   top: 0;
   left: 0;
@@ -25,25 +25,25 @@
   transition: opacity 0.3s ease-in-out;
 }
 
-.VehicleCard__Image--active {
+.ProjectCard__Image--active {
   opacity: 1;
 }
 
-.VehicleCard__Data__Title {
+.ProjectCard__Data__Title {
   padding: 10px 0;
 }
 
-.VehicleCard__Data__Row {
+.ProjectCard__Data__Row {
   display: grid;
   grid: auto / repeat(2, 1fr);
   row-gap: 10px;
   column-gap: 10px;
 }
 
-.VehicleCard__Label {
+.ProjectCard__Label {
   color: #777;
 }
 
-.VehicleCard__Data__Value {
+.ProjectCard__Data__Value {
   font-weight: 500;
 }

@@ -19,7 +19,7 @@ class Site {
     };
 
     this.links = {
-      adminHome: env.LINKS_ADMIN_HOME_URL || 'http://localhost:9081/auth/realms/Angorasix/protocol/openid-connect/auth?response_type=code&client_id=a6Client&scope=openid&redirect_uri=http://localhost:3000/oauth/login/callback',
+      adminHome: env.LINKS_ADMIN_HOME_URL || 'http://localhost:9081/auth/realms/Angorasix/protocol/openid-connect/auth?response_type=code&client_id=a6Client&scope=openid&redirect_uri=http://localhost:90/oauth/login/callback',
     };
   }
 }
