@@ -1,6 +1,5 @@
 import config from '../config';
 import BaseAPI from './BaseAPI';
-import OAuthAPI from './oauth';
 import ProjectsAPI from './projects';
 import UsersAPI from './users';
 import VehiclesAPI from './vehicles';
@@ -22,10 +21,6 @@ class API {
     return this.usersAPI;
   }
 
-  get oauth() {
-    return this.oauthAPI;
-  }
-
   applyEnvConfig() {
     this.axios = new BaseAPI({
       serverBaseURL: config.api.serverBaseURL,
@@ -35,7 +30,6 @@ class API {
     this.projectsAPI = new ProjectsAPI(_getServiceAPI('projects', this.axios));
     this.vehiclesAPI = new VehiclesAPI(this.axios);
     this.usersAPI = new UsersAPI(this.axios);
-    this.oauthAPI = new OAuthAPI(_getServiceAPI('oauth', this.axios));
   }
 }
 

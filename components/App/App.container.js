@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import api from '../../api';
 import { useLoading } from '../../hooks/app';
 import { useCurrentUser } from '../../hooks/user';
-// import OAuthService from '../../utils/oauth';
 import App from './App.component';
 
 const AppContainer = (props) => {
@@ -24,10 +23,6 @@ const AppContainer = (props) => {
     if (user && user.jwt) {
       api.users.setAuthorizationToken(user.jwt);
     }
-
-    // Setup OAuth Context
-    // const oauthContext = new OAuthService();
-    // reduxDispatch(setupOAuthContext(oauthContext));
 
     router.events.on('beforeHistoryChange', startLoading);
     router.events.on('routeChangeStart', startLoading);
