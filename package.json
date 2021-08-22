@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 90",
     "debug": "cross-env NODE_OPTIONS='--inspect' next dev -p 90",
     "build": "next build",
     "start": "next start",
@@ -23,7 +23,6 @@
     "next": "9.5.5",
     "next-auth": "^3.23.0",
     "notistack": "^1.0.1",
-    "oidc-client": "^1.11.5",
     "query-string": "^6.13.5",
     "react": "16.13.1",
     "react-dom": "16.13.1",
