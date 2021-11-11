@@ -7,7 +7,8 @@ import React, { useState } from 'react';
 const ProjectCard = ({ project }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  const images = project.images || [];
+  const images =
+    project.media.filter((m) => m.type === 'image').map((m) => m.url) || [];
 
   const className = classnames('ProjectCard ProjectCard__Container', {
     'ProjectCard--no-images': !images.length,
@@ -16,8 +17,8 @@ const ProjectCard = ({ project }) => {
   let projectDetailsURL = `/projects/${project.id}`;
 
   return (
-    <Link href={projectDetailsURL} passHref>      
-      <Paper className={className} component='a'>
+    <Link href={projectDetailsURL} passHref>
+      <Paper className={className} component="a">
         <div className="ProjectCard__Images">
           <div className="ProjectCard__Image__Container">
             {images.map((src, i) => (
@@ -36,7 +37,7 @@ const ProjectCard = ({ project }) => {
         <div className="ProjectCard__Data">
           <div className="ProjectCard__Data__Title">
             <Typography variant="subtitle1" color="primary">
-              {project.name}
+              {project.title}
             </Typography>
           </div>
           <div className="ProjectCard__Data__Row">
@@ -46,9 +47,11 @@ const ProjectCard = ({ project }) => {
                 component="label"
                 className="ProjectCard__Label"
               >
-                Description
+                Goals
               </Typography>
-              <div className="ProjectCard__Data__Value">{project.description}</div>
+              <div className="ProjectCard__Data__Value">
+                {project.objective}
+              </div>
             </div>
           </div>
         </div>
