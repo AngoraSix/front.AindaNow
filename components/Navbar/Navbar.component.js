@@ -1,7 +1,9 @@
-import { AppBar, Button, LinearProgress, Toolbar } from '@material-ui/core';
+import { AppBar, Button, LinearProgress, Toolbar, Avatar } from '@material-ui/core';
 import { signIn, signOut, useSession } from 'next-auth/client';
+import Link from 'next/link';
 import React from 'react';
 import config from '../../config';
+import UserIcon from '@material-ui/icons/Person';
 
 const Navbar = () => {
   const [session, loading] = useSession();
@@ -31,19 +33,26 @@ const Navbar = () => {
                 onClick={() => signIn('angorasixkeycloak')}
                 variant="contained"
                 color="secondary"
-                alt="AngoraSix"
+                alt="login"
               >
                 Log In
               </Button>
             ) : (
-              <Button
-                onClick={() => signOut()}
-                variant="contained"
-                color="secondary"
-                alt="AngoraSix"
-              >
-                Log Out
-              </Button>
+              <React.Fragment>
+                <Link href={`/profile/${session.user.id}`}>
+                  <Avatar alt="Profile" src={session.user.image}>
+                    <UserIcon />
+                  </Avatar>
+                </Link>
+                <Button
+                  onClick={() => signOut()}
+                  variant="contained"
+                  color="secondary"
+                  alt="logout"
+                >
+                  Log Out
+                </Button>
+              </React.Fragment>
             )}
           </div>
 

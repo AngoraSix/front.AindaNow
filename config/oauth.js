@@ -2,6 +2,9 @@ export const oauthFrameworkConfig = {
   debug:
     process.env.A6_APP_OAUTH_FW_DEBUG &&
     process.env.A6_APP_OAUTH_FW_DEBUG === 'true',
+  jwt: {
+    secret: process.env.A6_APP_OAUTH_JWT_SECRET = "aSecre7"
+  }
 };
 
 const oauthConfig = {
@@ -33,6 +36,7 @@ const oauthConfig = {
       name: profile.name,
       email: profile.email,
       image: profile.picture,
+      ger: profile
     };
   },
   clientId: process.env.A6_APP_OAUTH_CLIENT_ID || 'clientId',

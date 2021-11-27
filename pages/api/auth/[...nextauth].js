@@ -7,11 +7,18 @@ export default NextAuth({
     jwt: true,
   },
   callbacks: {
-    async jwt(token, user, account, profile, isNewUser) {
+    jwt(token, user, account, claims, isNewUser) {
       if (account?.accessToken) {
         token.accessToken = account.accessToken;
       }
+      if (account) {
+        token.uid = account.id;
+      }    
       return token;
+    },
+    session(session, user) {      
+      session.user.id = user.uid;
+      return session;
     },
   },
   // A database is optional, but required to persist accounts in a database
