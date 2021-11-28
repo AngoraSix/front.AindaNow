@@ -1,5 +1,6 @@
 import { getSession } from 'next-auth/client';
 import Head from 'next/head';
+import React from 'react';
 import PropTypes from 'prop-types';
 import api from '../api';
 import ProjectsList from '../components/ProjectsList';

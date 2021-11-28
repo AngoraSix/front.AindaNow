@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { IconButton } from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import { IconButton } from '@mui/material';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const Carousel = ({ images, aspectRatio }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -40,7 +40,7 @@ const Carousel = ({ images, aspectRatio }) => {
   return (
     <div className={className}>
       <div className="Carousel__Prev">
-        <IconButton onClick={onPrevClick} className="Carousel__Prev__Button">
+        <IconButton onClick={onPrevClick} className="Carousel__Prev__Button" size="large">
           <ChevronLeftIcon />
         </IconButton>
       </div>
@@ -58,7 +58,7 @@ const Carousel = ({ images, aspectRatio }) => {
         ))}
       </div>
       <div className="Carousel__Next">
-        <IconButton onClick={onNextClick} className="Carousel__Next__Button">
+        <IconButton onClick={onNextClick} className="Carousel__Next__Button" size="large">
           <ChevronRightIcon />
         </IconButton>
       </div>

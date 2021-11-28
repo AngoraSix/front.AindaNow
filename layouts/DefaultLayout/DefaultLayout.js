@@ -1,4 +1,4 @@
-import { Paper } from '@material-ui/core';
+import { Paper } from '@mui/material';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React from 'react';

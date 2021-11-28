@@ -1,4 +1,4 @@
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 import { signIn, signOut, useSession } from 'next-auth/client';
 import React from 'react';
 import LandingLayout from '../../layouts/LandingLayout';
@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <LandingLayout className="Home Home__Container">
       <img
-        src="/logos/paraconcesionarias2-largo-blanco.png"
+        src="/logos/a6-white-500.png"
         alt="AngoraSix"
       />
       {!session ? (

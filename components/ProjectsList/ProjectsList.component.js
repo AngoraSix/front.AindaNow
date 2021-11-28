@@ -1,7 +1,6 @@
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import FieldMaker from 'react-mui-fieldmaker';
 import ProjectCard from '../ProjectCard';
 
 const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
@@ -23,10 +22,9 @@ const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
         </div>
         <div className="ProjectsList__Toolbar__Column" />
         <div className="ProjectsList__Toolbar__Column">
-          <FieldMaker
+          <TextField
             label="Buscar"
             value={search}
-            type="text"
             onChange={onSearchChange}
           />
         </div>

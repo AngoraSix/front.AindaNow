@@ -7,7 +7,7 @@ import {
   ListItemIcon,
   ListItemText,
   Divider,
-} from '@material-ui/core';
+} from '@mui/material';
 import routes from '../../../routes';
 import { isMaster } from '../../../utils/helpers';
 
