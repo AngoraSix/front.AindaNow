@@ -15,6 +15,9 @@ const ViewVehicle = ({ vehicle }) => {
   return (
     <div className="ViewVehicle ViewVehicle__Container">
       <Head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/fonts/Ruluko.css" />
+        <link rel="stylesheet" href="/fonts/ZCool.css" />
         <meta property="og:title" key="og.title" content={vehicle.name} />
         <meta
           property="og:description"

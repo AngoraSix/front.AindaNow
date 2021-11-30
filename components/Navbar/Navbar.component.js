@@ -12,14 +12,15 @@ import {
   Typography,
   Tooltip,
 } from '@mui/material';
-import { signIn, signOut, useSession } from 'next-auth/client';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React from 'react';
 import config from '../../config';
 import MenuIcon from '@mui/icons-material/Menu';
 
 const Navbar = () => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
+  const loading = status === 'loading';
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -156,7 +157,7 @@ const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <Link href={`/profile/${session.user?.id}`}>
+                  <Link href={`/profile/${session.user?.uid}`}>
                     <MenuItem key="profile">
                       <Typography textAlign="center">Profile</Typography>
                     </MenuItem>

@@ -2,8 +2,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const Profile = ({ profile }) => {
-  console.log("GERGERGER");
-  console.log(profile);
   return (
     <div className="Profile Profile__Container">
       <div className="Profile__ContributorData">

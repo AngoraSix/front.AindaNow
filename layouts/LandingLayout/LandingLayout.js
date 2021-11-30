@@ -13,6 +13,9 @@ const LandingLayout = ({ children, className, headData }) => {
       <Head>
         <meta charSet="utf-8" />
         <title>{head.title}</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/fonts/Ruluko.css" />
+        <link rel="stylesheet" href="/fonts/ZCool.css" />
         <meta property="og:title" key="og.title" content={head.title} />
         <meta
           property="og:description"
