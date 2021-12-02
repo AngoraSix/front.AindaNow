@@ -5,11 +5,12 @@ import React from 'react';
 import Navbar from '../../components/Navbar';
 import config from '../../config';
 
-const DefaultLayout = ({ children, className, headData }) => {
+const DefaultLayout = ({ children, className, headData, contained = true }) => {
   const head = {
     ...config.site.head,
     ...headData,
   };
+  const ChildrenContainer = contained ? Paper : 'div';
 
   return (
     <div className={`DefaultLayout DefaultLayout__Container ${className}`}>
@@ -34,7 +35,7 @@ const DefaultLayout = ({ children, className, headData }) => {
         <meta property="fb:app_id" key="fb.id" content={head.facebookAppId} />
       </Head>
       <Navbar />
-      <Paper className="DefaultLayout__Body">{children}</Paper>
+      <ChildrenContainer className={`${className}__Body`}>{children}</ChildrenContainer>
     </div>
   );
 };

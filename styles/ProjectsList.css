@@ -20,11 +20,11 @@
   z-index: 10;
 }
 
-.DefaultLayout__Body .ProjectsList__Container {
+.DefaultLayout__Page__Body .ProjectsList__Container {
   padding: 0;
 }
 
-.DefaultLayout__Body .ProjectsList__Toolbar {
+.DefaultLayout__Page__Body .ProjectsList__Toolbar {
   top: 64px;
 }
 

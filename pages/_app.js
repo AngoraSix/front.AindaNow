@@ -19,6 +19,7 @@ import '../styles/Home.css';
 import '../styles/LandingLayout.css';
 import '../styles/Menu.css';
 import '../styles/Navbar.css';
+import '../styles/Profile.css';
 import '../styles/ProjectCard.css';
 import '../styles/ProjectsList.css';
 import '../styles/Vehicles.css';

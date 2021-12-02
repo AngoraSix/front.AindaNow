@@ -12,11 +12,11 @@
   z-index: 10;
 }
 
-.DefaultLayout__Body .ViewVehicle__Container {
+.DefaultLayout__Page__Body .ViewVehicle__Container {
   padding: 0;
 }
 
-.DefaultLayout__Body .ViewVehicle__Header {
+.DefaultLayout__Page__Body .ViewVehicle__Header {
   padding: 10px 16px;
   margin: 0 -16px;
   top: 64px;

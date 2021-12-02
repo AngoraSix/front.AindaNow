@@ -2,7 +2,7 @@
   background: #fafafa;
 }
 
-.DefaultLayout__Body {
+.DefaultLayout__Page__Body {
   display: block;
   padding: 45px 16px 24px;
   margin: -20px auto 20px;
@@ -12,7 +12,7 @@
 }
 
 @media (min-width: 768px) {
-  .DefaultLayout__Body {
+  .DefaultLayout__Page__Body {
     padding: 45px 20px;
     width: 90%;
   }

@@ -5,7 +5,15 @@ import DefaultLayout from '../DefaultLayout';
 const ProfileLayout = ({ children }) => {
   let headData = {};
 
-  return <DefaultLayout headData={headData}>{children}</DefaultLayout>;
+  return (
+    <DefaultLayout
+      headData={headData}
+      contained={false}
+      className="ProfileLayout__Page"
+    >
+      {children}
+    </DefaultLayout>
+  );
 };
 
 ProfileLayout.defaultProps = {};

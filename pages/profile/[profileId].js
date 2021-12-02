@@ -23,6 +23,8 @@ export const getServerSideProps = async (ctx) => {
   const { profileId } = ctx.params,
     token = await getToken({ ...ctx, secret: oauthFrameworkConfig.jwt.secret });
   try {
+    console.log('TOKENTOKENTOKEN');
+    console.log(token);
     const profile = await api.contributors.getContributor(profileId, token);
 
     props = {

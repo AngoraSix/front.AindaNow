@@ -87,7 +87,7 @@ const Navbar = () => {
                     <Typography
                       textAlign="center"
                       onClick={handleCloseNavMenu}
-                      sx={{ my: 2, color: 'white', display: 'block' }}
+                      sx={{ my: 2, display: 'block' }}
                     >
                       Projects
                     </Typography>
@@ -138,6 +138,7 @@ const Navbar = () => {
                     <Avatar
                       alt="User Profile image"
                       src={session.user?.image}
+                      sx={{ width: 50, height: 50 }}
                     />
                   </IconButton>
                 </Tooltip>

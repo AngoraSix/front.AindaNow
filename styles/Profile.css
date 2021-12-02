@@ -1,0 +1,72 @@
+.Profile__Container {
+  padding: 0 20px;
+  margin-top: 30px;
+}
+
+.Presentation {
+  display: flex;
+  flex-direction: column;
+}
+
+.Presentation__HeadImageContainer {
+  min-height: 20vh;
+  background-size: cover;
+  background-position: center;
+  flex-grow: 0;
+  flex-basis: 50%;
+  position: relative;
+}
+
+.Presentation__ProfileImage {
+  position: absolute;
+  bottom: -9vh;
+  width: 100%;
+  text-align: center;
+}
+
+.Presentation__ProfileImage img {
+  height: 15vh;
+  max-width: 15vh;
+  border-radius: 15vh;
+}
+
+.Presentation__ContributorData {
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 9vh;
+  align-content: space-evenly;
+  justify-content: space-evenly;
+}
+
+@media (min-width: 768px) {
+  .Presentation {
+    height: 40vh;
+    flex-direction: row;
+  }
+
+  .Presentation__HeadImageContainer {
+    flex-basis: 40%;
+  }
+
+  .Presentation__ProfileImage {
+    position: absolute;
+    right: -13vh;
+    width: auto;
+    bottom: auto;
+    top: 2vh;
+  }
+
+  .Presentation__ProfileImage img {
+    height: 20vh;
+    max-width: 20vh;
+    border-radius: 20vh;
+  }
+
+  .Presentation__ContributorData{
+    padding-top: unset;
+    padding-left: 13vh;
+    width: 100%;
+  }
+}
