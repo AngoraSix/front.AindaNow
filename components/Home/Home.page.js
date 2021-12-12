@@ -1,16 +1,14 @@
-import Button from '@material-ui/core/Button';
-import { signIn, signOut, useSession } from 'next-auth/client';
+import Button from '@mui/material/Button';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import React from 'react';
 import LandingLayout from '../../layouts/LandingLayout';
 
 const Home = () => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
+  const loading = status === 'loading';
   return (
     <LandingLayout className="Home Home__Container">
-      <img
-        src="/logos/paraconcesionarias2-largo-blanco.png"
-        alt="AngoraSix"
-      />
+      <img src="/logos/a6-white-500.png" alt="AngoraSix" />
       {!session ? (
         <Button
           onClick={() => signIn('angorasixkeycloak')}

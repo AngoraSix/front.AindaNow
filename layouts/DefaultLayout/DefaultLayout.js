@@ -1,21 +1,25 @@
-import { Paper } from '@material-ui/core';
+import { Paper } from '@mui/material';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Navbar from '../../components/Navbar';
 import config from '../../config';
 
-const DefaultLayout = ({ children, className, headData }) => {
+const DefaultLayout = ({ children, className, headData, contained = true }) => {
   const head = {
     ...config.site.head,
     ...headData,
   };
+  const ChildrenContainer = contained ? Paper : 'div';
 
   return (
     <div className={`DefaultLayout DefaultLayout__Container ${className}`}>
       <Head>
         <meta charSet="utf-8" />
         <title>{head.title}</title>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="stylesheet" href="/fonts/Ruluko.css" />
+        <link rel="stylesheet" href="/fonts/ZCool.css" />
         <meta property="og:title" key="og.title" content={head.title} />
         <meta
           property="og:description"
@@ -31,7 +35,7 @@ const DefaultLayout = ({ children, className, headData }) => {
         <meta property="fb:app_id" key="fb.id" content={head.facebookAppId} />
       </Head>
       <Navbar />
-      <Paper className="DefaultLayout__Body">{children}</Paper>
+      <ChildrenContainer className={`${className}__Body`}>{children}</ChildrenContainer>
     </div>
   );
 };

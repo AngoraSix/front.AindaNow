@@ -15,28 +15,8 @@
   z-index: 1101;
 }
 
-.Navbar__Column {
-  margin: 0 auto;
-}
-
-.Navbar__Column:first-child {
-  margin-left: 0;
-}
-
-.Navbar__Column:last-child {
-  margin-right: 0;
-}
-
-.Navbar__User {
-  display: none;
-}
-
-.Navbar__MenuIcon svg {
-  color: #fff;
-}
-
-.NavbarMenu {
-  z-index: 10 !important;
+.Navbar__Menu__Item:hover{
+  filter: brightness(90%);
 }
 
 .Navbar__Logo {
@@ -46,18 +26,5 @@
 }
 
 @media (min-width: 768px) {
-  .Navbar__User {
-    display: block;
-    margin: 0 0 0 auto;
-  }
-
-  .NavbarMenu {
-    display: none !important;
-  }
-
-  .Navbar__Container > div {
-    width: 90%;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
+  
 }

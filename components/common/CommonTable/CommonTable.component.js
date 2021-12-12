@@ -12,9 +12,9 @@ import {
   TextField,
   Toolbar,
   Typography,
-} from '@material-ui/core';
-import SearchIcon from '@material-ui/icons/SearchRounded';
-import Skeleton from '@material-ui/lab/Skeleton';
+} from '@mui/material';
+import SearchIcon from '@mui/icons-material/SearchRounded';
+import Skeleton from '@mui/material/Skeleton';
 
 const CommonTable = ({
   className,
@@ -129,10 +129,10 @@ const CommonTable = ({
 
       {isLoading && (
         <div className="CommonTable__Table--loading">
-          <Skeleton variant="rect" />
-          <Skeleton variant="rect" />
-          <Skeleton variant="rect" />
-          <Skeleton variant="rect" />
+          <Skeleton variant="rectangular" />
+          <Skeleton variant="rectangular" />
+          <Skeleton variant="rectangular" />
+          <Skeleton variant="rectangular" />
         </div>
       )}
 

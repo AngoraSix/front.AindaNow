@@ -1,0 +1,80 @@
+.Profile__Container {
+  padding: 0 20px;
+  margin-top: 30px;
+}
+
+.Presentation {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.Presentation__HeadImageContainer {
+  min-height: 17vh;
+  background-size: cover;
+  background-position: center;
+  flex-grow: 0;
+  flex-basis: 50%;
+  position: relative;
+}
+
+.Presentation__ProfileImage {
+  position: absolute;
+  bottom: -9vh;
+  width: 100%;
+  text-align: center;
+}
+
+.Presentation__ProfileImage img {
+  height: 15vh;
+  max-width: 15vh;
+  border-radius: 15vh;
+}
+
+.Presentation__ContributorData {
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 9vh;
+  align-content: space-evenly;
+  justify-content: space-evenly;
+}
+
+.Presentation__Edit {
+  position: absolute;
+  z-index: 2;
+  top: 0.5em;
+  left: 0.5em;
+}
+
+@media (min-width: 768px) {
+  .Presentation {
+    height: 40vh;
+    flex-direction: row;
+  }
+
+  .Presentation__HeadImageContainer {
+    flex-basis: 40%;
+  }
+
+  .Presentation__ProfileImage {
+    position: absolute;
+    right: -10.5vh;
+    width: auto;
+    bottom: auto;
+    top: 2vh;
+  }
+
+  .Presentation__ProfileImage img {
+    height: 17vh;
+    max-width: 17vh;
+    border-radius: 17vh;
+  }
+
+  .Presentation__ContributorData {
+    padding-top: unset;
+    padding-left: 13vh;
+    width: 100%;
+  }
+}

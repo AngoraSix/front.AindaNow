@@ -1,33 +1,50 @@
+import KeycloakProvider from 'next-auth/providers/keycloak';
+
 export const oauthFrameworkConfig = {
   debug:
     process.env.A6_APP_OAUTH_FW_DEBUG &&
     process.env.A6_APP_OAUTH_FW_DEBUG === 'true',
+  jwt: {
+    secret: process.env.A6_APP_OAUTH_JWT_SECRET || 'jw7Secre7',
+  },
+  secret: process.env.A6_APP_MAIN_SECRET || 'aSecre7',
+  session: {
+    strategy: 'jwt',
+  },
 };
 
-const oauthConfig = {
+export const oauthBuiltinProviderConfig = KeycloakProvider({
+  clientId: process.env.A6_APP_OAUTH_CLIENT_ID || 'clientId',
+  clientSecret: process.env.A6_APP_OAUTH_CLIENT_SECRET || 'clientSecret',
+  issuer: process.env.A6_APP_OAUTH_PROVIDER_ISSUER || 'realms/myrealm/',
+  token: process.env.A6_APP_OAUTH_PROVIDER_TOKEN_ENDPOINT || undefined,
+});
+
+/*
+Not used -> now using built-in provider...does it provide token endpoint for refresh token?
+*/
+export const oauthProviderConfig = {
   id: 'angorasixkeycloak',
   name: 'AngorasixKeycloak',
   type: 'oauth',
   version: '2.0',
-  scope: process.env.A6_APP_OAUTH_CLIENT_SCOPES || 'profile openid',
-  params: { grant_type: 'authorization_code' },
+  wellKnown:
+    process.env.A6_APP_OAUTH_PROVIDER_DISCOVERY_ENDPOINT ||
+    '/myrealm/.well-known/openid-configuration',
+  authorization: {
+    url: process.env.A6_APP_OAUTH_PROVIDER_AUTHORIZATION_ENDPOINT || undefined,
+    params: {
+      scope:
+        process.env.A6_APP_OAUTH_PROVIDER_AUTHORIZATION_SCOPES ||
+        'openid email profile',
+    },
+  },
+  token: process.env.A6_APP_OAUTH_PROVIDER_TOKEN_ENDPOINT || undefined,
+  userinfo: process.env.A6_APP_OAUTH_PROVIDER_USERINFO_ENDPOINT || undefined,
   idToken: true,
-  accessTokenUrl:
-    process.env.A6_APP_OAUTH_PROVIDER_TOKEN_ENDPOINT ||
-    '/myrealm/protocol/openid-connect/token',
-  requestTokenUrl:
-    process.env.A6_APP_OAUTH_PROVIDER_REQUESTTOKEN_ENDPOINT ||
-    '/myrealm/protocol/openid-connect/auth',
-  authorizationUrl:
-    process.env.A6_APP_OAUTH_PROVIDER_AUTHORIZATION_ENDPOINT ||
-    '/myrealm/protocol/openid-connect/auth?response_type=code',
-  profileUrl:
-    process.env.A6_APP_OAUTH_PROVIDER_USERINFO_ENDPOINT ||
-    '/myrealm/protocol/openid-connect/userinfo',
+  issuer: process.env.A6_APP_OAUTH_PROVIDER_ISSUER || 'realms/myrealm/',
+  checks: ['pkce', 'state'],
   async profile(profile, tokens) {
-    // You can use the tokens, in case you want to fetch more profile information
-    // For example several OAuth providers do not return email by default.
-    // Depending on your provider, will have tokens like `access_token`, `id_token` and or `refresh_token`
     return {
       id: profile.sub,
       name: profile.name,
@@ -35,8 +52,7 @@ const oauthConfig = {
       image: profile.picture,
     };
   },
+
   clientId: process.env.A6_APP_OAUTH_CLIENT_ID || 'clientId',
   clientSecret: process.env.A6_APP_OAUTH_CLIENT_SECRET || 'clientSecret',
 };
-
-export default oauthConfig;

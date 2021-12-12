@@ -1,15 +1,16 @@
-import { useSession } from 'next-auth/client';
+import { useSession } from 'next-auth/react';
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
 import api from '../../api';
 import ProjectsList from './ProjectsList.component';
 import ProjectsListReducer, {
   INITIAL_STATE,
-  updateDataAction
+  updateDataAction,
 } from './ProjectsList.reducer';
 
 const ProjectsListContainer = ({ data }) => {
-  const [session, loading] = useSession();
+  const { data: session, status } = useSession();
+  const loading = status === 'loading';
 
   const [state, dispatch] = useReducer(ProjectsListReducer, {
     ...INITIAL_STATE,
@@ -17,16 +18,11 @@ const ProjectsListContainer = ({ data }) => {
   });
 
   const onNextPageClick = async () => {
-    const {
-      total,
-      page,
-      limit,
-      search,
-      data,
-    } = await api.projects.fetchProjects(session.user.attributes, {
-      page: state.data.page + 1,
-      search: state.data.search,
-    });
+    const { total, page, limit, search, data } =
+      await api.projects.fetchProjects(session.user.attributes, {
+        page: state.data.page + 1,
+        search: state.data.search,
+      });
 
     const projects = state.data.projects.concat(data);
 

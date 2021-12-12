@@ -1,4 +1,4 @@
-import { Provider as NextAuthProvider } from "next-auth/client";
+import { SessionProvider as NextAuthProvider } from "next-auth/react";
 import PropTypes from 'prop-types';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from 'redux';
@@ -19,6 +19,7 @@ import '../styles/Home.css';
 import '../styles/LandingLayout.css';
 import '../styles/Menu.css';
 import '../styles/Navbar.css';
+import '../styles/Profile.css';
 import '../styles/ProjectCard.css';
 import '../styles/ProjectsList.css';
 import '../styles/Vehicles.css';
@@ -31,10 +32,9 @@ const HOCWebApp = ({ Component, pageProps, preloadedState, env }) => {
 
   config.applyEnvConfig(env);
   api.applyEnvConfig(env);
-
   return (
     <ReduxProvider store={store}>
-      <NextAuthProvider session={pageProps.session}>
+      <NextAuthProvider session={pageProps.session} refetchInterval={1 * 30}>
       <App>
         <Component {...pageProps} />
       </App>

@@ -32,6 +32,18 @@ class BaseAPI {
     return this.getCurrentAxiosInstance().defaults.headers.common;
   }
 
+  getAuthorizationHeaders = (token, isRequired = true) => {
+    if (token?.accessToken) {
+      return { Authorization: `Bearer ${token.accessToken}` };
+    } else if (isRequired) {
+      throw new Error(
+        'BaseAPI Error - Authorization header is required but user is not authenticated'
+      );
+    } else {
+      return {};
+    }
+  };
+
   getCurrentAxiosInstance() {
     const axiosInstance =
       typeof window !== 'undefined' ? this.axiosBrowser : this.axiosServer;

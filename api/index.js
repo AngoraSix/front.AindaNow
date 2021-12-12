@@ -1,7 +1,7 @@
 import config from '../config';
 import BaseAPI from './BaseAPI';
 import ProjectsAPI from './projects';
-import UsersAPI from './users';
+import ContributorsAPI from './contributors';
 import VehiclesAPI from './vehicles';
 
 class API {
@@ -17,8 +17,8 @@ class API {
     return this.vehiclesAPI;
   }
 
-  get users() {
-    return this.usersAPI;
+  get contributors() {
+    return this.contributorsAPI;
   }
 
   applyEnvConfig() {
@@ -29,7 +29,7 @@ class API {
 
     this.projectsAPI = new ProjectsAPI(_getServiceAPI('projects', this.axios));
     this.vehiclesAPI = new VehiclesAPI(this.axios);
-    this.usersAPI = new UsersAPI(this.axios);
+    this.contributorsAPI = new ContributorsAPI(this.axios);
   }
 }
 

@@ -1,4 +1,4 @@
-import { Paper, Typography } from '@material-ui/core';
+import { Paper, Typography } from '@mui/material';
 import classnames from 'classnames';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
