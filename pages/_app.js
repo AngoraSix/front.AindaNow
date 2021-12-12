@@ -32,7 +32,6 @@ const HOCWebApp = ({ Component, pageProps, preloadedState, env }) => {
 
   config.applyEnvConfig(env);
   api.applyEnvConfig(env);
-
   return (
     <ReduxProvider store={store}>
       <NextAuthProvider session={pageProps.session} refetchInterval={1 * 30}>

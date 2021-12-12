@@ -158,7 +158,7 @@ const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <Link href={`/profile/${session.user?.uid}`}>
+                  <Link href={`/profile/${session.user?.id}`}>
                     <MenuItem key="profile">
                       <Typography textAlign="center">Profile</Typography>
                     </MenuItem>
