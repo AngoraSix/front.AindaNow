@@ -4,10 +4,10 @@ import { Paper, Typography, Avatar } from '@mui/material';
 import Editable from '../../common/Editable';
 import { PROFILE_ATTRIBUTES } from '../../../constants';
 import { EDITABLE_FIELD_TYPES } from '../../../constants';
-import EditIcon from '@mui/icons-material/Edit';
 
 const ContributorPresentationSection = ({
   profile,
+  profileAttributes,
   isCurrentContributor,
   onEditField,
 }) => {
@@ -17,10 +17,9 @@ const ContributorPresentationSection = ({
     };
   };
 
-  const getAttributeValue = (fieldName, extractFromArray = false) => {
-    return extractFromArray
-      ? profile.attributes?.[fieldName][0]
-      : profile.attributes?.[fieldName];
+  const getAttributeValue = (fieldName) => {
+    const attributeValue = profileAttributes[fieldName];
+    return Array.isArray(attributeValue) ? attributeValue[0] : attributeValue;
   };
 
   return (
@@ -37,7 +36,10 @@ const ContributorPresentationSection = ({
             className="Presentation__HeadImage"
             style={{
               backgroundImage:
-                'url(https://naldzgraphics.net/wp-content/uploads/2012/06/road-wallpaper.jpg)',
+                `url(${getAttributeValue(
+                  PROFILE_ATTRIBUTES.headImage.key
+                )}), ` +
+                'url(https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg)',
             }}
           ></div>
         </Editable>
@@ -51,9 +53,10 @@ const ContributorPresentationSection = ({
           onEdit={onEdit(PROFILE_ATTRIBUTES.profilePicture.key)}
         >
           <div className={'Presentation__ProfileImage'}>
-            <img
+            <Avatar
               src={getAttributeValue(PROFILE_ATTRIBUTES.profilePicture.key)}
-            ></img>
+              sx={{ width: '100%', height: '100%' }}
+            ></Avatar>
           </div>
         </Editable>
       </div>
@@ -68,10 +71,13 @@ const ContributorPresentationSection = ({
   );
 };
 
-ContributorPresentationSection.defaultProps = {};
+ContributorPresentationSection.defaultProps = {
+  profileAttributes: {},
+};
 
 ContributorPresentationSection.propTypes = {
   profile: PropTypes.object.isRequired,
+  profileAttributes: PropTypes.object,
   onEditField: PropTypes.func.isRequired,
 };
 

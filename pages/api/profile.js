@@ -1,14 +1,33 @@
 import { getToken } from 'next-auth/jwt';
 import { oauthFrameworkConfig } from '../../config/oauth';
+import MethodNotAllowedError from '../../utils/errors/MethodNotAllowedError';
+import { getEnv } from '../../utils/env';
+import api from '../../api';
+import config from '../../config';
 
-export default async function handler(req, res) {
-  const token = await getToken({
-    req,
-    secret: oauthFrameworkConfig.jwt.secret,
-  });
+export default async (req, res) => {
   if (req.method === 'POST') {
-    res.status(200).json({ ger: 'POST', token, body: req.body });
+    const env = getEnv();
+    config.applyEnvConfig(env);
+    api.applyEnvConfig(env);
+    const token = await getToken({
+      req,
+      secret: oauthFrameworkConfig.jwt.secret,
+    });
+    const validatedToken =
+      token?.error !== 'RefreshAccessTokenError' ? token : null;
+    try {
+      const { data } = await api.contributors.setAttributes(
+        req.body,
+        validatedToken
+      );
+      res.status(200).json({ data });
+    } catch (err) {}
   } else {
-    res.status(400).json({ ger: 'gergerGET', token, body: req.body });
+    const mnaError = new MethodNotAllowedError(
+      'No Profile API support for this method',
+      'PROFILE'
+    );
+    res.status(mnaError.status).json(mnaError.asObject());
   }
-}
+};

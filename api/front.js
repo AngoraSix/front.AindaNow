@@ -3,10 +3,8 @@ class FrontAPI {
     this.axios = axiosInstance;
   }
 
-  async setProfileAttribute(fieldName, fieldValue) {
-    const { data } = await this.axios.post(`api/profile`, {
-      [fieldName]: fieldValue,
-    });
+  async setProfileAttributes(attributes) {
+    const { data } = await this.axios.post(`api/profile`, attributes);
     return data;
   }
 }

@@ -57,8 +57,8 @@ async function refreshAccessToken(token) {
       accessTokenExpires: moment().unix() + accessTokenBody.expires_in,
       refreshToken: accessTokenBody.refresh_token ?? token.refreshToken, // Fall back to old refresh token
     };
-  } catch (error) {
-    console.log(error);
+  } catch (err) {
+    console.log(err);
     return {
       ...token,
       error: 'RefreshAccessTokenError',
