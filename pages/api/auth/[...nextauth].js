@@ -16,10 +16,6 @@ export const oauthCallbacksConfig = {
         user,
       };
     }
-    console.log("UUUUU");
-    console.log(moment());
-    console.log(moment.unix(token.accessTokenExpires));
-    console.log(token.accessTokenExpires);
     // Return previous token if the access token has not expired yet
     if (moment().isBefore(moment.unix(token.accessTokenExpires))) {
       return token;
@@ -58,7 +54,7 @@ async function refreshAccessToken(token) {
     let accessTokenBody = response.data;
     return {
       accessToken: accessTokenBody.access_token,
-      accessTokenExpires: Date.now() + accessTokenBody.expires_in,
+      accessTokenExpires: moment().unix() + accessTokenBody.expires_in,
       refreshToken: accessTokenBody.refresh_token ?? token.refreshToken, // Fall back to old refresh token
     };
   } catch (error) {

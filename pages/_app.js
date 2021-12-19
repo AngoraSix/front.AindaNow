@@ -13,6 +13,7 @@ import { loadVehicleTypesAction } from '../store/vehicleTypes';
 import '../styles/App.css';
 import '../styles/Carousel.css';
 import '../styles/CommonTable.css';
+import '../styles/Editable.css';
 import '../styles/DefaultLayout.css';
 import '../styles/globals.css';
 import '../styles/Home.css';
@@ -69,17 +70,17 @@ HOCWebApp.getInitialProps = async (ctx) => {
   //   limit: 99999999,
   // });
   // store.dispatch(loadBrandsAction(brands));
-  store.dispatch(loadBrandsAction([]));
+  // store.dispatch(loadBrandsAction([]));
 
   // Load vehicle types
   // const { data: vehicleTypes } = await api.vehicles.listVehicleTypes({
   //   limit: 99999999,
   // });
   // store.dispatch(loadVehicleTypesAction(vehicleTypes));
-  store.dispatch(loadVehicleTypesAction([]));
+  // store.dispatch(loadVehicleTypesAction([]));
   
   // Load currencies
-  store.dispatch(loadCurrenciesAction(CURRENCIES));
+  // store.dispatch(loadCurrenciesAction(CURRENCIES));
 
   const preloadedState = store.getState();
 

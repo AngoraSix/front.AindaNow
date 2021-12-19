@@ -5,11 +5,23 @@ import ProfileLayout from '../../layouts/ProfileLayout';
 import Profile from '../../components/Profile';
 import { getToken } from 'next-auth/jwt';
 import { oauthFrameworkConfig } from '../../config/oauth';
-import { getSession } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
+import { useLoading } from '../../hooks/app';
+import { useEffect } from 'react';
 
 const ContributorProfile = ({ profile, isCurrentContributor }) => {
-  console.log("TTTTT");
-  console.log(isCurrentContributor);
+  const { data: session, status } = useSession();
+  const loading = status === 'loading';
+  const { doLoad } = useLoading();
+
+  useEffect(() => {
+    const shouldReauth =
+      isCurrentContributor && session?.error === 'RefreshAccessTokenError';
+    doLoad(loading || shouldReauth);
+    if (shouldReauth) {
+      signIn('angorasixkeycloak'); // Force sign in to hopefully resolve error and be able to edit
+    }
+  }, [session, loading]);
   return (
     <ProfileLayout>
       <Profile profile={profile} isCurrentContributor={isCurrentContributor} />
@@ -33,10 +45,13 @@ export const getServerSideProps = async (ctx) => {
       ...ctx,
       secret: oauthFrameworkConfig.jwt.secret,
     });
-    console.log("EEEEE");
-    console.log(token?.user.id === profileId);
+  const validatedToken =
+    token?.error !== 'RefreshAccessTokenError' ? token : null;
   try {
-    const profile = await api.contributors.getContributor(profileId, token);
+    const profile = await api.contributors.getContributor(
+      profileId,
+      validatedToken
+    );
     props = {
       ...props,
       profile,

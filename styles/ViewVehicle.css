@@ -109,7 +109,7 @@
   margin: 10px 0;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .ViewVehicle__Header {
     padding: 20px 20px;
     margin: 0 -20px;

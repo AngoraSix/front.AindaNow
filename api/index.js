@@ -1,12 +1,17 @@
 import config from '../config';
 import BaseAPI from './BaseAPI';
 import ProjectsAPI from './projects';
+import FrontAPI from './front';
 import ContributorsAPI from './contributors';
 import VehiclesAPI from './vehicles';
 
 class API {
   constructor() {
     this.applyEnvConfig();
+  }
+
+  get front() {
+    return this.frontAPI;
   }
 
   get projects() {
@@ -26,7 +31,11 @@ class API {
       serverBaseURL: config.api.serverBaseURL,
       browserBaseURL: config.api.browserBaseURL,
     });
-
+    this.frontAPI = new FrontAPI(
+      new BaseAPI({
+        baseURL: '/',
+      })
+    );
     this.projectsAPI = new ProjectsAPI(_getServiceAPI('projects', this.axios));
     this.vehiclesAPI = new VehiclesAPI(this.axios);
     this.contributorsAPI = new ContributorsAPI(this.axios);

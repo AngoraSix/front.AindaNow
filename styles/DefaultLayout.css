@@ -11,7 +11,7 @@
   min-height: calc(100vh - 80px);
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .DefaultLayout__Page__Body {
     padding: 45px 20px;
     width: 90%;

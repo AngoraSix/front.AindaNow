@@ -7,28 +7,46 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  align-items: center;
 }
 
-.Presentation__HeadImageContainer {
-  min-height: 17vh;
-  background-size: cover;
-  background-position: center;
-  flex-grow: 0;
-  flex-basis: 50%;
+.Profile__Editable__Container {
   position: relative;
 }
 
-.Presentation__ProfileImage {
-  position: absolute;
-  bottom: -9vh;
+.Presentation__HeadImageContainer {
+  height: 17vh;
+  min-height: 17vh;
+  flex-grow: 0;
+  flex-basis: 50%;
   width: 100%;
+}
+
+.Presentation__HeadImage {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+}
+
+.Presentation__ProfileImageContainer {
+  position: absolute;
+  height: 17vh;
+  width: 17vh;
+  border-radius: 17vh;
+  overflow: hidden;
+  top: 5vh;
+}
+
+.Presentation__ProfileImage {
+  width: 100%;
+  height: 100%;
   text-align: center;
 }
 
 .Presentation__ProfileImage img {
-  height: 15vh;
-  max-width: 15vh;
-  border-radius: 15vh;
+  height: 100%;
+  width: 100%;
 }
 
 .Presentation__ContributorData {
@@ -36,19 +54,11 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding-top: 9vh;
   align-content: space-evenly;
   justify-content: space-evenly;
 }
 
-.Presentation__Edit {
-  position: absolute;
-  z-index: 2;
-  top: 0.5em;
-  left: 0.5em;
-}
-
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .Presentation {
     height: 40vh;
     flex-direction: row;
@@ -56,14 +66,9 @@
 
   .Presentation__HeadImageContainer {
     flex-basis: 40%;
-  }
-
-  .Presentation__ProfileImage {
-    position: absolute;
-    right: -10.5vh;
-    width: auto;
-    bottom: auto;
-    top: 2vh;
+    height: 100%;
+    min-height: 17vh;
+    width: 100%;
   }
 
   .Presentation__ProfileImage img {
@@ -76,5 +81,11 @@
     padding-top: unset;
     padding-left: 13vh;
     width: 100%;
+  }
+}
+
+@media (min-width: 900px) {
+  .Presentation__ProfileImageContainer {
+    left: 23%;
   }
 }
