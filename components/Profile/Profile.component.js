@@ -1,6 +1,6 @@
-import ContributorPresentationSection from './Sections/ContributorPresentationSection.component';
-import PropTypes from 'prop-types';
 import React from 'react';
+import PropTypes from 'prop-types';
+import ContributorPresentationSection from './Sections/ContributorPresentationSection.component';
 
 const Profile = ({
   profile,

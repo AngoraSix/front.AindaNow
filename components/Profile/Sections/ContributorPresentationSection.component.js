@@ -4,6 +4,7 @@ import { Paper, Typography, Avatar } from '@mui/material';
 import Editable from '../../common/Editable';
 import { PROFILE_ATTRIBUTES } from '../../../constants';
 import { EDITABLE_FIELD_TYPES } from '../../../constants';
+import { useTheme } from '@mui/styles';
 
 const ContributorPresentationSection = ({
   profile,
@@ -22,6 +23,8 @@ const ContributorPresentationSection = ({
     return Array.isArray(attributeValue) ? attributeValue[0] : attributeValue;
   };
 
+  const theme = useTheme();
+
   return (
     <Paper className="Presentation">
       <div className="Profile__Editable__Container Presentation__HeadImageContainer">
@@ -35,11 +38,10 @@ const ContributorPresentationSection = ({
           <div
             className="Presentation__HeadImage"
             style={{
-              backgroundImage:
-                `url(${getAttributeValue(
-                  PROFILE_ATTRIBUTES.headImage.key
-                )}), ` +
-                'url(https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg)',
+              backgroundImage: `url(${getAttributeValue(
+                PROFILE_ATTRIBUTES.headImage.key
+              )}) `,
+              backgroundColor: theme.palette.primary.main,
             }}
           ></div>
         </Editable>

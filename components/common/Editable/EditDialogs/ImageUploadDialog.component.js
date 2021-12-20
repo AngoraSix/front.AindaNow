@@ -7,6 +7,7 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import FileDragAndDrop from '../../FileDragAndDrop';
 
 const ImageUploadDialog = ({
   open,
@@ -27,13 +28,13 @@ const ImageUploadDialog = ({
 
   return (
     <Dialog open={open} onClose={handleDialogClose}>
-      <DialogTitle>Subscribe</DialogTitle>
+      <DialogTitle>Upload Image</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          To subscribe to this website, please enter your email address here. We
-          will send updates occasionally.
+          Browse or drop a file in the drop zone
         </DialogContentText>
-        <TextField
+        <FileDragAndDrop />
+        {/* <TextField
           autoFocus
           margin="dense"
           id="name"
@@ -42,11 +43,11 @@ const ImageUploadDialog = ({
           onChange={handleChange}
           fullWidth
           variant="standard"
-        />
+        /> */}
       </DialogContent>
       <DialogActions>
         <Button onClick={handleDialogClose}>Cancel</Button>
-        <Button onClick={onSubmit}>Subscribe</Button>
+        <Button onClick={onSubmit}>Save</Button>
       </DialogActions>
     </Dialog>
   );
