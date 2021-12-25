@@ -3,6 +3,7 @@ import BaseAPI from './BaseAPI';
 import ProjectsAPI from './projects';
 import FrontAPI from './front';
 import ContributorsAPI from './contributors';
+import MediaAPI from './media';
 import VehiclesAPI from './vehicles';
 
 class API {
@@ -16,6 +17,10 @@ class API {
 
   get projects() {
     return this.projectsAPI;
+  }
+
+  get media() {
+    return this.mediaAPI;
   }
 
   get vehicles() {
@@ -37,16 +42,27 @@ class API {
       })
     );
     this.projectsAPI = new ProjectsAPI(_getServiceAPI('projects', this.axios));
+    this.mediaAPI = new MediaAPI(_getServiceAPI('media', this.axios));
+    this.contributorsAPI = new ContributorsAPI(
+      _getServiceAPI('contributors', this.axios)
+    );
     this.vehiclesAPI = new VehiclesAPI(this.axios);
-    this.contributorsAPI = new ContributorsAPI(this.axios);
   }
 }
 
 const _getServiceAPI = (service, axiosInstance) => {
-  const serviceOverrideBaseURL = config.api.servicesOverrideBaseURLs[service];
+  const serviceOverrideBaseURL = config.api.servicesOverrideBaseURLs[service],
+    apiGatewayPath = config.api.servicesAPIGatewayPath[service];
+
   return serviceOverrideBaseURL
     ? new BaseAPI({
+        ...axiosInstance.getDefaults(),
         baseURL: serviceOverrideBaseURL,
+      })
+    : apiGatewayPath
+    ? new BaseAPI({
+        ...axiosInstance.getDefaults(),
+        baseURL: `${axiosInstance.getBaseURL()}${apiGatewayPath}`,
       })
     : axiosInstance;
 };

@@ -33,7 +33,7 @@ const ImageUploadDialog = ({
         <DialogContentText>
           Browse or drop a file in the drop zone
         </DialogContentText>
-        <FileDragAndDrop />
+        <FileDragAndDrop onChange={handleChange} />
         {/* <TextField
           autoFocus
           margin="dense"

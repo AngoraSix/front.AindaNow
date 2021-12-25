@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
@@ -35,7 +36,7 @@ const getImageSrc = (file) => {
   return src;
 };
 
-const FileDragAndDrop = ({}) => {
+const FileDragAndDrop = ({ onChange }) => {
   const { onError } = useNotifications();
   const [imageSrc, setImageSrc] = useState(null);
 
@@ -64,7 +65,6 @@ const FileDragAndDrop = ({}) => {
     let fileData = Array.from(files);
     fileData = await Promise.all(
       fileData.map(async (fileDataElement) => {
-        console.log(fileDataElement.type);
         if (!fileDataElement.type.startsWith('image/')) {
           onError('File is not an image');
           setImageSrc(null);
@@ -75,6 +75,7 @@ const FileDragAndDrop = ({}) => {
         return fileDataElement;
       })
     );
+    onChange({ target: { value: fileData } });
   };
 
   const loadImageSrc = async (imageFile) => {
@@ -126,6 +127,6 @@ const FileDragAndDrop = ({}) => {
 
 FileDragAndDrop.defaultProps = {};
 
-FileDragAndDrop.propTypes = {};
+FileDragAndDrop.propTypes = { onChange: PropTypes.func.isRequired };
 
 export default FileDragAndDrop;
