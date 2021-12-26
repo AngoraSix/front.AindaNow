@@ -12,6 +12,19 @@
   border-radius: 5px;
   border-style: dashed;
   border-color: #47626b;
+  transition: border-color 0.5s;
+}
+
+.FileDragAndDrop__DropZone.DragOver {
+  border-color: #df0000;
+}
+
+.FileDragAndDrop__DropZone * {
+  transition: opacity 0.5s;
+}
+
+.FileDragAndDrop__DropZone.DragOver * {
+  opacity: 0.4;
 }
 
 .FileDragAndDrop__Dropzone__Preview {

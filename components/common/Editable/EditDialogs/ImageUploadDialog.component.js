@@ -34,20 +34,22 @@ const ImageUploadDialog = ({
           Browse or drop a file in the drop zone
         </DialogContentText>
         <FileDragAndDrop onChange={handleChange} />
-        {/* <TextField
-          autoFocus
-          margin="dense"
-          id="name"
-          label="Email Address"
-          value={currentFieldValue}
-          onChange={handleChange}
-          fullWidth
-          variant="standard"
-        /> */}
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleDialogClose}>Cancel</Button>
-        <Button onClick={onSubmit}>Save</Button>
+        <Button
+          className="Dialog__Button__Cancel"
+          onClick={handleDialogClose}
+          sx={{ color: 'primary.light' }}
+        >
+          Cancel
+        </Button>
+        <Button
+          className="Dialog__Button__Save"
+          onClick={onSubmit}
+          sx={{ color: 'primary.dark' }}
+        >
+          Save
+        </Button>
       </DialogActions>
     </Dialog>
   );

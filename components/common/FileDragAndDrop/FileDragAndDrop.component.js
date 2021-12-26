@@ -39,6 +39,7 @@ const getImageSrc = (file) => {
 const FileDragAndDrop = ({ onChange }) => {
   const { onError } = useNotifications();
   const [imageSrc, setImageSrc] = useState(null);
+  const [dragOverCount, setDragOver] = useState(0);
 
   const dragOverHandler = (event) => {
     event.stopPropagation();
@@ -46,13 +47,26 @@ const FileDragAndDrop = ({ onChange }) => {
   };
 
   const dragEnterHandler = (event) => {
-    event.stopPropagation();
     event.preventDefault();
+    event.stopPropagation();
+    setDragOver(dragOverCount + 1);
+    console.log('GERGERGERENTER');
+    console.log(dragOverCount);
+  };
+
+  const dragLeaveHandler = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setDragOver(dragOverCount - 1);
+    console.log(dragOverCount);
+    console.log('22222222');
   };
 
   const dropHandler = async (event) => {
     event.stopPropagation();
     event.preventDefault();
+
+    setDragOver(0);
 
     await processFiles(event.dataTransfer.files);
   };
@@ -94,10 +108,13 @@ const FileDragAndDrop = ({ onChange }) => {
   return (
     <div
       id="dropZone"
-      className="FileDragAndDrop__DropZone"
+      className={`FileDragAndDrop__DropZone ${
+        dragOverCount > 0 ? 'DragOver' : ''
+      }`}
       onDrop={dropHandler}
       onDragOver={dragOverHandler}
       onDragEnter={dragEnterHandler}
+      onDragLeave={dragLeaveHandler}
     >
       {!!imageSrc ? (
         <img className="FileDragAndDrop__Dropzone__Preview" src={imageSrc} />

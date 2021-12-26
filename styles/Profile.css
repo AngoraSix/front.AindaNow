@@ -76,6 +76,10 @@
     width: 100%;
   }
 
+  .Presentation__ProfileImageContainer {
+    left: 20%;
+  }
+
   .Presentation__ProfileImage img {
     height: 17vh;
     max-width: 17vh;

@@ -40,6 +40,8 @@ const ContributorPresentationSection = ({
             style={{
               backgroundImage: `url(${getAttributeValue(
                 PROFILE_ATTRIBUTES.headImage.key
+              )}), url(${getAttributeValue(
+                PROFILE_ATTRIBUTES.headImageThumbnail.key
               )}) `,
               backgroundColor: theme.palette.primary.main,
             }}
@@ -56,7 +58,11 @@ const ContributorPresentationSection = ({
         >
           <div className={'Presentation__ProfileImage'}>
             <Avatar
-              src={getAttributeValue(PROFILE_ATTRIBUTES.profilePicture.key)}
+              src={
+                getAttributeValue(
+                  PROFILE_ATTRIBUTES.profilePictureThumbnail.key
+                ) || getAttributeValue(PROFILE_ATTRIBUTES.profilePicture.key)
+              }
               sx={{ width: '100%', height: '100%' }}
             ></Avatar>
           </div>
