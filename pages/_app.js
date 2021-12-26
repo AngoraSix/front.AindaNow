@@ -1,18 +1,20 @@
-import { SessionProvider as NextAuthProvider } from "next-auth/react";
+import { SessionProvider as NextAuthProvider } from 'next-auth/react';
 import PropTypes from 'prop-types';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from 'redux';
 import api from '../api';
 import App from '../components/App';
 import config from '../config';
-import { CURRENCIES } from '../constants';
-import { loadBrandsAction } from '../store/brands';
-import { loadCurrenciesAction } from '../store/currencies';
+// import { CURRENCIES } from '../constants';
+// import { loadBrandsAction } from '../store/brands';
+// import { loadCurrenciesAction } from '../store/currencies';
 import reducers from '../store/reducers';
-import { loadVehicleTypesAction } from '../store/vehicleTypes';
+// import { loadVehicleTypesAction } from '../store/vehicleTypes';
 import '../styles/App.css';
 import '../styles/Carousel.css';
 import '../styles/CommonTable.css';
+import '../styles/Editable.css';
+import '../styles/FileDragAndDrop.css';
 import '../styles/DefaultLayout.css';
 import '../styles/globals.css';
 import '../styles/Home.css';
@@ -26,7 +28,6 @@ import '../styles/Vehicles.css';
 import '../styles/ViewVehicle.css';
 import { getEnv } from '../utils/env';
 
-
 const HOCWebApp = ({ Component, pageProps, preloadedState, env }) => {
   const store = createStore(reducers, preloadedState);
 
@@ -35,9 +36,9 @@ const HOCWebApp = ({ Component, pageProps, preloadedState, env }) => {
   return (
     <ReduxProvider store={store}>
       <NextAuthProvider session={pageProps.session} refetchInterval={1 * 30}>
-      <App>
-        <Component {...pageProps} />
-      </App>
+        <App>
+          <Component {...pageProps} />
+        </App>
       </NextAuthProvider>
     </ReduxProvider>
   );
@@ -69,17 +70,17 @@ HOCWebApp.getInitialProps = async (ctx) => {
   //   limit: 99999999,
   // });
   // store.dispatch(loadBrandsAction(brands));
-  store.dispatch(loadBrandsAction([]));
+  // store.dispatch(loadBrandsAction([]));
 
   // Load vehicle types
   // const { data: vehicleTypes } = await api.vehicles.listVehicleTypes({
   //   limit: 99999999,
   // });
   // store.dispatch(loadVehicleTypesAction(vehicleTypes));
-  store.dispatch(loadVehicleTypesAction([]));
-  
+  // store.dispatch(loadVehicleTypesAction([]));
+
   // Load currencies
-  store.dispatch(loadCurrenciesAction(CURRENCIES));
+  // store.dispatch(loadCurrenciesAction(CURRENCIES));
 
   const preloadedState = store.getState();
 
@@ -87,6 +88,6 @@ HOCWebApp.getInitialProps = async (ctx) => {
     preloadedState,
     env,
   };
-}
+};
 
 export default HOCWebApp;

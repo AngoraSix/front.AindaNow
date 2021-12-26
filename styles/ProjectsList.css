@@ -48,13 +48,13 @@
   text-align: center;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
   .ProjectsList__Grid {
     grid: auto / repeat(3, 1fr);
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 900px) {
   .ProjectsList__Grid {
     grid: auto / repeat(4, 1fr);
   }

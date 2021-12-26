@@ -11,15 +11,6 @@ import { useEffect } from 'react';
 import oauthConfig from '../config/oauth'; //../config/oauth';
 
 const HomePage = ({ projectsList }) => {
-  const { data: session, status } = useSession();
-  const loading = status === 'loading';
-
-  useEffect(() => {
-    if (session?.error === 'RefreshAccessTokenError') {
-      signIn(); // Force sign in to hopefully resolve error
-    }
-  }, [session]);
-
   return (
     <React.Fragment>
       <Head>

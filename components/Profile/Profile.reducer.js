@@ -1,17 +1,20 @@
-const UPDATE_DATA = 'Profile/UPDATE_DATA';
+const UPDATE_ATTRIBUTES = 'Profile/UPDATE_ATTRIBUTES';
 
-export const updateDataAction = (payload) => ({ type: UPDATE_DATA, payload });
+export const updateAttributesAction = (payload) => ({
+  type: UPDATE_ATTRIBUTES,
+  payload,
+});
 
 export const INITIAL_STATE = {
-  data: {},
+  attributes: {},
 };
 
 const ProfileReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UPDATE_DATA:
+    case UPDATE_ATTRIBUTES:
       return {
         ...state,
-        data: action.payload,
+        attributes: action.payload,
       };
 
     default:
