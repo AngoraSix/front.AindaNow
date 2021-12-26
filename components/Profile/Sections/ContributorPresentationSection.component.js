@@ -12,9 +12,9 @@ const ContributorPresentationSection = ({
   isCurrentContributor,
   onEditField,
 }) => {
-  const onEdit = (fieldName) => {
+  const onEdit = (fieldName, isMedia = false) => {
     return (fieldValue) => {
-      return onEditField(fieldName, fieldValue);
+      return onEditField(fieldName, fieldValue, isMedia);
     };
   };
 
@@ -33,7 +33,7 @@ const ContributorPresentationSection = ({
           isEditable={isCurrentContributor}
           fieldName={PROFILE_ATTRIBUTES.headImage.label}
           fieldValue={getAttributeValue(PROFILE_ATTRIBUTES.headImage.key)}
-          onEdit={onEdit(PROFILE_ATTRIBUTES.headImage.key)}
+          onEdit={onEdit(PROFILE_ATTRIBUTES.headImage.key, true)}
         >
           <div
             className="Presentation__HeadImage"
@@ -52,7 +52,7 @@ const ContributorPresentationSection = ({
           isEditable={isCurrentContributor}
           fieldName={PROFILE_ATTRIBUTES.profilePicture.label}
           fieldValue={getAttributeValue(PROFILE_ATTRIBUTES.profilePicture.key)}
-          onEdit={onEdit(PROFILE_ATTRIBUTES.profilePicture.key)}
+          onEdit={onEdit(PROFILE_ATTRIBUTES.profilePicture.key, true)}
         >
           <div className={'Presentation__ProfileImage'}>
             <Avatar

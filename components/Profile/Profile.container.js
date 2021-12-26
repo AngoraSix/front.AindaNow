@@ -19,13 +19,24 @@ const ProfileContainer = ({ profile, isCurrentContributor }) => {
   });
   const profileAttributes = profileFields.attributes;
 
-  const onEditAttributeField = async (fieldName, fieldValue) => {
+  const onEditAttributeField = async (
+    fieldName,
+    fieldValue,
+    isMedia = false
+  ) => {
     doLoad(true);
+    let updatedAttributes = { ...profileAttributes };
     try {
-      const updatedAttributes = {
-        ...profileAttributes,
-        [fieldName]: fieldValue,
-      };
+      if (isMedia) {
+        let imageURL = fieldValue,
+          thumbnailURL = null;
+        if (imageURL instanceof File || typeof imageURL === 'object') {
+          [imageURL, thumbnailURL] = await api.front.uploadFile(imageURL);
+          updatedAttributes[`${fieldName}.thumbnail`] = thumbnailURL;
+          fieldValue = imageURL;
+        }
+      }
+      updatedAttributes[fieldName] = fieldValue;
       const setResponse = await api.front.setProfileAttributes(
         updatedAttributes
       );
@@ -35,6 +46,7 @@ const ProfileContainer = ({ profile, isCurrentContributor }) => {
         signIn('angorasixkeycloak');
       }
     } catch (err) {
+      console.log('ERR', err);
       onError('There was an error updating the Profile field');
     }
     doLoad(false);

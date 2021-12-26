@@ -5,9 +5,7 @@ class ProjectsAPI {
 
   async fetchProjectPresentations(attributes) {
     // traer projects  pasados por projects-presentation?
-    const { data } = await this.axios.get(
-      `projects/presentations?${attributes}`
-    );
+    const { data } = await this.axios.get(`/presentations?${attributes}`);
     return data;
   }
 }

@@ -32,6 +32,14 @@ class BaseAPI {
     return this.getCurrentAxiosInstance().defaults.headers.common;
   }
 
+  getBaseURL() {
+    return this.getCurrentAxiosInstance().defaults.baseURL;
+  }
+
+  getDefaults() {
+    return this.getCurrentAxiosInstance().defaults;
+  }
+
   getAuthorizationHeaders = (token, isRequired = true) => {
     if (token?.accessToken) {
       return { Authorization: `Bearer ${token.accessToken}` };

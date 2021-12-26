@@ -25,7 +25,7 @@ export default async (req, res) => {
     } catch (err) {}
   } else {
     const mnaError = new MethodNotAllowedError(
-      'No Profile API support for this method',
+      `No API support for ${req.method} HTTP method`,
       'PROFILE'
     );
     res.status(mnaError.status).json(mnaError.asObject());
