@@ -1,0 +1,10 @@
+.ProjectForm__Description {
+  text-align: center;
+  width: 50%;
+  margin: 2em auto;
+}
+
+.NewProject__Stepper {
+  width: 70%;
+  margin: 0 auto;
+}

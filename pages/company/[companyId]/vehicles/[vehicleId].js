@@ -5,6 +5,7 @@ import api from '../../../../api';
 import CompanyVehiclesLayout from '../../../../layouts/CompanyVehiclesLayout';
 import ViewVehicle from '../../../../components/ViewVehicle';
 import { VEHICLE_STEERINGS } from '../../../../constants';
+import logger from '../../../../utils/logger';
 
 const CompanyVehicleDetail = ({ company, vehicle }) => {
   const reduxState = useSelector(({ brands, vehicleTypes, currencies }) => ({
@@ -20,7 +21,8 @@ const CompanyVehicleDetail = ({ company, vehicle }) => {
       brand: reduxState.brands[vehicle.brand],
       vehicleType: reduxState.vehicleTypes[vehicle.vehicleType],
       currency: reduxState.currencies[vehicle.currency],
-      steering: VEHICLE_STEERINGS.find(({ id }) => id === vehicle.steering) || {},
+      steering:
+        VEHICLE_STEERINGS.find(({ id }) => id === vehicle.steering) || {},
     };
   }
 
@@ -44,7 +46,7 @@ CompanyVehicleDetail.propTypes = {
 export const getServerSideProps = async (ctx) => {
   let props = {};
 
-  const { companyId, vehicleId }= ctx.params;
+  const { companyId, vehicleId } = ctx.params;
   try {
     const company = await api.companies.getCompanyById(companyId);
 
@@ -59,7 +61,7 @@ export const getServerSideProps = async (ctx) => {
       vehicle,
     };
   } catch (err) {
-    console.log('err', err);
+    logger.error('err', err);
   }
 
   return {
@@ -67,4 +69,4 @@ export const getServerSideProps = async (ctx) => {
   };
 };
 
-export default CompanyVehicleDetail
+export default CompanyVehicleDetail;

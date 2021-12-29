@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import api from '../../../api';
 import ProjectsList from '../../../components/ProjectsList';
 import ProjectsLayout from '../../../layouts/ProjectsLayout/ProjectsLayout';
+import logger from '../../../utils/logger';
 
 const CompanyProjectsList = ({ company, data }) => {
   return (
@@ -22,7 +23,7 @@ CompanyProjectsList.propTypes = {
 export const getServerSideProps = async (ctx) => {
   let props = {};
 
-  const { companyId }= ctx.params;
+  const { companyId } = ctx.params;
   try {
     const company = await api.companies.fetchProjects(companyId);
 
@@ -37,7 +38,7 @@ export const getServerSideProps = async (ctx) => {
       },
     };
   } catch (err) {
-    console.log('err', err);
+    logger.error('err', err);
   }
 
   return {
@@ -45,4 +46,4 @@ export const getServerSideProps = async (ctx) => {
   };
 };
 
-export default CompanyProjectsList
+export default CompanyProjectsList;

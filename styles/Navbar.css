@@ -15,7 +15,11 @@
   z-index: 1101;
 }
 
-.Navbar__Menu__Item:hover{
+.Navbar__Login__Icon {
+  color: #fafafa;
+}
+
+.Navbar__Menu__Item:hover {
   filter: brightness(90%);
 }
 
@@ -26,5 +30,4 @@
 }
 
 @media (min-width: 600px) {
-  
 }

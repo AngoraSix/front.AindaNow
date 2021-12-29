@@ -50,8 +50,6 @@ const ProjectsListContainer = ({ data }) => {
       page = 1,
       limit = 5,
       search = value;
-    console.log('4444444');
-    console.log(projectsList);
     dispatch(updateDataAction({ total, page, limit, search, projectsList }));
   };
   return (

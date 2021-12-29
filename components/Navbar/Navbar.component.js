@@ -17,6 +17,8 @@ import Link from 'next/link';
 import React from 'react';
 import config from '../../config';
 import MenuIcon from '@mui/icons-material/Menu';
+import LoginIcon from '@mui/icons-material/Login';
+import { ROUTES, resolveRoute } from '../../constants';
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -82,8 +84,8 @@ const Navbar = () => {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                <MenuItem key="page1">
-                  <Link href="/">
+                <MenuItem key="projects">
+                  <Link href={ROUTES.projects.list}>
                     <Typography
                       textAlign="center"
                       onClick={handleCloseNavMenu}
@@ -108,7 +110,7 @@ const Navbar = () => {
             </Box>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Link href={'/'}>
+              <Link href={ROUTES.projects.list}>
                 <Button
                   className="Navbar__Menu__Item"
                   variant="text"
@@ -158,7 +160,9 @@ const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <Link href={`/profile/${session.user?.id}`}>
+                  <Link
+                    href={resolveRoute(ROUTES.profile.view, session.user?.id)}
+                  >
                     <MenuItem key="profile">
                       <Typography textAlign="center">Profile</Typography>
                     </MenuItem>
@@ -170,16 +174,24 @@ const Navbar = () => {
               </Box>
             ) : (
               <Box sx={{ flexGrow: 0 }}>
-                <Tooltip title="Open settings">
-                  <Button
-                    onClick={() => signIn('angorasixkeycloak')}
-                    variant="contained"
-                    color="secondary"
-                    alt="login"
-                  >
-                    Log In
-                  </Button>
-                </Tooltip>
+                <Button
+                  onClick={() => signIn('angorasixkeycloak')}
+                  variant="contained"
+                  sx={{ backgroundColor: 'primary.dark' }}
+                  startIcon={<LoginIcon />}
+                  alt="login"
+                  sx={{ display: { xs: 'none', sm: 'flex' } }}
+                >
+                  Log In
+                </Button>
+                <IconButton
+                  className="Navbar__Login__Icon"
+                  onClick={() => signIn('angorasixkeycloak')}
+                  aria-label="login"
+                  sx={{ display: { xs: 'flex', sm: 'none' } }}
+                >
+                  <LoginIcon />
+                </IconButton>
               </Box>
             )}
           </Toolbar>

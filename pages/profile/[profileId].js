@@ -8,6 +8,7 @@ import { oauthFrameworkConfig } from '../../config/oauth';
 import { signIn, useSession } from 'next-auth/react';
 import { useLoading } from '../../hooks/app';
 import { useEffect } from 'react';
+import logger from '../../utils/logger';
 
 const ContributorProfile = ({ profile, isCurrentContributor }) => {
   const { data: session, status } = useSession();
@@ -58,7 +59,7 @@ export const getServerSideProps = async (ctx) => {
       isCurrentContributor: token?.user.id === profileId,
     };
   } catch (err) {
-    console.log('err', err);
+    logger.error('err', err);
   }
 
   return {
