@@ -1,18 +1,20 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { TextField, Box, Grid, Typography } from '@mui/material';
-import { PROJECT_PRESENTATION_BASE_FORM_FIELDS as PRESENTATION_BASE_FIELDS } from '../ProjectForm.properties';
+import { PROJECT_PRESENTATION_PARAMS_FIELDS as PRESENTATION_PARAMS_FIELDS } from '../ProjectForm.properties';
 
-const MOBILE_DESCRIPTION = "Now let's show what this is all about...";
+const MOBILE_DESCRIPTION =
+  'Make the project easily discoverable for thos in tune with your idea...';
 
 const FULL_DESCRIPTION =
-  "We need people to understand what this is all about, let's share all the information they need to know...";
+  'These will help make the project easily discoverable by those in tune with your idea...';
 
-const ProjectPresentationData = ({
+const ProjectPresentationParams = ({
   formData,
   onFormChange,
   withDescription,
   isNotMobile,
+  onInputKeyPressed,
 }) => {
   return (
     <div className="ProjectPresentationData ProjectPresentationData__Container ProjectForm__Container">
@@ -29,11 +31,19 @@ const ProjectPresentationData = ({
         spacing={2}
         justifyContent="center"
       >
-        <Grid item xs={10}>
+        <Grid item xs={5}>
           <TextField
-            {...PRESENTATION_BASE_FIELDS.description}
-            value={formData['presentation.description'] || ''}
-            onChange={onFormChange('presentation.description')}
+            {...PRESENTATION_PARAMS_FIELDS.location}
+            value={formData['presentation.params.location'] || ''}
+            onChange={onFormChange('presentation.params.location')}
+            fullWidth
+          />
+        </Grid>
+        <Grid item xs={5}>
+          <TextField
+            {...PRESENTATION_PARAMS_FIELDS.technologies}
+            value={formData['presentation.params.technologies'] || ''}
+            onChange={onFormChange('presentation.params.technologies')}
             fullWidth
           />
         </Grid>
@@ -42,7 +52,7 @@ const ProjectPresentationData = ({
   );
 };
 
-ProjectPresentationData.defaultProps = {
+ProjectPresentationParams.defaultProps = {
   formData: {},
   withDescription: false,
   isNotMobile: false,
@@ -51,11 +61,12 @@ ProjectPresentationData.defaultProps = {
   },
 };
 
-ProjectPresentationData.propTypes = {
+ProjectPresentationParams.propTypes = {
   formData: PropTypes.object,
   onFormChange: PropTypes.func.isRequired,
   withDescription: PropTypes.bool,
   isNotMobile: PropTypes.bool,
+  onInputKeyPressed: PropTypes.func,
 };
 
-export default ProjectPresentationData;
+export default ProjectPresentationParams;
