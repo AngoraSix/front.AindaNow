@@ -3,16 +3,13 @@ import LoginRequiredMessage from '../../components/common/Messages/LoginRequired
 import DefaultLayout from '../../layouts/DefaultLayout';
 import NewProjectContainer from '../../components/Project/NewProject';
 import { signIn, getSession } from 'next-auth/react';
+import { useActiveSession } from '../../hooks/oauth';
 import { useEffect } from 'react';
 
 const NewProjectPage = ({ session }) => {
-  useEffect(() => {
-    if (!session) {
-      signIn('angorasixkeycloak');
-    }
-  }, [session]);
+  useActiveSession();
 
-  if (!session) {
+  if (!session || session.error) {
     return <LoginRequiredMessage message="Log in to create new project" />;
   }
   return (

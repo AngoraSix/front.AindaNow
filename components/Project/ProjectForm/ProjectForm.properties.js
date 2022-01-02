@@ -13,6 +13,12 @@ export const PROJECT_PRESENTATION_BASE_FORM_FIELDS = {
     multiline: true,
     minRows: 3,
   },
+  objective: {
+    key: 'objective',
+    label: 'Objective',
+    multiline: true,
+    minRows: 3,
+  },
   media: {
     key: 'media',
     label: 'Media',
@@ -38,8 +44,16 @@ export const PROJECT_PRESENTATION_PARAMS_FIELDS = {
   },
 };
 
+export const PROJECT_PRESENTATION_REQUIRED_FIELDS = {
+  title: {
+    ...PROJECT_PRESENTATION_ADDITIONAL_FORM_FIELDS.title,
+    mapFromProject: (project) => project[PROJECT_CORE_FORM_FIELDS.name.key],
+  },
+};
+
 export default {
   core: PROJECT_CORE_FORM_FIELDS,
   presentationBase: PROJECT_PRESENTATION_BASE_FORM_FIELDS,
   presentationAdditional: PROJECT_PRESENTATION_ADDITIONAL_FORM_FIELDS,
+  presentationParams: PROJECT_PRESENTATION_PARAMS_FIELDS,
 };

@@ -59,7 +59,6 @@ const ProjectForm = ({ project, className, onSubmit, stepped }) => {
     if (!event) {
       return false;
     }
-
     let {
       target: { value },
     } = event;

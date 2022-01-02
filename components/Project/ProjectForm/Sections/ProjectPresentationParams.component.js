@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { TextField, Box, Grid, Typography } from '@mui/material';
+import TagsInput from '../../../common/TagsInput';
 import { PROJECT_PRESENTATION_PARAMS_FIELDS as PRESENTATION_PARAMS_FIELDS } from '../ProjectForm.properties';
 
 const MOBILE_DESCRIPTION =
@@ -37,13 +38,15 @@ const ProjectPresentationParams = ({
             value={formData['presentation.params.location'] || ''}
             onChange={onFormChange('presentation.params.location')}
             fullWidth
+            onKeyPress={onInputKeyPressed}
           />
         </Grid>
         <Grid item xs={5}>
-          <TextField
+          <TagsInput
             {...PRESENTATION_PARAMS_FIELDS.technologies}
-            value={formData['presentation.params.technologies'] || ''}
-            onChange={onFormChange('presentation.params.technologies')}
+            selectedTags={onFormChange('presentation.params.skills')}
+            id="tags"
+            name="tags"
             fullWidth
           />
         </Grid>

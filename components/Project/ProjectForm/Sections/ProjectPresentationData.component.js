@@ -37,6 +37,14 @@ const ProjectPresentationData = ({
             fullWidth
           />
         </Grid>
+        <Grid item xs={10}>
+          <TextField
+            {...PRESENTATION_BASE_FIELDS.objective}
+            value={formData['presentation.objective'] || ''}
+            onChange={onFormChange('presentation.objective')}
+            fullWidth
+          />
+        </Grid>
       </Grid>
     </div>
   );
@@ -46,9 +54,6 @@ ProjectPresentationData.defaultProps = {
   formData: {},
   withDescription: false,
   isNotMobile: false,
-  onInputKeyPressed: (e) => {
-    e.key === 'Enter' && e.preventDefault();
-  },
 };
 
 ProjectPresentationData.propTypes = {

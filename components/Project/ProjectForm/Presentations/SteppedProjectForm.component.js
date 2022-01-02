@@ -62,11 +62,9 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
   const handleNext = (e) => {
     e?.preventDefault();
     if (!isStepCompleted() && !isStepOptional(activeStep)) {
-      console.log('AASDASDA');
       setStepWasSubmitted(true);
       return;
     }
-    console.log('UUUUU');
     let newSkipped = skipped;
     if (isStepSkipped(activeStep)) {
       newSkipped = new Set(newSkipped.values());

@@ -6,38 +6,41 @@ import { useLoading } from '../../../hooks/app';
 import logger from '../../../utils/logger';
 import ProjectForm from './ProjectForm.component';
 import { ROUTES, resolveRoute } from '../../../constants';
+import { createObjectFromFlatParams } from '../../../utils/helpers';
+import {PROJECT_PRESENTATION_REQUIRED_FIELDS} from './ProjectForm.properties';
 
 const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
   const { doLoad } = useLoading();
   const router = useRouter();
 
-  const onSubmit = async (formData) => {
+  const _uploadMedia = async ({type, url, file}) => {
+        if (file && file instanceof File || typeof file === 'object') {
+          let [mediaURL, thumbnail] = await api.front.uploadFile(mediaURL);
+          return { type, url: mediaURL, thumbnail};
+        } 
+        return {type, url};
+  }
+
+  const _completeFields = (project) => {
+    if (project.presentation) {
+      Object.entries(PROJECT_PRESENTATION_REQUIRED_FIELDS).forEach(([key, field]) => {
+        if (!project.presentation[key]) {
+          project.presentation[key] = field.mapFromProject(project);
+        }
+      });
+    } 
+    
+  }
+
+  const onSubmit = async (flatFormData) => {
     doLoad(true);
-    let projectImages = formData.images || [];
-    projectImages = projectImages.filter((img) => !!img);
-    let images = [];
+    let projectObject = createObjectFromFlatParams(flatFormData);
     try {
-      if (projectImages.length) {
-        let thumbnailImages = formData.thumbnailImages || [];
-        images = await Promise.all(
-          projectImages.map(async (image, index) => {
-            let imageURL = image;
-            let thumbnailURL = thumbnailImages[index];
-            // eslint-disable-next-line no-undef
-            if (imageURL instanceof File || typeof imageURL === 'object') {
-              [imageURL, thumbnailURL] = await api.front.uploadFile(image);
-            }
-            return { url: imageURL, thumbnail: thumbnailURL, type: 'image' };
-          })
-        );
-      }
+      
+      projectObject.presentation?.media = await Promise.all(projectObject.presentation?.media?.map(m => _uploadMedia(m)) || []);
+      _completeFields(projectObject);
 
-      const projectDataToSubmit = {
-        ...formData,
-        images,
-      };
-
-      const projectResponse = await api.front.newProject(projectDataToSubmit);
+      const projectResponse = await api.front.newProject(projectObject);
       onDone(projectResponse);
 
       const viewURL = resolveRoute(ROUTES.projects.view, projectResponse.id);

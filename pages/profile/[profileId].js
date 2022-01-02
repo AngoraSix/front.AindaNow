@@ -5,24 +5,12 @@ import ProfileLayout from '../../layouts/ProfileLayout';
 import Profile from '../../components/Profile';
 import { getToken } from 'next-auth/jwt';
 import { oauthFrameworkConfig } from '../../config/oauth';
-import { signIn, useSession } from 'next-auth/react';
-import { useLoading } from '../../hooks/app';
-import { useEffect } from 'react';
+import { useActiveSession } from '../../hooks/oauth';
 import logger from '../../utils/logger';
 
 const ContributorProfile = ({ profile, isCurrentContributor }) => {
-  const { data: session, status } = useSession();
-  const loading = status === 'loading';
-  const { doLoad } = useLoading();
+  isCurrentContributor && useActiveSession();
 
-  useEffect(() => {
-    const shouldReauth =
-      isCurrentContributor && session?.error === 'RefreshAccessTokenError';
-    doLoad(loading || shouldReauth);
-    if (shouldReauth) {
-      signIn('angorasixkeycloak'); // Force sign in to hopefully resolve error and be able to edit
-    }
-  }, [session, loading]);
   return (
     <ProfileLayout>
       <Profile profile={profile} isCurrentContributor={isCurrentContributor} />
