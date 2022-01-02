@@ -4,7 +4,6 @@ import ProjectsAPI from './projects';
 import FrontAPI from './front';
 import ContributorsAPI from './contributors';
 import MediaAPI from './media';
-import VehiclesAPI from './vehicles';
 
 class API {
   constructor() {
@@ -21,10 +20,6 @@ class API {
 
   get media() {
     return this.mediaAPI;
-  }
-
-  get vehicles() {
-    return this.vehiclesAPI;
   }
 
   get contributors() {
@@ -46,7 +41,6 @@ class API {
     this.contributorsAPI = new ContributorsAPI(
       _getServiceAPI('contributors', this.axios)
     );
-    this.vehiclesAPI = new VehiclesAPI(this.axios);
   }
 }
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import SteppedProjectForm from './Presentations/SteppedProjectForm.component';
 import PlainProjectForm from './Presentations/PlainProjectForm.component';
-import VEHICLE_FORM_PROPS from './ProjectForm.properties';
+import PROJECT_FORM_PROPS from './ProjectForm.properties';
 
 const ProjectForm = ({ project, className, onSubmit, stepped }) => {
   const [formData, setFormData] = useState(project);
@@ -70,8 +70,8 @@ const ProjectForm = ({ project, className, onSubmit, stepped }) => {
     };
 
     const propertyType =
-      VEHICLE_FORM_PROPS[property] && VEHICLE_FORM_PROPS[property].type
-        ? VEHICLE_FORM_PROPS[property].type
+      PROJECT_FORM_PROPS[property] && PROJECT_FORM_PROPS[property].type
+        ? PROJECT_FORM_PROPS[property].type
         : 'object';
 
     const onChangeFn =

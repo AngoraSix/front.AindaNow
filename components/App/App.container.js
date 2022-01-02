@@ -3,12 +3,10 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import api from '../../api';
 import { useLoading } from '../../hooks/app';
-import { useCurrentUser } from '../../hooks/user';
 import App from './App.component';
 
 const AppContainer = (props) => {
   const reduxDispatch = useDispatch();
-  const user = useCurrentUser();
   const router = useRouter();
   const { isLoading, doLoad } = useLoading();
 
@@ -20,10 +18,6 @@ const AppContainer = (props) => {
   };
 
   useEffect(() => {
-    if (user && user.jwt) {
-      api.users.setAuthorizationToken(user.jwt);
-    }
-
     router.events.on('beforeHistoryChange', startLoading);
     router.events.on('routeChangeStart', startLoading);
 
@@ -39,7 +33,7 @@ const AppContainer = (props) => {
     };
   }, []);
 
-  return <App user={user} isLoading={isLoading} {...props} />;
+  return <App isLoading={isLoading} {...props} />;
 };
 
 export default AppContainer;
