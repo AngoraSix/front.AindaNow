@@ -30,10 +30,24 @@
 
 .ProjectsList__Toolbar__Column {
   display: flex;
+  flex-grow: 1;
+  align-items: center;
 }
 
-.ProjectsList__Toolbar__Column > * {
+.ProjectsList__Toolbar__Column:first-child {
+  justify-content: left;
+}
+
+.ProjectsList__Toolbar__Column:last-child {
+  justify-content: center;
+}
+
+.ProjectsList__Toolbar__Column.Column__Text > * {
   margin-top: auto;
+}
+
+.ProjectsList__Toolbar__Column.Column__Large {
+  flex-grow: 2;
 }
 
 .ProjectsList__Grid {
@@ -51,6 +65,10 @@
 @media (min-width: 600px) {
   .ProjectsList__Grid {
     grid: auto / repeat(3, 1fr);
+  }
+
+  .ProjectsList__Toolbar__Column:last-child {
+    justify-content: right;
   }
 }
 

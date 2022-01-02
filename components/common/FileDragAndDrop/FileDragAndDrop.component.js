@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -50,16 +50,12 @@ const FileDragAndDrop = ({ onChange }) => {
     event.preventDefault();
     event.stopPropagation();
     setDragOver(dragOverCount + 1);
-    console.log('GERGERGERENTER');
-    console.log(dragOverCount);
   };
 
   const dragLeaveHandler = (event) => {
     event.preventDefault();
     event.stopPropagation();
     setDragOver(dragOverCount - 1);
-    console.log(dragOverCount);
-    console.log('22222222');
   };
 
   const dropHandler = async (event) => {

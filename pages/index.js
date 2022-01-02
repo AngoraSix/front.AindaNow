@@ -1,5 +1,4 @@
-import { getSession, signIn, useSession } from 'next-auth/react';
-import { getServerSession } from 'next-auth/next';
+import { getSession } from 'next-auth/react';
 import Head from 'next/head';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -7,8 +6,7 @@ import api from '../api';
 import ProjectsList from '../components/ProjectsList';
 import config from '../config';
 import ProjectsLayout from '../layouts/ProjectsLayout/ProjectsLayout';
-import { useEffect } from 'react';
-import oauthConfig from '../config/oauth'; //../config/oauth';
+import logger from '../utils/logger';
 
 const HomePage = ({ projectsList }) => {
   return (
@@ -45,7 +43,7 @@ export const getServerSideProps = async (ctx) => {
       projectsList: projectPresentationsList,
     };
   } catch (err) {
-    console.log('err', err);
+    logger.error('err', err);
   }
 
   return {

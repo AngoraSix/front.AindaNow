@@ -7,14 +7,16 @@ export class Logger {
   }
 
   _logMessage(type, color, ...args) {
-    let message = [ ...args ];
+    args = args.map((a) => (typeof a === 'object' ? JSON.stringify(a) : a));
+    let message = [...args];
 
-    const formatterCallback = this.formatters[type] || this.formatters.all || null;
+    const formatterCallback =
+      this.formatters[type] || this.formatters.all || null;
     if (formatterCallback) {
-      message = [ ...formatterCallback(...args) ];
+      message = [...formatterCallback(...args)];
     }
 
-    const chalkFn = chalk[color] || chalk.reset;
+    const chalkFn = chalk[color] || chalk.reset;
     console.log(chalkFn(this.prefix, ...message));
   }
 

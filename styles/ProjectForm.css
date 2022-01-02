@@ -1,0 +1,36 @@
+.ProjectForm__Description {
+  text-align: center;
+  width: 90%;
+  margin: 1em auto;
+  padding: 2rem 2rem;
+  border: 3px solid #c6d4d9;
+  border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+  letter-spacing: 0.3ch;
+  background: #ffffff;
+  position: relative;
+}
+
+.ProjectForm__Description::before {
+  content: '';
+  border: 2px solid #a9bec5;
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(0.5deg);
+  border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
+}
+
+.NewProject__Stepper {
+  width: 70%;
+  margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+  .ProjectForm__Description {
+    margin: 2em auto;
+    padding: 2rem 4rem;
+  }
+}

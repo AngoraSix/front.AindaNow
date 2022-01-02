@@ -9,6 +9,7 @@ import ProfileReducer, {
   updateAttributesAction,
 } from './Profile.reducer';
 import { PROFILE_ATTRIBUTES } from '../../constants';
+import logger from '../../utils/logger';
 
 const ProfileContainer = ({ profile, isCurrentContributor }) => {
   const { doLoad } = useLoading();
@@ -46,8 +47,9 @@ const ProfileContainer = ({ profile, isCurrentContributor }) => {
         signIn('angorasixkeycloak');
       }
     } catch (err) {
-      console.log('ERR', err);
-      onError('There was an error updating the Profile field');
+      const errorMessage = 'There was an error updating the Profile field';
+      logger.error(`${errorMessage} - ${err}`);
+      onError(errorMessage);
     }
     doLoad(false);
     return;

@@ -5,6 +5,7 @@ import {
 } from '../../../config/oauth';
 import axios from 'axios';
 import moment from 'moment';
+import logger from '../../../utils/logger';
 
 export const oauthCallbacksConfig = {
   async jwt({ token, user, account }) {
@@ -58,7 +59,7 @@ async function refreshAccessToken(token) {
       refreshToken: accessTokenBody.refresh_token ?? token.refreshToken, // Fall back to old refresh token
     };
   } catch (err) {
-    console.log(err);
+    logger.error(err);
     return {
       ...token,
       error: 'RefreshAccessTokenError',

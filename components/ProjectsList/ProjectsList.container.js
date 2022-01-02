@@ -24,23 +24,33 @@ const ProjectsListContainer = ({ data }) => {
         search: state.data.search,
       });
 
-    const projects = state.data.projects.concat(data);
+    const projectsList = state.data.projects.concat(data);
 
-    dispatch(updateDataAction({ total, page, limit, search, projects }));
+    dispatch(updateDataAction({ total, page, limit, search, projectsList }));
   };
 
   const onSearch = async (value) => {
-    const {
-      total,
-      page,
-      limit,
-      search,
-      data: projects,
-    } = await api.projects.fetchProjects(session.user.attributes, {
-      search: value,
-    });
+    // @TODO: impelement search (https://trello.com/c/Bfhf1cQu/32-implement-basic-search-functionality)
 
-    dispatch(updateDataAction({ total, page, limit, search, projects }));
+    // const {
+    //   total,
+    //   page,
+    //   limit,
+    //   search,
+    //   data: projects,
+    // } =
+    const projectsList = await api.projects.fetchProjectPresentations(
+      session.user.attributes,
+      {
+        search: value,
+      }
+    );
+
+    const total = projectsList.length,
+      page = 1,
+      limit = 5,
+      search = value;
+    dispatch(updateDataAction({ total, page, limit, search, projectsList }));
   };
   return (
     <ProjectsList

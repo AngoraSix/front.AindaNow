@@ -26,6 +26,15 @@ const theme = createTheme({
       ),
     },
   },
+  components: {
+    MuiMobileStepper: {
+      styleOverrides: {
+        dotActive: {
+          backgroundColor: '#47626B',
+        },
+      },
+    },
+  },
 });
 
 export default theme;

@@ -40,6 +40,11 @@ class FrontAPI {
     });
     return data;
   }
+
+  async newProject(projectBody) {
+    const { data } = await this.axios.post(`api/projects/new`, projectBody);
+    return data;
+  }
 }
 
 export default FrontAPI;
