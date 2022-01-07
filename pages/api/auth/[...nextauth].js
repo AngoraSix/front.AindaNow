@@ -28,6 +28,7 @@ export const oauthCallbacksConfig = {
     };
   },
   session({ session, token }) {
+    session.accessToken = token.accessToken;
     session.user = token.user;
     session.error = token.error;
     return session;

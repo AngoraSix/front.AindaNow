@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import api from '../../api';
 import ProfileLayout from '../../layouts/ProfileLayout';
 import Profile from '../../components/Profile';
-import { getToken } from 'next-auth/jwt';
-import { oauthFrameworkConfig } from '../../config/oauth';
+import { getSession } from 'next-auth/react';
 import { useActiveSession } from '../../hooks/oauth';
 import logger from '../../utils/logger';
 
@@ -30,12 +29,9 @@ ContributorProfile.propTypes = {
 export const getServerSideProps = async (ctx) => {
   let props = {};
   const { profileId } = ctx.params,
-    token = await getToken({
-      ...ctx,
-      secret: oauthFrameworkConfig.jwt.secret,
-    });
+    session = await getSession(ctx);
   const validatedToken =
-    token?.error !== 'RefreshAccessTokenError' ? token : null;
+    session?.error !== 'RefreshAccessTokenError' ? session : null;
   try {
     const profile = await api.contributors.getContributor(
       profileId,
@@ -44,7 +40,7 @@ export const getServerSideProps = async (ctx) => {
     props = {
       ...props,
       profile,
-      isCurrentContributor: token?.user.id === profileId,
+      isCurrentContributor: session?.user.id === profileId,
     };
   } catch (err) {
     logger.error('err', err);
