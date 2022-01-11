@@ -1,19 +1,19 @@
-import React from 'react';
+import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
-import LoginRequiredMessage from '../../components/common/Messages/LoginRequiredMessage';
+import React from 'react';
 import FormSkeleton from '../../components/common/Skeletons/FormSkeleton.component';
-import DefaultLayout from '../../layouts/DefaultLayout';
 import NewProjectContainer from '../../components/Project/NewProject';
 import { useActiveSession } from '../../hooks/oauth';
-import { Box } from '@mui/material';
+import DefaultLayout from '../../layouts/DefaultLayout';
+import logger from '../../utils/logger';
 
 const NewProjectPage = ({ session }) => {
   useActiveSession();
 
   if (!session || session.error) {
+    logger.error('Log in to create new project');
     return (
       <Box>
-        <LoginRequiredMessage message="Log in to create new project" />
         <FormSkeleton />
       </Box>
     );
