@@ -6,7 +6,6 @@ class Site {
       title: 'AngoraSix',
       description: '',
       image: { logo: LOGO_IMAGE_URI },
-      facebookAppId: env.FACEBOOK_APPID || '1234',
     };
   }
 }

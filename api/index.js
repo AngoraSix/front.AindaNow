@@ -1,9 +1,10 @@
 import config from '../config';
 import BaseAPI from './BaseAPI';
-import ProjectsAPI from './projects';
-import FrontAPI from './front';
 import ContributorsAPI from './contributors';
+import FrontAPI from './front';
 import MediaAPI from './media';
+import ProjectsAPI from './projects';
+import ThirdPartiesAPI from './thirdparties';
 
 class API {
   constructor() {
@@ -26,6 +27,10 @@ class API {
     return this.contributorsAPI;
   }
 
+  get thirdParties() {
+    return this.thirdPartiesAPI;
+  }
+
   applyEnvConfig() {
     this.axios = new BaseAPI({
       serverBaseURL: config.api.serverBaseURL,
@@ -41,6 +46,7 @@ class API {
     this.contributorsAPI = new ContributorsAPI(
       _getServiceAPI('contributors', this.axios)
     );
+    this.thirdPartiesAPI = new ThirdPartiesAPI();
   }
 }
 

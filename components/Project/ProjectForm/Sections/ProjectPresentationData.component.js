@@ -1,6 +1,7 @@
+import { Box, Grid, TextField, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { TextField, Box, Grid, Typography } from '@mui/material';
+import MediaList from '../../../common/Media/MediaList.component';
 import { PROJECT_PRESENTATION_BASE_FORM_FIELDS as PRESENTATION_BASE_FIELDS } from '../ProjectForm.properties';
 
 const MOBILE_DESCRIPTION = "Now let's show what this is all about...";
@@ -44,6 +45,9 @@ const ProjectPresentationData = ({
             onChange={onFormChange('presentation.objective')}
             fullWidth
           />
+        </Grid>
+        <Grid item xs={10}>
+          <MediaList />
         </Grid>
       </Grid>
     </div>

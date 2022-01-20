@@ -137,7 +137,7 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
       ) : (
         <MobileStepper
           variant="dots"
-          steps={2}
+          steps={3}
           position="static"
           activeStep={activeStep}
           sx={{ maxWidth: 400, flexGrow: 1 }}

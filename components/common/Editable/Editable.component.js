@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Typography, Popover } from '@mui/material';
-import dialogTypes from './EditDialogs';
+import dialogTypes from '../InputDialogs';
 
 const Editable = ({
   children,
@@ -75,7 +75,7 @@ const Editable = ({
         open={dialogOpen}
         fieldValue={fieldValue}
         handleDialogClose={handleDialogClose}
-        onEditSubmit={onEdit}
+        onInputSubmit={onEdit}
       />
       {children}
     </React.Fragment>
