@@ -7,7 +7,7 @@ import { getSession } from 'next-auth/react';
 import { useActiveSession } from '../../hooks/oauth';
 import logger from '../../utils/logger';
 
-const ContributorProfile = ({ profile, isCurrentContributor }) => {
+const ContributorProfile = ({ profile, isCurrentContributor, session }) => {
   isCurrentContributor && useActiveSession();
 
   return (
@@ -47,7 +47,10 @@ export const getServerSideProps = async (ctx) => {
   }
 
   return {
-    props,
+    props: {
+      ...props,
+      session,
+    },
   };
 };
 

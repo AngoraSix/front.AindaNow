@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Paper, Typography, Avatar } from '@mui/material';
 import Editable from '../../common/Editable';
 import { PROFILE_ATTRIBUTES } from '../../../constants';
-import { EDITABLE_FIELD_TYPES } from '../../../constants';
+import { INPUT_FIELD_TYPES } from '../../../constants';
 import { useTheme } from '@mui/styles';
 
 const ContributorPresentationSection = ({
@@ -29,7 +29,7 @@ const ContributorPresentationSection = ({
     <Paper className="Presentation">
       <div className="Profile__Editable__Container Presentation__HeadImageContainer">
         <Editable
-          type={EDITABLE_FIELD_TYPES.IMAGE}
+          type={INPUT_FIELD_TYPES.IMAGE}
           isEditable={isCurrentContributor}
           fieldName={PROFILE_ATTRIBUTES.headImage.label}
           fieldValue={getAttributeValue(PROFILE_ATTRIBUTES.headImage.key)}
@@ -50,7 +50,7 @@ const ContributorPresentationSection = ({
       </div>
       <div className="Profile__Editable__Container Presentation__ProfileImageContainer">
         <Editable
-          type={EDITABLE_FIELD_TYPES.IMAGE}
+          type={INPUT_FIELD_TYPES.IMAGE}
           isEditable={isCurrentContributor}
           fieldName={PROFILE_ATTRIBUTES.profilePicture.label}
           fieldValue={getAttributeValue(PROFILE_ATTRIBUTES.profilePicture.key)}
