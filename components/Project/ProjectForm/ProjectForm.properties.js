@@ -21,7 +21,7 @@ export const PROJECT_PRESENTATION_BASE_FORM_FIELDS = {
   },
   media: {
     key: 'media',
-    label: 'Media',
+    label: 'Add Media',
   },
 };
 

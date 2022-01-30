@@ -18,16 +18,16 @@ const ProjectPresentationParams = ({
   onInputKeyPressed,
 }) => {
   return (
-    <div className="ProjectPresentationData ProjectPresentationData__Container ProjectForm__Container">
+    <div className="ProjectPresentationParams ProjectPresentationParams__Container ProjectForm__Container">
       {withDescription && (
-        <Box className="ProjectForm__Description ProjectCoreData__Description">
+        <Box className="ProjectForm__Description ProjectPresentationParams__Description">
           <Typography>
             {isNotMobile ? FULL_DESCRIPTION : MOBILE_DESCRIPTION}
           </Typography>
         </Box>
       )}
       <Grid
-        className="ProjectForm__Fields ProjectCoreData__Fields"
+        className="ProjectForm__Fields ProjectPresentationParams__Fields"
         container
         spacing={2}
         justifyContent="center"

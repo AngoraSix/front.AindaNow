@@ -10,8 +10,7 @@
   align-items: center;
   background-color: #dbdbdb;
   border-radius: 5px;
-  border-style: dashed;
-  border-color: #47626b;
+  border: medium dashed #47626b;
   transition: border-color 0.5s;
 }
 
