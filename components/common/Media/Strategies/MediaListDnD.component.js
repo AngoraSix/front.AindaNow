@@ -1,3 +1,4 @@
+import AddIcon from '@mui/icons-material/Add';
 import DeleteIcon from '@mui/icons-material/Delete';
 import ImageIcon from '@mui/icons-material/Image';
 import PreviewIcon from '@mui/icons-material/Preview';
@@ -16,8 +17,6 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../../constants';
 import InputDialog from '../../InputDialogs';
-import { useTheme } from '@mui/styles';
-import AddIcon from '@mui/icons-material/Add';
 
 const MEDIA_OPTIONS_MAP = {
   [MEDIA_OPTIONS.IMAGE]: {
@@ -36,26 +35,12 @@ const MEDIA_OPTIONS_MAP = {
   },
 };
 
-const MEDIA_OPTIONS_IMPORTANCE = {
+const MEDIA_OPTIONS_GRID_SIZE = {
   [MEDIA_OPTIONS.IMAGE]: 1,
   [MEDIA_OPTIONS.VIDEO_YOUTUBE]: 2,
 };
 
-const _mapMediaValue = (mediaValue) => {
-  mediaValue = Array.isArray(mediaValue) ? mediaValue : [mediaValue];
-  return mediaValue.map((mValue) =>
-    mValue instanceof File
-      ? {
-          type: INPUT_FIELD_TYPES.IMAGE,
-          thumbnailUrl: mValue.blob,
-          file: mValue,
-        }
-      : mValue
-  );
-};
-
-const MediaListDnD = ({ options, limit }) => {
-  const [mediaValues, setMediaValues] = useState([]);
+const MediaListDnD = ({ limit, media, allowedMediaTypes, onMediaInput }) => {
   const [openedDialogType, setOpenedDialogType] = React.useState(null);
   const [newOptionsVisible, setNewOptionsVisible] = useState(false);
   const isNotMobile = useMediaQuery('(min-width:600px)');
@@ -75,8 +60,9 @@ const MediaListDnD = ({ options, limit }) => {
   };
 
   const addMedia = async (media) => {
-    const normalizedMedia = _mapMediaValue(media);
-    setMediaValues([...mediaValues, ...normalizedMedia]);
+    console.log('GERGERGER');
+    console.log(media);
+    onMediaInput(media);
   };
 
   return (
@@ -98,7 +84,7 @@ const MediaListDnD = ({ options, limit }) => {
               />
             </IconButton>
           )}
-          {options.map((option) => {
+          {allowedMediaTypes.map((option) => {
             const OptionIcon = MEDIA_OPTIONS_MAP[option].icon;
             return isNotMobile ? (
               <Button
@@ -108,7 +94,7 @@ const MediaListDnD = ({ options, limit }) => {
                 key={option}
                 startIcon={<OptionIcon />}
                 onClick={handleDialogClickOpen(option)}
-                disabled={mediaValues.length >= limit}
+                disabled={media.length >= limit}
               >
                 {MEDIA_OPTIONS_MAP[option].label}
               </Button>
@@ -123,7 +109,7 @@ const MediaListDnD = ({ options, limit }) => {
                 }`}
                 key={option}
                 onClick={handleDialogClickOpen(option)}
-                disabled={mediaValues.length >= limit}
+                disabled={media.length >= limit}
               >
                 <OptionIcon
                   className={`MediaList__Option__Icon ${
@@ -138,19 +124,19 @@ const MediaListDnD = ({ options, limit }) => {
         </Box>
       </Box>
       <Box className="MediaList__List__Container">
-        {mediaValues && mediaValues.length ? (
+        {media && media.length ? (
           <ImageList
             className="MediaList__List"
             variant="quilted"
             cols={isLarge ? 6 : isMedium ? 4 : 2}
             rowHeight={121}
           >
-            {mediaValues.map((media, index) => {
+            {media.map((media, index) => {
               const MediaIcon = MEDIA_OPTIONS_MAP[media.type].icon;
               return (
                 <ImageListItem
-                  cols={MEDIA_OPTIONS_IMPORTANCE[media.type] || 1}
-                  rows={MEDIA_OPTIONS_IMPORTANCE[media.type] || 1}
+                  cols={MEDIA_OPTIONS_GRID_SIZE[media.type] || 1}
+                  rows={MEDIA_OPTIONS_GRID_SIZE[media.type] || 1}
                   key={index}
                 >
                   <img
@@ -159,13 +145,14 @@ const MediaListDnD = ({ options, limit }) => {
                     loading="lazy"
                   />
                   <ImageListItemBar
+                    actionPosition="left"
                     actionIcon={
                       <Box>
                         <IconButton edge="end" aria-label="preview">
-                          <PreviewIcon />
+                          <PreviewIcon sx={{ color: 'primary.light' }} />
                         </IconButton>
                         <IconButton edge="end" aria-label="delete">
-                          <DeleteIcon />
+                          <DeleteIcon sx={{ color: 'primary.light' }} />
                         </IconButton>
                       </Box>
                     }
@@ -192,8 +179,14 @@ const MediaListDnD = ({ options, limit }) => {
   );
 };
 
-MediaListDnD.defaultProps = { options: Object.values(MEDIA_OPTIONS), limit: 15 };
+MediaListDnD.defaultProps = {
+  allowedMediaTypes: Object.values(MEDIA_OPTIONS),
+  limit: 15,
+};
 
-MediaListDnD.propTypes = { options: PropTypes.array, limit: PropTypes.number };
+MediaListDnD.propTypes = {
+  allowedMediaTypes: PropTypes.array,
+  limit: PropTypes.number,
+};
 
 export default MediaListDnD;

@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../constants';
 import { useNotifications } from '../../../hooks/app';
-import { MEDIA_OPTIONS } from '../../../constants';
 import MediaDnD from './MediaDnD.component';
 
-const readImageFile = async (file) => {
+const _readImageFile = async (file) => {
   return new Promise((resolve, reject) => {
     try {
       const reader = new FileReader();
@@ -19,7 +19,7 @@ const readImageFile = async (file) => {
   });
 };
 
-const getImageSrc = (file) => {
+const _getImageSrc = (file) => {
   let src = null;
   if (file) {
     if (typeof file === 'object' && file.blob) {
@@ -31,28 +31,45 @@ const getImageSrc = (file) => {
   return src;
 };
 
+const _normalizeMedia = (mediaValue) => {
+  return mediaValue instanceof File
+    ? {
+        type: INPUT_FIELD_TYPES.IMAGE,
+        thumbnailUrl: mediaValue.blob,
+        file: mediaValue,
+      }
+    : mediaValue;
+};
 const MediaDnDContainer = ({ onChange, single, allowedMediaTypes }) => {
   const { onError } = useNotifications();
   const [media, setMedia] = useState([]);
 
   const onMediaInput = async (mediaInputs) => {
-    await processMedia(mediaInputs);
-  };
-
-  const processMedia = async (mediaInputs) => {
-    let fileData = Array.from(mediaInputs);
-    fileData = (
+    let mediaData =
+      Array.isArray(mediaInputs) || mediaInputs instanceof FileList
+        ? Array.from(mediaInputs)
+        : [mediaInputs];
+    mediaData = (
       await Promise.all(
-        fileData.map(async (fileDataElement) => {
+        mediaData.map(async (mediaDataElement) => {
+          console.log('MAPPPP');
+          console.log(mediaDataElement);
           if (
-            fileDataElement.type.startsWith('image/') &&
+            mediaDataElement.type.startsWith('image/') &&
             allowedMediaTypes.includes(MEDIA_OPTIONS.IMAGE)
           ) {
-            const blobURL = await loadImageSrc(fileDataElement);
-            fileDataElement.blob = blobURL;
-            return fileDataElement;
+            const blobURL = await loadImageSrc(mediaDataElement);
+            mediaDataElement.blob = blobURL;
+            return mediaDataElement;
+          } else if (
+            mediaDataElement.type === INPUT_FIELD_TYPES.YOUTUBEVIDEO &&
+            allowedMediaTypes.includes(MEDIA_OPTIONS.IMAGE)
+          ) {
+            return mediaDataElement;
           }
           // if none matched, show error
+          console.log('NONEEE');
+          console.log(mediaDataElement);
           onError(
             single ? 'Input is not supported' : 'Not all input is supported'
           );
@@ -60,17 +77,17 @@ const MediaDnDContainer = ({ onChange, single, allowedMediaTypes }) => {
         })
       )
     ).filter((media) => !!media);
-    setMedia(single ? fileData : [...media, ...fileData]);
-    onChange({ target: { value: fileData } });
+    const normalizedMedia = mediaData.map(_normalizeMedia);
+    setMedia(single ? normalizedMedia : [...media, ...normalizedMedia]);
+    onChange({ target: { value: mediaData } });
   };
 
   const loadImageSrc = async (imageFile) => {
-    let newImageSrc = imageFile ? getImageSrc(imageFile) : null;
+    let newImageSrc = imageFile ? _getImageSrc(imageFile) : null;
     try {
       if (!newImageSrc) {
-        newImageSrc = await readImageFile(imageFile);
+        newImageSrc = await _readImageFile(imageFile);
       }
-      // setImageSrc(newImageSrc);
     } catch (err) {
       // do nothing.
     }

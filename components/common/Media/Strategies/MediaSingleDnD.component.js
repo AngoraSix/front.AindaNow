@@ -41,9 +41,6 @@ const MediaSingleDnD = ({ singleMedia, onMediaInput }) => {
     await onMediaInput(files);
   };
 
-  const singleMediaPreviewUrl =
-    singleMedia instanceof File ? singleMedia.blob : singleMedia;
-
   return (
     <div
       className={`MediaSingleDnD__DropZone ${
@@ -57,7 +54,7 @@ const MediaSingleDnD = ({ singleMedia, onMediaInput }) => {
       {!!singleMedia ? (
         <img
           className="MediaSingleDnD__Dropzone__Preview"
-          src={singleMediaPreviewUrl}
+          src={singleMedia.thumbnailUrl}
         />
       ) : (
         <div className="MediaSingleDnD__Dropzone__PreviewPlaceholder" />

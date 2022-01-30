@@ -35,6 +35,7 @@ const InputDialogContainer = ({
   };
 
   const onSubmit = async () => {
+    console.log("SUBBBB");
     await onInputSubmit(currentFieldValue);
     handleDialogClose();
   };

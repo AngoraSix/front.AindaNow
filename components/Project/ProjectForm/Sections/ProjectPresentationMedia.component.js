@@ -32,7 +32,7 @@ const ProjectPresentationMedia = ({
       >
         <Grid item xs={10}>
           <Typography>{PRESENTATION_BASE_FIELDS.media.label}</Typography>
-          <Media single={false} />
+          <Media single={false} onChange={onFormChange} />
           {/* formData={formData} onFormChange={onFormChange} /> */}
         </Grid>
       </Grid>
