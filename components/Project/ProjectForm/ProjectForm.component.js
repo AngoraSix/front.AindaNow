@@ -12,48 +12,6 @@ const ProjectForm = ({ project, className, onSubmit, stepped }) => {
     onSubmit(formData);
   };
 
-  const resolveBooleanChange = (property) => {
-    const newValue = !formData[property];
-
-    return {
-      [property]: newValue,
-    };
-  };
-
-  const resolveMultipleChange = (property, value) => {
-    const propertyData = [].concat(formData[property] || []);
-    const index = propertyData.indexOf(value);
-    if (index >= 0) {
-      propertyData.splice(index, 1);
-    } else {
-      propertyData.push(value);
-    }
-
-    return {
-      [property]: propertyData,
-    };
-  };
-
-  const resolveImagesChange = (property, value, customEvent) => {
-    let imageChanges = {
-      [property]: value,
-    };
-
-    if (
-      formData.thumbnailImages &&
-      customEvent &&
-      customEvent.type === 'DND_UPDATE'
-    ) {
-      const result = [...formData.thumbnailImages];
-      const [removed] = result.splice(customEvent.source, 1);
-      result.splice(customEvent.destination, 0, removed);
-
-      imageChanges.thumbnailImages = result;
-    }
-
-    return imageChanges;
-  };
-
   const onFormChange = (property) => (event) => {
     if (!event) {
       return false;
