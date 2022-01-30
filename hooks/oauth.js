@@ -9,8 +9,8 @@ export const useActiveSession = () => {
 
   useEffect(() => {
     const shouldReauth = session?.error === 'RefreshAccessTokenError';
-    doLoad(loading || shouldReauth);
-    if (shouldReauth) {
+    doLoad(!session || loading || shouldReauth);
+    if (!session || shouldReauth) {
       signIn('angorasixkeycloak'); // Force sign in to hopefully resolve error and be able to edit
     }
   }, [session, loading]);

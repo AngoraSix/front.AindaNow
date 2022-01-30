@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { Popover, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { Typography, Popover } from '@mui/material';
-import dialogTypes from '../InputDialogs';
+import React, { useState } from 'react';
+import InputDialog from '../InputDialogs';
 
 const Editable = ({
   children,
@@ -34,8 +34,6 @@ const Editable = ({
   const handleDialogClose = () => {
     setDialogOpen(false);
   };
-
-  const Dialog = dialogTypes[type];
 
   return isEditable ? (
     <React.Fragment>
@@ -71,11 +69,12 @@ const Editable = ({
           Change {fieldName}
         </Typography>
       </Popover>
-      <Dialog
+      <InputDialog
         open={dialogOpen}
-        fieldValue={fieldValue}
+        inputType={type}
         handleDialogClose={handleDialogClose}
         onInputSubmit={onEdit}
+        fieldValue={fieldValue}
       />
       {children}
     </React.Fragment>

@@ -8,14 +8,14 @@ import {
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { INPUT_FIELD_TYPES } from '../../../constants';
-import ImageUploadDialog from './Types/ImageUploadDialog.component';
-import TextDialog from './Types/TextDialog.component';
-import YoutubeDialog from './Types/YoutubeDialog.container';
+import ImageUploadDialog from './Types/ImageUploadDialog';
+import TextDialog from './Types/TextDialog';
+import YoutubeVideoDialog from './Types/YoutubeVideoDialog';
 
 const INPUT_DIALOG_TYPES_MAP = {
   [INPUT_FIELD_TYPES.IMAGE]: ImageUploadDialog,
   [INPUT_FIELD_TYPES.TEXT]: TextDialog,
-  [INPUT_FIELD_TYPES.YOUTUBEVIDEO]: YoutubeDialog,
+  [INPUT_FIELD_TYPES.YOUTUBEVIDEO]: YoutubeVideoDialog,
 };
 
 const InputDialogContainer = ({

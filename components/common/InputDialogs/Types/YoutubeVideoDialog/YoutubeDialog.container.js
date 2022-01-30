@@ -1,7 +1,8 @@
 import PropTypes from 'prop-types';
-import React, { useState, useEffect } from 'react';
-import api from '../../../../api';
-import { useLoading } from '../../../../hooks/app';
+import React, { useEffect, useState } from 'react';
+import api from '../../../../../api';
+import { INPUT_FIELD_TYPES } from '../../../../../constants';
+import { useLoading } from '../../../../../hooks/app';
 import YoutubeDialog from './YoutubeDialog.component';
 
 const YOUTUBEURL_REGEX =
@@ -33,7 +34,15 @@ const YoutubeDialogContainer = ({ onChange, setIsValid, ...args }) => {
         thumbnailUrl: videoThumbnail,
       });
       setIsValid(!!videoThumbnail);
-      onChange({ target: { value: id } });
+      onChange({
+        target: {
+          value: {
+            type: INPUT_FIELD_TYPES.YOUTUBEVIDEO,
+            thumbnailUrl: videoThumbnail,
+            id,
+          },
+        },
+      });
       doLoad(false);
     } else {
       setProcessedVideo({
@@ -70,6 +79,6 @@ YoutubeDialogContainer.defaultProps = {};
 
 YoutubeDialogContainer.propTypes = {
   onChange: PropTypes.func.isRequired,
-  setIsValid: PropTypes.func
+  setIsValid: PropTypes.func,
 };
 export default YoutubeDialogContainer;

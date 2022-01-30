@@ -1,7 +1,7 @@
 import { Box, DialogContentText } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import FileDragAndDrop from '../../FileDragAndDrop';
+import FileDragAndDrop from '../../../FileDragAndDrop';
 
 const ImageUploadDialog = ({ onChange, label }) => {
   return (
@@ -17,8 +17,8 @@ ImageUploadDialog.defaultProps = {
 };
 
 ImageUploadDialog.propTypes = {
-  onInputSubmit: PropTypes.func.isRequired,
   label: PropTypes.string,
+  onChange: PropTypes.func.isRequired
 };
 
 export default ImageUploadDialog;

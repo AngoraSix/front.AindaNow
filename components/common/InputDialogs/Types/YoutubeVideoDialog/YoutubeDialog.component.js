@@ -1,7 +1,15 @@
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import { Box, DialogContentText, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  DialogContentText,
+  TextField,
+  Typography,
+} from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
+import config from '../../../../../config';
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 const YoutubeDialog = ({
   isValid,
@@ -48,6 +56,16 @@ const YoutubeDialog = ({
           onChange={onChange}
           fullWidth
         />
+        <a href={config.thirdPartiesConfig.youtube.uploadPage} target="_blank">
+          <Button
+            className="YoutubeDialog__Upload"
+            variant="outlined"
+            size="small"
+            endIcon={<OpenInNewIcon />}
+          >
+            Youtube Studio
+          </Button>
+        </a>
       </Box>
     </Box>
   );
