@@ -8,6 +8,7 @@ import config from '../config';
 import reducers from '../store/reducers';
 import '../styles/App.css';
 import '../styles/Editable.css';
+import '../styles/Media.css';
 import '../styles/FileDragAndDrop.css';
 import '../styles/InputDialogs.css';
 import '../styles/Layouts.css';
