@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import SteppedProjectForm from './Presentations/SteppedProjectForm.component';
+import React, { useState } from 'react';
 import PlainProjectForm from './Presentations/PlainProjectForm.component';
-import PROJECT_FORM_PROPS from './ProjectForm.properties';
+import SteppedProjectForm from './Presentations/SteppedProjectForm.component';
 
 const ProjectForm = ({ project, className, onSubmit, stepped }) => {
   const [formData, setFormData] = useState(project);
@@ -55,7 +54,7 @@ const ProjectForm = ({ project, className, onSubmit, stepped }) => {
     return imageChanges;
   };
 
-  const onFormChange = (property) => (event, customEvent) => {
+  const onFormChange = (property) => (event) => {
     if (!event) {
       return false;
     }
@@ -63,30 +62,9 @@ const ProjectForm = ({ project, className, onSubmit, stepped }) => {
       target: { value },
     } = event;
 
-    const ON_CHANGE_MAP = {
-      images: resolveImagesChange,
-      multiple: resolveMultipleChange,
-      boolean: resolveBooleanChange,
+    const partialFormData = {
+      [property]: value,
     };
-
-    const propertyType =
-      PROJECT_FORM_PROPS[property] && PROJECT_FORM_PROPS[property].type
-        ? PROJECT_FORM_PROPS[property].type
-        : 'object';
-
-    const onChangeFn =
-      ON_CHANGE_MAP[propertyType.toLowerCase()] ||
-      ON_CHANGE_MAP[property.toLowerCase()];
-
-    let partialFormData = {};
-
-    if (onChangeFn) {
-      partialFormData = onChangeFn(property, value, customEvent);
-    } else {
-      partialFormData = {
-        [property]: value,
-      };
-    }
 
     setFormData({ ...formData, ...partialFormData });
   };

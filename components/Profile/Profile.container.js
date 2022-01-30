@@ -29,10 +29,9 @@ const ProfileContainer = ({ profile, isCurrentContributor }) => {
     let updatedAttributes = { ...profileAttributes };
     try {
       if (isMedia) {
-        let imageURL = fieldValue,
-          thumbnailURL = null;
-        if (imageURL instanceof File || typeof imageURL === 'object') {
-          [imageURL, thumbnailURL] = await api.front.uploadFile(imageURL);
+        let imageFile = fieldValue[0].file;
+        if (imageFile instanceof File || typeof imageFile === 'object') {
+          let [imageURL, thumbnailURL] = await api.front.uploadFile(imageFile);
           updatedAttributes[`${fieldName}.thumbnail`] = thumbnailURL;
           fieldValue = imageURL;
         }

@@ -15,6 +15,10 @@ const ProjectPresentationMedia = ({
   withDescription,
   isNotMobile,
 }) => {
+  const onMediaChange = (mediaData) => {
+    onFormChange('presentation.media')(mediaData);
+  };
+
   return (
     <div className="ProjectPresentationMedia ProjectPresentationMedia__Container ProjectForm__Container">
       {withDescription && (
@@ -32,8 +36,11 @@ const ProjectPresentationMedia = ({
       >
         <Grid item xs={10}>
           <Typography>{PRESENTATION_BASE_FIELDS.media.label}</Typography>
-          <Media single={false} onChange={onFormChange} />
-          {/* formData={formData} onFormChange={onFormChange} /> */}
+          <Media
+            single={false}
+            onChange={onMediaChange}
+            mediaData={formData['presentation.media']}
+          />
         </Grid>
       </Grid>
     </div>

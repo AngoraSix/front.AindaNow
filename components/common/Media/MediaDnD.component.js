@@ -11,7 +11,7 @@ const Input = styled('input')({
 
 const MediaDnD = ({ single, media, allowedMediaTypes, onMediaInput }) => {
   return single ? (
-    <MediaSingleDnD singleMedia={media[0]} onMediaInput={onMediaInput} />
+    <MediaSingleDnD singleMedia={media?.[0]} onMediaInput={onMediaInput} />
   ) : (
     <MediaListDnD
       media={media}

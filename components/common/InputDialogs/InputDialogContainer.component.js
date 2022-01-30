@@ -35,8 +35,8 @@ const InputDialogContainer = ({
   };
 
   const onSubmit = async () => {
-    console.log("SUBBBB");
     await onInputSubmit(currentFieldValue);
+    setCurrentFieldValue(undefined);
     handleDialogClose();
   };
 
@@ -81,7 +81,6 @@ const InputDialogContainer = ({
 
 InputDialogContainer.defaultProps = {
   open: false,
-  fieldValue: '',
   inputType: INPUT_FIELD_TYPES.TEXT,
   title: 'Fill in',
 };
@@ -90,7 +89,10 @@ InputDialogContainer.propTypes = {
   open: PropTypes.bool,
   handleDialogClose: PropTypes.func.isRequired,
   onInputSubmit: PropTypes.func.isRequired,
-  fieldValue: PropTypes.string,
+  fieldValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.arrayOf(PropTypes.object),
+  ]),
   inputType: PropTypes.string,
 };
 

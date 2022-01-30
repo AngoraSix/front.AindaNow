@@ -32,7 +32,6 @@ const ContributorPresentationSection = ({
           type={INPUT_FIELD_TYPES.IMAGE}
           isEditable={isCurrentContributor}
           fieldName={PROFILE_ATTRIBUTES.headImage.label}
-          fieldValue={getAttributeValue(PROFILE_ATTRIBUTES.headImage.key)}
           onEdit={onEdit(PROFILE_ATTRIBUTES.headImage.key, true)}
         >
           <div
@@ -53,7 +52,6 @@ const ContributorPresentationSection = ({
           type={INPUT_FIELD_TYPES.IMAGE}
           isEditable={isCurrentContributor}
           fieldName={PROFILE_ATTRIBUTES.profilePicture.label}
-          fieldValue={getAttributeValue(PROFILE_ATTRIBUTES.profilePicture.key)}
           onEdit={onEdit(PROFILE_ATTRIBUTES.profilePicture.key, true)}
         >
           <div className={'Presentation__ProfileImage'}>

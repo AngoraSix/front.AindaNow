@@ -87,12 +87,13 @@ Editable.defaultProps = {
   fieldName: 'field',
   isEditable: false,
   type: 'text',
+  fieldValue: null,
 };
 
 Editable.propTypes = {
   type: PropTypes.string,
   fieldName: PropTypes.string,
-  fieldValue: PropTypes.string,
+  fieldValue: PropTypes.any,
   isEditable: PropTypes.bool,
   onEdit: PropTypes.func.isRequired,
 };

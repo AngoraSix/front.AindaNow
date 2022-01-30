@@ -60,8 +60,6 @@ const MediaListDnD = ({ limit, media, allowedMediaTypes, onMediaInput }) => {
   };
 
   const addMedia = async (media) => {
-    console.log('GERGERGER');
-    console.log(media);
     onMediaInput(media);
   };
 
