@@ -89,9 +89,59 @@
 }
 
 .MediaList__EmptyMessage {
-  margin: auto 15px;
+  margin: auto;
+  padding: 0 15px;
 }
 
 .MediaList__List {
   margin: 0 auto;
 }
+
+/* MediaSingleDnD */
+
+.MediaSingleDnD__DropZone {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  padding: 15px;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #dbdbdb;
+  border-radius: 5px;
+  border: medium dashed #47626b;
+  transition: border-color 0.5s;
+}
+
+.MediaSingleDnD__DropZone.DragOver {
+  border-color: #df0000;
+}
+
+.MediaSingleDnD__DropZone * {
+  transition: opacity 0.5s;
+}
+
+.MediaSingleDnD__DropZone.DragOver * {
+  opacity: 0.4;
+}
+
+.MediaSingleDnD__Dropzone__Preview {
+  max-width: 30vw;
+  max-height: 15vh;
+}
+
+.MediaSingleDnD__Dropzone__PreviewPlaceholder {
+  width: 15vh;
+  height: 15vh;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: thin;
+  border-color: #47626b;
+}
+
+.MediaSingleDnD__DropZone__Icon {
+  margin: 15px;
+}
+

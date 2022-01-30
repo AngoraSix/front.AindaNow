@@ -1,3 +1,3 @@
-import Media from './Media.component';
+import Media from './MediaDnD.container';
 
 export default Media;

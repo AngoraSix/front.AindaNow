@@ -14,8 +14,8 @@ import {
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../constants';
-import InputDialog from '../InputDialogs';
+import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../../constants';
+import InputDialog from '../../InputDialogs';
 import { useTheme } from '@mui/styles';
 import AddIcon from '@mui/icons-material/Add';
 
@@ -54,14 +54,13 @@ const _mapMediaValue = (mediaValue) => {
   );
 };
 
-const MediaList = ({ options, limit }) => {
+const MediaListDnD = ({ options, limit }) => {
   const [mediaValues, setMediaValues] = useState([]);
   const [openedDialogType, setOpenedDialogType] = React.useState(null);
   const [newOptionsVisible, setNewOptionsVisible] = useState(false);
   const isNotMobile = useMediaQuery('(min-width:600px)');
   const isMedium = useMediaQuery('(min-width:900px)');
   const isLarge = useMediaQuery('(min-width:1200px)');
-  const theme = useTheme();
 
   const handleShowNewOptions = () => {
     setNewOptionsVisible(!newOptionsVisible);
@@ -139,47 +138,47 @@ const MediaList = ({ options, limit }) => {
         </Box>
       </Box>
       <Box className="MediaList__List__Container">
-        {!mediaValues ||
-          (!mediaValues.length && (
-            <Typography className="MediaList__EmptyMessage" align="center">
-              Click above or drop image file or Youtube link
-            </Typography>
-          ))}
-        <ImageList
-          className="MediaList__List"
-          variant="quilted"
-          cols={isLarge ? 6 : isMedium ? 4 : 2}
-          rowHeight={121}
-        >
-          {mediaValues.map((media, index) => {
-            const MediaIcon = MEDIA_OPTIONS_MAP[media.type].icon;
-            return (
-              <ImageListItem
-                cols={MEDIA_OPTIONS_IMPORTANCE[media.type] || 1}
-                rows={MEDIA_OPTIONS_IMPORTANCE[media.type] || 1}
-                key={index}
-              >
-                <img
-                  src={media.thumbnailUrl}
-                  // alt={item.title}
-                  loading="lazy"
-                />
-                <ImageListItemBar
-                  actionIcon={
-                    <Box>
-                      <IconButton edge="end" aria-label="preview">
-                        <PreviewIcon />
-                      </IconButton>
-                      <IconButton edge="end" aria-label="delete">
-                        <DeleteIcon />
-                      </IconButton>
-                    </Box>
-                  }
-                />
-              </ImageListItem>
-            );
-          })}
-        </ImageList>
+        {mediaValues && mediaValues.length ? (
+          <ImageList
+            className="MediaList__List"
+            variant="quilted"
+            cols={isLarge ? 6 : isMedium ? 4 : 2}
+            rowHeight={121}
+          >
+            {mediaValues.map((media, index) => {
+              const MediaIcon = MEDIA_OPTIONS_MAP[media.type].icon;
+              return (
+                <ImageListItem
+                  cols={MEDIA_OPTIONS_IMPORTANCE[media.type] || 1}
+                  rows={MEDIA_OPTIONS_IMPORTANCE[media.type] || 1}
+                  key={index}
+                >
+                  <img
+                    src={media.thumbnailUrl}
+                    // alt={item.title}
+                    loading="lazy"
+                  />
+                  <ImageListItemBar
+                    actionIcon={
+                      <Box>
+                        <IconButton edge="end" aria-label="preview">
+                          <PreviewIcon />
+                        </IconButton>
+                        <IconButton edge="end" aria-label="delete">
+                          <DeleteIcon />
+                        </IconButton>
+                      </Box>
+                    }
+                  />
+                </ImageListItem>
+              );
+            })}
+          </ImageList>
+        ) : (
+          <Typography className="MediaList__EmptyMessage" align="center">
+            Click above or drop image file or Youtube link
+          </Typography>
+        )}
       </Box>
 
       <InputDialog
@@ -193,8 +192,8 @@ const MediaList = ({ options, limit }) => {
   );
 };
 
-MediaList.defaultProps = { options: Object.values(MEDIA_OPTIONS), limit: 15 };
+MediaListDnD.defaultProps = { options: Object.values(MEDIA_OPTIONS), limit: 15 };
 
-MediaList.propTypes = { options: PropTypes.array, limit: PropTypes.number };
+MediaListDnD.propTypes = { options: PropTypes.array, limit: PropTypes.number };
 
-export default MediaList;
+export default MediaListDnD;
