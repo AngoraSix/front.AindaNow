@@ -29,7 +29,8 @@ const ProfileContainer = ({ profile, isCurrentContributor }) => {
     let updatedAttributes = { ...profileAttributes };
     try {
       if (isMedia) {
-        let imageFile = fieldValue[0].file;
+        let imageFile = fieldValue[0]?.file;
+        fieldValue = fieldValue[0]?.thumbnailURL;
         if (imageFile instanceof File || typeof imageFile === 'object') {
           let [imageURL, thumbnailURL] = await api.front.uploadFile(imageFile);
           updatedAttributes[`${fieldName}.thumbnail`] = thumbnailURL;
@@ -37,9 +38,7 @@ const ProfileContainer = ({ profile, isCurrentContributor }) => {
         }
       }
       updatedAttributes[fieldName] = fieldValue;
-      const setResponse = await api.front.setProfileAttributes(
-        updatedAttributes
-      );
+      await api.front.setProfileAttributes(updatedAttributes);
       onSuccess('Profile field updated successfully!');
       dispatch(updateAttributesAction(updatedAttributes));
       if (fieldName === PROFILE_ATTRIBUTES.profilePicture.key) {

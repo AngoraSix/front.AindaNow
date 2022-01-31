@@ -1,13 +1,8 @@
-import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { MEDIA_OPTIONS } from '../../../constants';
 import MediaListDnD from './Strategies/MediaListDnD.component';
 import MediaSingleDnD from './Strategies/MediaSingleDnD.component';
-import { MEDIA_OPTIONS } from '../../../constants';
-
-const Input = styled('input')({
-  display: 'none',
-});
 
 const MediaDnD = ({ single, media, allowedMediaTypes, onMediaInput }) => {
   return single ? (

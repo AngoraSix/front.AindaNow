@@ -17,6 +17,8 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../../constants';
 import InputDialog from '../../InputDialogs';
+import DnDContainer from '../DnDContainer.component';
+import FileIcon from '@mui/icons-material/FilePresent';
 
 const MEDIA_OPTIONS_MAP = {
   [MEDIA_OPTIONS.IMAGE]: {
@@ -121,7 +123,7 @@ const MediaListDnD = ({ limit, media, allowedMediaTypes, onMediaInput }) => {
           })}
         </Box>
       </Box>
-      <Box className="MediaList__List__Container">
+      <DnDContainer onMediaInput={onMediaInput} classNameModifier="List">
         {media && media.length ? (
           <ImageList
             className="MediaList__List"
@@ -130,18 +132,15 @@ const MediaListDnD = ({ limit, media, allowedMediaTypes, onMediaInput }) => {
             rowHeight={121}
           >
             {media.map((media, index) => {
-              const MediaIcon = MEDIA_OPTIONS_MAP[media.type].icon;
+              const MediaIcon =
+                MEDIA_OPTIONS_MAP[media.mediaType]?.icon || FileIcon;
               return (
                 <ImageListItem
-                  cols={MEDIA_OPTIONS_GRID_SIZE[media.type] || 1}
-                  rows={MEDIA_OPTIONS_GRID_SIZE[media.type] || 1}
+                  cols={MEDIA_OPTIONS_GRID_SIZE[media.mediaType] || 1}
+                  rows={MEDIA_OPTIONS_GRID_SIZE[media.mediaType] || 1}
                   key={index}
                 >
-                  <img
-                    src={media.thumbnailUrl}
-                    // alt={item.title}
-                    loading="lazy"
-                  />
+                  <img src={media.thumbnailUrl} loading="lazy" />
                   <ImageListItemBar
                     actionPosition="left"
                     actionIcon={
@@ -164,7 +163,7 @@ const MediaListDnD = ({ limit, media, allowedMediaTypes, onMediaInput }) => {
             Click above or drop image file or Youtube link
           </Typography>
         )}
-      </Box>
+      </DnDContainer>
 
       <InputDialog
         open={!!openedDialogType}

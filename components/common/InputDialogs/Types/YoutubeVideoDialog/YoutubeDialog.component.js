@@ -13,16 +13,17 @@ import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 
 const YoutubeDialog = ({
   isValid,
-  videoId,
-  thumbnailUrl,
+  videoMedia,
   fieldValue,
   onChange,
   label,
 }) => {
-  const visibleVideoId =
-    !isValid && videoId.length > 15
-      ? `...${videoId.substring(videoId.length - 15)}`
-      : videoId;
+  const thumbnailUrl = videoMedia.thumbnailUrl,
+    videoId = videoMedia.resourceId,
+    visibleVideoId =
+      !isValid && videoId.length > 15
+        ? `...${videoId.substring(videoId.length - 15)}`
+        : videoId;
   return (
     <Box>
       {label && <DialogContentText>{label}</DialogContentText>}

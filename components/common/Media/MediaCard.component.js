@@ -64,7 +64,7 @@ const Media = ({ options, value }) => {
     let fileData = Array.from(files);
     fileData = await Promise.all(
       fileData.map(async (fileDataElement) => {
-        if (!fileDataElement.type.startsWith('image/')) {
+        if (!fileDataElement.type?.startsWith('image/')) {
           onError('File is not an image');
           setImageSrc(null);
           return;
