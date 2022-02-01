@@ -47,20 +47,14 @@ const MediaDnDContainer = ({
           ) {
             return processImage(mediaDataElement);
           }
-          // if none matched, show error
-          else
-            onError(
-              single ? 'Input is not supported' : 'Not all input is supported'
-            );
           return null;
         })
       )
     ).filter((media) => !!media);
-    onChange({
-      target: {
-        value: single ? normalizedMedia : [...mediaData, ...normalizedMedia],
-      },
-    });
+    if (!mediaInputs.length || normalizedMedia.length < mediaInputs.length) {
+      onError(single ? 'Input is not supported' : 'Not all input is supported');
+    }
+    onChange(single ? normalizedMedia : [...mediaData, ...normalizedMedia]);
   };
 
   return (

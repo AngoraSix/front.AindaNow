@@ -10,12 +10,12 @@ import React, { useState } from 'react';
 import { INPUT_FIELD_TYPES } from '../../../constants';
 import ImageUploadDialog from './Types/ImageUploadDialog';
 import TextDialog from './Types/TextDialog';
-import YoutubeVideoDialog from './Types/YoutubeVideoDialog';
+import YoutubeDialog from './Types/YoutubeDialog';
 
 const INPUT_DIALOG_TYPES_MAP = {
   [INPUT_FIELD_TYPES.IMAGE]: ImageUploadDialog,
   [INPUT_FIELD_TYPES.TEXT]: TextDialog,
-  [INPUT_FIELD_TYPES.YOUTUBEVIDEO]: YoutubeVideoDialog,
+  [INPUT_FIELD_TYPES.YOUTUBEVIDEO]: YoutubeDialog,
 };
 
 const InputDialogContainer = ({
@@ -30,8 +30,8 @@ const InputDialogContainer = ({
   const [currentFieldValue, setCurrentFieldValue] = useState(fieldValue);
   const [isValid, setIsValid] = useState(true);
 
-  const handleChange = (event) => {
-    setCurrentFieldValue(event.target.value);
+  const handleChange = (value) => {
+    setCurrentFieldValue(value);
   };
 
   const onSubmit = async () => {

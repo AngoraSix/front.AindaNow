@@ -16,9 +16,7 @@ const ProjectForm = ({ project, className, onSubmit, stepped }) => {
     if (!event) {
       return false;
     }
-    let {
-      target: { value },
-    } = event;
+    let value = event.target?.value || event;
 
     const partialFormData = {
       [property]: value,

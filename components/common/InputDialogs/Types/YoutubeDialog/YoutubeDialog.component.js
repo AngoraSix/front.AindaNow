@@ -10,6 +10,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import config from '../../../../../config';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
+import DnDContainer from '../../../Media/DnDContainer.component';
+import { useNotifications } from '../../../../../hooks/app';
+import { INPUT_FIELD_TYPES } from '../../../../../constants';
 
 const YoutubeDialog = ({
   isValid,
@@ -18,12 +21,31 @@ const YoutubeDialog = ({
   onChange,
   label,
 }) => {
+  const { onError } = useNotifications();
+
   const thumbnailUrl = videoMedia.thumbnailUrl,
     videoId = videoMedia.resourceId,
     visibleVideoId =
       !isValid && videoId.length > 15
         ? `...${videoId.substring(videoId.length - 15)}`
         : videoId;
+
+  const handleChange = ({ target: { value } }) => {
+    onChange(value);
+  };
+
+  const handleDrop = (processedMedia) => {
+    if (
+      !processedMedia ||
+      processedMedia.length !== 1 ||
+      processedMedia[0].mediaType !== INPUT_FIELD_TYPES.YOUTUBEVIDEO
+    ) {
+      onError("Couldn't process Youtube video URL");
+    } else {
+      onChange(null, processedMedia[0]);
+    }
+  };
+
   return (
     <Box>
       {label && <DialogContentText>{label}</DialogContentText>}
@@ -35,7 +57,7 @@ const YoutubeDialog = ({
         >
           <Typography>{visibleVideoId || '-'}</Typography>
         </Box>
-        <Box className="YoutubeDialog__Thumbnail">
+        <DnDContainer onMediaInput={handleDrop} classNameModifier="Youtube">
           {!!thumbnailUrl ? (
             <img
               className="YoutubeDialog__Thumbnail__Preview"
@@ -50,11 +72,11 @@ const YoutubeDialog = ({
               />
             </div>
           )}
-        </Box>
+        </DnDContainer>
         <TextField
           label="Video ID or URL"
           value={fieldValue}
-          onChange={onChange}
+          onChange={handleChange}
           fullWidth
         />
         <a href={config.thirdPartiesConfig.youtube.uploadPage} target="_blank">

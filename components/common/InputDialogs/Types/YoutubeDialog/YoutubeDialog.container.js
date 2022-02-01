@@ -17,22 +17,33 @@ const YoutubeDialogContainer = ({ onChange, setIsValid, ...args }) => {
     setIsValid(false);
   }, []);
 
-  const handleChange = async ({ target: { value } }) => {
-    setFieldValue(value);
-    doLoad(true);
-    const videoMedia = await processYoutubeUrl(value);
-    const isValid = !!videoMedia.thumbnailUrl;
-    setProcessedVideo({
-      isValid,
-      videoMedia,
-    });
-    setIsValid(isValid);
-    onChange({
-      target: {
-        value: videoMedia,
-      },
-    });
-    doLoad(false);
+  const handleChange = async (value, videoMedia) => {
+    if (Media.isMedia(videoMedia)) {
+      setFieldValue(videoMedia.resourceId);
+      const isValid = !!videoMedia.thumbnailUrl;
+      setProcessedVideo({
+        isValid,
+        videoMedia,
+      });
+      setIsValid(isValid);
+      onChange(videoMedia);
+    } else {
+      setFieldValue(value);
+      doLoad(true);
+      const videoMedia = await processYoutubeUrl(value);
+      const isValid = !!videoMedia.thumbnailUrl;
+      setProcessedVideo({
+        isValid,
+        videoMedia,
+      });
+      setIsValid(isValid);
+      onChange({
+        target: {
+          value: videoMedia,
+        },
+      });
+      doLoad(false);
+    }
   };
 
   return (

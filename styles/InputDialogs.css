@@ -36,9 +36,6 @@
   justify-content: center;
   display: flex;
   border-radius: 5px;
-  border-style: solid;
-  border-width: thin;
-  border-color: #47626b;
   background-color: #e5e5e5;
 }
 

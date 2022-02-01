@@ -18,6 +18,7 @@ const _requestThumbnail = async (videoId) => {
 };
 
 export const processYoutubeUrl = async (value) => {
+  if (typeof value !== 'string') return null;
   let [isValid, id] = _extractId(value),
     videoThumbnail;
   if (isValid) {

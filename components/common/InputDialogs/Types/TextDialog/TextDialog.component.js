@@ -3,13 +3,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 const TextDialog = ({ currentFieldValue, onChange, label }) => {
+  const handleChange = ({ target: { value } }) => {
+    onChange(value);
+  };
+
   return (
     <Box>
       {label && <DialogContentText>{label}</DialogContentText>}
       <TextField
         label="New value"
         value={currentFieldValue}
-        onChange={onChange}
+        onChange={handleChange}
         fullWidth
       />
     </Box>
