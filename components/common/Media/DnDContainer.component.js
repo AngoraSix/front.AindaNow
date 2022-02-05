@@ -1,49 +1,46 @@
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React from 'react';
+import { useDrop } from 'react-dnd';
+import { NativeTypes } from 'react-dnd-html5-backend';
 import resolveToMediaArray from '../../../utils/media/mediaProcessor';
 
 const DnDContainer = ({ onMediaInput, children, classNameModifier }) => {
-  const [dragOverCount, setDragOver] = useState(0);
+  const [{ canDrop, isOver }, drop] = useDrop(
+    () => ({
+      accept: [NativeTypes.FILE, NativeTypes.URL],
+      async drop(input) {
+        const processedFiles = await resolveToMediaArray(input?.files);
+        const processedTexts = await resolveToMediaArray(input?.urls);
 
-  const dragOverHandler = (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-  };
-
-  const dragEnterHandler = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setDragOver(dragOverCount + 1);
-  };
-
-  const dragLeaveHandler = (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    setDragOver(dragOverCount - 1);
-  };
-
-  const dropHandler = async (event) => {
-    event.stopPropagation();
-    event.preventDefault();
-
-    setDragOver(0);
-
-    const processedFiles = await resolveToMediaArray(event.dataTransfer?.files);
-    const processedTexts = await resolveToMediaArray(
-      event.dataTransfer.getData('Text')
-    );
-
-    await onMediaInput([...processedFiles, ...processedTexts]);
-  };
+        await onMediaInput([...processedFiles, ...processedTexts]);
+      },
+      canDrop(input) {
+        console.log('canDrop', input.files, input.items);
+        return true;
+      },
+      hover(input) {
+        console.log('hover', input.files, input.items);
+      },
+      collect: (monitor) => {
+        const input = monitor.getItem();
+        if (input) {
+          console.log('collect', input.files, input.items);
+        }
+        return {
+          isOver: monitor.isOver(),
+          canDrop: monitor.canDrop(),
+        };
+      },
+    }),
+    [onMediaInput]
+  );
+  const isActive = canDrop && isOver;
   return (
     <Box
+      ref={drop}
       className={`Media__Container__${classNameModifier}
-       MediaDnD__DropZone ${dragOverCount > 0 ? 'DragOver' : ''}`}
-      onDrop={dropHandler}
-      onDragOver={dragOverHandler}
-      onDragEnter={dragEnterHandler}
-      onDragLeave={dragLeaveHandler}
+       MediaDnD__DropZone ${isActive ? 'DragOver' : ''}`}
     >
       {children}
     </Box>
