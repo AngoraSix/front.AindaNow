@@ -4,7 +4,13 @@ import { MEDIA_OPTIONS } from '../../../constants';
 import MediaListDnD from './Strategies/MediaListDnD.component';
 import MediaSingleDnD from './Strategies/MediaSingleDnD.component';
 
-const MediaDnD = ({ single, media, allowedMediaTypes, onMediaInput }) => {
+const MediaDnD = ({
+  single,
+  media,
+  allowedMediaTypes,
+  onMediaInput,
+  onModifyMediaOrder,
+}) => {
   return single ? (
     <MediaSingleDnD singleMedia={media?.[0]} onMediaInput={onMediaInput} />
   ) : (
@@ -12,6 +18,7 @@ const MediaDnD = ({ single, media, allowedMediaTypes, onMediaInput }) => {
       media={media}
       allowedMediaTypes={allowedMediaTypes}
       onMediaInput={onMediaInput}
+      onModifyMediaOrder={onModifyMediaOrder}
     />
   );
 };

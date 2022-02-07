@@ -46,3 +46,7 @@ export const MEDIA_OPTIONS = {
   IMAGE: 'image',
   VIDEO_YOUTUBE: 'video.youtube',
 };
+
+export const DRAGGABLE_ITEMS = {
+  MEDIA_CARD: 'MEDIA_CARD',
+};

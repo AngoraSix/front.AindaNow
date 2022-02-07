@@ -29,7 +29,6 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
         }
       });
     } 
-    
   }
 
   const onSubmit = async (flatFormData) => {

@@ -96,6 +96,14 @@
   margin: 0 auto;
 }
 
+.MediaList__List__DropOver {
+  background-color: red;
+}
+
+.MediaList__List__DropHover {
+  transform: rotateX(10deg);
+}
+
 /* common DnD */
 
 .MediaDnD__DropZone {
@@ -147,4 +155,66 @@
 
 .MediaSingleDnD__DropZone__Icon {
   margin: 15px;
+}
+
+/* MediaListCard */
+
+.MediaListCard {
+  transition: transform 0.5s ease-in;
+}
+
+.MediaListCard__Placement__Dragging {
+  opacity: 0.5;
+  border: medium solid #ff000080;
+}
+
+.MediaListCard__Placement__Regular {
+  transform: translateX(0);
+}
+
+.MediaListCard__Placement__Before {
+  transform: translateX(-50%);
+}
+
+.MediaListCard__Placement__After {
+  transform: translateX(50%);
+}
+
+.MediaListCard__Placement__JustAfter {
+  transform: translateX(50%);
+}
+
+.MediaListCard__Placement__JustBefore {
+  transform: translateX(-50%);
+}
+
+.MediaListCard.MediaListCard__Placement__Current {
+  opacity: 1;
+}
+
+.MediaListCard::before {
+  content: '';
+  z-index: -5;
+  border-style: solid;
+  border-width: medium;
+  border-color: transparent;
+  border-radius: 5px;
+  display: block;
+  width: 50%;
+  height: 80%;
+  position: absolute;
+  top: 10%;
+  transition: border-color 1s ease-in;
+}
+
+.MediaListCard.MediaListCard__Placement__JustAfter::before {
+  border-color: #ff000060;
+  left: -75%;
+  position: absolute;
+}
+
+.MediaListCard.MediaListCard__Placement__JustBefore::before {
+  border-color: #ff000060;
+  right: -75%;
+  position: absolute;
 }

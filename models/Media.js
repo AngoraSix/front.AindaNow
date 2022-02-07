@@ -16,4 +16,8 @@ export default class Media {
     }
     return !!object.mediaType;
   }
+
+  getKey() {
+    return `${this.mediaType}-${this.resourceId}`;
+  }
 }

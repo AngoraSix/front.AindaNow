@@ -15,18 +15,8 @@ const DnDContainer = ({ onMediaInput, children, classNameModifier }) => {
 
         await onMediaInput([...processedFiles, ...processedTexts]);
       },
-      canDrop(input) {
-        console.log('canDrop', input.files, input.items);
-        return true;
-      },
-      hover(input) {
-        console.log('hover', input.files, input.items);
-      },
       collect: (monitor) => {
         const input = monitor.getItem();
-        if (input) {
-          console.log('collect', input.files, input.items);
-        }
         return {
           isOver: monitor.isOver(),
           canDrop: monitor.canDrop(),

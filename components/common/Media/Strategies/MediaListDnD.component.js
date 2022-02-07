@@ -1,24 +1,15 @@
 import AddIcon from '@mui/icons-material/Add';
-import DeleteIcon from '@mui/icons-material/Delete';
+import FileIcon from '@mui/icons-material/FilePresent';
 import ImageIcon from '@mui/icons-material/Image';
-import PreviewIcon from '@mui/icons-material/Preview';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import {
-  Box,
-  Button,
-  IconButton,
-  ImageList,
-  ImageListItem,
-  ImageListItemBar,
-  Typography,
-} from '@mui/material';
+import { Box, Button, IconButton, ImageList, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../../constants';
 import InputDialog from '../../InputDialogs';
 import DnDContainer from '../DnDContainer.component';
-import FileIcon from '@mui/icons-material/FilePresent';
+import MediaListCard from '../MediaListCard.component';
 
 const MEDIA_OPTIONS_MAP = {
   [MEDIA_OPTIONS.IMAGE]: {
@@ -39,12 +30,25 @@ const MEDIA_OPTIONS_MAP = {
 
 const MEDIA_OPTIONS_GRID_SIZE = {
   [MEDIA_OPTIONS.IMAGE]: 1,
-  [MEDIA_OPTIONS.VIDEO_YOUTUBE]: 2,
+  [MEDIA_OPTIONS.VIDEO_YOUTUBE]: 1,
 };
 
-const MediaListDnD = ({ limit, media, allowedMediaTypes, onMediaInput }) => {
-  const [openedDialogType, setOpenedDialogType] = React.useState(null);
+const _getQuantityOfColumns = (isMedium, isLarge) =>
+  isLarge ? 6 : isMedium ? 4 : 2;
+
+const MediaListDnD = ({
+  limit,
+  media,
+  allowedMediaTypes,
+  onMediaInput,
+  onModifyMediaOrder,
+}) => {
+  const [openedDialogType, setOpenedDialogType] = useState(null);
   const [newOptionsVisible, setNewOptionsVisible] = useState(false);
+  const [tempOrderChangeKeys, setTempOrderChangeKeys] = useState({
+    targetKey: null,
+    originKey: null,
+  });
   const isNotMobile = useMediaQuery('(min-width:600px)');
   const isMedium = useMediaQuery('(min-width:900px)');
   const isLarge = useMediaQuery('(min-width:1200px)');
@@ -64,6 +68,20 @@ const MediaListDnD = ({ limit, media, allowedMediaTypes, onMediaInput }) => {
   const addMedia = async (media) => {
     onMediaInput(media);
   };
+
+  const onTempOrderChange = (targetKey, originKey) => {
+    setTempOrderChangeKeys({ targetKey, originKey });
+  };
+
+  const targetIndex =
+    tempOrderChangeKeys.targetKey != null
+      ? media.findIndex((m) => m.getKey() === tempOrderChangeKeys.targetKey)
+      : null;
+  const originIndex =
+    tempOrderChangeKeys.originKey != null
+      ? media.findIndex((m) => m.getKey() === tempOrderChangeKeys.originKey)
+      : null;
+  const quantityOfColumns = _getQuantityOfColumns(isMedium, isLarge);
 
   return (
     <Box>
@@ -126,35 +144,36 @@ const MediaListDnD = ({ limit, media, allowedMediaTypes, onMediaInput }) => {
       <DnDContainer onMediaInput={onMediaInput} classNameModifier="List">
         {media && media.length ? (
           <ImageList
-            className="MediaList__List"
+            className={`MediaList__List`}
             variant="quilted"
-            cols={isLarge ? 6 : isMedium ? 4 : 2}
+            cols={quantityOfColumns}
             rowHeight={121}
           >
-            {media.map((media, index) => {
+            {media.map((mediaElement, index) => {
               const MediaIcon =
-                MEDIA_OPTIONS_MAP[media.mediaType]?.icon || FileIcon;
+                MEDIA_OPTIONS_MAP[mediaElement.mediaType]?.icon || FileIcon;
+              const isOnSameLine =
+                Math.floor(targetIndex / quantityOfColumns) ===
+                Math.floor(index / quantityOfColumns);
+              const targetElementOffset =
+                targetIndex != null && isOnSameLine
+                  ? index - targetIndex
+                  : null;
+              const originTargetElementsOffset =
+                targetIndex != null && originIndex != null && isOnSameLine
+                  ? targetIndex - originIndex
+                  : null;
               return (
-                <ImageListItem
-                  cols={MEDIA_OPTIONS_GRID_SIZE[media.mediaType] || 1}
-                  rows={MEDIA_OPTIONS_GRID_SIZE[media.mediaType] || 1}
-                  key={index}
-                >
-                  <img src={media.thumbnailUrl} loading="lazy" />
-                  <ImageListItemBar
-                    actionPosition="left"
-                    actionIcon={
-                      <Box>
-                        <IconButton edge="end" aria-label="preview">
-                          <PreviewIcon sx={{ color: 'primary.light' }} />
-                        </IconButton>
-                        <IconButton edge="end" aria-label="delete">
-                          <DeleteIcon sx={{ color: 'primary.light' }} />
-                        </IconButton>
-                      </Box>
-                    }
-                  />
-                </ImageListItem>
+                <MediaListCard
+                  key={mediaElement.getKey()}
+                  colSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
+                  rowSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
+                  media={mediaElement}
+                  targetElementOffset={targetElementOffset}
+                  originTargetElementsOffset={originTargetElementsOffset}
+                  onTempOrderChange={onTempOrderChange}
+                  onModifyMediaOrder={onModifyMediaOrder}
+                />
               );
             })}
           </ImageList>

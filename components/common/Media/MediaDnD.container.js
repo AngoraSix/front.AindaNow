@@ -1,10 +1,16 @@
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useReducer, useEffect } from 'react';
 import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../constants';
 import { useNotifications } from '../../../hooks/app';
 import { isImage, processImage } from '../../../utils/media/image';
 import MediaDnD from './MediaDnD.component';
 import Media from '../../../models/Media';
+import MediaDnDReducer, {
+  INITIAL_STATE,
+  addMediaAction,
+  changeOrderAction,
+  setMediaAction,
+} from './MediaDnD.reducer';
 
 const MEDIA_TYPE_TO_OPTION = {
   [INPUT_FIELD_TYPES.YOUTUBEVIDEO]: MEDIA_OPTIONS.VIDEO_YOUTUBE,
@@ -17,6 +23,14 @@ const MediaDnDContainer = ({
   single,
   allowedMediaTypes,
 }) => {
+  const [mediaDataState, dispatch] = useReducer(MediaDnDReducer, {
+    ...INITIAL_STATE,
+    mediaList: mediaData,
+  });
+  useEffect(() => {
+    onChange(mediaDataState.mediaList);
+  }, [mediaDataState.mediaList]);
+
   const { onError } = useNotifications();
 
   const onMediaInput = async (mediaInput) => {
@@ -28,6 +42,9 @@ const MediaDnDContainer = ({
     if (single) {
       mediaInputs = [mediaInputs[0]];
     }
+    const existingKeys = mediaDataState.mediaList.map((media) =>
+      media.getKey()
+    );
     const normalizedMedia = (
       await Promise.all(
         mediaInputs.map(async (mediaDataElement) => {
@@ -36,7 +53,8 @@ const MediaDnDContainer = ({
             mediaDataElement instanceof Media &&
             allowedMediaTypes.includes(
               MEDIA_TYPE_TO_OPTION[mediaDataElement.mediaType]
-            )
+            ) &&
+            !existingKeys.includes(mediaDataElement.getKey())
           ) {
             return mediaDataElement;
           }
@@ -45,7 +63,10 @@ const MediaDnDContainer = ({
             isImage(mediaDataElement) &&
             allowedMediaTypes.includes(MEDIA_OPTIONS.IMAGE)
           ) {
-            return processImage(mediaDataElement);
+            const imageMedia = processImage(mediaDataElement);
+            if (!existingKeys.includes(imageMedia.getKey())) {
+              return imageMedia;
+            }
           }
           return null;
         })
@@ -54,15 +75,23 @@ const MediaDnDContainer = ({
     if (!mediaInputs.length || normalizedMedia.length < mediaInputs.length) {
       onError(single ? 'Input is not supported' : 'Not all input is supported');
     }
-    onChange(single ? normalizedMedia : [...mediaData, ...normalizedMedia]);
+    if (single) {
+      dispatch(setMediaAction(normalizedMedia));
+    } else {
+      dispatch(addMediaAction(normalizedMedia));
+    }
   };
 
+  const onModifyMediaOrder = async (targetKey, originKey) => {
+    dispatch(changeOrderAction(targetKey, originKey));
+  };
   return (
     <MediaDnD
       single={single}
       onMediaInput={onMediaInput}
-      media={mediaData}
+      media={mediaDataState.mediaList}
       allowedMediaTypes={allowedMediaTypes}
+      onModifyMediaOrder={onModifyMediaOrder}
     />
   );
 };

@@ -1,10 +1,17 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
+import ProjectFormReducer, {
+  INITIAL_STATE,
+  updateFieldsAction,
+} from './ProjectForm.reducer';
 import PlainProjectForm from './Presentations/PlainProjectForm.component';
 import SteppedProjectForm from './Presentations/SteppedProjectForm.component';
 
 const ProjectForm = ({ project, className, onSubmit, stepped }) => {
-  const [formData, setFormData] = useState(project);
+  const [formData, dispatch] = useReducer(ProjectFormReducer, {
+    ...INITIAL_STATE,
+    ...(project || {}),
+  });
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -22,7 +29,7 @@ const ProjectForm = ({ project, className, onSubmit, stepped }) => {
       [property]: value,
     };
 
-    setFormData({ ...formData, ...partialFormData });
+    dispatch(updateFieldsAction(partialFormData));
   };
 
   const FormPresentation = stepped ? SteppedProjectForm : PlainProjectForm;
