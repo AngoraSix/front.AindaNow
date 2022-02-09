@@ -8,11 +8,11 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import config from '../../../../../config';
+import config from '../../../../../../config';
 import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import DnDContainer from '../../../Media/DnDContainer.component';
-import { useNotifications } from '../../../../../hooks/app';
-import { INPUT_FIELD_TYPES } from '../../../../../constants';
+import DnDContainer from '../../../DnDContainer.component';
+import { useNotifications } from '../../../../../../hooks/app';
+import { INPUT_FIELD_TYPES } from '../../../../../../constants';
 
 const YoutubeDialog = ({
   isValid,

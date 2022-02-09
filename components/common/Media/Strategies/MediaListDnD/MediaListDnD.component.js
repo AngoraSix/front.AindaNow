@@ -6,10 +6,10 @@ import { Box, Button, IconButton, ImageList, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../../constants';
-import InputDialog from '../../InputDialogs';
-import DnDContainer from '../DnDContainer.component';
-import MediaListCard from '../MediaListCard.component';
+import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../../../constants';
+import InputDialog from '../../../InputDialog';
+import DnDContainer from '../../DnDContainer.component';
+import MediaListCard from './MediaListCard.component';
 
 const MEDIA_OPTIONS_MAP = {
   [MEDIA_OPTIONS.IMAGE]: {

@@ -3,9 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useLoading } from '../../../../../hooks/app';
 import { processYoutubeUrl } from '../../../../../utils/media/youtube';
 import Media from '../../../../../models/Media';
-import YoutubeDialog from './YoutubeDialog.component';
+import YoutubeInput from './YoutubeInput.component';
 
-const YoutubeDialogContainer = ({ onChange, setIsValid, ...args }) => {
+const YoutubeInputContainer = ({ onChange, setIsValid, ...args }) => {
   const { doLoad } = useLoading();
   const [processedVideo, setProcessedVideo] = useState({
     isValid: false,
@@ -37,17 +37,13 @@ const YoutubeDialogContainer = ({ onChange, setIsValid, ...args }) => {
         videoMedia,
       });
       setIsValid(isValid);
-      onChange({
-        target: {
-          value: videoMedia,
-        },
-      });
+      onChange(videoMedia);
       doLoad(false);
     }
   };
 
   return (
-    <YoutubeDialog
+    <YoutubeInput
       onChange={handleChange}
       {...processedVideo}
       fieldValue={fieldValue}
@@ -56,10 +52,10 @@ const YoutubeDialogContainer = ({ onChange, setIsValid, ...args }) => {
   );
 };
 
-YoutubeDialogContainer.defaultProps = {};
+YoutubeInputContainer.defaultProps = {};
 
-YoutubeDialogContainer.propTypes = {
+YoutubeInputContainer.propTypes = {
   onChange: PropTypes.func.isRequired,
   setIsValid: PropTypes.func,
 };
-export default YoutubeDialogContainer;
+export default YoutubeInputContainer;

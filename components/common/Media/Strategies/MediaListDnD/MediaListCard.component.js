@@ -9,7 +9,7 @@ import {
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { DRAGGABLE_ITEMS } from '../../../constants';
+import { DRAGGABLE_ITEMS } from '../../../../../constants';
 
 const _mapOffsetToClassModifier = (offset, originTargetOffset) => {
   if (offset == null) return 'Regular';

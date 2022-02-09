@@ -63,7 +63,7 @@ const MediaDnDContainer = ({
             isImage(mediaDataElement) &&
             allowedMediaTypes.includes(MEDIA_OPTIONS.IMAGE)
           ) {
-            const imageMedia = processImage(mediaDataElement);
+            const imageMedia = await processImage(mediaDataElement);
             if (!existingKeys.includes(imageMedia.getKey())) {
               return imageMedia;
             }
@@ -73,7 +73,11 @@ const MediaDnDContainer = ({
       )
     ).filter((media) => !!media);
     if (!mediaInputs.length || normalizedMedia.length < mediaInputs.length) {
-      onError(single ? 'Input is not supported' : 'Not all input is supported');
+      onError(
+        single
+          ? 'Input is not supported'
+          : 'Some input is duplicated or not supported'
+      );
     }
     if (single) {
       dispatch(setMediaAction(normalizedMedia));

@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { MEDIA_OPTIONS } from '../../../constants';
-import MediaListDnD from './Strategies/MediaListDnD.component';
-import MediaSingleDnD from './Strategies/MediaSingleDnD.component';
+import MediaListDnD from './Strategies/MediaListDnD';
+import MediaSingleDnD from './Strategies/MediaSingleDnD';
 
 const MediaDnD = ({
   single,
@@ -33,6 +33,7 @@ MediaDnD.propTypes = {
   single: PropTypes.bool,
   media: PropTypes.arrayOf(PropTypes.object),
   onMediaInput: PropTypes.func.isRequired,
+  onModifyMediaOrder: PropTypes.func.isRequired,
   allowedMediaTypes: PropTypes.arrayOf(PropTypes.string),
 };
 

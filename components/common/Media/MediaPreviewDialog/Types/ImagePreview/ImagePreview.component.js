@@ -1,8 +1,8 @@
 import { Box, DialogContentText } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Media from '../../../Media';
-import { MEDIA_OPTIONS } from '../../../../../constants';
+import Media from '../../..';
+import { MEDIA_OPTIONS } from '../../../../../../constants';
 
 const ImageUploadDialog = ({ onChange, label, currentFieldValue }) => {
   return (

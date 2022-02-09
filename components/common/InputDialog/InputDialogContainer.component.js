@@ -8,14 +8,14 @@ import {
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { INPUT_FIELD_TYPES } from '../../../constants';
-import ImageUploadDialog from './Types/ImageUploadDialog';
-import TextDialog from './Types/TextDialog';
-import YoutubeDialog from './Types/YoutubeDialog';
+import ImageUploadInput from './Types/ImageUploadInput';
+import TextInput from './Types/TextInput';
+import YoutubeInput from './Types/YoutubeInput';
 
 const INPUT_DIALOG_TYPES_MAP = {
-  [INPUT_FIELD_TYPES.IMAGE]: ImageUploadDialog,
-  [INPUT_FIELD_TYPES.TEXT]: TextDialog,
-  [INPUT_FIELD_TYPES.YOUTUBEVIDEO]: YoutubeDialog,
+  [INPUT_FIELD_TYPES.IMAGE]: ImageUploadInput,
+  [INPUT_FIELD_TYPES.TEXT]: TextInput,
+  [INPUT_FIELD_TYPES.YOUTUBEVIDEO]: YoutubeInput,
 };
 
 const InputDialogContainer = ({
@@ -40,12 +40,17 @@ const InputDialogContainer = ({
     handleDialogClose();
   };
 
-  const InputDialogComponent = INPUT_DIALOG_TYPES_MAP[inputType] || TextDialog;
+  const onDialogClose = () => {
+    setCurrentFieldValue(undefined);
+    handleDialogClose();
+  };
+
+  const InputDialogComponent = INPUT_DIALOG_TYPES_MAP[inputType] || TextInput;
 
   return (
     <Dialog
       open={!!open && !!inputType}
-      onClose={handleDialogClose}
+      onClose={onDialogClose}
       maxWidth="sm"
       fullWidth
     >

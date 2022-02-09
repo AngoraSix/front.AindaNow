@@ -3,7 +3,7 @@ import { Box, Button } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React from 'react';
-import DnDContainer from '../DnDContainer.component';
+import DnDContainer from '../../DnDContainer.component';
 
 const Input = styled('input')({
   display: 'none',

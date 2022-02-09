@@ -1,7 +1,7 @@
 import { Popover, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import InputDialog from '../InputDialogs';
+import InputDialog from '../InputDialog';
 
 const Editable = ({
   children,
@@ -87,7 +87,6 @@ Editable.defaultProps = {
   fieldName: 'field',
   isEditable: false,
   type: 'text',
-  fieldValue: null,
 };
 
 Editable.propTypes = {

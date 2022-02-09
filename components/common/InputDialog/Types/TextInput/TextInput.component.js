@@ -2,7 +2,7 @@ import { Box, DialogContentText, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const TextDialog = ({ currentFieldValue, onChange, label }) => {
+const TextInput = ({ currentFieldValue, onChange, label }) => {
   const handleChange = ({ target: { value } }) => {
     onChange(value);
   };
@@ -20,15 +20,15 @@ const TextDialog = ({ currentFieldValue, onChange, label }) => {
   );
 };
 
-TextDialog.defaultProps = {
+TextInput.defaultProps = {
   currentFieldValue: '',
   label: 'Set new value',
 };
 
-TextDialog.propTypes = {
+TextInput.propTypes = {
   onChange: PropTypes.func.isRequired,
   currentFieldValue: PropTypes.string,
   label: PropTypes.string,
 };
 
-export default TextDialog;
+export default TextInput;
