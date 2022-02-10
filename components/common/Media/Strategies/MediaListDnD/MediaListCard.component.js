@@ -1,5 +1,8 @@
 import DeleteIcon from '@mui/icons-material/Delete';
+import FileIcon from '@mui/icons-material/FilePresent';
+import ImageIcon from '@mui/icons-material/Image';
 import PreviewIcon from '@mui/icons-material/Preview';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
   Box,
   IconButton,
@@ -9,7 +12,18 @@ import {
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { DRAGGABLE_ITEMS } from '../../../../../constants';
+import { DRAGGABLE_ITEMS, MEDIA_OPTIONS } from '../../../../../constants';
+
+const MEDIA_TYPE_MAP = {
+  [MEDIA_OPTIONS.IMAGE]: {
+    icon: ImageIcon,
+    classModifier: 'Image',
+  },
+  [MEDIA_OPTIONS.VIDEO_YOUTUBE]: {
+    icon: YouTubeIcon,
+    classModifier: 'Youtube',
+  },
+};
 
 const _mapOffsetToClassModifier = (offset, originTargetOffset) => {
   if (offset == null) return 'Regular';
@@ -41,6 +55,7 @@ const MediaListCard = ({
       isDragging: !!monitor.isDragging(),
     }),
   }));
+
   const [, drop] = useDrop(() => ({
     accept: DRAGGABLE_ITEMS.MEDIA_CARD,
     hover: (item) => {
@@ -51,6 +66,9 @@ const MediaListCard = ({
     },
     collect: () => ({}),
   }));
+
+  const MediaIcon = MEDIA_TYPE_MAP[media.mediaType]?.icon || FileIcon;
+
   return (
     <ImageListItem
       className={`MediaListCard ${
@@ -65,6 +83,11 @@ const MediaListCard = ({
       rows={rowSize}
       ref={(node) => drag(drop(node))}
     >
+      <MediaIcon
+        className={`MediaListCard__MediaIcon MediaListCard__MediaIcon__${
+          MEDIA_TYPE_MAP[media.mediaType]?.classModifier || 'Default'
+        }`}
+      />
       <img ref={preview} src={media.thumbnailUrl} loading="lazy" />
       <ImageListItemBar
         actionPosition="left"

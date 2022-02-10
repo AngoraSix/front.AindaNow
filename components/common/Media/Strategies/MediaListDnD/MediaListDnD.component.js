@@ -150,8 +150,6 @@ const MediaListDnD = ({
             rowHeight={121}
           >
             {media.map((mediaElement, index) => {
-              const MediaIcon =
-                MEDIA_OPTIONS_MAP[mediaElement.mediaType]?.icon || FileIcon;
               const isOnSameLine =
                 Math.floor(targetIndex / quantityOfColumns) ===
                 Math.floor(index / quantityOfColumns);

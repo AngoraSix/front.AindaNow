@@ -25,7 +25,6 @@ const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
         : videoId;
 
   const handleChange = ({ target: { value } }) => {
-    console.log('YT CHANGE', value);
     onChange(value);
   };
 

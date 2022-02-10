@@ -163,6 +163,26 @@
   transition: transform 0.5s ease-in;
 }
 
+.MediaListCard__MediaIcon {
+  position: absolute;
+  opacity: 0.7;
+  top: 5%;
+  right: 5%;
+  color: #dbdbdb;
+}
+
+.MediaListCard__MediaIcon__Youtube {
+  box-shadow: 0 0 5px 15px #ff0000 inset, 0 0 10px 5px #ff0000;
+}
+
+.MediaListCard__MediaIcon__Image {
+  box-shadow: 0 0 5px 15px #3f6e91 inset, 0 0 10px 5px #3f6e91;
+}
+
+.MediaListCard__MediaIcon__Default {
+  box-shadow: 0 0 5px 15px #000000 inset, 0 0 10px 5px #000000;
+}
+
 .MediaListCard__Placement__Dragging {
   opacity: 0.5;
   border: medium solid #ff000080;
