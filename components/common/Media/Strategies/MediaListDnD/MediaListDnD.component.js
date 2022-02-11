@@ -206,11 +206,15 @@ const MediaListDnD = ({
 MediaListDnD.defaultProps = {
   allowedMediaTypes: Object.values(MEDIA_OPTIONS),
   limit: 15,
+  media: [],
 };
 
 MediaListDnD.propTypes = {
   allowedMediaTypes: PropTypes.array,
   limit: PropTypes.number,
+  media: PropTypes.array,
+  onMediaInput: PropTypes.func.isRequired,
+  onModifyMediaOrder: PropTypes.func.isRequired,
 };
 
 export default MediaListDnD;

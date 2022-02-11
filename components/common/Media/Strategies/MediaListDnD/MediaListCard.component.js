@@ -112,6 +112,10 @@ MediaListCard.propTypes = {
   media: PropTypes.object.isRequired,
   colSize: PropTypes.number,
   rowSize: PropTypes.number,
+  targetElementOffset: PropTypes.number,
+  originTargetElementsOffset: PropTypes.number,
+  onTempOrderChange: PropTypes.func.isRequired,
+  onModifyMediaOrder: PropTypes.func.isRequired,
 };
 
 export default MediaListCard;
