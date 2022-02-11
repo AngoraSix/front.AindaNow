@@ -1,9 +1,10 @@
 export default class Media {
-  constructor(mediaType, thumbnailUrl = '', resourceId, file) {
+  constructor(mediaType, key, thumbnailUrl = '', resourceId, file) {
     this.mediaType = mediaType;
     this.resourceId = resourceId || thumbnailUrl;
     this.thumbnailUrl = thumbnailUrl;
     this.file = file;
+    this.key = `${mediaType}-${key}`;
   }
 
   static isMedia(object) {
@@ -15,9 +16,5 @@ export default class Media {
       return false;
     }
     return !!object.mediaType;
-  }
-
-  getKey() {
-    return `${this.mediaType}-${this.resourceId}`;
   }
 }

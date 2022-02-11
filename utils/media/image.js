@@ -43,7 +43,13 @@ const _loadImageSrc = async (imageFile) => {
 export const processImage = async (mediaDataElement) => {
   const blobURL = await _loadImageSrc(mediaDataElement);
   mediaDataElement.blob = blobURL;
-  return new Media(INPUT_FIELD_TYPES.IMAGE, blobURL, null, mediaDataElement);
+  return new Media(
+    INPUT_FIELD_TYPES.IMAGE,
+    mediaDataElement.name,
+    blobURL,
+    null,
+    mediaDataElement
+  );
 };
 
 export const isImage = (mediaDataElement) => {

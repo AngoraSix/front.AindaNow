@@ -38,12 +38,8 @@ const MediaDnDReducer = (state = INITIAL_STATE, action) => {
     case CHANGE_ORDER:
       const reorderedMediaList = _arrayMove(
         state.mediaList,
-        state.mediaList.findIndex(
-          (m) => m.getKey() === action.payload.targetKey
-        ),
-        state.mediaList.findIndex(
-          (m) => m.getKey() === action.payload.originKey
-        )
+        state.mediaList.findIndex((m) => m.key === action.payload.targetKey),
+        state.mediaList.findIndex((m) => m.key === action.payload.originKey)
       );
       return { ...state, mediaList: reorderedMediaList };
     default:

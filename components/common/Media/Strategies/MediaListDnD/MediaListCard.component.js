@@ -47,7 +47,7 @@ const MediaListCard = ({
 }) => {
   const [{ isDragging }, drag, preview] = useDrag(() => ({
     type: DRAGGABLE_ITEMS.MEDIA_CARD,
-    item: { originKey: media.getKey() },
+    item: { originKey: media.key },
     end: () => {
       onTempOrderChange(null);
     },
@@ -59,10 +59,10 @@ const MediaListCard = ({
   const [, drop] = useDrop(() => ({
     accept: DRAGGABLE_ITEMS.MEDIA_CARD,
     hover: (item) => {
-      onTempOrderChange(media.getKey(), item.originKey);
+      onTempOrderChange(media.key, item.originKey);
     },
     drop: async (item) => {
-      await onModifyMediaOrder(media.getKey(), item.originKey);
+      await onModifyMediaOrder(media.key, item.originKey);
     },
     collect: () => ({}),
   }));

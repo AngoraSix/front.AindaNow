@@ -42,9 +42,7 @@ const MediaDnDContainer = ({
     if (single) {
       mediaInputs = [mediaInputs[0]];
     }
-    const existingKeys = mediaDataState.mediaList.map((media) =>
-      media.getKey()
-    );
+    const existingKeys = mediaDataState.mediaList.map((media) => media.key);
     const normalizedMedia = (
       await Promise.all(
         mediaInputs.map(async (mediaDataElement) => {
@@ -54,7 +52,7 @@ const MediaDnDContainer = ({
             allowedMediaTypes.includes(
               MEDIA_TYPE_TO_OPTION[mediaDataElement.mediaType]
             ) &&
-            !existingKeys.includes(mediaDataElement.getKey())
+            !existingKeys.includes(mediaDataElement.key)
           ) {
             return mediaDataElement;
           }
@@ -64,7 +62,7 @@ const MediaDnDContainer = ({
             allowedMediaTypes.includes(MEDIA_OPTIONS.IMAGE)
           ) {
             const imageMedia = await processImage(mediaDataElement);
-            if (!existingKeys.includes(imageMedia.getKey())) {
+            if (!existingKeys.includes(imageMedia.key)) {
               return imageMedia;
             }
           }

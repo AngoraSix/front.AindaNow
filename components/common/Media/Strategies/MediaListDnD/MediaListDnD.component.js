@@ -1,5 +1,4 @@
 import AddIcon from '@mui/icons-material/Add';
-import FileIcon from '@mui/icons-material/FilePresent';
 import ImageIcon from '@mui/icons-material/Image';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Box, Button, IconButton, ImageList, Typography } from '@mui/material';
@@ -10,6 +9,7 @@ import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../../../constants';
 import InputDialog from '../../../InputDialog';
 import DnDContainer from '../../DnDContainer.component';
 import MediaListCard from './MediaListCard.component';
+import { useNotifications } from '../../../../../hooks/app';
 
 const MEDIA_OPTIONS_MAP = {
   [MEDIA_OPTIONS.IMAGE]: {
@@ -43,6 +43,7 @@ const MediaListDnD = ({
   onMediaInput,
   onModifyMediaOrder,
 }) => {
+  const { onError } = useNotifications();
   const [openedDialogType, setOpenedDialogType] = useState(null);
   const [newOptionsVisible, setNewOptionsVisible] = useState(false);
   const [tempOrderChangeKeys, setTempOrderChangeKeys] = useState({
@@ -65,8 +66,13 @@ const MediaListDnD = ({
     setOpenedDialogType(null);
   };
 
-  const addMedia = async (media) => {
-    onMediaInput(media);
+  const onAddMedia = async (mediaInput) => {
+    const newMediaCount = Array.isArray(mediaInput) ? mediaInput.length : 1;
+    if (media.length + newMediaCount > limit) {
+      onError("Can't add all items - limit exceeded");
+      return;
+    }
+    onMediaInput(mediaInput);
   };
 
   const onTempOrderChange = (targetKey, originKey) => {
@@ -75,11 +81,11 @@ const MediaListDnD = ({
 
   const targetIndex =
     tempOrderChangeKeys.targetKey != null
-      ? media.findIndex((m) => m.getKey() === tempOrderChangeKeys.targetKey)
+      ? media.findIndex((m) => m.key === tempOrderChangeKeys.targetKey)
       : null;
   const originIndex =
     tempOrderChangeKeys.originKey != null
-      ? media.findIndex((m) => m.getKey() === tempOrderChangeKeys.originKey)
+      ? media.findIndex((m) => m.key === tempOrderChangeKeys.originKey)
       : null;
   const quantityOfColumns = _getQuantityOfColumns(isMedium, isLarge);
 
@@ -141,7 +147,11 @@ const MediaListDnD = ({
           })}
         </Box>
       </Box>
-      <DnDContainer onMediaInput={onMediaInput} classNameModifier="List">
+      <DnDContainer
+        onMediaInput={onAddMedia}
+        classNameModifier="List"
+        disabled={media.length >= limit}
+      >
         {media && media.length ? (
           <ImageList
             className={`MediaList__List`}
@@ -163,7 +173,7 @@ const MediaListDnD = ({
                   : null;
               return (
                 <MediaListCard
-                  key={mediaElement.getKey()}
+                  key={mediaElement.key}
                   colSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
                   rowSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
                   media={mediaElement}
@@ -186,7 +196,7 @@ const MediaListDnD = ({
         open={!!openedDialogType}
         inputType={openedDialogType}
         handleDialogClose={handleDialogClose}
-        onInputSubmit={addMedia}
+        onInputSubmit={onAddMedia}
         label={MEDIA_OPTIONS_MAP[openedDialogType]?.dialogLabel}
       />
     </Box>
