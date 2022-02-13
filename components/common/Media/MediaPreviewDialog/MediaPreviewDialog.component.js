@@ -1,9 +1,13 @@
-import { Dialog, DialogContent } from '@mui/material';
+import { Dialog, DialogContent, Zoom } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { MEDIA_OPTIONS } from '../../../../constants';
 import ImagePreview from './Types/ImagePreview';
 import YoutubePreview from './Types/YoutubePreview';
+
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Zoom in={true} ref={ref} {...props} />;
+});
 
 const MEDIA_PREVIEW_TYPES_MAP = {
   [MEDIA_OPTIONS.IMAGE]: ImagePreview,
@@ -21,6 +25,7 @@ const MediaPreviewDialog = ({ mediaType, open, handleDialogClose, media }) => {
       open={!!open && !!mediaType}
       onClose={handleDialogClose}
       maxWidth="xl"
+      TransitionComponent={Transition}
     >
       <DialogContent>
         <PreviewComponent media={media} />

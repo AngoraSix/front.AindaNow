@@ -248,7 +248,24 @@
 
 .MediaPreview__Image {
   max-height: 80vh;
+  max-width: 100%;
+}
+
+.MediaPreview__Image.MediaPreview__Image__Zoomed {
   max-width: none;
+}
+
+.MediaPreview__Image__ZoomIcon {
+  position: absolute;
+  background-color: #a9bec590;
+  border: medium solid #47626b;
+  color: #47626b;
+  bottom: 1.25em;
+  right: 10%;
+}
+
+.MediaPreview__Image__Loading {
+  width: 50vw;
 }
 
 .MediaPreview__Youtube {

@@ -10,6 +10,7 @@ const MediaDnD = ({
   allowedMediaTypes,
   onMediaInput,
   onModifyMediaOrder,
+  onRemoveMediaItem,
 }) => {
   return single ? (
     <MediaSingleDnD singleMedia={media?.[0]} onMediaInput={onMediaInput} />
@@ -19,6 +20,7 @@ const MediaDnD = ({
       allowedMediaTypes={allowedMediaTypes}
       onMediaInput={onMediaInput}
       onModifyMediaOrder={onModifyMediaOrder}
+      onRemoveMediaItem={onRemoveMediaItem}
     />
   );
 };
@@ -35,6 +37,7 @@ MediaDnD.propTypes = {
   onMediaInput: PropTypes.func.isRequired,
   onModifyMediaOrder: PropTypes.func.isRequired,
   allowedMediaTypes: PropTypes.arrayOf(PropTypes.string),
+  onRemoveMediaItem: PropTypes.func.isRequired,
 };
 
 export default MediaDnD;

@@ -10,6 +10,7 @@ import MediaDnDReducer, {
   addMediaAction,
   changeOrderAction,
   setMediaAction,
+  removeMediaItemAction,
 } from './MediaDnD.reducer';
 
 const MEDIA_TYPE_TO_OPTION = {
@@ -84,6 +85,10 @@ const MediaDnDContainer = ({
     }
   };
 
+  const onRemoveMediaItem = (itemIndex) => {
+    dispatch(removeMediaItemAction(itemIndex));
+  };
+
   const onModifyMediaOrder = async (targetKey, originKey) => {
     dispatch(changeOrderAction(targetKey, originKey));
   };
@@ -94,6 +99,7 @@ const MediaDnDContainer = ({
       media={mediaDataState.mediaList}
       allowedMediaTypes={allowedMediaTypes}
       onModifyMediaOrder={onModifyMediaOrder}
+      onRemoveMediaItem={onRemoveMediaItem}
     />
   );
 };

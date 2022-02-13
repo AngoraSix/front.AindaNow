@@ -8,6 +8,7 @@ import {
   IconButton,
   ImageListItem,
   ImageListItemBar,
+  Zoom,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -44,6 +45,7 @@ const MediaListCard = ({
   originTargetElementsOffset,
   onTempOrderChange,
   onModifyMediaOrder,
+  onRemoveMediaItem,
   handlePreviewDialogClickOpen,
 }) => {
   const [{ isDragging }, drag, preview] = useDrag(() => ({
@@ -101,7 +103,11 @@ const MediaListCard = ({
             >
               <PreviewIcon sx={{ color: 'primary.light' }} />
             </IconButton>
-            <IconButton edge="end" aria-label="delete">
+            <IconButton
+              edge="end"
+              aria-label="delete"
+              onClick={onRemoveMediaItem}
+            >
               <DeleteIcon sx={{ color: 'primary.light' }} />
             </IconButton>
           </Box>

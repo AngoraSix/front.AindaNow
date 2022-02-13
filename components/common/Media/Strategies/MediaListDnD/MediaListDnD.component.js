@@ -4,13 +4,14 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Box, Button, IconButton, ImageList, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../../../constants';
 import InputDialog from '../../../InputDialog';
 import DnDContainer from '../../DnDContainer.component';
 import MediaListCard from './MediaListCard.component';
 import { useNotifications } from '../../../../../hooks/app';
 import MediaPreviewDialog from '../../MediaPreviewDialog';
+import { useRouter } from 'next/router';
 
 const MEDIA_OPTIONS_MAP = {
   [MEDIA_OPTIONS.IMAGE]: {
@@ -43,8 +44,10 @@ const MediaListDnD = ({
   allowedMediaTypes,
   onMediaInput,
   onModifyMediaOrder,
+  onRemoveMediaItem,
 }) => {
   const { onError } = useNotifications();
+  const router = useRouter();
   const [openedInputDialogType, setOpenedInputDialogType] = useState(null);
   const [openedPreviewDialogMedia, setOpenedPreviewDialogMedia] =
     useState(null);
@@ -57,16 +60,30 @@ const MediaListDnD = ({
   const isMedium = useMediaQuery('(min-width:900px)');
   const isLarge = useMediaQuery('(min-width:1200px)');
 
+  useEffect(() => {
+    const handleRouteChange = (url, { shallow }) => {
+      if (!shallow && url[url.length - 1] !== '#') {
+        handleDialogClose();
+      }
+    };
+    router.events.on('hashChangeStart', handleRouteChange);
+
+    return () => {
+      router.events.off('hashChangeStart', handleRouteChange);
+    };
+  }, []);
+
   const handleShowNewOptions = () => {
     setNewOptionsVisible(!newOptionsVisible);
   };
 
   const handleInputDialogClickOpen = (type) => () => {
     setOpenedInputDialogType(MEDIA_OPTIONS_MAP[type].inputType);
+    router.push('#', undefined, { shallow: true });
   };
 
-  const handlePreviewDialogClickOpen = (media) => {
-    setOpenedPreviewDialogMedia(media);
+  const handlePreviewDialogClickOpen = (mediaItem) => {
+    setOpenedPreviewDialogMedia(mediaItem);
   };
 
   const handleDialogClose = () => {
@@ -81,6 +98,10 @@ const MediaListDnD = ({
       return;
     }
     onMediaInput(mediaInput);
+  };
+
+  const onRemoveMedia = (index) => () => {
+    onRemoveMediaItem(index);
   };
 
   const onTempOrderChange = (targetKey, originKey) => {
@@ -189,6 +210,7 @@ const MediaListDnD = ({
                   originTargetElementsOffset={originTargetElementsOffset}
                   onTempOrderChange={onTempOrderChange}
                   onModifyMediaOrder={onModifyMediaOrder}
+                  onRemoveMediaItem={onRemoveMedia(index)}
                   handlePreviewDialogClickOpen={handlePreviewDialogClickOpen}
                 />
               );
@@ -230,6 +252,7 @@ MediaListDnD.propTypes = {
   media: PropTypes.array,
   onMediaInput: PropTypes.func.isRequired,
   onModifyMediaOrder: PropTypes.func.isRequired,
+  onRemoveMediaItem: PropTypes.func.isRequired,
 };
 
 export default MediaListDnD;

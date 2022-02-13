@@ -1,9 +1,15 @@
 const ADD_MEDIA = 'MediaDnD/ADD_MEDIA';
+const REMOVE_MEDIA_ITEM = 'MediaDnD/REMOVE_MEDIA_ITEM';
 const SET_MEDIA = 'MediaDnD/SET_MEDIA';
 const CHANGE_ORDER = 'MediaDnD/CHANGE_ORDER';
 
 export const addMediaAction = (payload) => ({
   type: ADD_MEDIA,
+  payload,
+});
+
+export const removeMediaItemAction = (payload) => ({
+  type: REMOVE_MEDIA_ITEM,
   payload,
 });
 
@@ -27,6 +33,15 @@ const MediaDnDReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         mediaList: combinedMediaList,
+      };
+    case REMOVE_MEDIA_ITEM:
+      const updatedMediaList = state.mediaList
+        .slice(0, action.payload)
+        .concat(state.mediaList.slice(action.payload + 1));
+      // state.callbacks?.onFormChange?.(combinedMediaList);
+      return {
+        ...state,
+        mediaList: updatedMediaList,
       };
     case SET_MEDIA:
       const replacedMediaList = [...action.payload];
