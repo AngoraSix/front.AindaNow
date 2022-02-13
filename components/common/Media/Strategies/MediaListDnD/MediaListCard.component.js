@@ -44,6 +44,7 @@ const MediaListCard = ({
   originTargetElementsOffset,
   onTempOrderChange,
   onModifyMediaOrder,
+  handlePreviewDialogClickOpen,
 }) => {
   const [{ isDragging }, drag, preview] = useDrag(() => ({
     type: DRAGGABLE_ITEMS.MEDIA_CARD,
@@ -93,7 +94,11 @@ const MediaListCard = ({
         actionPosition="left"
         actionIcon={
           <Box>
-            <IconButton edge="end" aria-label="preview">
+            <IconButton
+              edge="end"
+              aria-label="preview"
+              onClick={() => handlePreviewDialogClickOpen(media)}
+            >
               <PreviewIcon sx={{ color: 'primary.light' }} />
             </IconButton>
             <IconButton edge="end" aria-label="delete">
@@ -116,6 +121,7 @@ MediaListCard.propTypes = {
   originTargetElementsOffset: PropTypes.number,
   onTempOrderChange: PropTypes.func.isRequired,
   onModifyMediaOrder: PropTypes.func.isRequired,
+  handlePreviewDialogClickOpen: PropTypes.func.isRequired,
 };
 
 export default MediaListCard;

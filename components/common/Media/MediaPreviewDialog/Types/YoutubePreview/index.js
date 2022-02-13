@@ -1,3 +1,3 @@
-import YoutubePreviewDialog from './YoutubePreview.container';
+import YoutubePreview from './YoutubePreview.component';
 
-export default YoutubePreviewDialog;
+export default YoutubePreview;

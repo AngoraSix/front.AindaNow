@@ -1,32 +1,14 @@
-import { Box, DialogContentText } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Media from '../../..';
-import { MEDIA_OPTIONS } from '../../../../../../constants';
 
-const ImageUploadDialog = ({ onChange, label, currentFieldValue }) => {
-  return (
-    <Box>
-      {label && <DialogContentText>{label}</DialogContentText>}
-      <Media
-        single={true}
-        onChange={onChange}
-        mediaData={currentFieldValue}
-        allowedMediaTypes={[MEDIA_OPTIONS.IMAGE]}
-      />
-    </Box>
-  );
+const ImagePreview = ({ media }) => {
+  return <img className="MediaPreview__Image" src={media?.thumbnailUrl} />;
 };
 
-ImageUploadDialog.defaultProps = {
-  label: 'Browse or drop a file in the drop zone',
-  currentFieldValue: [],
+ImagePreview.defaultProps = {};
+
+ImagePreview.propTypes = {
+  media: PropTypes.object,
 };
 
-ImageUploadDialog.propTypes = {
-  label: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  currentFieldValue: PropTypes.arrayOf(PropTypes.object),
-};
-
-export default ImageUploadDialog;
+export default ImagePreview;

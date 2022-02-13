@@ -243,3 +243,20 @@
   right: -75%;
   position: absolute;
 }
+
+/* MediaPreview */
+
+.MediaPreview__Image {
+  max-height: 80vh;
+  max-width: none;
+}
+
+.MediaPreview__Youtube {
+  max-width: 100%;
+}
+
+@media (min-width: 900px) {
+  .MediaPreview__Image {
+    max-width: 100%;
+  }
+}

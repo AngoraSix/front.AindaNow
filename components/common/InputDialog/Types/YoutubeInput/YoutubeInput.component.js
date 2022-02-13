@@ -17,7 +17,7 @@ import { INPUT_FIELD_TYPES } from '../../../../../constants';
 const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
   const { onError } = useNotifications();
 
-  const thumbnailUrl = videoMedia.thumbnailUrl,
+  const thumbnailUrl = videoMedia?.thumbnailUrl,
     videoId = videoMedia.resourceId,
     visibleVideoId =
       !isValid && videoId.length > 15

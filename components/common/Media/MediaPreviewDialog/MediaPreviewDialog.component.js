@@ -10,22 +10,17 @@ const MEDIA_PREVIEW_TYPES_MAP = {
   [MEDIA_OPTIONS.VIDEO_YOUTUBE]: YoutubePreview,
 };
 
-const MediaPreviewDialogContainer = ({
-  mediaType,
-  open,
-  handleDialogClose,
-  media,
-}) => {
+const MediaPreviewDialog = ({ mediaType, open, handleDialogClose, media }) => {
   const PreviewComponent =
     MEDIA_PREVIEW_TYPES_MAP[mediaType] ||
     MEDIA_PREVIEW_TYPES_MAP[MEDIA_OPTIONS.IMAGE];
 
   return (
     <Dialog
+      className="MediaPreview__Dialog__Container"
       open={!!open && !!mediaType}
       onClose={handleDialogClose}
       maxWidth="xl"
-      fullWidth
     >
       <DialogContent>
         <PreviewComponent media={media} />
@@ -34,16 +29,16 @@ const MediaPreviewDialogContainer = ({
   );
 };
 
-MediaPreviewDialogContainer.defaultProps = {
+MediaPreviewDialog.defaultProps = {
   open: false,
   mediaType: MEDIA_OPTIONS.IMAGE,
 };
 
-MediaPreviewDialogContainer.propTypes = {
+MediaPreviewDialog.propTypes = {
   open: PropTypes.bool,
   handleDialogClose: PropTypes.func.isRequired,
-  media: PropTypes.object.isRequired,
+  media: PropTypes.object,
   mediaType: PropTypes.string,
 };
 
-export default MediaPreviewDialogContainer;
+export default MediaPreviewDialog;

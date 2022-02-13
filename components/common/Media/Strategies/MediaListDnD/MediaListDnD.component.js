@@ -10,6 +10,7 @@ import InputDialog from '../../../InputDialog';
 import DnDContainer from '../../DnDContainer.component';
 import MediaListCard from './MediaListCard.component';
 import { useNotifications } from '../../../../../hooks/app';
+import MediaPreviewDialog from '../../MediaPreviewDialog';
 
 const MEDIA_OPTIONS_MAP = {
   [MEDIA_OPTIONS.IMAGE]: {
@@ -44,7 +45,9 @@ const MediaListDnD = ({
   onModifyMediaOrder,
 }) => {
   const { onError } = useNotifications();
-  const [openedDialogType, setOpenedDialogType] = useState(null);
+  const [openedInputDialogType, setOpenedInputDialogType] = useState(null);
+  const [openedPreviewDialogMedia, setOpenedPreviewDialogMedia] =
+    useState(null);
   const [newOptionsVisible, setNewOptionsVisible] = useState(false);
   const [tempOrderChangeKeys, setTempOrderChangeKeys] = useState({
     targetKey: null,
@@ -58,12 +61,17 @@ const MediaListDnD = ({
     setNewOptionsVisible(!newOptionsVisible);
   };
 
-  const handleDialogClickOpen = (type) => () => {
-    setOpenedDialogType(MEDIA_OPTIONS_MAP[type].inputType);
+  const handleInputDialogClickOpen = (type) => () => {
+    setOpenedInputDialogType(MEDIA_OPTIONS_MAP[type].inputType);
+  };
+
+  const handlePreviewDialogClickOpen = (media) => {
+    setOpenedPreviewDialogMedia(media);
   };
 
   const handleDialogClose = () => {
-    setOpenedDialogType(null);
+    setOpenedInputDialogType(null);
+    setOpenedPreviewDialogMedia(null);
   };
 
   const onAddMedia = async (mediaInput) => {
@@ -117,7 +125,7 @@ const MediaListDnD = ({
                 }`}
                 key={option}
                 startIcon={<OptionIcon />}
-                onClick={handleDialogClickOpen(option)}
+                onClick={handleInputDialogClickOpen(option)}
                 disabled={media.length >= limit}
               >
                 {MEDIA_OPTIONS_MAP[option].label}
@@ -132,7 +140,7 @@ const MediaListDnD = ({
                   MEDIA_OPTIONS_MAP[option].classModifier || ''
                 }`}
                 key={option}
-                onClick={handleDialogClickOpen(option)}
+                onClick={handleInputDialogClickOpen(option)}
                 disabled={media.length >= limit}
               >
                 <OptionIcon
@@ -181,6 +189,7 @@ const MediaListDnD = ({
                   originTargetElementsOffset={originTargetElementsOffset}
                   onTempOrderChange={onTempOrderChange}
                   onModifyMediaOrder={onModifyMediaOrder}
+                  handlePreviewDialogClickOpen={handlePreviewDialogClickOpen}
                 />
               );
             })}
@@ -193,11 +202,17 @@ const MediaListDnD = ({
       </DnDContainer>
 
       <InputDialog
-        open={!!openedDialogType}
-        inputType={openedDialogType}
+        open={!!openedInputDialogType}
+        inputType={openedInputDialogType}
         handleDialogClose={handleDialogClose}
         onInputSubmit={onAddMedia}
-        label={MEDIA_OPTIONS_MAP[openedDialogType]?.dialogLabel}
+        label={MEDIA_OPTIONS_MAP[openedInputDialogType]?.dialogLabel}
+      />
+      <MediaPreviewDialog
+        open={!!openedPreviewDialogMedia}
+        media={openedPreviewDialogMedia}
+        handleDialogClose={handleDialogClose}
+        mediaType={openedPreviewDialogMedia?.mediaType}
       />
     </Box>
   );

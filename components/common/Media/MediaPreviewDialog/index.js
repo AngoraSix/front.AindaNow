@@ -1,3 +1,3 @@
-import MediaPreviewDialogContainer from './MediaPreviewDialogContainer.component';
+import MediaPreviewDialog from './MediaPreviewDialog.component';
 
-export default MediaPreviewDialogContainer;
+export default MediaPreviewDialog;
