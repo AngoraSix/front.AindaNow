@@ -6,7 +6,9 @@ import { ThemeProvider, StyledEngineProvider } from '@mui/material/styles';
 import { SnackbarProvider } from 'notistack';
 import theme from '../../theme';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { TouchBackend } from 'react-dnd-touch-backend';
 import { DndProvider } from 'react-dnd';
+import { isMobile } from 'react-device-detect';
 
 const App = ({ isLoading, children }) => (
   <StyledEngineProvider injectFirst>
@@ -18,7 +20,7 @@ const App = ({ isLoading, children }) => (
           horizontal: 'center',
         }}
       >
-        <DndProvider backend={HTML5Backend}>
+        <DndProvider backend={isMobile ? TouchBackend : HTML5Backend}>
           <React.Fragment>
             <CssBaseline />
             <div
