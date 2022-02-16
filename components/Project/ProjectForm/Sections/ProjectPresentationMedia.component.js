@@ -2,6 +2,7 @@ import { Box, Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Media from '../../../common/Media';
+import { MEDIA_INPUT_STRATEGIES } from '../../../../constants';
 import { PROJECT_PRESENTATION_BASE_FORM_FIELDS as PRESENTATION_BASE_FIELDS } from '../ProjectForm.properties';
 
 const MOBILE_DESCRIPTION = 'Time to add some visual aids...';
@@ -37,7 +38,8 @@ const ProjectPresentationMedia = ({
         <Grid item xs={10}>
           <Typography>{PRESENTATION_BASE_FIELDS.media.label}</Typography>
           <Media
-            single={false}
+            allowsMultiple={true}
+            strategy={MEDIA_INPUT_STRATEGIES.LIST}
             onChange={onMediaChange}
             mediaData={formData['presentation.media']}
           />

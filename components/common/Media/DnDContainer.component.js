@@ -40,7 +40,7 @@ const DnDContainer = ({
   return (
     <Box
       ref={drop}
-      className={`Media__Container__${classNameModifier}
+      className={`Media__Container Media__Container__${classNameModifier}
        MediaDnD__DropZone ${
          isActive
            ? !disabled

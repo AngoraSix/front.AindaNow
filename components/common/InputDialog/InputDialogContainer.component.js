@@ -25,6 +25,7 @@ const InputDialogContainer = ({
   onInputSubmit,
   fieldValue,
   title,
+  allowsMultiple,
   ...args
 }) => {
   const [currentFieldValue, setCurrentFieldValue] = useState(fieldValue);
@@ -60,6 +61,7 @@ const InputDialogContainer = ({
           currentFieldValue={currentFieldValue}
           onChange={handleChange}
           setIsValid={setIsValid}
+          allowsMultiple={allowsMultiple}
           {...args}
         />
       </DialogContent>
@@ -88,6 +90,7 @@ InputDialogContainer.defaultProps = {
   open: false,
   inputType: INPUT_FIELD_TYPES.TEXT,
   title: 'Fill in',
+  allowsMultiple: false,
 };
 
 InputDialogContainer.propTypes = {
@@ -99,6 +102,7 @@ InputDialogContainer.propTypes = {
     PropTypes.arrayOf(PropTypes.object),
   ]),
   inputType: PropTypes.string,
+  allowsMultiple: PropTypes.bool,
 };
 
 export default InputDialogContainer;

@@ -229,6 +229,7 @@ const MediaListDnD = ({
         handleDialogClose={handleDialogClose}
         onInputSubmit={onAddMedia}
         label={MEDIA_OPTIONS_MAP[openedInputDialogType]?.dialogLabel}
+        allowsMultiple={true}
       />
       <MediaPreviewDialog
         open={!!openedPreviewDialogMedia}

@@ -1,6 +1,10 @@
 import PropTypes from 'prop-types';
 import React, { useReducer, useEffect } from 'react';
-import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../constants';
+import {
+  INPUT_FIELD_TYPES,
+  MEDIA_OPTIONS,
+  MEDIA_INPUT_STRATEGIES,
+} from '../../../constants';
 import { useNotifications } from '../../../hooks/app';
 import { isImage, processImage } from '../../../utils/media/image';
 import MediaDnD from './MediaDnD.component';
@@ -21,8 +25,9 @@ const MEDIA_TYPE_TO_OPTION = {
 const MediaDnDContainer = ({
   onChange,
   mediaData,
-  single,
   allowedMediaTypes,
+  allowsMultiple,
+  strategy,
 }) => {
   const [mediaDataState, dispatch] = useReducer(MediaDnDReducer, {
     ...INITIAL_STATE,
@@ -39,8 +44,7 @@ const MediaDnDContainer = ({
       Array.isArray(mediaInput) || mediaInput instanceof FileList
         ? Array.from(mediaInput)
         : [mediaInput];
-    // @TODO allow this, once we improve the single logic (Trello-l7DFMPvh)
-    if (single) {
+    if (!allowsMultiple) {
       mediaInputs = [mediaInputs[0]];
     }
     const existingKeys = mediaDataState.mediaList.map((media) => media.key);
@@ -73,15 +77,15 @@ const MediaDnDContainer = ({
     ).filter((media) => !!media);
     if (!mediaInputs.length || normalizedMedia.length < mediaInputs.length) {
       onError(
-        single
-          ? 'Input is not supported'
-          : 'Some input is duplicated or not supported'
+        allowsMultiple
+          ? 'Some input is duplicated or not supported'
+          : 'Input is not supported'
       );
     }
-    if (single) {
-      dispatch(setMediaAction(normalizedMedia));
-    } else {
+    if (strategy === MEDIA_INPUT_STRATEGIES.LIST) {
       dispatch(addMediaAction(normalizedMedia));
+    } else {
+      dispatch(setMediaAction(normalizedMedia));
     }
   };
 
@@ -94,7 +98,8 @@ const MediaDnDContainer = ({
   };
   return (
     <MediaDnD
-      single={single}
+      strategy={strategy}
+      allowsMultiple={allowsMultiple}
       onMediaInput={onMediaInput}
       media={mediaDataState.mediaList}
       allowedMediaTypes={allowedMediaTypes}
@@ -105,16 +110,18 @@ const MediaDnDContainer = ({
 };
 
 MediaDnDContainer.defaultProps = {
-  single: true,
+  strategy: MEDIA_INPUT_STRATEGIES.SINGLE,
   mediaData: [],
   allowedMediaTypes: Object.values(MEDIA_OPTIONS),
+  allowsMultiple: false,
 };
 
 MediaDnDContainer.propTypes = {
   onChange: PropTypes.func.isRequired,
-  single: PropTypes.bool,
   allowedMediaTypes: PropTypes.arrayOf(PropTypes.string),
   mediaData: PropTypes.arrayOf(PropTypes.object),
+  allowsMultiple: PropTypes.bool,
+  strategy: PropTypes.oneOf(Object.values(MEDIA_INPUT_STRATEGIES)),
 };
 
 export default MediaDnDContainer;

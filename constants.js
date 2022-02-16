@@ -50,3 +50,8 @@ export const MEDIA_OPTIONS = {
 export const DRAGGABLE_ITEMS = {
   MEDIA_CARD: 'MEDIA_CARD',
 };
+
+export const MEDIA_INPUT_STRATEGIES = {
+  LIST: 'media.list',
+  SINGLE: 'media.single',
+};
