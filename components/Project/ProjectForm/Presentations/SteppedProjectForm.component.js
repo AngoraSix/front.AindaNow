@@ -12,6 +12,7 @@ import {
 import { useTheme } from '@mui/material/styles';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
 import ProjectPresentationData from '../Sections/ProjectPresentationData.component';
+import ProjectPresentationMedia from '../Sections/ProjectPresentationMedia.component';
 import ProjectPresentationParams from '../Sections/ProjectPresentationParams.component';
 import { useNotifications } from '../../../../hooks/app';
 import logger from '../../../../utils/logger';
@@ -26,6 +27,7 @@ const steps = [
     optional: false,
   },
   { label: 'Presentation', component: ProjectPresentationData, optional: true },
+  { label: 'Media', component: ProjectPresentationMedia, optional: true },
   { label: 'Parameters', component: ProjectPresentationParams, optional: true },
 ];
 
@@ -136,8 +138,9 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
         </Stepper>
       ) : (
         <MobileStepper
+          className="NewProject__MobileStepper"
           variant="dots"
-          steps={2}
+          steps={steps.length}
           position="static"
           activeStep={activeStep}
           sx={{ maxWidth: 400, flexGrow: 1 }}
@@ -145,7 +148,7 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
             <Button
               size="small"
               onClick={handleNext}
-              disabled={activeStep === 1}
+              disabled={activeStep >= steps.length - 1}
             >
               Next
               {theme.direction === 'rtl' ? (

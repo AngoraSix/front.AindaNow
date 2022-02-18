@@ -36,7 +36,22 @@ export const ROUTES = {
   },
 };
 
-export const EDITABLE_FIELD_TYPES = {
+export const INPUT_FIELD_TYPES = {
   IMAGE: 'image',
   TEXT: 'text',
+  YOUTUBEVIDEO: 'video.youtube',
+};
+
+export const MEDIA_TYPES = {
+  IMAGE: 'image',
+  VIDEO_YOUTUBE: 'video.youtube',
+};
+
+export const DRAGGABLE_ITEMS = {
+  MEDIA_CARD: 'MEDIA_CARD',
+};
+
+export const MEDIA_INPUT_STRATEGIES = {
+  LIST: 'media.list',
+  SINGLE: 'media.single',
 };

@@ -1,0 +1,302 @@
+.MediaList__Container {
+  height: 3em;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  border-style: solid;
+  border-color: #a9bec5;
+  border-width: thin;
+}
+
+.MediaList__Add__Options {
+  display: flex;
+  position: relative;
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  overflow: hidden;
+}
+
+.MediaList__Add__Options .MediaList__New__Option {
+  position: absolute;
+  top: -0.25em;
+  background-color: #a9bec5;
+  color: #fff;
+}
+
+.MediaList__New__Option__Icon {
+  transition: transform 0.3s ease-in;
+}
+
+.MediaList__New__Option__Icon__Add {
+  transform: rotate(0deg);
+}
+
+.MediaList__New__Option__Icon__Close {
+  transform: rotate(45deg);
+}
+
+.MediaList__Option {
+  transition: transform 0.3s ease-in, opacity 0.3s ease-in, color 0.2s linear,
+    background-color 0.2s linear;
+}
+
+.MediaList__Option__Hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  /* transform: scale(0, 0); */
+}
+
+.MediaList__Option__Visible {
+  /* display: inline-flex; */
+  /* transform: scale(1, 1); */
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.MediaList__Option__Youtube {
+  background-color: #ff0000;
+  color: #ffffff;
+}
+
+.MediaList__Option__Youtube:hover {
+  background-color: transparent;
+  color: #ff0000;
+  border: thin solid #ff0000;
+}
+
+.MediaList__Option__Image {
+  background-color: #3f6e91;
+  color: #ffffff;
+}
+
+.MediaList__Option__Image:hover {
+  background-color: transparent;
+  color: #3f6e91;
+  border: thin solid #3f6e91;
+}
+
+.Media__Container__List {
+  display: flex;
+  border-radius: 5px;
+  min-height: 8em;
+  margin-top: 25px;
+}
+
+.MediaList__EmptyMessage {
+  margin: auto;
+  padding: 0 15px;
+}
+
+.MediaList__List {
+  margin: 0 auto;
+}
+
+.MediaList__List__DropOver {
+  background-color: red;
+}
+
+.MediaList__List__DropHover {
+  transform: rotateX(10deg);
+}
+
+/* common DnD */
+
+.MediaDnD__DropZone {
+  background-color: #dbdbdb;
+  border-radius: 5px;
+  border: medium dashed #47626b;
+  transition: border-color 0.5s;
+}
+
+.MediaDnD__DropZone.DragOver {
+  border-color: #df0000;
+}
+
+.MediaDnD__DropZone.DragOver.DragOver__Disabled {
+  border-color: #000;
+  filter: brightness(0.75);
+}
+
+.MediaDnD__DropZone * {
+  transition: opacity 0.5s;
+}
+
+.MediaDnD__DropZone.DragOver * {
+  opacity: 0.4;
+}
+
+/* MediaSingleDnD */
+
+.Media__Container__Single {
+  width: 100%;
+  height: 100%;
+  min-height: 150px;
+  padding: 15px;
+  margin: 15px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.MediaSingleDnD__DropZone__Preview__Container {
+  width: 15vh;
+  height: 15vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.MediaSingleDnD__DropZone__Preview {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  position: absolute;
+  transition: transform 0.75s ease-in;
+}
+
+.MediaSingleDnD__DropZone__Preview.Left {
+  transform: translateX(-100%);
+}
+
+.MediaSingleDnD__DropZone__Preview.Active {
+  transform: translateX(0);
+}
+
+.MediaSingleDnD__DropZone__Preview.Right {
+  transform: translateX(100%);
+}
+
+.MediaSingleDnD__DropZone__PreviewPlaceholder {
+  width: 15vh;
+  height: 15vh;
+  border-radius: 5px;
+  border-style: solid;
+  border-width: thin;
+  border-color: #47626b;
+}
+
+.MediaSingleDnD__DropZone__Icon {
+  margin: 15px;
+}
+
+/* MediaListCard */
+
+.MediaListCard {
+  transition: transform 0.5s ease-in;
+}
+
+.MediaListCard__MediaIcon {
+  position: absolute;
+  opacity: 0.7;
+  top: 5%;
+  right: 5%;
+  color: #dbdbdb;
+}
+
+.MediaListCard__MediaIcon__Youtube {
+  box-shadow: 0 0 5px 15px #ff0000 inset, 0 0 10px 5px #ff0000;
+}
+
+.MediaListCard__MediaIcon__Image {
+  box-shadow: 0 0 5px 15px #3f6e91 inset, 0 0 10px 5px #3f6e91;
+}
+
+.MediaListCard__MediaIcon__Default {
+  box-shadow: 0 0 5px 15px #000000 inset, 0 0 10px 5px #000000;
+}
+
+.MediaListCard__Placement__Dragging {
+  opacity: 0.5;
+  border: medium solid #ff000080;
+}
+
+.MediaListCard__Placement__Regular {
+  transform: translateX(0);
+}
+
+.MediaListCard__Placement__Before {
+  transform: translateX(-50%);
+}
+
+.MediaListCard__Placement__After {
+  transform: translateX(50%);
+}
+
+.MediaListCard__Placement__JustAfter {
+  transform: translateX(50%);
+}
+
+.MediaListCard__Placement__JustBefore {
+  transform: translateX(-50%);
+}
+
+.MediaListCard.MediaListCard__Placement__Current {
+  opacity: 1;
+}
+
+.MediaListCard::before {
+  content: '';
+  z-index: -5;
+  border-style: solid;
+  border-width: medium;
+  border-color: transparent;
+  border-radius: 5px;
+  display: block;
+  width: 50%;
+  height: 80%;
+  position: absolute;
+  top: 10%;
+  transition: border-color 1s ease-in;
+}
+
+.MediaListCard.MediaListCard__Placement__JustAfter::before {
+  border-color: #ff000060;
+  left: -75%;
+  position: absolute;
+}
+
+.MediaListCard.MediaListCard__Placement__JustBefore::before {
+  border-color: #ff000060;
+  right: -75%;
+  position: absolute;
+}
+
+/* MediaPreview */
+
+.MediaPreview__Image {
+  max-height: 80vh;
+  max-width: 100%;
+}
+
+.MediaPreview__Image.MediaPreview__Image__Zoomed {
+  max-width: none;
+}
+
+.MediaPreview__Image__ZoomIcon {
+  position: absolute;
+  background-color: #a9bec590;
+  border: medium solid #47626b;
+  color: #47626b;
+  bottom: 1.25em;
+  right: 10%;
+}
+
+.MediaPreview__Image__Loading {
+  width: 50vw;
+}
+
+.MediaPreview__Youtube {
+  max-width: 100%;
+}
+
+@media (min-width: 900px) {
+  .MediaPreview__Image {
+    max-width: 100%;
+  }
+}

@@ -23,6 +23,10 @@
   border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
 }
 
+.NewProject__MobileStepper {
+  margin: auto;
+}
+
 .NewProject__Stepper {
   width: 70%;
   margin: 0 auto;

@@ -1,5 +1,6 @@
 import Api from './api';
 import Site from './site';
+import ThirdParties from './thirdparties';
 
 class A6Config {
   constructor(env = {}) {
@@ -14,10 +15,15 @@ class A6Config {
     return this.apiConfig;
   }
 
+  get thirdParties() {
+    return this.thirdPartiesConfig;
+  }
+
   applyEnvConfig(env = {}) {
     this.buildNo = env.BUILD || 'dev';
     this.siteConfig = new Site(env);
     this.apiConfig = new Api(env);
+    this.thirdPartiesConfig = new ThirdParties(env);
   }
 }
 

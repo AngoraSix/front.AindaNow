@@ -50,6 +50,7 @@ export const oauthProviderConfig = {
       name: profile.name,
       email: profile.email,
       image: profile.picture,
+      identityProvider: profile.identityProvider
     };
   },
 

@@ -8,7 +8,8 @@ const ProjectCard = ({ project }) => {
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
   const images =
-    project.media.filter((m) => m.type === 'image').map((m) => m.url) || [];
+    project.media?.filter((m) => m.thumbnailUrl).map((m) => m.thumbnailUrl) ||
+    [];
 
   const className = classnames('ProjectCard ProjectCard__Container', {
     'ProjectCard--no-images': !images.length,

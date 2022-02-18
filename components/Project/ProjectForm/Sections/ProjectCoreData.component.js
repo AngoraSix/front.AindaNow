@@ -4,7 +4,7 @@ import { TextField, Grid, Box, Typography } from '@mui/material';
 import { PROJECT_CORE_FORM_FIELDS as CORE_FIELDS } from '../ProjectForm.properties';
 
 const MOBILE_DESCRIPTION =
-  "Let's start by giving a name to that idea of yours...";
+  "Let's start by giving a name to that idea you have...";
 
 const FULL_DESCRIPTION =
   "It's time to start giving shape to that idea you have. Let's first define a name for it...";

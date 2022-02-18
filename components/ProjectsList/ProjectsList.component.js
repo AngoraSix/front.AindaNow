@@ -5,7 +5,7 @@ import Link from 'next/link';
 import ProjectCard from '../ProjectCard';
 import NewIcon from '@mui/icons-material/AddCircleOutline';
 import NewIconContained from '@mui/icons-material/AddCircle';
-import { ROUTES, resolveRoute } from '../../constants';
+import { ROUTES } from '../../constants';
 
 const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
   const [search, setSearch] = useState('');

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Paper, Typography, Avatar } from '@mui/material';
+import { Box, Paper, Typography, Avatar } from '@mui/material';
 import Editable from '../../common/Editable';
 import { PROFILE_ATTRIBUTES } from '../../../constants';
-import { EDITABLE_FIELD_TYPES } from '../../../constants';
+import { INPUT_FIELD_TYPES } from '../../../constants';
 import { useTheme } from '@mui/styles';
 
 const ContributorPresentationSection = ({
@@ -27,15 +27,14 @@ const ContributorPresentationSection = ({
 
   return (
     <Paper className="Presentation">
-      <div className="Profile__Editable__Container Presentation__HeadImageContainer">
+      <Box className="Profile__Editable__Container Presentation__HeadImageContainer">
         <Editable
-          type={EDITABLE_FIELD_TYPES.IMAGE}
+          type={INPUT_FIELD_TYPES.IMAGE}
           isEditable={isCurrentContributor}
           fieldName={PROFILE_ATTRIBUTES.headImage.label}
-          fieldValue={getAttributeValue(PROFILE_ATTRIBUTES.headImage.key)}
           onEdit={onEdit(PROFILE_ATTRIBUTES.headImage.key, true)}
         >
-          <div
+          <Box
             className="Presentation__HeadImage"
             style={{
               backgroundImage: `url(${getAttributeValue(
@@ -45,18 +44,17 @@ const ContributorPresentationSection = ({
               )}) `,
               backgroundColor: theme.palette.primary.main,
             }}
-          ></div>
+          ></Box>
         </Editable>
-      </div>
-      <div className="Profile__Editable__Container Presentation__ProfileImageContainer">
+      </Box>
+      <Box className="Profile__Editable__Container Presentation__ProfileImageContainer">
         <Editable
-          type={EDITABLE_FIELD_TYPES.IMAGE}
+          type={INPUT_FIELD_TYPES.IMAGE}
           isEditable={isCurrentContributor}
           fieldName={PROFILE_ATTRIBUTES.profilePicture.label}
-          fieldValue={getAttributeValue(PROFILE_ATTRIBUTES.profilePicture.key)}
           onEdit={onEdit(PROFILE_ATTRIBUTES.profilePicture.key, true)}
         >
-          <div className={'Presentation__ProfileImage'}>
+          <Box className={'Presentation__ProfileImage'}>
             <Avatar
               src={
                 getAttributeValue(
@@ -65,16 +63,16 @@ const ContributorPresentationSection = ({
               }
               sx={{ width: '100%', height: '100%' }}
             ></Avatar>
-          </div>
+          </Box>
         </Editable>
-      </div>
+      </Box>
 
-      <div className="Presentation__ContributorData">
+      <Box className="Presentation__ContributorData">
         <Typography
           className="ContributorData__Name"
           variant="h5"
         >{`${profile.firstName} ${profile.lastName}`}</Typography>
-      </div>
+      </Box>
     </Paper>
   );
 };

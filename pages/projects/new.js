@@ -13,9 +13,11 @@ const NewProjectPage = ({ session }) => {
   if (!session || session.error) {
     logger.error('Log in to create new project');
     return (
-      <Box>
-        <FormSkeleton />
-      </Box>
+      <DefaultLayout>
+        <Box>
+          <FormSkeleton />
+        </Box>
+      </DefaultLayout>
     );
   }
   return (
