@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import { MEDIA_OPTIONS, MEDIA_INPUT_STRATEGIES } from '../../../constants';
+import { MEDIA_TYPES, MEDIA_INPUT_STRATEGIES } from '../../../constants';
 import MediaListDnD from './Strategies/MediaListDnD';
 import MediaSingleDnD from './Strategies/MediaSingleDnD';
 
@@ -36,7 +36,7 @@ const MediaDnD = ({
 MediaDnD.defaultProps = {
   strategy: MEDIA_INPUT_STRATEGIES.SINGLE,
   media: [],
-  allowedMediaTypes: Object.values(MEDIA_OPTIONS),
+  allowedMediaTypes: Object.values(MEDIA_TYPES),
   allowsMultiple: false,
   limit: 15,
 };

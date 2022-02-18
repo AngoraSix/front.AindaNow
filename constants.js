@@ -42,7 +42,7 @@ export const INPUT_FIELD_TYPES = {
   YOUTUBEVIDEO: 'video.youtube',
 };
 
-export const MEDIA_OPTIONS = {
+export const MEDIA_TYPES = {
   IMAGE: 'image',
   VIDEO_YOUTUBE: 'video.youtube',
 };

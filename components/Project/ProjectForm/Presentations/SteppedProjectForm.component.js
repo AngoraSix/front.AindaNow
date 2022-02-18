@@ -138,6 +138,7 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
         </Stepper>
       ) : (
         <MobileStepper
+          className="NewProject__MobileStepper"
           variant="dots"
           steps={steps.length}
           position="static"
@@ -147,7 +148,7 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
             <Button
               size="small"
               onClick={handleNext}
-              disabled={activeStep >= steps.length -1 }
+              disabled={activeStep >= steps.length - 1}
             >
               Next
               {theme.direction === 'rtl' ? (

@@ -5,7 +5,7 @@ import { Box, Button, IconButton, ImageList, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { INPUT_FIELD_TYPES, MEDIA_OPTIONS } from '../../../../../constants';
+import { INPUT_FIELD_TYPES, MEDIA_TYPES } from '../../../../../constants';
 import InputDialog from '../../../InputDialog';
 import DnDContainer from '../../DnDContainer.component';
 import MediaListCard from './MediaListCard.component';
@@ -14,14 +14,14 @@ import MediaPreviewDialog from '../../MediaPreviewDialog';
 import { useRouter } from 'next/router';
 
 const MEDIA_OPTIONS_MAP = {
-  [MEDIA_OPTIONS.IMAGE]: {
+  [MEDIA_TYPES.IMAGE]: {
     icon: ImageIcon,
     label: 'Image',
     dialogLabel: 'Upload new image',
     inputType: INPUT_FIELD_TYPES.IMAGE,
     classModifier: 'Image',
   },
-  [MEDIA_OPTIONS.VIDEO_YOUTUBE]: {
+  [MEDIA_TYPES.VIDEO_YOUTUBE]: {
     icon: YouTubeIcon,
     label: 'Video',
     dialogLabel: 'Introduce the Youtube video ID or URL',
@@ -31,8 +31,8 @@ const MEDIA_OPTIONS_MAP = {
 };
 
 const MEDIA_OPTIONS_GRID_SIZE = {
-  [MEDIA_OPTIONS.IMAGE]: 1,
-  [MEDIA_OPTIONS.VIDEO_YOUTUBE]: 1,
+  [MEDIA_TYPES.IMAGE]: 1,
+  [MEDIA_TYPES.VIDEO_YOUTUBE]: 1,
 };
 
 const _getQuantityOfColumns = (isMedium, isLarge) =>
@@ -242,7 +242,7 @@ const MediaListDnD = ({
 };
 
 MediaListDnD.defaultProps = {
-  allowedMediaTypes: Object.values(MEDIA_OPTIONS),
+  allowedMediaTypes: Object.values(MEDIA_TYPES),
   limit: 15,
   media: [],
 };

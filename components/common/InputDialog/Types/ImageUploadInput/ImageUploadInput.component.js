@@ -2,10 +2,7 @@ import { Box, DialogContentText } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Media from '../../../Media';
-import {
-  MEDIA_OPTIONS,
-  MEDIA_INPUT_STRATEGIES,
-} from '../../../../../constants';
+import { MEDIA_TYPES, MEDIA_INPUT_STRATEGIES } from '../../../../../constants';
 
 const ImageUploadInput = ({
   onChange,
@@ -21,7 +18,7 @@ const ImageUploadInput = ({
         strategy={MEDIA_INPUT_STRATEGIES.SINGLE}
         onChange={onChange}
         mediaData={currentFieldValue}
-        allowedMediaTypes={[MEDIA_OPTIONS.IMAGE]}
+        allowedMediaTypes={[MEDIA_TYPES.IMAGE]}
       />
     </Box>
   );

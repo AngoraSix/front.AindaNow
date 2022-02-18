@@ -4,7 +4,7 @@ export default class Media {
     this.resourceId = resourceId || thumbnailUrl;
     this.thumbnailUrl = thumbnailUrl;
     this.file = file;
-    this.key = `${mediaType}-${key}`;
+    this.key = `${mediaType}-${key || resourceId}`;
   }
 
   static isMedia(object) {

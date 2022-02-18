@@ -13,14 +13,14 @@ import {
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
-import { DRAGGABLE_ITEMS, MEDIA_OPTIONS } from '../../../../../constants';
+import { DRAGGABLE_ITEMS, MEDIA_TYPES } from '../../../../../constants';
 
 const MEDIA_TYPE_MAP = {
-  [MEDIA_OPTIONS.IMAGE]: {
+  [MEDIA_TYPES.IMAGE]: {
     icon: ImageIcon,
     classModifier: 'Image',
   },
-  [MEDIA_OPTIONS.VIDEO_YOUTUBE]: {
+  [MEDIA_TYPES.VIDEO_YOUTUBE]: {
     icon: YouTubeIcon,
     classModifier: 'Youtube',
   },

@@ -29,7 +29,6 @@ const MediaDnDReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ADD_MEDIA:
       const combinedMediaList = [...state.mediaList, ...action.payload];
-      // state.callbacks?.onFormChange?.(combinedMediaList);
       return {
         ...state,
         mediaList: combinedMediaList,
@@ -38,14 +37,12 @@ const MediaDnDReducer = (state = INITIAL_STATE, action) => {
       const updatedMediaList = state.mediaList
         .slice(0, action.payload)
         .concat(state.mediaList.slice(action.payload + 1));
-      // state.callbacks?.onFormChange?.(combinedMediaList);
       return {
         ...state,
         mediaList: updatedMediaList,
       };
     case SET_MEDIA:
       const replacedMediaList = [...action.payload];
-      // state.callbacks?.onFormChange?.(replacedMediaList);
       return {
         ...state,
         mediaList: replacedMediaList,

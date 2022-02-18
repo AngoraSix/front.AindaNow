@@ -1,14 +1,17 @@
-import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Media from '../../../../../../models/Media';
+import config from '../../../../../../config';
 
 const YoutubePreview = ({ media }) => {
+  const resolvedEmbedUrl = config.thirdParties.youtube.embedUrlPattern.replace(
+    ':resourceId',
+    media.resourceId
+  );
   return (
     <iframe
       className="MediaPreview__Youtube"
       height="500"
-      src={`https://www.youtube.com/embed/${media.resourceId}`}
+      src={resolvedEmbedUrl}
       frameBorder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowFullScreen

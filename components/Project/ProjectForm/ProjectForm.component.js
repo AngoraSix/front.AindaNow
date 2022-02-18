@@ -19,14 +19,11 @@ const ProjectForm = ({ project, className, onSubmit, stepped }) => {
     onSubmit(formData);
   };
 
-  const onFormChange = (property) => (event) => {
-    if (!event) {
-      return false;
-    }
-    let value = event.target?.value || event;
-
+  const onFormChange = (property) => (eventOrValue) => {
     const partialFormData = {
-      [property]: value,
+      [property]: eventOrValue.target
+        ? eventOrValue.target.value
+        : eventOrValue,
     };
 
     dispatch(updateFieldsAction(partialFormData));

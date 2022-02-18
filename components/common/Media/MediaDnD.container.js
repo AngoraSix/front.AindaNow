@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, { useReducer, useEffect } from 'react';
 import {
   INPUT_FIELD_TYPES,
-  MEDIA_OPTIONS,
+  MEDIA_TYPES,
   MEDIA_INPUT_STRATEGIES,
 } from '../../../constants';
 import { useNotifications } from '../../../hooks/app';
@@ -18,8 +18,8 @@ import MediaDnDReducer, {
 } from './MediaDnD.reducer';
 
 const MEDIA_TYPE_TO_OPTION = {
-  [INPUT_FIELD_TYPES.YOUTUBEVIDEO]: MEDIA_OPTIONS.VIDEO_YOUTUBE,
-  [INPUT_FIELD_TYPES.IMAGE]: MEDIA_OPTIONS.IMAGE,
+  [INPUT_FIELD_TYPES.YOUTUBEVIDEO]: MEDIA_TYPES.VIDEO_YOUTUBE,
+  [INPUT_FIELD_TYPES.IMAGE]: MEDIA_TYPES.IMAGE,
 };
 
 const MediaDnDContainer = ({
@@ -64,7 +64,7 @@ const MediaDnDContainer = ({
           // if it's not yet proccessed (can only be image then)
           if (
             isImage(mediaDataElement) &&
-            allowedMediaTypes.includes(MEDIA_OPTIONS.IMAGE)
+            allowedMediaTypes.includes(MEDIA_TYPES.IMAGE)
           ) {
             const imageMedia = await processImage(mediaDataElement);
             if (!existingKeys.includes(imageMedia.key)) {
@@ -112,7 +112,7 @@ const MediaDnDContainer = ({
 MediaDnDContainer.defaultProps = {
   strategy: MEDIA_INPUT_STRATEGIES.SINGLE,
   mediaData: [],
-  allowedMediaTypes: Object.values(MEDIA_OPTIONS),
+  allowedMediaTypes: Object.values(MEDIA_TYPES),
   allowsMultiple: false,
 };
 
