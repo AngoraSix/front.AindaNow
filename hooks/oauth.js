@@ -10,8 +10,13 @@ export const useActiveSession = () => {
   useEffect(() => {
     const shouldReauth = session?.error === 'RefreshAccessTokenError';
     doLoad(!session || loading || shouldReauth);
+    const identityProvider = session?.user?.identityProvider;
     if (!session || shouldReauth) {
-      signIn('angorasixkeycloak'); // Force sign in to hopefully resolve error and be able to edit
+      signIn(
+        'angorasixkeycloak',
+        null,
+        identityProvider ? { kc_idp_hint: identityProvider } : null
+      ); // Force sign in to hopefully resolve error and be able to edit
     }
   }, [session, loading]);
 };
