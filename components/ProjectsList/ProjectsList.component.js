@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, IconButton, TextField } from '@mui/material';
+import { Grid, Button, IconButton, TextField } from '@mui/material';
 import Link from 'next/link';
-import ProjectCard from '../ProjectCard';
+import ProjectCard from './ProjectCard';
 import NewIcon from '@mui/icons-material/AddCircleOutline';
 import NewIconContained from '@mui/icons-material/AddCircle';
 import { ROUTES } from '../../constants';
@@ -10,7 +10,7 @@ import { ROUTES } from '../../constants';
 const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
   const [search, setSearch] = useState('');
 
-  const onSearchChange = ({ target: { value } }) => {
+  const onSearchChange = (value) => {
     setSearch(value);
 
     onSearch(value);
@@ -23,7 +23,7 @@ const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
           <TextField
             label="Search"
             value={search}
-            onChange={onSearchChange}
+            onChange={({ target: value }) => onSearchChange(value)}
             fullWidth
           />
         </div>
@@ -51,11 +51,13 @@ const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
       </div>
 
       <div className="ProjectsList__Content">
-        <div className="ProjectsList__Grid">
+        <Grid container spacing={2}>
           {projectsList.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+            <Grid item xs={12} sm={6} md={4} lg={3}>
+              <ProjectCard key={project.id} project={project} />
+            </Grid>
           ))}
-        </div>
+        </Grid>
 
         {total > projectsList.length && (
           <div className="ProjectsList__LoadMore">

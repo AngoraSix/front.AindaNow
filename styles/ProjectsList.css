@@ -50,30 +50,12 @@
   flex-grow: 2;
 }
 
-.ProjectsList__Grid {
-  display: grid;
-  grid: auto / auto;
-  row-gap: 20px;
-  column-gap: 20px;
-  padding: 20px 0;
-}
-
 .ProjectsList__LoadMore {
   text-align: center;
 }
 
 @media (min-width: 600px) {
-  .ProjectsList__Grid {
-    grid: auto / repeat(3, 1fr);
-  }
-
   .ProjectsList__Toolbar__Column:last-child {
     justify-content: right;
-  }
-}
-
-@media (min-width: 900px) {
-  .ProjectsList__Grid {
-    grid: auto / repeat(4, 1fr);
   }
 }
