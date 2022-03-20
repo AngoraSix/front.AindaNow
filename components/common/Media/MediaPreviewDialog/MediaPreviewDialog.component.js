@@ -2,8 +2,8 @@ import { Dialog, DialogContent, Zoom } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { MEDIA_TYPES } from '../../../../constants';
-import ImagePreview from './Types/ImagePreview';
-import YoutubePreview from './Types/YoutubePreview';
+import ImagePreview from '../Previews/ImagePreview';
+import YoutubePreview from '../Previews/YoutubePreview';
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Zoom in={true} ref={ref} {...props} />;

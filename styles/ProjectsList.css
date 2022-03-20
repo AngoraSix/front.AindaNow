@@ -1,3 +1,12 @@
+.ProjectsLayout__Page__Body {
+  display: block;
+  padding: 25px 16px 24px;
+  margin: -20px auto 20px;
+  min-width: 300px;
+  width: calc(100% - 20px);
+  min-height: calc(100vh - 80px);
+}
+
 .ProjectsList__Container {
   padding: 0 20px;
 }
@@ -9,10 +18,9 @@
 .ProjectsList__Toolbar {
   overflow: hidden;
   width: calc(100% + 40px);
-  padding: 10px 20px;
+  padding: 15px 40px 10px;
   margin-left: -20px;
-  background-color: #fff;
-  border-bottom: 2px solid #eee;
+  background-color: #fafafa;
   display: flex;
   justify-content: space-between;
   position: sticky;
@@ -20,12 +28,16 @@
   z-index: 10;
 }
 
-.DefaultLayout__Page__Body .ProjectsList__Container {
+.ProjectsList__Toolbar__Input {
+  background-color: #fff;
+}
+
+.ProjectsLayout__Page__Body .ProjectsList__Container {
   padding: 0;
 }
 
-.DefaultLayout__Page__Body .ProjectsList__Toolbar {
-  top: 64px;
+.ProjectsLayout__Page__Body .ProjectsList__Toolbar {
+  top: calc(2em + 10px);
 }
 
 .ProjectsList__Toolbar__Column {
@@ -50,30 +62,26 @@
   flex-grow: 2;
 }
 
-.ProjectsList__Grid {
-  display: grid;
-  grid: auto / auto;
-  row-gap: 20px;
-  column-gap: 20px;
-  padding: 20px 0;
-}
-
 .ProjectsList__LoadMore {
   text-align: center;
 }
 
 @media (min-width: 600px) {
-  .ProjectsList__Grid {
-    grid: auto / repeat(3, 1fr);
-  }
-
   .ProjectsList__Toolbar__Column:last-child {
     justify-content: right;
+  }
+
+  .ProjectsList__Toolbar {
+    padding: 20px 40px 10px;
+  }
+
+  .ProjectsLayout__Page__Body .ProjectsList__Toolbar {
+    top: 2.7em;
   }
 }
 
 @media (min-width: 900px) {
-  .ProjectsList__Grid {
-    grid: auto / repeat(4, 1fr);
+  .ProjectsLayout__Page__Body .ProjectsList__Toolbar {
+    top: 3.2em;
   }
 }
