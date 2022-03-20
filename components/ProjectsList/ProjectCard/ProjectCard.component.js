@@ -8,12 +8,19 @@ import YoutubePreview from '../../common/Media/Previews/YoutubePreview';
 
 const ProjectCard = ({ project }) => {
   const [isActive, setIsActive] = useState(false);
+  const [currentActiveVideo, setCurrentActiveVideo] = useState(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const handleCardHover = (isHovered) => () => {
     setIsActive(isHovered);
-    if (!isHovered) {
+    if (isHovered) {
+      const activeVideoMedia = project.media?.find(
+        (m) => m.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE
+      );
+      setCurrentActiveVideo(activeVideoMedia);
+    } else {
       setIsVideoPlaying(false);
+      setCurrentActiveVideo(null);
     }
   };
 
@@ -21,16 +28,26 @@ const ProjectCard = ({ project }) => {
     setIsVideoPlaying(true);
   };
 
-  const images =
-    project.media?.filter((m) => m.thumbnailUrl).map((m) => m.thumbnailUrl) ||
-    [];
+  const handleVideoEnded = () => {
+    setIsVideoPlaying(false);
+    const endedVideoIndex = project.media.findIndex(
+      (m) => m.resourceId === currentActiveVideo.resourceId
+    );
+    const activeVideoMedia = project.media
+      .slice(endedVideoIndex + 1)
+      .find((m) => m.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE);
+    setCurrentActiveVideo(activeVideoMedia);
+  };
+
+  let imageMedia = project.media?.filter(
+    (m) => m.mediaType === MEDIA_TYPES.IMAGE && m.thumbnailUrl
+  );
+  if (!imageMedia?.length)
+    imageMedia = project.media?.filter((m) => m.thumbnailUrl) || [];
+
+  const images = imageMedia.map((m) => m.thumbnailUrl);
 
   const projectDetailsURL = resolveRoute(ROUTES.projects.view, project.id);
-  const activeVideoMedia = isActive
-    ? project.media?.filter(
-        (m) => m.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE
-      )?.[0]
-    : null;
 
   return (
     <Link href={projectDetailsURL} passHref>
@@ -63,15 +80,16 @@ const ProjectCard = ({ project }) => {
             'ProjectCard__Image--hidden': !!isVideoPlaying,
           })}
         />
-        {activeVideoMedia && (
+        {currentActiveVideo && (
           <YoutubePreview
-            media={activeVideoMedia}
+            media={currentActiveVideo}
             autoplay={true}
             iframeClassname="ProjectCard__VideoSection__Iframe"
             containerClassname={classnames('ProjectCard__VideoSection', {
               'ProjectCard__VideoSection--active': !!isVideoPlaying,
             })}
             onVideoReady={handleVideoIsReady}
+            onVideoEnd={handleVideoEnded}
           />
         )}
       </Paper>
