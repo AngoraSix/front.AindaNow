@@ -15,7 +15,15 @@ const ProjectsLayout = ({ children }) => {
   //     headData.image = { logo: company.images[0] };
   // }
 
-  return <DefaultLayout headData={headData}>{children}</DefaultLayout>;
+  return (
+    <DefaultLayout
+      className="ProjectsLayout__Page"
+      headData={headData}
+      contained={false}
+    >
+      {children}
+    </DefaultLayout>
+  );
 };
 
 ProjectsLayout.defaultProps = {};

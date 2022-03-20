@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Button, IconButton, TextField } from '@mui/material';
 import Link from 'next/link';
@@ -10,17 +10,12 @@ import { ROUTES } from '../../constants';
 const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
   const [search, setSearch] = useState('');
 
-  const onSearchChange = (value) => {
-    setSearch(value);
-
-    onSearch(value);
-  };
-
   return (
     <div className="ProjectsList ProjectsList__Container">
       <div className="ProjectsList__Toolbar">
         <div className="ProjectsList__Toolbar__Column Column__Large">
           <TextField
+            className="ProjectsList__Toolbar__Input"
             label="Search"
             value={search}
             onChange={({ target: value }) => onSearchChange(value)}
@@ -53,8 +48,8 @@ const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
       <div className="ProjectsList__Content">
         <Grid container spacing={2}>
           {projectsList.map((project) => (
-            <Grid item xs={12} sm={6} md={4} lg={3}>
-              <ProjectCard key={project.id} project={project} />
+            <Grid key={project.id} item xs={12} sm={6} md={4} lg={3}>
+              <ProjectCard project={project} />
             </Grid>
           ))}
         </Grid>

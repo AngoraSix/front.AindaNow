@@ -52,14 +52,14 @@
 .ProjectCard__Container::after {
   background: linear-gradient(
     45deg,
-    hsl(5 97% 63% / 0.7) 0,
+    #3f6e91,
     hsl(5 97% 63% / 0) 100%
   );
-  opacity: 0;
-  transition: 300ms opacity linear;
+  opacity: 0.7;
+  transition: 1500ms opacity linear;
 }
 
-.ProjectCard__Container img {
+.ProjectCard__Container .ProjectCard__Image {
   width: 100%;
   height: 100%;
   position: absolute;
@@ -68,8 +68,8 @@
   margin: 0;
   z-index: 0;
   object-fit: cover;
-  filter: grayscale(1);
-  transition: filter 200ms ease, transform 250ms linear;
+  opacity: 1;
+  transition: opacity 500ms linear;
 }
 
 .ProjectCard__DescriptionSection {
@@ -97,6 +97,7 @@
   text-overflow: ellipsis;
   overflow: hidden;
   min-height: 2rem;
+  text-shadow: 0 0 10px black;
 }
 
 .ProjectCard__DescriptionSection .ProjectCard__Goal {
@@ -115,7 +116,7 @@
 }
 
 .ProjectCard__Container:focus {
-  outline: 0.5rem solid white;
+  outline: 0.5rem solid #fafafa;
   outline-offset: -0.5rem;
 }
 
@@ -123,11 +124,11 @@
   transform: translateY(80%);
 }
 
-.ProjectCard__Container:hover::after,
-.ProjectCard__Container:focus::after,
+.ProjectCard__Container--active:hover::after,
+.ProjectCard__Container--active:focus::after,
 .ProjectCard__Container:hover::before,
 .ProjectCard__Container:focus::before {
-  opacity: 0.7;
+  opacity: 0;
 }
 
 .ProjectCard__Container:hover .ProjectCard__Goal,
@@ -135,8 +136,35 @@
   opacity: 0;
 }
 
-.ProjectCard__Container:hover .ProjectCard__Image,
-.ProjectCard__Container:focus .ProjectCard__Image {
-  filter: grayscale(0);
-  transform: scale(1.05) rotate(1deg);
+.ProjectCard__VideoSection {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 500ms linear;
+  transition-delay: 200ms;
+}
+
+.ProjectCard__VideoSection--active {
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.ProjectCard__Image.ProjectCard__Image--hidden {
+  opacity: 0;
+  transition-delay: 0ms;
+}
+
+.ProjectCard__VideoSection__Iframe {
+  position: absolute;
+  min-width: 100%;
+  max-height: 120%;
+  margin: auto;
+  bottom: 0;
+  background-color: black;
 }
