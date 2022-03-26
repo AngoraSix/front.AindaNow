@@ -42,6 +42,18 @@ class ProjectsAPI {
     }
     return { ...createdProject, presentation: createdPresentation };
   }
+
+  async getProject(projectId, token) {
+    const headers = this.axios.getCommonHeaders();
+    const authHeaders = this.axios.getAuthorizationHeaders(token, false);
+    const { data } = await this.axios.get(`/presentations/${projectId}`, {
+      headers: {
+        ...headers,
+        ...authHeaders,
+      },
+    });
+    return data;
+  }
 }
 
 export default ProjectsAPI;

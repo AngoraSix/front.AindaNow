@@ -7,7 +7,7 @@ import { getSession } from 'next-auth/react';
 import { useActiveSession } from '../../hooks/oauth';
 import logger from '../../utils/logger';
 
-const ContributorProfile = ({ profile, isCurrentContributor }) => {
+const ProjectView = ({ project }) => {
   isCurrentContributor && useActiveSession();
 
   return (
@@ -17,30 +17,26 @@ const ContributorProfile = ({ profile, isCurrentContributor }) => {
   );
 };
 
-ContributorProfile.defaultProps = {
+ProjectView.defaultProps = {
   isCurrentContributor: false,
 };
 
-ContributorProfile.propTypes = {
+ProjectView.propTypes = {
   profile: PropTypes.object.isRequired,
   isCurrentContributor: PropTypes.bool,
 };
 
 export const getServerSideProps = async (ctx) => {
   let props = {};
-  const { profileId } = ctx.params,
+  const { projectId } = ctx.params,
     session = await getSession(ctx);
   const validatedToken =
     session?.error !== 'RefreshAccessTokenError' ? session : null;
   try {
-    const profile = await api.contributors.getContributor(
-      profileId,
-      validatedToken
-    );
+    const project = await api.projects.getProject(projectId, validatedToken);
     props = {
       ...props,
-      profile,
-      isCurrentContributor: session?.user.id === profileId,
+      project,
     };
   } catch (err) {
     logger.error('err', err);
@@ -54,4 +50,4 @@ export const getServerSideProps = async (ctx) => {
   };
 };
 
-export default ContributorProfile;
+export default ProjectView;
