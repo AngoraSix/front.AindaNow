@@ -50,6 +50,16 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
     }
   };
 
+  const _presentationAsSection = (project) => {
+    if (project.presentation) {
+      project.presentation.sections = [{ ...project.presentation }];
+      delete project.presentation.mainMedia;
+      delete project.presentation.media;
+      delete project.presentation.title;
+      delete project.presentation.description;
+    }
+  };
+
   const onSubmit = async (flatFormData) => {
     doLoad(true);
     let projectObject = createObjectFromFlatParams(flatFormData);
@@ -58,8 +68,14 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
         projectObject.presentation.media = await Promise.all(
           projectObject.presentation?.media?.map((m) => _uploadMedia(m)) || []
         );
+        if (projectObject.presentation.mainMedia?.length === 1) {
+          projectObject.presentation.mainMedia = await _uploadMedia(
+            projectObject.presentation.mainMedia[0]
+          );
+        }
       }
       _completeFields(projectObject);
+      _presentationAsSection(projectObject);
 
       const projectResponse = await api.front.newProject(projectObject);
       onDone(projectResponse);

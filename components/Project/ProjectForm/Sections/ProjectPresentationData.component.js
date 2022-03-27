@@ -1,7 +1,7 @@
 import { Box, Grid, TextField, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { PROJECT_PRESENTATION_BASE_FORM_FIELDS as PRESENTATION_BASE_FIELDS } from '../ProjectForm.properties';
+import { PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS as PRESENTATION_BASE_FIELDS } from '../ProjectForm.properties';
 
 const MOBILE_DESCRIPTION = "Now let's show what this is all about...";
 
@@ -34,14 +34,6 @@ const ProjectPresentationData = ({
             {...PRESENTATION_BASE_FIELDS.description}
             value={formData['presentation.description'] || ''}
             onChange={onFormChange('presentation.description')}
-            fullWidth
-          />
-        </Grid>
-        <Grid item xs={10}>
-          <TextField
-            {...PRESENTATION_BASE_FIELDS.objective}
-            value={formData['presentation.objective'] || ''}
-            onChange={onFormChange('presentation.objective')}
             fullWidth
           />
         </Grid>
