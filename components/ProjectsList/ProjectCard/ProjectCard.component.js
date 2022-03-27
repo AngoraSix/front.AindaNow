@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { resolveRoute, ROUTES, MEDIA_TYPES } from '../../../constants';
+import { MEDIA_TYPES, resolveRoute, ROUTES } from '../../../constants';
 import YoutubePreview from '../../common/Media/Previews/YoutubePreview';
 
 const ProjectCard = ({ project }) => {
@@ -14,7 +14,7 @@ const ProjectCard = ({ project }) => {
   const handleCardHover = (isHovered) => () => {
     setIsActive(isHovered);
     if (isHovered) {
-      const activeVideoMedia = project.media?.find(
+      const activeVideoMedia = project.sections[0].media?.find(
         (m) => m.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE
       );
       setCurrentActiveVideo(activeVideoMedia);
@@ -30,20 +30,20 @@ const ProjectCard = ({ project }) => {
 
   const handleVideoEnded = () => {
     setIsVideoPlaying(false);
-    const endedVideoIndex = project.media.findIndex(
+    const endedVideoIndex = project.sections[0].media.findIndex(
       (m) => m.resourceId === currentActiveVideo.resourceId
     );
-    const activeVideoMedia = project.media
+    const activeVideoMedia = project.sections[0].media
       .slice(endedVideoIndex + 1)
       .find((m) => m.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE);
     setCurrentActiveVideo(activeVideoMedia);
   };
 
-  let imageMedia = project.media?.filter(
+  let imageMedia = project.sections[0].media?.filter(
     (m) => m.mediaType === MEDIA_TYPES.IMAGE && m.thumbnailUrl
   );
   if (!imageMedia?.length)
-    imageMedia = project.media?.filter((m) => m.thumbnailUrl) || [];
+    imageMedia = project.sections[0].media?.filter((m) => m.thumbnailUrl) || [];
 
   const images = imageMedia.map((m) => m.thumbnailUrl);
 
@@ -68,10 +68,10 @@ const ProjectCard = ({ project }) => {
             variant="subtitle1"
             color="primary"
           >
-            {project.title}
+            {project.sections[0].title}
           </Typography>
           <Typography className="ProjectCard__Goal" variant="caption">
-            {project.objective}
+            {project.sections[0].description}
           </Typography>
         </Box>
         <img

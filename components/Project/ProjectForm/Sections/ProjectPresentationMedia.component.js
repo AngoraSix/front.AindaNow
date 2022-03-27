@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import Media from '../../../common/Media';
 import { MEDIA_INPUT_STRATEGIES } from '../../../../constants';
-import { PROJECT_PRESENTATION_BASE_FORM_FIELDS as PRESENTATION_BASE_FIELDS } from '../ProjectForm.properties';
+import { PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS as PRESENTATION_BASE_FIELDS } from '../ProjectForm.properties';
 
 const MOBILE_DESCRIPTION = 'Time to add some visual aids...';
 
@@ -16,8 +16,8 @@ const ProjectPresentationMedia = ({
   withDescription,
   isNotMobile,
 }) => {
-  const onMediaChange = (mediaData) => {
-    onFormChange('presentation.media')(mediaData);
+  const onMediaChange = (field) => (mediaData) => {
+    onFormChange(field)(mediaData);
   };
 
   return (
@@ -30,6 +30,22 @@ const ProjectPresentationMedia = ({
         </Box>
       )}
       <Grid
+        className="ProjectForm__Fields ProjectPresentationMedia__MainMedia"
+        container
+        spacing={2}
+        justifyContent="center"
+      >
+        <Grid item xs={6}>
+          <Typography>{PRESENTATION_BASE_FIELDS.mainMedia.label}</Typography>
+          <Media
+            allowsMultiple={false}
+            strategy={MEDIA_INPUT_STRATEGIES.SINGLE}
+            onChange={onMediaChange('presentation.mainMedia')}
+            mediaData={formData['presentation.mainMedia']}
+          />
+        </Grid>
+      </Grid>
+      <Grid
         className="ProjectForm__Fields ProjectPresentationMedia__Fields"
         container
         spacing={2}
@@ -40,7 +56,7 @@ const ProjectPresentationMedia = ({
           <Media
             allowsMultiple={true}
             strategy={MEDIA_INPUT_STRATEGIES.LIST}
-            onChange={onMediaChange}
+            onChange={onMediaChange('presentation.media')}
             mediaData={formData['presentation.media']}
           />
         </Grid>

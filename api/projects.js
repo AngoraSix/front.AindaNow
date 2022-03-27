@@ -25,7 +25,7 @@ class ProjectsAPI {
         },
       }
     );
-    
+
     if (newPresentation) {
       newPresentation.projectId = createdProject.id;
       const { data } = await this.axios.post(
