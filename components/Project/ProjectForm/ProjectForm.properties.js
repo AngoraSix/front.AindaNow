@@ -12,6 +12,7 @@ export const PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS = {
     label: 'Project description',
     multiline: true,
     minRows: 3,
+    required: true,
   },
   mainMedia: {
     key: 'mainMedia',

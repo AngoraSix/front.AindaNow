@@ -63,7 +63,7 @@ const ProjectCard = ({ project }) => {
         <Box className="ProjectCard__DescriptionSection">
           <Typography
             className={classnames('ProjectCard__Title', {
-              'ProjectCard__Title--withDescription': !!project.objective,
+              'ProjectCard__Title--withDescription': !!project.description,
             })}
             variant="subtitle1"
             color="primary"

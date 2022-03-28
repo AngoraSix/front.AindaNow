@@ -1,3 +1,3 @@
-import ImageUploadInput from "./ImageUploadInput.component";
+import ImageUploadInputContainer from './ImageUploadInput.container';
 
-export default ImageUploadInput;
+export default ImageUploadInputContainer;
