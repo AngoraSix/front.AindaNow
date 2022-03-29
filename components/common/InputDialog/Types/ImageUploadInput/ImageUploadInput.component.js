@@ -85,12 +85,11 @@ const ImageUploadInput = ({ handleMediaInput, media, allowsMultiple }) => {
   );
 };
 
-ImageUploadInput.defaultProps = { media: [], limit: 15, allowsMultiple: false };
+ImageUploadInput.defaultProps = { media: [], allowsMultiple: false };
 
 ImageUploadInput.propTypes = {
+  handleMediaInput: PropTypes.func.isRequired,
   media: PropTypes.array,
-  onMediaInput: PropTypes.func.isRequired,
-  limit: PropTypes.number,
   allowsMultiple: PropTypes.bool,
 };
 

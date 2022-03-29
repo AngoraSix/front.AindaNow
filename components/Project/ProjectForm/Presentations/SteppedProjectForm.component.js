@@ -1,24 +1,24 @@
-import React, { useState, useRef } from 'react';
-import PropTypes from 'prop-types';
+import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import {
-  Typography,
   Box,
-  Stepper,
+  Button,
   MobileStepper,
   Step,
   StepLabel,
-  Button,
+  Stepper,
+  Typography,
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import PropTypes from 'prop-types';
+import React, { useRef, useState } from 'react';
+import { useNotifications } from '../../../../hooks/app';
+import logger from '../../../../utils/logger';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
 import ProjectPresentationData from '../Sections/ProjectPresentationData.component';
 import ProjectPresentationMedia from '../Sections/ProjectPresentationMedia.component';
 import ProjectPresentationParams from '../Sections/ProjectPresentationParams.component';
-import { useNotifications } from '../../../../hooks/app';
-import logger from '../../../../utils/logger';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 
 const steps = [
   {
@@ -26,7 +26,11 @@ const steps = [
     component: ProjectCoreData,
     optional: false,
   },
-  { label: 'Presentation', component: ProjectPresentationData, optional: true },
+  {
+    label: 'Presentation',
+    component: ProjectPresentationData,
+    optional: false,
+  },
   { label: 'Media', component: ProjectPresentationMedia, optional: true },
   { label: 'Parameters', component: ProjectPresentationParams, optional: true },
 ];

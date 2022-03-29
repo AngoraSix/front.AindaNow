@@ -13,7 +13,19 @@ const ProjectPresentationData = ({
   onFormChange,
   withDescription,
   isNotMobile,
+  setIsCompleted,
+  wasSubmitted,
 }) => {
+  const onFieldChange = (property) => (event) => {
+    let {
+      target: { value },
+    } = event;
+
+    // we only have one field in this section
+    value ? setIsCompleted(true) : setIsCompleted(false);
+    onFormChange(property)(event);
+  };
+
   return (
     <div className="ProjectPresentationData ProjectPresentationData__Container ProjectForm__Container">
       {withDescription && (
@@ -33,7 +45,12 @@ const ProjectPresentationData = ({
           <TextField
             {...PRESENTATION_BASE_FIELDS.description}
             value={formData['presentation.description'] || ''}
-            onChange={onFormChange('presentation.description')}
+            onChange={onFieldChange('presentation.description')}
+            error={
+              wasSubmitted &&
+              PRESENTATION_BASE_FIELDS.description.required &&
+              !formData.description
+            }
             fullWidth
           />
         </Grid>
@@ -46,6 +63,7 @@ ProjectPresentationData.defaultProps = {
   formData: {},
   withDescription: false,
   isNotMobile: false,
+  setIsCompleted: () => {},
 };
 
 ProjectPresentationData.propTypes = {
@@ -53,6 +71,7 @@ ProjectPresentationData.propTypes = {
   onFormChange: PropTypes.func.isRequired,
   withDescription: PropTypes.bool,
   isNotMobile: PropTypes.bool,
+  setIsCompleted: PropTypes.func,
 };
 
 export default ProjectPresentationData;
