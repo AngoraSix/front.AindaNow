@@ -7,6 +7,7 @@ import InputDialog from '../InputDialog';
 import MediaAddOptions from './MediaAddOptions';
 import MediaListDnD from './Strategies/MediaListDnD';
 import MediaSingleDnD from './Strategies/MediaSingleDnD';
+import DnDContainer from './DnDContainer.component';
 
 const MediaDnD = ({
   strategy,
@@ -41,6 +42,8 @@ const MediaDnD = ({
     onMediaInput(mediaInput);
   };
 
+  const isList = strategy === MEDIA_INPUT_STRATEGIES.LIST;
+
   return (
     <Box className="Media__Container">
       <MediaAddOptions
@@ -48,17 +51,23 @@ const MediaDnD = ({
         onAddMediaOptionClick={onOpenInputDialogType}
         disabled={media.length >= limit}
       />
-      {strategy === MEDIA_INPUT_STRATEGIES.LIST ? (
-        <MediaListDnD
-          media={media}
-          onAddMedia={onAddMedia}
-          onModifyMediaOrder={onModifyMediaOrder}
-          onRemoveMediaItem={onRemoveMediaItem}
-          limit={limit}
-        />
-      ) : (
-        <MediaSingleDnD media={media} onAddMedia={onAddMedia} />
-      )}
+      <DnDContainer
+        onMediaInput={onAddMedia}
+        classNameModifier={isList ? 'List' : 'Single'}
+        disabled={media.length >= limit}
+      >
+        {isList ? (
+          <MediaListDnD
+            media={media}
+            onAddMedia={onAddMedia}
+            onModifyMediaOrder={onModifyMediaOrder}
+            onRemoveMediaItem={onRemoveMediaItem}
+            limit={limit}
+          />
+        ) : (
+          <MediaSingleDnD media={media} onAddMedia={onAddMedia} />
+        )}
+      </DnDContainer>
       <InputDialog
         open={!!openedInputDialogType}
         inputType={openedInputDialogType}

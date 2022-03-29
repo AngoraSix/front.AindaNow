@@ -3,7 +3,6 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { MEDIA_TYPES } from '../../../../../constants';
-import DnDContainer from '../../DnDContainer.component';
 import MediaPreviewDialog from '../../MediaPreviewDialog';
 import MediaListCard from './MediaListCard.component';
 
@@ -15,13 +14,7 @@ const MEDIA_OPTIONS_GRID_SIZE = {
 const _getQuantityOfColumns = (isMedium, isLarge) =>
   isLarge ? 6 : isMedium ? 4 : 2;
 
-const MediaListDnD = ({
-  limit,
-  media,
-  onAddMedia,
-  onModifyMediaOrder,
-  onRemoveMediaItem,
-}) => {
+const MediaListDnD = ({ media, onModifyMediaOrder, onRemoveMediaItem }) => {
   const [openedPreviewDialogMedia, setOpenedPreviewDialogMedia] =
     useState(null);
   const [tempOrderChangeKeys, setTempOrderChangeKeys] = useState({
@@ -59,53 +52,44 @@ const MediaListDnD = ({
 
   return (
     <Box className="MediaList__Container">
-      <DnDContainer
-        onMediaInput={onAddMedia}
-        classNameModifier="List"
-        disabled={media.length >= limit}
-      >
-        {media && media.length ? (
-          <ImageList
-            className={`MediaList__List`}
-            variant="quilted"
-            cols={quantityOfColumns}
-            rowHeight={121}
-          >
-            {media.map((mediaElement, index) => {
-              const isOnSameLine =
-                Math.floor(targetIndex / quantityOfColumns) ===
-                Math.floor(index / quantityOfColumns);
-              const targetElementOffset =
-                targetIndex != null && isOnSameLine
-                  ? index - targetIndex
-                  : null;
-              const originTargetElementsOffset =
-                targetIndex != null && originIndex != null && isOnSameLine
-                  ? targetIndex - originIndex
-                  : null;
-              return (
-                <MediaListCard
-                  key={mediaElement.key}
-                  colSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
-                  rowSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
-                  media={mediaElement}
-                  targetElementOffset={targetElementOffset}
-                  originTargetElementsOffset={originTargetElementsOffset}
-                  onTempOrderChange={onTempOrderChange}
-                  onModifyMediaOrder={onModifyMediaOrder}
-                  onRemoveMediaItem={onRemoveMedia(index)}
-                  handlePreviewDialogClickOpen={handlePreviewDialogClickOpen}
-                />
-              );
-            })}
-          </ImageList>
-        ) : (
-          <Typography className="MediaList__EmptyMessage" align="center">
-            Click above or drop image file or Youtube link
-          </Typography>
-        )}
-      </DnDContainer>
-
+      {media && media.length ? (
+        <ImageList
+          className={`MediaList__List`}
+          variant="quilted"
+          cols={quantityOfColumns}
+          rowHeight={121}
+        >
+          {media.map((mediaElement, index) => {
+            const isOnSameLine =
+              Math.floor(targetIndex / quantityOfColumns) ===
+              Math.floor(index / quantityOfColumns);
+            const targetElementOffset =
+              targetIndex != null && isOnSameLine ? index - targetIndex : null;
+            const originTargetElementsOffset =
+              targetIndex != null && originIndex != null && isOnSameLine
+                ? targetIndex - originIndex
+                : null;
+            return (
+              <MediaListCard
+                key={mediaElement.key}
+                colSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
+                rowSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
+                media={mediaElement}
+                targetElementOffset={targetElementOffset}
+                originTargetElementsOffset={originTargetElementsOffset}
+                onTempOrderChange={onTempOrderChange}
+                onModifyMediaOrder={onModifyMediaOrder}
+                onRemoveMediaItem={onRemoveMedia(index)}
+                handlePreviewDialogClickOpen={handlePreviewDialogClickOpen}
+              />
+            );
+          })}
+        </ImageList>
+      ) : (
+        <Typography className="MediaList__EmptyMessage" align="center">
+          Click above or drop image file or Youtube link
+        </Typography>
+      )}
       <MediaPreviewDialog
         open={!!openedPreviewDialogMedia}
         media={openedPreviewDialogMedia}
