@@ -55,6 +55,7 @@ const MediaDnD = ({
         onMediaInput={onAddMedia}
         classNameModifier={isList ? 'List' : 'Single'}
         disabled={media.length >= limit}
+        allowedMediaTypes={allowedMediaTypes}
       >
         {isList ? (
           <MediaListDnD

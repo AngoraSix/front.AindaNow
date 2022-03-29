@@ -1,23 +1,32 @@
+import { MEDIA_TYPES } from '../../constants';
 import { isImage, processImage } from './image';
 import { isYoutubeURL, processYoutubeUrl } from './youtube';
 
-const _processInputElement = async (mediaDataElement) => {
-  if (isImage(mediaDataElement)) {
+const _processInputElement = async (mediaDataElement, allowedMediaTypes) => {
+  if (
+    isImage(mediaDataElement) &&
+    allowedMediaTypes.includes(MEDIA_TYPES.IMAGE)
+  ) {
     return processImage(mediaDataElement);
   }
-  if (isYoutubeURL(mediaDataElement)) {
+  if (
+    isYoutubeURL(mediaDataElement) &&
+    allowedMediaTypes.includes(MEDIA_TYPES.VIDEO_YOUTUBE)
+  ) {
     return processYoutubeUrl(mediaDataElement);
   }
 };
 // Resolve media depending on different output, always retrieves an array
-const resolveToMediaArray = async (mediaInput = []) => {
+const resolveToMediaArray = async (mediaInput = [], allowedMediaTypes = []) => {
   mediaInput =
     Array.isArray(mediaInput) || mediaInput instanceof FileList
       ? Array.from(mediaInput)
       : [mediaInput];
-  return (await Promise.all(mediaInput.map(_processInputElement))).filter(
-    (media) => !!media
-  );
+  return (
+    await Promise.all(
+      mediaInput.map((m) => _processInputElement(m, allowedMediaTypes))
+    )
+  ).filter((media) => !!media);
 };
 
 export default resolveToMediaArray;

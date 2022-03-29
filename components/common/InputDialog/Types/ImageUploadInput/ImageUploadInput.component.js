@@ -3,6 +3,7 @@ import { Badge, Box, Button, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { MEDIA_TYPES } from '../../../../../constants';
 import DnDContainer from '../../../Media/DnDContainer.component';
 
 const Input = styled('input')({
@@ -34,6 +35,7 @@ const ImageUploadInput = ({ handleMediaInput, media, allowsMultiple }) => {
       <DnDContainer
         onMediaInput={handleMediaInput}
         classNameModifier="ImageUpload"
+        allowedMediaTypes={[MEDIA_TYPES.IMAGE]}
       >
         {!!media && media.length ? (
           <Badge
