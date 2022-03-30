@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { MEDIA_TYPES } from '../../../../../constants';
 import { useNotifications } from '../../../../../hooks/app';
-import Media from '../../../../../models/Media';
+import resolveToMediaArray from '../../../../../utils/media/mediaProcessor';
 import ImageUploadInput from './ImageUploadInput.component';
 
 const ImageUploadInputContainer = ({
@@ -13,7 +13,7 @@ const ImageUploadInputContainer = ({
   ...args
 }) => {
   const { onError } = useNotifications();
-  const handleMediaInput = (files) => {
+  const handleMediaInput = async (files) => {
     const inputLimit = allowsMultiple ? limit : 1;
     let fileInput =
       Array.isArray(files) || files instanceof FileList
@@ -23,20 +23,16 @@ const ImageUploadInputContainer = ({
       onError('Limit exceeded - removed additional entries');
       fileInput.splice(inputLimit);
     }
-    if (fileInput) {
-      onChange(fileInput);
-    } else {
-      onChange(fileInput.slice(0, 1));
-    }
+    // the only value of using resolveToMediaArray over processImage is that it checks it's an image file
+    // might not be worth since the input should limit that already...
+    const media = await resolveToMediaArray(fileInput, MEDIA_TYPES.IMAGE);
+    onChange(media);
   };
 
   if (currentFieldValue) {
     currentFieldValue = Array.isArray(currentFieldValue)
       ? currentFieldValue
       : [currentFieldValue];
-    currentFieldValue.map((cfv) =>
-      cfv instanceof Media ? cfv : new Media(MEDIA_TYPES.IMAGE, cfv, cfv)
-    );
   } else {
     currentFieldValue = [];
   }
@@ -60,7 +56,6 @@ ImageUploadInputContainer.defaultProps = {
 ImageUploadInputContainer.propTypes = {
   onChange: PropTypes.func.isRequired,
   currentFieldValue: PropTypes.oneOfType([
-    PropTypes.string,
     PropTypes.object,
     PropTypes.arrayOf(PropTypes.object),
   ]),

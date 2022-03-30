@@ -101,14 +101,11 @@ const MediaListDnD = ({ media, onModifyMediaOrder, onRemoveMediaItem }) => {
 };
 
 MediaListDnD.defaultProps = {
-  limit: 15,
   media: [],
 };
 
 MediaListDnD.propTypes = {
-  limit: PropTypes.number,
   media: PropTypes.array,
-  onAddMedia: PropTypes.func.isRequired,
   onModifyMediaOrder: PropTypes.func.isRequired,
   onRemoveMediaItem: PropTypes.func.isRequired,
 };

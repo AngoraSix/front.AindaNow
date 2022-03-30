@@ -60,13 +60,11 @@ const MediaDnD = ({
         {isList ? (
           <MediaListDnD
             media={media}
-            onAddMedia={onAddMedia}
             onModifyMediaOrder={onModifyMediaOrder}
             onRemoveMediaItem={onRemoveMediaItem}
-            limit={limit}
           />
         ) : (
-          <MediaSingleDnD media={media} onAddMedia={onAddMedia} />
+          <MediaSingleDnD media={media} />
         )}
       </DnDContainer>
       <InputDialog

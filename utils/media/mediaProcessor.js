@@ -1,8 +1,13 @@
 import { MEDIA_TYPES } from '../../constants';
+import Media from '../../models/Media';
 import { isImage, processImage } from './image';
 import { isYoutubeURL, processYoutubeUrl } from './youtube';
 
 const _processInputElement = async (mediaDataElement, allowedMediaTypes) => {
+  if (mediaDataElement instanceof Media) {
+    return mediaDataElement;
+  }
+
   if (
     isImage(mediaDataElement) &&
     allowedMediaTypes.includes(MEDIA_TYPES.IMAGE)

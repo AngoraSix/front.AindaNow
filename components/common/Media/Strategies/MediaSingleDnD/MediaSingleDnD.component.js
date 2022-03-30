@@ -28,7 +28,6 @@ MediaSingleDnD.defaultProps = { media: [] };
 
 MediaSingleDnD.propTypes = {
   media: PropTypes.array,
-  onAddMedia: PropTypes.func.isRequired,
 };
 
 export default MediaSingleDnD;

@@ -52,6 +52,7 @@
 .MediaList__Option {
   transition: transform 0.3s ease-in, opacity 0.3s ease-in, color 0.2s linear,
     background-color 0.2s linear;
+  border: thin solid transparent;
 }
 
 .MediaList__Option__Hidden {
