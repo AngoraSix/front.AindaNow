@@ -10,11 +10,18 @@ const Input = styled('input')({
   display: 'none',
 });
 
+const ACTIVE_MEDIA_INIT_STATE = { index: 0, upwards: true };
+
 const ImageUploadInput = ({ handleMediaInput, media, allowsMultiple }) => {
-  const [activeMedia, setActiveMedia] = useState({ index: 0, upwards: true });
+  const [activeMedia, setActiveMedia] = useState(ACTIVE_MEDIA_INIT_STATE);
 
   const onFileInputChange = ({ target: { files } }) => {
-    handleMediaInput(files);
+    onInput(files);
+  };
+
+  const onInput = (media) => {
+    setActiveMedia(ACTIVE_MEDIA_INIT_STATE);
+    handleMediaInput(media);
   };
 
   const updateActiveMedia = () => {
@@ -33,7 +40,7 @@ const ImageUploadInput = ({ handleMediaInput, media, allowsMultiple }) => {
   return (
     <Box>
       <DnDContainer
-        onMediaInput={handleMediaInput}
+        onMediaInput={onInput}
         classNameModifier="ImageUpload"
         allowedMediaTypes={[MEDIA_TYPES.IMAGE]}
       >
@@ -41,7 +48,7 @@ const ImageUploadInput = ({ handleMediaInput, media, allowsMultiple }) => {
           <Badge
             badgeContent={media.length === 1 ? 0 : media.length}
             color="primary"
-            onClick={updateActiveMedia}
+            onClick={media.length > 1 ? updateActiveMedia : () => {}}
           >
             <Paper className="ImageUploadInput__DropZone__Preview__Container">
               {media.map((m, index) => (
