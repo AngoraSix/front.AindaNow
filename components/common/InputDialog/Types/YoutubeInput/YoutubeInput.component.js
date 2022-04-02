@@ -1,3 +1,4 @@
+import OpenInNewIcon from '@mui/icons-material/OpenInNew';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
   Box,
@@ -9,10 +10,9 @@ import {
 import PropTypes from 'prop-types';
 import React from 'react';
 import config from '../../../../../config';
-import OpenInNewIcon from '@mui/icons-material/OpenInNew';
-import DnDContainer from '../../../Media/DnDContainer.component';
+import { INPUT_FIELD_TYPES, MEDIA_TYPES } from '../../../../../constants';
 import { useNotifications } from '../../../../../hooks/app';
-import { INPUT_FIELD_TYPES } from '../../../../../constants';
+import DnDContainer from '../../../Media/DnDContainer.component';
 
 const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
   const { onError } = useNotifications();
@@ -51,7 +51,11 @@ const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
         >
           <Typography>{visibleVideoId || '-'}</Typography>
         </Box>
-        <DnDContainer onMediaInput={handleDrop} classNameModifier="Youtube">
+        <DnDContainer
+          onMediaInput={handleDrop}
+          classNameModifier="Youtube"
+          allowedMediaTypes={[MEDIA_TYPES.VIDEO_YOUTUBE]}
+        >
           {!!thumbnailUrl ? (
             <img
               className="YoutubeDialog__Thumbnail__Preview"

@@ -6,6 +6,21 @@ import React, { useState } from 'react';
 import { MEDIA_TYPES, resolveRoute, ROUTES } from '../../../constants';
 import YoutubePreview from '../../common/Media/Previews/YoutubePreview';
 
+const _allMedia = (project) => {
+  return [
+    ...project.sections.map((m) => m.mainMedia),
+    ...project.sections.flatMap((m) => m.media || []),
+  ];
+};
+
+const _findMainImageMedia = (project) => {
+  const allMedia = _allMedia(project);
+  return (
+    allMedia.find((m) => m.mediaType === MEDIA_TYPES.IMAGE && m.thumbnailUrl) ||
+    allMedia.find((m) => m.thumbnailUrl)
+  );
+};
+
 const ProjectCard = ({ project }) => {
   const [isActive, setIsActive] = useState(false);
   const [currentActiveVideo, setCurrentActiveVideo] = useState(null);
@@ -14,7 +29,8 @@ const ProjectCard = ({ project }) => {
   const handleCardHover = (isHovered) => () => {
     setIsActive(isHovered);
     if (isHovered) {
-      const activeVideoMedia = project.sections[0].media?.find(
+      const allMedia = _allMedia(project);
+      const activeVideoMedia = allMedia.find(
         (m) => m.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE
       );
       setCurrentActiveVideo(activeVideoMedia);
@@ -30,22 +46,17 @@ const ProjectCard = ({ project }) => {
 
   const handleVideoEnded = () => {
     setIsVideoPlaying(false);
-    const endedVideoIndex = project.sections[0].media.findIndex(
+    const allMedia = _allMedia(project);
+    const endedVideoIndex = allMedia.findIndex(
       (m) => m.resourceId === currentActiveVideo.resourceId
     );
-    const activeVideoMedia = project.sections[0].media
+    const activeVideoMedia = allMedia
       .slice(endedVideoIndex + 1)
       .find((m) => m.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE);
     setCurrentActiveVideo(activeVideoMedia);
   };
 
-  let imageMedia = project.sections[0].media?.filter(
-    (m) => m.mediaType === MEDIA_TYPES.IMAGE && m.thumbnailUrl
-  );
-  if (!imageMedia?.length)
-    imageMedia = project.sections[0].media?.filter((m) => m.thumbnailUrl) || [];
-
-  const images = imageMedia.map((m) => m.thumbnailUrl);
+  const mainImage = _findMainImageMedia(project)?.thumbnailUrl;
 
   const projectDetailsURL = resolveRoute(ROUTES.projects.view, project.id);
 
@@ -53,7 +64,7 @@ const ProjectCard = ({ project }) => {
     <Link href={projectDetailsURL} passHref>
       <Paper
         className={classnames('ProjectCard ProjectCard__Container', {
-          'ProjectCard__Container--no-images': !images.length,
+          'ProjectCard__Container--no-images': !mainImage,
           'ProjectCard__Container--active': isActive,
         })}
         component="a"
@@ -63,7 +74,7 @@ const ProjectCard = ({ project }) => {
         <Box className="ProjectCard__DescriptionSection">
           <Typography
             className={classnames('ProjectCard__Title', {
-              'ProjectCard__Title--withDescription': !!project.objective,
+              'ProjectCard__Title--withDescription': !!project.description,
             })}
             variant="subtitle1"
             color="primary"
@@ -75,7 +86,7 @@ const ProjectCard = ({ project }) => {
           </Typography>
         </Box>
         <img
-          src={images[0]}
+          src={mainImage}
           className={classnames('ProjectCard__Image', {
             'ProjectCard__Image--hidden': !!isVideoPlaying,
           })}

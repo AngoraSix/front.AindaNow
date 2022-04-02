@@ -1,8 +1,8 @@
 import { Box, Grid, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import Media from '../../../common/Media';
 import { MEDIA_INPUT_STRATEGIES } from '../../../../constants';
+import Media from '../../../common/Media';
 import { PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS as PRESENTATION_BASE_FIELDS } from '../ProjectForm.properties';
 
 const MOBILE_DESCRIPTION = 'Time to add some visual aids...';
@@ -15,10 +15,18 @@ const ProjectPresentationMedia = ({
   onFormChange,
   withDescription,
   isNotMobile,
+  setIsCompleted,
+  wasSubmitted,
 }) => {
-  const onMediaChange = (field) => (mediaData) => {
-    onFormChange(field)(mediaData);
-  };
+  const onMediaChange =
+    (field, isRequired = false) =>
+    (mediaData) => {
+      if (isRequired && mediaData.length) {
+        // there is only one required field here
+        setIsCompleted(true);
+      }
+      onFormChange(field)(mediaData);
+    };
 
   return (
     <div className="ProjectPresentationMedia ProjectPresentationMedia__Container ProjectForm__Container">
@@ -40,8 +48,16 @@ const ProjectPresentationMedia = ({
           <Media
             allowsMultiple={false}
             strategy={MEDIA_INPUT_STRATEGIES.SINGLE}
-            onChange={onMediaChange('presentation.mainMedia')}
+            onChange={onMediaChange(
+              'presentation.mainMedia',
+              PRESENTATION_BASE_FIELDS.mainMedia.required
+            )}
             mediaData={formData['presentation.mainMedia']}
+            error={
+              wasSubmitted &&
+              PRESENTATION_BASE_FIELDS.mainMedia.required &&
+              !formData['presentation.mainMedia']?.length
+            }
           />
         </Grid>
       </Grid>
@@ -56,7 +72,10 @@ const ProjectPresentationMedia = ({
           <Media
             allowsMultiple={true}
             strategy={MEDIA_INPUT_STRATEGIES.LIST}
-            onChange={onMediaChange('presentation.media')}
+            onChange={onMediaChange(
+              'presentation.media',
+              PRESENTATION_BASE_FIELDS.media.required
+            )}
             mediaData={formData['presentation.media']}
           />
         </Grid>
@@ -69,6 +88,8 @@ ProjectPresentationMedia.defaultProps = {
   formData: {},
   withDescription: false,
   isNotMobile: false,
+  setIsCompleted: () => {},
+  wasSubmitted: false,
 };
 
 ProjectPresentationMedia.propTypes = {
@@ -76,6 +97,8 @@ ProjectPresentationMedia.propTypes = {
   onFormChange: PropTypes.func.isRequired,
   withDescription: PropTypes.bool,
   isNotMobile: PropTypes.bool,
+  setIsCompleted: PropTypes.func,
+  wasSubmitted: PropTypes.bool,
 };
 
 export default ProjectPresentationMedia;

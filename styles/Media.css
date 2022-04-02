@@ -1,13 +1,27 @@
-.MediaList__Container {
-  height: 3em;
+.Media__Container {
   width: 100%;
+  padding: 15px 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   border-style: solid;
   border-color: #a9bec5;
-  border-width: thin;
+  border-radius: 10px;
+  border-width: medium;
+  transition: border-color 0.3s ease-in;
+}
+
+.Media__Container.Media__Container--error {
+  border-color: #df0000;
+}
+
+.MediaList__Container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .MediaList__Add__Options {
@@ -43,6 +57,7 @@
 .MediaList__Option {
   transition: transform 0.3s ease-in, opacity 0.3s ease-in, color 0.2s linear,
     background-color 0.2s linear;
+  border: thin solid transparent;
 }
 
 .MediaList__Option__Hidden {
@@ -158,18 +173,6 @@
   background-position: center;
   position: absolute;
   transition: transform 0.75s ease-in;
-}
-
-.MediaSingleDnD__DropZone__Preview.Left {
-  transform: translateX(-100%);
-}
-
-.MediaSingleDnD__DropZone__Preview.Active {
-  transform: translateX(0);
-}
-
-.MediaSingleDnD__DropZone__Preview.Right {
-  transform: translateX(100%);
 }
 
 .MediaSingleDnD__DropZone__PreviewPlaceholder {
