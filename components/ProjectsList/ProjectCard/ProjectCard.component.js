@@ -13,13 +13,11 @@ const _allMedia = (project) => {
   ];
 };
 
-const _divideMediaBasedOnType = (project, mediaType) => {
-  return _allMedia(project).reduce(
-    (result, element) => {
-      result[element.mediaType === mediaType ? 0 : 1].push(element);
-      return result;
-    },
-    [[], []]
+const _findMainImageMedia = (project) => {
+  const allMedia = _allMedia(project);
+  return (
+    allMedia.find((m) => m.mediaType === MEDIA_TYPES.IMAGE && m.thumbnailUrl) ||
+    allMedia.find((m) => m.thumbnailUrl)
   );
 };
 
@@ -58,14 +56,7 @@ const ProjectCard = ({ project }) => {
     setCurrentActiveVideo(activeVideoMedia);
   };
 
-  let [allImageMedia, allOtherMedia] = _divideMediaBasedOnType(
-    project,
-    MEDIA_TYPES.IMAGE
-  );
-
-  const images = [...allImageMedia, ...allOtherMedia].map(
-    (m) => m.thumbnailUrl
-  );
+  const mainImage = _findMainImageMedia(project)?.thumbnailUrl;
 
   const projectDetailsURL = resolveRoute(ROUTES.projects.view, project.id);
 
@@ -73,7 +64,7 @@ const ProjectCard = ({ project }) => {
     <Link href={projectDetailsURL} passHref>
       <Paper
         className={classnames('ProjectCard ProjectCard__Container', {
-          'ProjectCard__Container--no-images': !images.length,
+          'ProjectCard__Container--no-images': !mainImage,
           'ProjectCard__Container--active': isActive,
         })}
         component="a"
@@ -95,7 +86,7 @@ const ProjectCard = ({ project }) => {
           </Typography>
         </Box>
         <img
-          src={images[0]}
+          src={mainImage}
           className={classnames('ProjectCard__Image', {
             'ProjectCard__Image--hidden': !!isVideoPlaying,
           })}
@@ -110,14 +101,6 @@ const ProjectCard = ({ project }) => {
             })}
             onVideoReady={handleVideoIsReady}
             onVideoEnd={handleVideoEnded}
-          />
-        )}
-        {isActive && !currentActiveVideo && (
-          <img
-            src={images[0]}
-            className={classnames('ProjectCard__Image', {
-              'ProjectCard__Image--hidden': !!isVideoPlaying,
-            })}
           />
         )}
       </Paper>

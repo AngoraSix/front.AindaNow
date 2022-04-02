@@ -29,9 +29,9 @@ const steps = [
   {
     label: 'Presentation',
     component: ProjectPresentationData,
-    optional: false,
+    optional: true,
   },
-  { label: 'Media', component: ProjectPresentationMedia, optional: true },
+  { label: 'Media', component: ProjectPresentationMedia, optional: false },
   { label: 'Parameters', component: ProjectPresentationParams, optional: true },
 ];
 

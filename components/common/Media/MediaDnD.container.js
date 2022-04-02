@@ -1,20 +1,20 @@
 import PropTypes from 'prop-types';
-import React, { useReducer, useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import {
   INPUT_FIELD_TYPES,
-  MEDIA_TYPES,
   MEDIA_INPUT_STRATEGIES,
+  MEDIA_TYPES,
 } from '../../../constants';
 import { useNotifications } from '../../../hooks/app';
+import Media from '../../../models/Media';
 import { isImage, processImage } from '../../../utils/media/image';
 import MediaDnD from './MediaDnD.component';
-import Media from '../../../models/Media';
 import MediaDnDReducer, {
-  INITIAL_STATE,
   addMediaAction,
   changeOrderAction,
-  setMediaAction,
+  INITIAL_STATE,
   removeMediaItemAction,
+  setMediaAction,
 } from './MediaDnD.reducer';
 
 const MEDIA_TYPE_TO_OPTION = {
@@ -28,6 +28,7 @@ const MediaDnDContainer = ({
   allowedMediaTypes,
   allowsMultiple,
   strategy,
+  error,
 }) => {
   const [mediaDataState, dispatch] = useReducer(MediaDnDReducer, {
     ...INITIAL_STATE,
@@ -105,6 +106,7 @@ const MediaDnDContainer = ({
       allowedMediaTypes={allowedMediaTypes}
       onModifyMediaOrder={onModifyMediaOrder}
       onRemoveMediaItem={onRemoveMediaItem}
+      error={error}
     />
   );
 };
@@ -114,6 +116,7 @@ MediaDnDContainer.defaultProps = {
   mediaData: [],
   allowedMediaTypes: Object.values(MEDIA_TYPES),
   allowsMultiple: false,
+  error: false,
 };
 
 MediaDnDContainer.propTypes = {
@@ -122,6 +125,7 @@ MediaDnDContainer.propTypes = {
   mediaData: PropTypes.arrayOf(PropTypes.object),
   allowsMultiple: PropTypes.bool,
   strategy: PropTypes.oneOf(Object.values(MEDIA_INPUT_STRATEGIES)),
+  error: PropTypes.bool,
 };
 
 export default MediaDnDContainer;

@@ -64,6 +64,7 @@ ProjectPresentationData.defaultProps = {
   withDescription: false,
   isNotMobile: false,
   setIsCompleted: () => {},
+  wasSubmitted: false,
 };
 
 ProjectPresentationData.propTypes = {
@@ -72,6 +73,7 @@ ProjectPresentationData.propTypes = {
   withDescription: PropTypes.bool,
   isNotMobile: PropTypes.bool,
   setIsCompleted: PropTypes.func,
+  wasSubmitted: PropTypes.bool,
 };
 
 export default ProjectPresentationData;

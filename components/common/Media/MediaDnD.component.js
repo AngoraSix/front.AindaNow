@@ -1,13 +1,14 @@
 import { Box } from '@mui/material';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { MEDIA_INPUT_STRATEGIES, MEDIA_TYPES } from '../../../constants';
 import { useNotifications } from '../../../hooks/app';
 import InputDialog from '../InputDialog';
+import DnDContainer from './DnDContainer.component';
 import MediaAddOptions from './MediaAddOptions';
 import MediaListDnD from './Strategies/MediaListDnD';
 import MediaSingleDnD from './Strategies/MediaSingleDnD';
-import DnDContainer from './DnDContainer.component';
 
 const MediaDnD = ({
   strategy,
@@ -18,6 +19,7 @@ const MediaDnD = ({
   onModifyMediaOrder,
   onRemoveMediaItem,
   limit,
+  error,
 }) => {
   const { onError } = useNotifications();
   const [openedInputDialogType, setOpenedInputDialogType] = useState(null);
@@ -45,7 +47,11 @@ const MediaDnD = ({
   const isList = strategy === MEDIA_INPUT_STRATEGIES.LIST;
 
   return (
-    <Box className="Media__Container">
+    <Box
+      className={classnames('Media__Container', {
+        'Media__Container--error': error,
+      })}
+    >
       <MediaAddOptions
         allowedMediaTypes={allowedMediaTypes}
         onAddMediaOptionClick={onOpenInputDialogType}
@@ -85,6 +91,7 @@ MediaDnD.defaultProps = {
   allowedMediaTypes: Object.values(MEDIA_TYPES),
   allowsMultiple: false,
   limit: 15,
+  error: false,
 };
 
 MediaDnD.propTypes = {
@@ -96,6 +103,7 @@ MediaDnD.propTypes = {
   allowsMultiple: PropTypes.bool,
   strategy: PropTypes.oneOf(Object.values(MEDIA_INPUT_STRATEGIES)),
   limit: PropTypes.number,
+  error: PropTypes.bool,
 };
 
 export default MediaDnD;
