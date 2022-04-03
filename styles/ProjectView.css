@@ -1,0 +1,109 @@
+.MediaCard__Container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  aspect-ratio: 1/1;
+  position: relative;
+  color: #ffffff;
+  backface-visibility: hidden;
+  overflow: hidden;
+  border-radius: 30px;
+}
+
+.MediaCard__Container.Transparent {
+  opacity: 0;
+}
+
+.MediaCard__Container .MediaCard__Image {
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  object-fit: cover;
+  opacity: 1;
+}
+
+.MediaCard__Overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  /* animation: fade-in-n-out 5s; */
+  transition: background-color 1.5s ease-in;
+  z-index: 1;
+
+  animation-name: fade-out-n-in;
+  /* animation-duration: 5s; */
+  animation-timing-function: linear;
+  /* animation-delay: 2s; */
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* .MediaCard__Overlay.StartsWithOverlay {
+  animation: fade-out-n-in 5s 2s infinite;
+}
+
+.MediaCard__Overlay.StartsWithoutOverlay {
+  animation: fade-in-n-out 5s 2s infinite;
+} */
+
+.MediaCard__Overlay.Transparent {
+  background-color: transparent;
+}
+
+.MediaCard__Overlay.Light {
+  background-color: #c6d4d9;
+}
+
+.MediaCard__Overlay.Regular {
+  background-color: #a9bec5;
+}
+
+.MediaCard__Overlay.Dark {
+  background-color: #47626b;
+}
+
+@keyframes fade-in-n-out {
+  0% {
+    opacity: 0;
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out-n-in {
+  0% {
+    opacity: 1;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

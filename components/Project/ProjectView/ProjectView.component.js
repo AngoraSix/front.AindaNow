@@ -1,11 +1,13 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import ProjectViewSection from './Sections/ProjectViewSection.component';
+import React from 'react';
+import MediaHeader from './Sections/MediaHeader';
+import ProjectPresentation from './Sections/ProjectPresentation';
 
 const ProjectView = ({ project }) => {
   return (
     <div className="ProjectView ProjectView__Container">
-      <ProjectViewSection project={project} />
+      <MediaHeader media={project.sections[0].media} />
+      {/* <ProjectPresentation project={project} /> */}
     </div>
   );
 };

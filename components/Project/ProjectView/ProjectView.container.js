@@ -1,15 +1,7 @@
-import React, { useReducer } from 'react';
 import PropTypes from 'prop-types';
-import { signIn } from 'next-auth/react';
-import Profile from './Profile.component';
-import api from '../../../api';
+import React from 'react';
 import { useLoading, useNotifications } from '../../../hooks/app';
-import ProfileReducer, {
-  INITIAL_STATE,
-  updateAttributesAction,
-} from './Profile.reducer';
-import { PROFILE_ATTRIBUTES } from '../../../constants';
-import logger from '../../../utils/logger';
+import ProjectView from './ProjectView.component';
 
 const ProjectViewContainer = ({ project }) => {
   const { doLoad } = useLoading();

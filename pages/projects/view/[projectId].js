@@ -1,29 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import api from '../../api';
-import ProfileLayout from '../../layouts/ProfileLayout';
-import Profile from '../../components/Profile';
 import { getSession } from 'next-auth/react';
-import { useActiveSession } from '../../hooks/oauth';
-import logger from '../../utils/logger';
+import PropTypes from 'prop-types';
+import React from 'react';
+import api from '../../../api';
+import ProjectView from '../../../components/Project/ProjectView';
+import DefaultLayout from '../../../layouts/DefaultLayout';
+import logger from '../../../utils/logger';
 
-const ProjectView = ({ project }) => {
-  isCurrentContributor && useActiveSession();
+const ProjectViewPage = ({ project }) => {
+  // isCurrentContributor && useActiveSession();
+  console.log("GERGERGER");
+  console.log(project);
 
   return (
-    <ProfileLayout>
-      <Profile profile={profile} isCurrentContributor={isCurrentContributor} />
-    </ProfileLayout>
+    <DefaultLayout>
+      <ProjectView project={project} />
+    </DefaultLayout>
   );
 };
 
-ProjectView.defaultProps = {
-  isCurrentContributor: false,
-};
+ProjectViewPage.defaultProps = {};
 
-ProjectView.propTypes = {
-  profile: PropTypes.object.isRequired,
-  isCurrentContributor: PropTypes.bool,
+ProjectViewPage.propTypes = {
+  project: PropTypes.object.isRequired,
 };
 
 export const getServerSideProps = async (ctx) => {
@@ -50,4 +48,4 @@ export const getServerSideProps = async (ctx) => {
   };
 };
 
-export default ProjectView;
+export default ProjectViewPage;
