@@ -10,7 +10,7 @@ const _getRandomIndexForArray = (array) => {
 
 const ProjectViewMediaCard = ({ imagesList, interval }) => {
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
-  const [activeOverlayIndex, setActiveOverlayIndex] = useState(0);
+  const [activeOverlayIndex, setActiveOverlayIndex] = useState(1);
   const [cardInterval, setCardInterval] = useState(5000);
 
   useEffect(() => {

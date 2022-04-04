@@ -160,8 +160,8 @@
 }
 
 .MediaSingleDnD__DropZone__Preview__Container {
-  width: 15vh;
-  height: 15vh;
+  flex-grow: 1;
+  width: 20%;
   position: relative;
   overflow: hidden;
 }
@@ -176,8 +176,8 @@
 }
 
 .MediaSingleDnD__DropZone__PreviewPlaceholder {
-  width: 15vh;
-  height: 15vh;
+  flex-grow: 1;
+  width: 20%;
   border-radius: 5px;
   border-style: solid;
   border-width: thin;

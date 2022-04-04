@@ -1,13 +1,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import MediaHeader from './Sections/MediaHeader';
-import ProjectPresentation from './Sections/ProjectPresentation';
+import ProjectPresentation from './Sections/ProjectPresentation/ProjectPresentation.component';
 
 const ProjectView = ({ project }) => {
   return (
     <div className="ProjectView ProjectView__Container">
-      <MediaHeader media={project.sections[0].media} />
-      {/* <ProjectPresentation project={project} /> */}
+      <MediaHeader media={project.sections.flatMap((s) => s.media)} />
+      <ProjectPresentation project={project} />
     </div>
   );
 };

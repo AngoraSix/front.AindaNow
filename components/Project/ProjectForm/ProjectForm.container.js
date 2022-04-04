@@ -80,7 +80,10 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
       const projectResponse = await api.front.newProject(projectObject);
       onDone(projectResponse);
 
-      const viewURL = resolveRoute(ROUTES.projects.view, projectResponse.id);
+      const viewURL = resolveRoute(
+        ROUTES.projects.view,
+        projectResponse.presentation.id
+      );
       router.push(viewURL);
     } catch (err) {
       logger.log(err);

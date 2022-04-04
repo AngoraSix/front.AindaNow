@@ -15,7 +15,6 @@ const _getRandomInterval = () => {
     INTERVAL_RANGE.MIN +
       Math.random() * (INTERVAL_RANGE.MAX - INTERVAL_RANGE.MIN)
   );
-  console.log(interval);
   return interval;
 };
 

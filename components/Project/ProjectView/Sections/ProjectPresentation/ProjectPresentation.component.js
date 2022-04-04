@@ -1,75 +1,39 @@
-// import React from 'react';
-// import PropTypes from 'prop-types';
-// import { Box, Paper, Typography, Avatar } from '@mui/material';
-// import Editable from '../../common/Editable';
-// import { PROFILE_ATTRIBUTES } from '../../../constants';
-// import { INPUT_FIELD_TYPES } from '../../../constants';
-// import { useTheme } from '@mui/styles';
+import { Box, Tab, Tabs } from '@mui/material';
+import React, { useState } from 'react';
+import ProjectSectionListing from './ProjectSectionListing.component';
 
-// const ProjectPresentation = ({
-//   project,
-// }) => {
+const ProjectPresentation = ({ project }) => {
+  const [activeSectionindex, setActiveSectionIndex] = useState(0);
 
-//   return (
-//     <Paper className="Presentation">
-//       <Box className="Profile__Editable__Container Presentation__HeadImageContainer">
-//         <Editable
-//           type={INPUT_FIELD_TYPES.IMAGE}
-//           isEditable={isCurrentContributor}
-//           fieldName={PROFILE_ATTRIBUTES.headImage.label}
-//           onEdit={onEdit(PROFILE_ATTRIBUTES.headImage.key, true)}
-//         >
-//           <Box
-//             className="Presentation__HeadImage"
-//             style={{
-//               backgroundImage: `url(${getAttributeValue(
-//                 PROFILE_ATTRIBUTES.headImage.key
-//               )}), url(${getAttributeValue(
-//                 PROFILE_ATTRIBUTES.headImageThumbnail.key
-//               )}) `,
-//               backgroundColor: theme.palette.primary.main,
-//             }}
-//           ></Box>
-//         </Editable>
-//       </Box>
-//       <Box className="Profile__Editable__Container Presentation__ProfileImageContainer">
-//         <Editable
-//           type={INPUT_FIELD_TYPES.IMAGE}
-//           isEditable={isCurrentContributor}
-//           fieldName={PROFILE_ATTRIBUTES.profilePicture.label}
-//           onEdit={onEdit(PROFILE_ATTRIBUTES.profilePicture.key, true)}
-//         >
-//           <Box className={'Presentation__ProfileImage'}>
-//             <Avatar
-//               src={
-//                 getAttributeValue(
-//                   PROFILE_ATTRIBUTES.profilePictureThumbnail.key
-//                 ) || getAttributeValue(PROFILE_ATTRIBUTES.profilePicture.key)
-//               }
-//               sx={{ width: '100%', height: '100%' }}
-//             ></Avatar>
-//           </Box>
-//         </Editable>
-//       </Box>
+  const selectSection = (asd, selectedSection) => {
+    setActiveSectionIndex(selectedSection);
+  };
 
-//       <Box className="Presentation__ContributorData">
-//         <Typography
-//           className="ContributorData__Name"
-//           variant="h5"
-//         >{`${profile.firstName} ${profile.lastName}`}</Typography>
-//       </Box>
-//     </Paper>
-//   );
-// };
+  return (
+    <Box className="ProjectPresentation ProjectPresentation__Container">
+      <Tabs
+        orientation="vertical"
+        variant="scrollable"
+        value={activeSectionindex}
+        onChange={selectSection}
+        aria-label="Vertical tabs example"
+        sx={{ borderRight: 1, borderColor: 'divider' }}
+      >
+        {project.sections.map((s) => (
+          <Tab label={s.title} />
+        ))}
+      </Tabs>
+      {project.sections.map((s, i) => (
+        <ProjectSectionListing value={activeSectionindex} index={i}>
+          {s.description}
+        </ProjectSectionListing>
+      ))}
+    </Box>
+  );
+};
 
-// ProjectPresentation.defaultProps = {
-//   profileAttributes: {},
-// };
+ProjectPresentation.defaultProps = {};
 
-// ProjectPresentation.propTypes = {
-//   profile: PropTypes.object.isRequired,
-//   profileAttributes: PropTypes.object,
-//   onEditField: PropTypes.func.isRequired,
-// };
+ProjectPresentation.propTypes = {};
 
-// export default ProjectPresentation;
+export default ProjectPresentation;

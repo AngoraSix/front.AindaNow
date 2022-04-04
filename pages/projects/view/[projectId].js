@@ -8,8 +8,6 @@ import logger from '../../../utils/logger';
 
 const ProjectViewPage = ({ project }) => {
   // isCurrentContributor && useActiveSession();
-  console.log("GERGERGER");
-  console.log(project);
 
   return (
     <DefaultLayout>
