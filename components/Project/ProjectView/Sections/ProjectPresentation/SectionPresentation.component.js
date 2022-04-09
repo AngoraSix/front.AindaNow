@@ -1,64 +1,33 @@
-import React from 'react';
+import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { Box, Paper, Typography, Avatar } from '@mui/material';
-import Editable from '../../common/Editable';
-import { PROFILE_ATTRIBUTES } from '../../../constants';
-import { INPUT_FIELD_TYPES } from '../../../constants';
-import { useTheme } from '@mui/styles';
+import React from 'react';
+import MediaPreview from '../../../../common/Media/Previews';
 
-const SectionPresentation = ({
-  project,
-}) => {
-
+const SectionPresentation = ({ sectionTitle, description, mainMedia }) => {
   return (
-    <Paper className="Presentation">
-      <Box className="Profile__Editable__Container Presentation__HeadImageContainer">
-        <Editable
-          type={INPUT_FIELD_TYPES.IMAGE}
-          isEditable={isCurrentContributor}
-          fieldName={PROFILE_ATTRIBUTES.headImage.label}
-          onEdit={onEdit(PROFILE_ATTRIBUTES.headImage.key, true)}
-        >
-          <Box
-            className="Presentation__HeadImage"
-            style={{
-              backgroundImage: `url(${getAttributeValue(
-                PROFILE_ATTRIBUTES.headImage.key
-              )}), url(${getAttributeValue(
-                PROFILE_ATTRIBUTES.headImageThumbnail.key
-              )}) `,
-              backgroundColor: theme.palette.primary.main,
-            }}
-          ></Box>
-        </Editable>
+    <Box className="SectionPresentation SectionPresentation__Container">
+      <Typography
+        className="SectionPresentation__Title"
+        variant="h4"
+        component="h2"
+        align="right"
+        color="primary.main"
+      >
+        {sectionTitle}
+      </Typography>
+      <Box className="SectionPresentation__MainMedia">
+        <MediaPreview mediaType={mainMedia.mediaType} media={mainMedia} />
       </Box>
-      <Box className="Profile__Editable__Container Presentation__ProfileImageContainer">
-        <Editable
-          type={INPUT_FIELD_TYPES.IMAGE}
-          isEditable={isCurrentContributor}
-          fieldName={PROFILE_ATTRIBUTES.profilePicture.label}
-          onEdit={onEdit(PROFILE_ATTRIBUTES.profilePicture.key, true)}
-        >
-          <Box className={'Presentation__ProfileImage'}>
-            <Avatar
-              src={
-                getAttributeValue(
-                  PROFILE_ATTRIBUTES.profilePictureThumbnail.key
-                ) || getAttributeValue(PROFILE_ATTRIBUTES.profilePicture.key)
-              }
-              sx={{ width: '100%', height: '100%' }}
-            ></Avatar>
-          </Box>
-        </Editable>
-      </Box>
-
-      <Box className="Presentation__ContributorData">
+      {description && (
         <Typography
-          className="ContributorData__Name"
-          variant="h5"
-        >{`${profile.firstName} ${profile.lastName}`}</Typography>
-      </Box>
-    </Paper>
+          className="SectionPresentation__Description"
+          variant="body1"
+          align="right"
+        >
+          {description}
+        </Typography>
+      )}
+    </Box>
   );
 };
 
@@ -67,9 +36,9 @@ SectionPresentation.defaultProps = {
 };
 
 SectionPresentation.propTypes = {
-  profile: PropTypes.object.isRequired,
-  profileAttributes: PropTypes.object,
-  onEditField: PropTypes.func.isRequired,
+  sectionTitle: PropTypes.string,
+  description: PropTypes.string,
+  mainMedia: PropTypes.object.isRequired,
 };
 
 export default SectionPresentation;

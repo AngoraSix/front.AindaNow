@@ -6,8 +6,8 @@ import ProjectViewMediaCard from './ProjectViewMediaCard.component';
 
 const QUANTITY_OF_CARDS = 12;
 const INTERVAL_RANGE = {
-  MIN: 15000,
-  MAX: 20000,
+  MIN: 12500,
+  MAX: 27500,
 };
 
 const _getRandomInterval = () => {

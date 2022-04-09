@@ -3,16 +3,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import api from '../../../api';
 import ProjectView from '../../../components/Project/ProjectView';
-import DefaultLayout from '../../../layouts/DefaultLayout';
+import ProjectViewLayout from '../../../layouts/ProjectViewLayout/ProjectViewLayout';
 import logger from '../../../utils/logger';
 
 const ProjectViewPage = ({ project }) => {
   // isCurrentContributor && useActiveSession();
 
   return (
-    <DefaultLayout>
+    <ProjectViewLayout>
       <ProjectView project={project} />
-    </DefaultLayout>
+    </ProjectViewLayout>
   );
 };
 
