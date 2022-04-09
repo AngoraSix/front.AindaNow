@@ -1,0 +1,211 @@
+.ProjectView__Container {
+  position: relative;
+}
+
+.MediaHeader__Container {
+  position: relative;
+  height: 20vh;
+  z-index: 0;
+}
+
+.ProjectPresentation__AreaExtension {
+  height: 30vh;
+  clip-path: ellipse(150% 300% at 100% 310%);
+  background-color: #fff;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+  box-shadow: 0px -3px 1px -1px rgb(0 0 0 / 20%),
+    0px -3px 1px 0px rgb(0 0 0 / 14%), 0px -3px 3px 0px rgb(0 0 0 / 12%);
+}
+
+.MediaCard__Container {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  aspect-ratio: 1/1;
+  position: relative;
+  color: #ffffff;
+  backface-visibility: hidden;
+  border-radius: 30px;
+}
+
+.MediaCard__Container .MediaCard__Image {
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  margin: 0;
+  object-fit: cover;
+  opacity: 1;
+  filter: brightness(80%);
+}
+
+.MediaCard__Container::before {
+  background: linear-gradient(
+    to top,
+    hsl(0 0% 0% / 0.79) 0%,
+    hsl(0 0% 0% / 0.787) 7.8%,
+    hsl(0 0% 0% / 0.779) 14.4%,
+    hsl(0 0% 0% / 0.765) 20.2%,
+    hsl(0 0% 0% / 0.744) 25.3%,
+    hsl(0 0% 0% / 0.717) 29.9%,
+    hsl(0 0% 0% / 0.683) 34.3%,
+    hsl(0 0% 0% / 0.641) 38.7%,
+    hsl(0 0% 0% / 0.592) 43.3%,
+    hsl(0 0% 0% / 0.534) 48.4%,
+    hsl(0 0% 0% / 0.468) 54.1%,
+    hsl(0 0% 0% / 0.393) 60.6%,
+    hsl(0 0% 0% / 0.31) 68.3%,
+    hsl(0 0% 0% / 0.216) 77.3%,
+    hsl(0 0% 0% / 0.113) 87.7%,
+    hsl(0 0% 0% / 0) 100%
+  );
+  transition: 300ms opacity linear;
+  z-index: 1;
+}
+
+.MediaCard__Container::before {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.MediaCard__Container.Transparent {
+  opacity: 0;
+}
+
+.MediaCard__Overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  transition: background-color 1.5s ease-in;
+  z-index: 1;
+
+  animation-name: fade-out-n-in;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.MediaCard__Overlay.Transparent {
+  background-color: transparent;
+}
+
+.MediaCard__Overlay.Light {
+  background-color: #c6d4d9;
+}
+
+.MediaCard__Overlay.Regular {
+  background-color: #a9bec5;
+}
+
+.MediaCard__Overlay.Dark {
+  background-color: #47626b;
+}
+
+@keyframes fade-in-n-out {
+  0% {
+    opacity: 0;
+  }
+
+  35% {
+    opacity: 1;
+  }
+
+  65% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out-n-in {
+  0% {
+    opacity: 1;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  80% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Sections Presentation */
+
+.ProjectPresentation__Container {
+  position: relative;
+  margin-top: 10vh;
+  z-index: 2;
+}
+
+.ProjectPresentation__SectionsPresentation {
+  display: flex;
+  flex-direction: row;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.SectionsPresentation__PresentationArea {
+  flex-grow: 1;
+  min-height: 100vh;
+}
+
+.SectionPresentation__Container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.SectionPresentation__MainMedia {
+  max-width: 70%;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  margin-bottom: 2em;
+}
+
+.SectionsPresentation__SectionsTabs {
+  min-width: 20vw;
+  min-height: 50vh;
+  margin: 0.5em 2vw 0 2vw;
+  background-color: #a9bec5;
+  border-radius: 4px;
+  padding: 3em 0;
+}
+
+.SectionsPresentation__SectionsTabs .Mui-selected {
+  background-color: #fff;
+}
+
+.SectionsPresentation__SectionsTabs .MuiTabs-indicator {
+  /* width: 0; */
+  /* border-style: none; */
+}
+
+.SectionPresentation__Title {
+  margin-bottom: 0.5em;
+}

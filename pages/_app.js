@@ -8,16 +8,17 @@ import config from '../config';
 import reducers from '../store/reducers';
 import '../styles/App.css';
 import '../styles/Editable.css';
-import '../styles/Media.css';
+import '../styles/globals.css';
 import '../styles/InputDialogs.css';
 import '../styles/Layouts.css';
-import '../styles/globals.css';
+import '../styles/Media.css';
 import '../styles/Messages.css';
 import '../styles/Navbar.css';
 import '../styles/Profile.css';
 import '../styles/ProjectCard.css';
-import '../styles/ProjectsList.css';
 import '../styles/ProjectForm.css';
+import '../styles/ProjectsList.css';
+import '../styles/ProjectView.css';
 import { getEnv } from '../utils/env';
 
 const A6WebApp = ({ Component, pageProps, preloadedState, env }) => {

@@ -7,7 +7,7 @@ import { getSession } from 'next-auth/react';
 import { useActiveSession } from '../../hooks/oauth';
 import logger from '../../utils/logger';
 
-const ContributorProfile = ({ profile, isCurrentContributor, session }) => {
+const ContributorProfile = ({ profile, isCurrentContributor }) => {
   isCurrentContributor && useActiveSession();
 
   return (
