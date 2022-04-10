@@ -137,12 +137,14 @@
   filter: brightness(0.75);
 }
 
-.MediaDnD__DropZone * {
-  transition: opacity 0.5s;
-}
+@media (min-width: 600px) {
+  .MediaDnD__DropZone > * {
+    transition: opacity 0.5s;
+  }
 
-.MediaDnD__DropZone.DragOver * {
-  opacity: 0.4;
+  .MediaDnD__DropZone.DragOver > * {
+    opacity: 0.4;
+  }
 }
 
 /* MediaSingleDnD */
@@ -177,7 +179,7 @@
 
 .MediaSingleDnD__DropZone__PreviewPlaceholder {
   flex-grow: 1;
-  width: 20%;
+  width: 60%;
   border-radius: 5px;
   border-style: solid;
   border-width: thin;
@@ -186,6 +188,12 @@
 
 .MediaSingleDnD__DropZone__Icon {
   margin: 15px;
+}
+
+@media (min-width: 900px) {
+  .MediaSingleDnD__DropZone__PreviewPlaceholder {
+    width: 20%;
+  }
 }
 
 /* MediaListCard */
@@ -298,7 +306,7 @@
   max-width: 100%;
 }
 
-.Youtube__Iframe { 
+.Youtube__Iframe {
   max-width: 100%;
 }
 

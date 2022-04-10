@@ -43,7 +43,7 @@ const ProjectPresentationMedia = ({
         spacing={2}
         justifyContent="center"
       >
-        <Grid item xs={6}>
+        <Grid item xs={10} sm={6}>
           <Typography>{PRESENTATION_BASE_FIELDS.mainMedia.label}</Typography>
           <Media
             allowsMultiple={false}
