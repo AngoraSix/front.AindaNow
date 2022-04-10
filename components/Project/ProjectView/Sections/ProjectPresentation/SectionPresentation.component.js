@@ -10,7 +10,6 @@ const SectionPresentation = ({ sectionTitle, description, mainMedia }) => {
         className="SectionPresentation__Title"
         variant="h4"
         component="h2"
-        align="right"
         color="primary.main"
       >
         {sectionTitle}
@@ -22,7 +21,6 @@ const SectionPresentation = ({ sectionTitle, description, mainMedia }) => {
         <Typography
           className="SectionPresentation__Description"
           variant="body1"
-          align="right"
         >
           {description}
         </Typography>

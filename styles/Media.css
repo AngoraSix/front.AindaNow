@@ -298,6 +298,10 @@
   max-width: 100%;
 }
 
+.Youtube__Iframe { 
+  max-width: 100%;
+}
+
 @media (min-width: 900px) {
   .MediaPreview__Image {
     max-width: 100%;

@@ -5,12 +5,14 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 
-const ImagePreview = ({ media }) => {
+const ImagePreview = ({ media, allowsZoomingIn }) => {
   const [isZoomed, setIsZoomed] = useState(false);
   const isNotMobile = useMediaQuery('(min-width:600px)');
 
   const onZoomIn = () => {
-    setIsZoomed(!isZoomed);
+    if (allowsZoomingIn) {
+      setIsZoomed(!isZoomed);
+    }
   };
 
   return media ? (
@@ -22,7 +24,7 @@ const ImagePreview = ({ media }) => {
         }`}
         src={media?.thumbnailUrl}
       />
-      {!isNotMobile && (
+      {allowsZoomingIn && !isNotMobile && (
         <IconButton
           className={`MediaPreview__Image__ZoomIcon ${
             isZoomed ? 'ZoomedIn' : 'ZoomedOut'
@@ -50,10 +52,13 @@ const ImagePreview = ({ media }) => {
   );
 };
 
-ImagePreview.defaultProps = {};
+ImagePreview.defaultProps = {
+  allowsZoomingIn: false,
+};
 
 ImagePreview.propTypes = {
-  media: PropTypes.object,
+  media: PropTypes.object.isRequired,
+  allowsZoomingIn: PropTypes.bool,
 };
 
 export default ImagePreview;
