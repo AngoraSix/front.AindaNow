@@ -10,6 +10,7 @@
   min-width: 300px;
   width: calc(100% - 20px);
   min-height: calc(100vh - 80px);
+  display: block;
 }
 
 @media (min-width: 600px) {
@@ -22,10 +23,6 @@
 /* Landing */
 .DefaultLayout__Container {
   background: #fafafa;
-}
-
-.DefaultLayout__Page__Body {
-  display: block;
 }
 
 /* Projects List */

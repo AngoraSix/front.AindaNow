@@ -21,6 +21,7 @@ const MediaPreviewDialog = ({ mediaType, open, handleDialogClose, media }) => {
         <MediaPreview
           mediaType={mediaType || MEDIA_TYPES.IMAGE}
           media={media}
+          allowsZoomingIn={true}
         />
       </DialogContent>
     </Dialog>
