@@ -2,12 +2,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import DefaultLayout from '../DefaultLayout';
 
-const ProjectViewLayout = ({ children }) => {
+const ProjectPresentationViewLayout = ({ children }) => {
   let headData = {};
 
   return (
     <DefaultLayout
-      className="ProjectViewLayout__Page"
+      className="ProjectPresentationViewLayout__Page"
       headData={headData}
       contained={false}
     >
@@ -16,13 +16,13 @@ const ProjectViewLayout = ({ children }) => {
   );
 };
 
-ProjectViewLayout.defaultProps = {};
+ProjectPresentationViewLayout.defaultProps = {};
 
-ProjectViewLayout.propTypes = {
+ProjectPresentationViewLayout.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
 };
 
-export default ProjectViewLayout;
+export default ProjectPresentationViewLayout;

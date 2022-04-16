@@ -8,7 +8,7 @@ const _getRandomIndexForArray = (array) => {
   return Math.floor(Math.random() * array.length);
 };
 
-const ProjectViewMediaCard = ({ imagesList, interval }) => {
+const ProjectPresentationViewMediaCard = ({ imagesList, interval }) => {
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
   const [activeOverlayIndex, setActiveOverlayIndex] = useState(1);
   const [cardInterval, setCardInterval] = useState(5000);
@@ -48,13 +48,13 @@ const ProjectViewMediaCard = ({ imagesList, interval }) => {
   );
 };
 
-ProjectViewMediaCard.defaultProps = {
+ProjectPresentationViewMediaCard.defaultProps = {
   imagesList: [],
   interval: 5000, // every five second
 };
 
-ProjectViewMediaCard.propTypes = {
+ProjectPresentationViewMediaCard.propTypes = {
   imagesList: PropTypes.arrayOf(PropTypes.string),
   interval: PropTypes.number,
 };
-export default ProjectViewMediaCard;
+export default ProjectPresentationViewMediaCard;

@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 
 const drawerBleeding = 35;
 
-const SectionTabs = ({ project, setActiveSectionIndex, activeSectionindex }) => {
+const SectionTabs = ({ projectPresentation, setActiveSectionIndex, activeSectionindex }) => {
   const isNotMobile = useMediaQuery('(min-width:600px)');
   const [openedDrawer, setOpenedDrawer] = useState(false);
   const theme = useTheme();
@@ -55,7 +55,7 @@ const SectionTabs = ({ project, setActiveSectionIndex, activeSectionindex }) => 
       aria-label="Vertical tabs example"
       sx={{ borderRight: 1, borderColor: 'divider' }}
     >
-      {project.sections.map((s, i) => (
+      {projectPresentation.sections.map((s, i) => (
         <Tab key={i} label={s.title} />
       ))}
     </Tabs>

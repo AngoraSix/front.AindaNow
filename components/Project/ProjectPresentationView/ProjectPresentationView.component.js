@@ -1,6 +1,4 @@
-import {
-  Box, SwipeableDrawer, Typography
-} from '@mui/material';
+import { Box } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { styled } from '@mui/system';
 import PropTypes from 'prop-types';
@@ -10,12 +8,12 @@ import ProjectPresentation from './Sections/ProjectPresentation/ProjectPresentat
 
 const drawerBleeding = 56;
 
-const ProjectView = ({ project }) => {
+const ProjectPresentationView = ({ projectPresentation }) => {
   const [openedDrawer, setOpenedDrawer] = useState(false);
   const StyledBox = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
   }));
-  
+
   const Puller = styled(Box)(({ theme }) => ({
     width: 30,
     height: 6,
@@ -37,17 +35,19 @@ const ProjectView = ({ project }) => {
     setOpenedDrawer(open);
   };
   return (
-    <div className="ProjectView ProjectView__Container">
-      <MediaHeader media={project.sections.flatMap((s) => s.media)} />
-      <ProjectPresentation project={project} />
+    <div className="ProjectPresentationView ProjectPresentationView__Container">
+      <MediaHeader
+        media={projectPresentation.sections.flatMap((s) => s.media)}
+      />
+      <ProjectPresentation projectPresentation={projectPresentation} />
     </div>
   );
 };
 
-ProjectView.defaultProps = {};
+ProjectPresentationView.defaultProps = {};
 
-ProjectView.propTypes = {
-  project: PropTypes.object.isRequired,
+ProjectPresentationView.propTypes = {
+  projectPresentation: PropTypes.object.isRequired,
 };
 
-export default ProjectView;
+export default ProjectPresentationView;

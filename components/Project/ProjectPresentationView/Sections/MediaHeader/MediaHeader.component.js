@@ -3,7 +3,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { MEDIA_TYPES } from '../../../../../constants';
-import ProjectViewMediaCard from './ProjectViewMediaCard.component';
+import ProjectPresentationViewMediaCard from './ProjectPresentationViewMediaCard.component';
 
 const QUANTITY_OF_CARDS = {
   MOBILE: 6,
@@ -38,7 +38,7 @@ const MediaHeader = ({ media }) => {
         {new Array(quantityOfCards).fill('', 0, quantityOfCards).map((_, i) => {
           return (
             <Grid item key={i} xs={4} sm={2}>
-              <ProjectViewMediaCard
+              <ProjectPresentationViewMediaCard
                 imagesList={images}
                 interval={_getRandomInterval()}
               />
