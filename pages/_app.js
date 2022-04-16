@@ -18,7 +18,7 @@ import '../styles/Profile.css';
 import '../styles/ProjectCard.css';
 import '../styles/ProjectForm.css';
 import '../styles/ProjectsList.css';
-import '../styles/ProjectView.css';
+import '../styles/ProjectPresentationView.css';
 import { getEnv } from '../utils/env';
 
 const A6WebApp = ({ Component, pageProps, preloadedState, env }) => {
