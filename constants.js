@@ -29,11 +29,22 @@ export const ROUTES = {
   projects: {
     new: '/projects/new',
     view: '/projects/view/:projectId',
-    list: '/',
+    edit: '/projects/edit/:projectId',
+    presentations: {
+      list: '/',
+      view: '/projects/presentations/view/:projectPresentationId',
+      edit: '/projects/presentations/edit/:projectPresentationId',
+    }
   },
   profile: {
     view: '/profile/:profileId',
   },
+};
+
+export const HEADERS = {
+  messages: {
+    error: 'A6-REDIRECT-ERROR-MESSAGE'
+  }
 };
 
 export const INPUT_FIELD_TYPES = {

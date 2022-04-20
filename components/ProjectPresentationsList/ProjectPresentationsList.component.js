@@ -1,28 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Grid, Button, IconButton, TextField } from '@mui/material';
-import Link from 'next/link';
-import ProjectCard from './ProjectCard';
-import NewIcon from '@mui/icons-material/AddCircleOutline';
 import NewIconContained from '@mui/icons-material/AddCircle';
+import NewIcon from '@mui/icons-material/AddCircleOutline';
+import { Button, Grid, IconButton, TextField } from '@mui/material';
+import Link from 'next/link';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import { ROUTES } from '../../constants';
+import ProjectCard from './ProjectCard';
 
-const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
+const ProjectPresentationsList = ({
+  total,
+  projectPresentationsList,
+  onNextPageClick,
+  onSearch,
+}) => {
   const [search, setSearch] = useState('');
 
   return (
-    <div className="ProjectsList ProjectsList__Container">
-      <div className="ProjectsList__Toolbar">
-        <div className="ProjectsList__Toolbar__Column Column__Large">
+    <div className="ProjectPresentationsList ProjectPresentationsList__Container">
+      <div className="ProjectPresentationsList__Toolbar">
+        <div className="ProjectPresentationsList__Toolbar__Column Column__Large">
           <TextField
-            className="ProjectsList__Toolbar__Input"
+            className="ProjectPresentationsList__Toolbar__Input"
             label="Search"
             value={search}
             onChange={({ target: value }) => onSearchChange(value)}
             fullWidth
           />
         </div>
-        <div className="ProjectsList__Toolbar__Column">
+        <div className="ProjectPresentationsList__Toolbar__Column">
           <Link href={ROUTES.projects.new}>
             <Button
               color="primary"
@@ -45,17 +50,24 @@ const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
         </div>
       </div>
 
-      <div className="ProjectsList__Content">
+      <div className="ProjectPresentationsList__Content">
         <Grid container spacing={2}>
-          {projectsList.map((project) => (
-            <Grid key={project.id} item xs={12} sm={6} md={4} lg={3}>
-              <ProjectCard project={project} />
+          {projectPresentationsList.map((projectPresentation) => (
+            <Grid
+              key={projectPresentation.id}
+              item
+              xs={12}
+              sm={6}
+              md={4}
+              lg={3}
+            >
+              <ProjectCard projectPresentation={projectPresentation} />
             </Grid>
           ))}
         </Grid>
 
-        {total > projectsList.length && (
-          <div className="ProjectsList__LoadMore">
+        {total > projectPresentationsList.length && (
+          <div className="ProjectPresentationsList__LoadMore">
             <Button
               variant="outlined"
               color="primary"
@@ -70,16 +82,16 @@ const ProjectsList = ({ total, projectsList, onNextPageClick, onSearch }) => {
   );
 };
 
-ProjectsList.defaultProps = {
+ProjectPresentationsList.defaultProps = {
   total: 0,
   projects: [],
 };
 
-ProjectsList.propTypes = {
+ProjectPresentationsList.propTypes = {
   total: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onNextPageClick: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
   projects: PropTypes.array,
 };
 
-export default ProjectsList;
+export default ProjectPresentationsList;

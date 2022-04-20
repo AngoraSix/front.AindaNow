@@ -1,10 +1,10 @@
 import { getSession } from 'next-auth/react';
 import PropTypes from 'prop-types';
 import React from 'react';
-import api from '../../../api';
-import ProjectPresentationView from '../../../components/Project/ProjectPresentationView';
-import ProjectPresentationViewLayout from '../../../layouts/ProjectPresentationViewLayout/ProjectPresentationViewLayout';
-import logger from '../../../utils/logger';
+import api from '../../../../api';
+import ProjectPresentationView from '../../../../components/Project/ProjectPresentationView';
+import ProjectPresentationViewLayout from '../../../../layouts/ProjectPresentationViewLayout/ProjectPresentationViewLayout';
+import logger from '../../../../utils/logger';
 
 const ProjectPresentationViewPage = ({ projectPresentation }) => {
   return (
@@ -27,7 +27,7 @@ export const getServerSideProps = async (ctx) => {
   const validatedToken =
     session?.error !== 'RefreshAccessTokenError' ? session : null;
   try {
-    const projectPresentation = await api.projects.getProject(
+    const projectPresentation = await api.projects.getProjectPresentation(
       projectPresentationId,
       validatedToken
     );

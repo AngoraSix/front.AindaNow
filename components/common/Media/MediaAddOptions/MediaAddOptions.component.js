@@ -53,7 +53,7 @@ const MediaAddOptions = ({
 
   const handleInputDialogClickOpen = (type) => () => {
     onAddMediaOptionClick(MEDIA_OPTIONS_MAP[type].inputType);
-    router.push('#', undefined, { shallow: true });
+      push('#', undefined, { shallow: true });
   };
 
   const handleDialogClose = () => {

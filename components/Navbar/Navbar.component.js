@@ -85,7 +85,7 @@ const Navbar = () => {
                 }}
               >
                 <MenuItem key="projects">
-                  <Link href={ROUTES.projects.list}>
+                  <Link href={ROUTES.projects.presentations.list}>
                     <Typography
                       textAlign="center"
                       onClick={handleCloseNavMenu}
@@ -110,7 +110,7 @@ const Navbar = () => {
             </Box>
 
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-              <Link href={ROUTES.projects.list}>
+              <Link href={ROUTES.projects.presentations.list}>
                 <Button
                   className="Navbar__Menu__Item"
                   variant="text"

@@ -2,17 +2,17 @@ import { useSession } from 'next-auth/react';
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
 import api from '../../api';
-import ProjectsList from './ProjectsList.component';
-import ProjectsListReducer, {
+import ProjectPresentationsList from './ProjectPresentationsList.component';
+import ProjectPresentationsListReducer, {
   INITIAL_STATE,
   updateDataAction,
-} from './ProjectsList.reducer';
+} from './ProjectPresentationsList.reducer';
 
-const ProjectsListContainer = ({ data }) => {
+const ProjectPresentationsListContainer = ({ data }) => {
   const { data: session, status } = useSession();
   const loading = status === 'loading';
 
-  const [state, dispatch] = useReducer(ProjectsListReducer, {
+  const [state, dispatch] = useReducer(ProjectPresentationsListReducer, {
     ...INITIAL_STATE,
     data,
   });
@@ -24,9 +24,9 @@ const ProjectsListContainer = ({ data }) => {
         search: state.data.search,
       });
 
-    const projectsList = state.data.projects.concat(data);
+    const projectPresentationsList = state.data.projects.concat(data);
 
-    dispatch(updateDataAction({ total, page, limit, search, projectsList }));
+    dispatch(updateDataAction({ total, page, limit, search, projectPresentationsList }));
   };
 
   const onSearch = async (value) => {
@@ -39,21 +39,21 @@ const ProjectsListContainer = ({ data }) => {
     //   search,
     //   data: projects,
     // } =
-    const projectsList = await api.projects.fetchProjectPresentations(
+    const projectPresentationsList = await api.projects.fetchProjectPresentations(
       session.user.attributes,
       {
         search: value,
       }
     );
 
-    const total = projectsList.length,
+    const total = projectPresentationsList.length,
       page = 1,
       limit = 5,
       search = value;
-    dispatch(updateDataAction({ total, page, limit, search, projectsList }));
+    dispatch(updateDataAction({ total, page, limit, search, projectPresentationsList }));
   };
   return (
-    <ProjectsList
+    <ProjectPresentationsList
       {...state.data}
       onNextPageClick={onNextPageClick}
       onSearch={onSearch}
@@ -61,11 +61,11 @@ const ProjectsListContainer = ({ data }) => {
   );
 };
 
-ProjectsListContainer.defaultProps = {
+ProjectPresentationsListContainer.defaultProps = {
   data: {},
 };
-ProjectsListContainer.propTypes = {
+ProjectPresentationsListContainer.propTypes = {
   data: PropTypes.object,
 };
 
-export default ProjectsListContainer;
+export default ProjectPresentationsListContainer;

@@ -1,4 +1,4 @@
-const UPDATE_DATA = 'ProjectsList/UPDATE_DATA';
+const UPDATE_DATA = 'ProjectPresentationsList/UPDATE_DATA';
 
 export const updateDataAction = (payload) => ({ type: UPDATE_DATA, payload });
 
@@ -6,7 +6,7 @@ export const INITIAL_STATE = {
   data: {},
 };
 
-const ProjectsListReducer = (state = INITIAL_STATE, action) => {
+const ProjectPresentationsListReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case UPDATE_DATA:
       return {
@@ -19,4 +19,4 @@ const ProjectsListReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default ProjectsListReducer;
+export default ProjectPresentationsListReducer;
