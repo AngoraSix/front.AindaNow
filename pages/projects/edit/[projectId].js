@@ -1,34 +1,38 @@
 import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import api from '../../../api';
 import FormSkeleton from '../../../components/common/Skeletons/FormSkeleton.component';
 import ManageProject from '../../../components/Project/ManageProject';
-import { resolveRoute, ROUTES, HEADERS } from '../../../constants';
+import { resolveRoute, ROUTES } from '../../../constants';
+import { useNotifications } from '../../../hooks/app';
 import { useActiveSession } from '../../../hooks/oauth';
 import DefaultLayout from '../../../layouts/DefaultLayout';
 import logger from '../../../utils/logger';
-import { useNotifications } from '../../../hooks/app';
 
-const NOT_ADMIN_ERROR_MESSAGE = 'You need admin privileges to edit the Project';
+const NOT_ADMIN_ERROR_MESSAGE =
+  'You need admin privileges to edit this Project';
 
 const EditProjectPage = ({ session, project, isAdmin }) => {
-  const { onError } = useNotifications();
   useActiveSession();
+  const { onError } = useNotifications();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isAdmin) {
+    if (session && !session.error && !isAdmin) {
       onError(NOT_ADMIN_ERROR_MESSAGE);
       // const viewURL = resolveRoute(ROUTES.projects.view, project.id);
-      const viewURL = resolveRoute(ROUTES.projects.presentations.view, "623fd4ed584d6f113deb622a");
+      const viewURL = resolveRoute(
+        ROUTES.projects.presentations.view,
+        '6248ba9bda2c4941bf9df036'
+      );
       router.push(viewURL);
     }
     return () => {};
   }, []);
 
-  if (!session || session.error || !isAdmin) {
+  if (!session || session.error || !project || !isAdmin) {
     logger.error('Log in to modify new Project');
     return (
       <DefaultLayout>
@@ -58,8 +62,6 @@ export const getServerSideProps = async (ctx) => {
   let isAdmin = false;
   try {
     const project = await api.projects.getProject(projectId, validatedToken);
-    console.log('GERRRRRRRRRRRRRARRRDOO');
-    console.log(project);
     isAdmin = session?.user.id === project.adminId;
     props = {
       ...props,
@@ -67,20 +69,7 @@ export const getServerSideProps = async (ctx) => {
       isAdmin,
     };
   } catch (err) {
-    console.log('NONONONO');
-    console.log(err);
     logger.error('err', err);
-  }
-
-  if (session && !session.error && !isAdmin) {
-    ctx.res.setHeader(HEADERS.messages.error, NOT_ADMIN_ERROR_MESSAGE);
-    const viewURL = resolveRoute(ROUTES.projects.view, projectId);
-    // return {
-    //   redirect: {
-    //     destination: viewURL,
-    //     permanent: false,
-    //   },
-    // };
   }
 
   return {
