@@ -3,7 +3,7 @@ import React from 'react';
 import { useNotifications } from '../../../hooks/app';
 import ManageProject from './ManageProject.component';
 
-const ManageProjectContainer = ({ project }) => {
+const ManageProjectContainer = ({ project, stepped }) => {
   const { onSuccess, onError: onNotificationError } = useNotifications();
 
   const onDone = () => {
@@ -14,13 +14,23 @@ const ManageProjectContainer = ({ project }) => {
     onNotificationError('Error creating project.');
   };
 
-  return <ManageProject project={project} onDone={onDone} onError={onError} />;
+  return (
+    <ManageProject
+      project={project}
+      stepped={stepped}
+      onDone={onDone}
+      onError={onError}
+    />
+  );
 };
 
-ManageProjectContainer.defaultProps = {};
+ManageProjectContainer.defaultProps = {
+  stepped: true,
+};
 
 ManageProjectContainer.propTypes = {
   project: PropTypes.object,
+  stepped: PropTypes.bool,
 };
 
 export default ManageProjectContainer;

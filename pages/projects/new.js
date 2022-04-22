@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
 import React from 'react';
 import FormSkeleton from '../../components/common/Skeletons/FormSkeleton.component';
-import NewProjectContainer from '../../components/Project/ManageProject';
+import ManageProject from '../../components/Project/ManageProject';
 import { useActiveSession } from '../../hooks/oauth';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import logger from '../../utils/logger';
@@ -22,7 +22,7 @@ const NewProjectPage = ({ session }) => {
   }
   return (
     <DefaultLayout>
-      <NewProjectContainer />
+      <ManageProject />
     </DefaultLayout>
   );
 };

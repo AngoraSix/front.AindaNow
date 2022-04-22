@@ -44,7 +44,7 @@ const EditProjectPage = ({ session, project, isAdmin }) => {
   }
   return (
     <DefaultLayout>
-      <ManageProject />
+      <ManageProject stepped={false} project={project} />
     </DefaultLayout>
   );
 };
