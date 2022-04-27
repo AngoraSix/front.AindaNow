@@ -61,9 +61,6 @@ A6WebApp.getInitialProps = async ({ ctx }) => {
 
   const preloadedState = store.getState();
 
-  console.log('ZEEZZEZE');
-  console.log(ctx.req.headers[HEADERS.messages.error]);
-
   return {
     preloadedState,
     env,

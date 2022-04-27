@@ -42,3 +42,18 @@ export const createObjectFromFlatParams = (flatObject) => {
     .filter(([, value]) => (Array.isArray(value) ? value.length : !!value))
     .reduce((output, field) => _mergeDeep(output, _mapFlatParam(field)), {});
 };
+
+export const createObjectWithFlatParams = (deepObject) => {
+  let result = {};
+  for (const i in deepObject) {
+    if (typeof deepObject[i] === 'object' && !Array.isArray(deepObject[i])) {
+      const temp = createObjectWithFlatParams(deepObject[i]);
+      for (const j in temp) {
+        result[i + '.' + j] = temp[j];
+      }
+    } else {
+      result[i] = deepObject[i];
+    }
+  }
+  return result;
+};

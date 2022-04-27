@@ -1,81 +1,46 @@
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useReducer } from 'react';
 import api from '../../../api';
-import config from '../../../config';
-import { MEDIA_TYPES, resolveRoute, ROUTES } from '../../../constants';
+import { resolveRoute, ROUTES } from '../../../constants';
 import { useLoading } from '../../../hooks/app';
-import { createObjectFromFlatParams } from '../../../utils/helpers';
+import {
+  formToProject,
+  projectToForm,
+} from '../../../utils/converters/projectConverters';
 import logger from '../../../utils/logger';
 import ProjectForm from './ProjectForm.component';
 import { PROJECT_PRESENTATION_REQUIRED_FIELDS } from './ProjectForm.properties';
+import ProjectFormReducer, {
+  INITIAL_STATE,
+  updateFieldsAction,
+} from './ProjectForm.reducer';
 
 const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
   const { doLoad } = useLoading();
   const router = useRouter();
+  const [formData, dispatch] = useReducer(ProjectFormReducer, {
+    ...INITIAL_STATE,
+    ...projectToForm(project),
+  });
 
-  const _uploadMedia = async (media) => {
-    const file = media.file;
-    let resourceId = media.resourceId;
-    let thumbnailURL = media.thumbnailUrl;
-    let mediaURL;
-    if (file && (file instanceof File || typeof file === 'object')) {
-      [mediaURL, thumbnailURL] = await api.front.uploadFile(file);
-      resourceId = mediaURL.split('/').pop();
-    } else if (media.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE) {
-      const resolvedEmbedUrl =
-        config.thirdParties.youtube.embedUrlPattern.replace(
-          ':resourceId',
-          media.resourceId
-        );
-      mediaURL = resolvedEmbedUrl;
-    }
-    return {
-      mediaType: media.mediaType,
-      url: mediaURL,
-      thumbnailUrl: thumbnailURL,
-      resourceId: resourceId,
+  const onFormChange = (property) => (eventOrValue) => {
+    const partialFormData = {
+      [property]: eventOrValue.target
+        ? eventOrValue.target.value
+        : eventOrValue,
     };
-  };
 
-  const _completeFields = (project) => {
-    if (project.presentation) {
-      Object.entries(PROJECT_PRESENTATION_REQUIRED_FIELDS).forEach(
-        ([key, field]) => {
-          if (!project.presentation[key]) {
-            project.presentation[key] = field.mapFromProject(project);
-          }
-        }
-      );
-    }
-  };
-
-  const _presentationAsSection = (project) => {
-    if (project.presentation) {
-      project.presentation.sections = [{ ...project.presentation }];
-      delete project.presentation.mainMedia;
-      delete project.presentation.media;
-      delete project.presentation.title;
-      delete project.presentation.description;
-    }
+    dispatch(updateFieldsAction(partialFormData));
   };
 
   const onSubmit = async (flatFormData) => {
     doLoad(true);
-    let projectObject = createObjectFromFlatParams(flatFormData);
     try {
-      if (projectObject.presentation) {
-        projectObject.presentation.media = await Promise.all(
-          projectObject.presentation?.media?.map((m) => _uploadMedia(m)) || []
-        );
-        if (projectObject.presentation.mainMedia?.length === 1) {
-          projectObject.presentation.mainMedia = await _uploadMedia(
-            projectObject.presentation.mainMedia[0]
-          );
-        }
-      }
-      _completeFields(projectObject);
-      _presentationAsSection(projectObject);
+      let projectObject = await formToProject(
+        flatFormData,
+        PROJECT_PRESENTATION_REQUIRED_FIELDS
+      );
 
       const projectResponse = await api.front.newProject(projectObject);
       onDone(projectResponse);
@@ -86,14 +51,21 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
       );
       router.push(viewURL);
     } catch (err) {
-      logger.log(err);
+      logger.error(err);
       onError(err);
     }
 
     doLoad(false);
   };
 
-  return <ProjectForm project={project} onSubmit={onSubmit} {...args} />;
+  return (
+    <ProjectForm
+      formData={formData}
+      onFormChange={onFormChange}
+      onSubmit={onSubmit}
+      {...args}
+    />
+  );
 };
 
 ProjectFormContainer.defaultProps = {

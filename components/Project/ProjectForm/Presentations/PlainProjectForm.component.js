@@ -1,23 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography, Button } from '@mui/material';
+import { Typography, Button, Box } from '@mui/material';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
-import ProjectPresentationData from '../Sections/ProjectPresentationData.component';
+import ProjectCorePresentationsHolder from '../Sections/ProjectCorePresentationsHolder.component';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
-const PlainProjectForm = ({ formData, onFormChange, className }) => (
-  <div className={`PlainProjectForm PlainProjectForm__Container ${className}`}>
+const PlainProjectForm = ({ formData, onFormChange, className }) => {
+  const isNotMobile = useMediaQuery('(min-width:600px)');
+
+  return <Box className={`PlainProjectForm PlainProjectForm__Container ${className}`}>
     <Typography variant="subtitle1" color="primary">
       Project
     </Typography>
-    <ProjectCoreData formData={formData} onFormChange={onFormChange} />
-    <ProjectPresentationData formData={formData} onFormChange={onFormChange} />
-    <div>
+    <ProjectCoreData formData={formData} onFormChange={onFormChange} isNotMobile={isNotMobile} />
+    <ProjectCorePresentationsHolder formData={formData} />
+    <Box>
       <Button type="submit" color="primary" variant="contained" fullWidth>
         Save
       </Button>
-    </div>
-  </div>
-);
+    </Box>
+  </Box>
+};
 
 PlainProjectForm.defaultProps = {
   className: '',

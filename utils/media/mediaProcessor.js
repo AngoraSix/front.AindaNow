@@ -2,6 +2,31 @@ import { MEDIA_TYPES } from '../../constants';
 import Media from '../../models/Media';
 import { isImage, processImage } from './image';
 import { isYoutubeURL, processYoutubeUrl } from './youtube';
+import api from '../../api';
+
+export const uploadMedia = async (media) => {
+  const file = media.file;
+  let resourceId = media.resourceId;
+  let thumbnailURL = media.thumbnailUrl;
+  let mediaURL;
+  if (file && (file instanceof File || typeof file === 'object')) {
+    [mediaURL, thumbnailURL] = await api.front.uploadFile(file);
+    resourceId = mediaURL.split('/').pop();
+  } else if (media.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE) {
+    const resolvedEmbedUrl =
+      config.thirdParties.youtube.embedUrlPattern.replace(
+        ':resourceId',
+        media.resourceId
+      );
+    mediaURL = resolvedEmbedUrl;
+  }
+  return {
+    mediaType: media.mediaType,
+    url: mediaURL,
+    thumbnailUrl: thumbnailURL,
+    resourceId: resourceId,
+  };
+};
 
 const _processInputElement = async (mediaDataElement, allowedMediaTypes) => {
   if (mediaDataElement instanceof Media) {

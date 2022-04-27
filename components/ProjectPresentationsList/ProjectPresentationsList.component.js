@@ -52,7 +52,7 @@ const ProjectPresentationsList = ({
 
       <div className="ProjectPresentationsList__Content">
         <Grid container spacing={2}>
-          {projectPresentationsList.map((projectPresentation) => (
+          {projectPresentationsList?.map((projectPresentation) => (
             <Grid
               key={projectPresentation.id}
               item

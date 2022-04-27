@@ -38,3 +38,11 @@
     padding: 2rem 4rem;
   }
 }
+
+/* ProjectCorePresentationsHolder */
+
+.ProjectPresentationsData__Summary .MuiAccordionSummary-content {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 1em;
+}
