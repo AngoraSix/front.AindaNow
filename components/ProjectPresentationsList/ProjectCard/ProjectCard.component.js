@@ -58,7 +58,10 @@ const ProjectCard = ({ projectPresentation }) => {
 
   const mainImage = _findMainImageMedia(projectPresentation)?.thumbnailUrl;
 
-  const viewURL = resolveRoute(ROUTES.projects.presentations.view, projectPresentation.id);
+  const viewURL = resolveRoute(
+    ROUTES.projects.presentations.view,
+    projectPresentation.id
+  );
 
   return (
     <Link href={viewURL} passHref>
@@ -73,8 +76,8 @@ const ProjectCard = ({ projectPresentation }) => {
       >
         <Box className="ProjectCard__DescriptionSection">
           <Typography
-            className={classnames('ProjectCard__Title', {
-              'ProjectCard__Title--withDescription':
+            className={classnames('ProjectCard__DescriptionSection__Title', {
+              'ProjectCard__DescriptionSection__Title--withDescription':
                 !!projectPresentation.description,
             })}
             variant="subtitle1"
@@ -82,7 +85,10 @@ const ProjectCard = ({ projectPresentation }) => {
           >
             {projectPresentation.sections[0].title}
           </Typography>
-          <Typography className="ProjectCard__Goal" variant="caption">
+          <Typography
+            className="ProjectCard__DescriptionSection__Text"
+            variant="caption"
+          >
             {projectPresentation.sections[0].description}
           </Typography>
         </Box>

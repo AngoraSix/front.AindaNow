@@ -1,6 +1,6 @@
-import React from 'react';
+import { Box, Grid, TextField, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import { TextField, Grid, Box, Typography } from '@mui/material';
+import React from 'react';
 import { PROJECT_CORE_FORM_FIELDS as CORE_FIELDS } from '../ProjectForm.properties';
 
 const MOBILE_DESCRIPTION =
@@ -46,6 +46,7 @@ const ProjectCoreData = ({
         <Grid item xs={10}>
           <TextField
             {...CORE_FIELDS.name}
+            label={formData.name ? 'Project Name' : CORE_FIELDS.name.label}
             value={formData.name || ''}
             onChange={onFieldChange('name')}
             fullWidth

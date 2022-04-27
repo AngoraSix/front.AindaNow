@@ -47,11 +47,7 @@
 }
 
 .ProjectCard__Container::after {
-  background: linear-gradient(
-    45deg,
-    #3f6e91,
-    hsl(5 97% 63% / 0) 100%
-  );
+  background: linear-gradient(45deg, #3f6e91, hsl(5 97% 63% / 0) 100%);
   opacity: 0.7;
   transition: 1500ms opacity linear;
 }
@@ -83,7 +79,7 @@
   transition-delay: 200ms;
 }
 
-.ProjectCard__DescriptionSection .ProjectCard__Title {
+.ProjectCard__DescriptionSection .ProjectCard__DescriptionSection__Title {
   font-size: 1.7rem;
   line-height: 1.2;
   font-weight: 900;
@@ -97,7 +93,7 @@
   text-shadow: 0 0 10px black;
 }
 
-.ProjectCard__DescriptionSection .ProjectCard__Goal {
+.ProjectCard__DescriptionSection .ProjectCard__DescriptionSection__Text {
   font-size: 1.2rem;
   font-weight: 500;
   opacity: 1;
