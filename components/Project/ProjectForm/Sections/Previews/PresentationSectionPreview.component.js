@@ -5,14 +5,21 @@ import {
   ImageListItem,
   Typography,
 } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 const PresentationSectionPreview = ({ presentationSection, isNotMobile }) => {
+  const isMedium = useMediaQuery('(min-width:900px)');
+  const isLarge = useMediaQuery('(min-width:1200px)');
+
   const allMedia = [
     presentationSection.mainMedia,
     ...presentationSection.media,
   ];
+  const maxQtyOfCols = isNotMobile ? (isMedium ? (isLarge ? 10 : 6) : 4) : 2;
+  const qtyOfCols =
+    allMedia.length < maxQtyOfCols ? allMedia.length : maxQtyOfCols;
   return (
     <Box className="PresentationSectionPreview PresentationSectionPreview__Container">
       <Divider className="PresentationSectionPreview__Title__Container">
@@ -25,7 +32,7 @@ const PresentationSectionPreview = ({ presentationSection, isNotMobile }) => {
       </Divider>
       <ImageList
         className="PresentationSectionPreview__Media__Container"
-        cols={isNotMobile ? (allMedia.length < 10 ? allMedia.length : 10) : 2}
+        cols={qtyOfCols}
         rowHeight={100}
       >
         {allMedia.map((m) => (
