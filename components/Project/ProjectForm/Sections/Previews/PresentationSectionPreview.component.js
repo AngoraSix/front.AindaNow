@@ -1,10 +1,4 @@
-import {
-  Box,
-  Divider,
-  ImageList,
-  ImageListItem,
-  Typography,
-} from '@mui/material';
+import { Box, Divider, Typography } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -30,21 +24,19 @@ const PresentationSectionPreview = ({ presentationSection, isNotMobile }) => {
           {presentationSection.title}
         </Typography>
       </Divider>
-      <ImageList
-        className="PresentationSectionPreview__Media__Container"
-        cols={qtyOfCols}
-        rowHeight={100}
-      >
-        {allMedia.map((m) => (
-          <ImageListItem key={m.resourceId}>
-            <img src={m.thumbnailUrl} loading="lazy" />
-          </ImageListItem>
-        ))}
-      </ImageList>
-      <Box className="PresentationSectionPreview__Description__Container">
-        <Typography className="PresentationSectionPreview__Description__Text">
-          {presentationSection.description}
-        </Typography>
+      <Box className="PresentationSectionPreview__Data">
+        <Box className="PresentationSectionPreview__Media__Container">
+          <img
+            className="PresentationSectionPreview__Media__Image"
+            src={presentationSection.mainMedia.thumbnailUrl}
+            loading="lazy"
+          />
+        </Box>
+        <Box className="PresentationSectionPreview__Description__Container">
+          <Typography className="PresentationSectionPreview__Description__Text">
+            {presentationSection.description}
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );

@@ -66,7 +66,6 @@
   display: flex;
   justify-content: space-between;
   max-width: 90%;
-  /* margin-right: 1em; */
 }
 
 .PresentationSectionPreview__Title__Container .MuiDivider-wrapper {
@@ -79,9 +78,21 @@
   overflow: hidden;
 }
 
+.PresentationSectionPreview__Data {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .PresentationSectionPreview__Media__Container {
-  height: 200px;
-  margin: 1.5em 10% auto;
+  height: 30vh;
+  display: flex;
+  justify-content: center;
+  margin: 1em 5% auto;
+}
+
+.PresentationSectionPreview__Media__Image {
+  max-width: 70vw;
 }
 
 .PresentationSectionPreview__Description__Container {
@@ -105,7 +116,7 @@
   -webkit-box-orient: vertical;
 }
 @media (min-width: 600px) {
-  .PresentationSectionPreview__Media__Container {
-    height: 100px;
+  .PresentationSectionPreview__Data {
+    flex-direction: row;
   }
 }
