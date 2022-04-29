@@ -2,6 +2,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ImageIcon from '@mui/icons-material/Image';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Box, Button, IconButton } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
@@ -32,7 +33,8 @@ const MediaAddOptions = ({
 }) => {
   const router = useRouter();
   const [newOptionsVisible, setNewOptionsVisible] = useState(false);
-  const isNotMobile = useMediaQuery('(min-width:600px)');
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const handleRouteChange = (url, { shallow }) => {
@@ -53,7 +55,7 @@ const MediaAddOptions = ({
 
   const handleInputDialogClickOpen = (type) => () => {
     onAddMediaOptionClick(MEDIA_OPTIONS_MAP[type].inputType);
-      push('#', undefined, { shallow: true });
+    push('#', undefined, { shallow: true });
   };
 
   const handleDialogClose = () => {
@@ -61,7 +63,7 @@ const MediaAddOptions = ({
   };
   return (
     <Box className="MediaList__Add__Options">
-      {!isNotMobile && (
+      {isMobile && (
         <IconButton
           className="MediaList__New__Option"
           key="new"
@@ -78,19 +80,7 @@ const MediaAddOptions = ({
       )}
       {allowedMediaTypes.map((option) => {
         const OptionIcon = MEDIA_OPTIONS_MAP[option].icon;
-        return isNotMobile ? (
-          <Button
-            className={`MediaList__Option MediaList__Option__${
-              MEDIA_OPTIONS_MAP[option].classModifier || ''
-            }`}
-            key={option}
-            startIcon={<OptionIcon />}
-            onClick={handleInputDialogClickOpen(option)}
-            disabled={disabled}
-          >
-            {MEDIA_OPTIONS_MAP[option].label}
-          </Button>
-        ) : (
+        return isMobile ? (
           <IconButton
             className={`MediaList__Option ${
               newOptionsVisible
@@ -111,6 +101,18 @@ const MediaAddOptions = ({
               }`}
             />
           </IconButton>
+        ) : (
+          <Button
+            className={`MediaList__Option MediaList__Option__${
+              MEDIA_OPTIONS_MAP[option].classModifier || ''
+            }`}
+            key={option}
+            startIcon={<OptionIcon />}
+            onClick={handleInputDialogClickOpen(option)}
+            disabled={disabled}
+          >
+            {MEDIA_OPTIONS_MAP[option].label}
+          </Button>
         );
       })}
     </Box>

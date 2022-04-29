@@ -13,7 +13,7 @@ const ProjectCoreData = ({
   formData,
   onFormChange,
   withDescription,
-  isNotMobile,
+  isMobile,
   setIsCompleted,
   wasSubmitted,
   onInputKeyPressed,
@@ -33,7 +33,7 @@ const ProjectCoreData = ({
       {withDescription && (
         <Box className="ProjectForm__Description ProjectCoreData__Description">
           <Typography>
-            {isNotMobile ? FULL_DESCRIPTION : MOBILE_DESCRIPTION}
+            {isMobile ? FULL_DESCRIPTION : MOBILE_DESCRIPTION}
           </Typography>
         </Box>
       )}
@@ -62,7 +62,7 @@ const ProjectCoreData = ({
 ProjectCoreData.defaultProps = {
   formData: {},
   withDescription: false,
-  isNotMobile: false,
+  isMobile: true,
   setIsCompleted: () => {},
   onInputKeyPressed: (e) => {
     e.key === 'Enter' && e.preventDefault();
@@ -73,7 +73,7 @@ ProjectCoreData.propTypes = {
   formData: PropTypes.object,
   onFormChange: PropTypes.func.isRequired,
   withDescription: PropTypes.bool,
-  isNotMobile: PropTypes.bool,
+  isMobile: PropTypes.bool,
   wasSubmitted: PropTypes.bool,
   setIsCompleted: PropTypes.func,
   onInputKeyPressed: PropTypes.func,

@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import ProjectForm from '../ProjectForm';
+import ProjectForm from '../Form';
 
 const ManageProject = ({ project, stepped, ...args }) => {
   return (

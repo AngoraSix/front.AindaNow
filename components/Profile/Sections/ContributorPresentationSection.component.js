@@ -4,7 +4,7 @@ import { Box, Paper, Typography, Avatar } from '@mui/material';
 import Editable from '../../common/Editable';
 import { PROFILE_ATTRIBUTES } from '../../../constants';
 import { INPUT_FIELD_TYPES } from '../../../constants';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material/styles';
 
 const ContributorPresentationSection = ({
   profile,

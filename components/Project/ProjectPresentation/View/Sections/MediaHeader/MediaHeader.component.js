@@ -1,4 +1,5 @@
 import { Box, Grid } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -23,10 +24,11 @@ const _getRandomInterval = () => {
 };
 
 const MediaHeader = ({ media }) => {
-  const isNotMobile = useMediaQuery('(min-width:600px)');
-  const quantityOfCards = isNotMobile
-    ? QUANTITY_OF_CARDS.DESKTOP
-    : QUANTITY_OF_CARDS.MOBILE;
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const quantityOfCards = isMobile
+    ? QUANTITY_OF_CARDS.MOBILE
+    : QUANTITY_OF_CARDS.DESKTOP;
 
   const images = media
     .filter((m) => m.mediaType === MEDIA_TYPES.IMAGE)

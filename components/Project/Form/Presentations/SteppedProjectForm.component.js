@@ -42,8 +42,8 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
   const [completed, setCompleted] = useState(new Set());
   const [stepWasSubmitted, setStepWasSubmitted] = useState(false);
   const submitInputRef = useRef();
-  const isNotMobile = useMediaQuery('(min-width:600px)');
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const setCompletedStep = (isCompleted) => {
     const newCompleted = new Set(completed.values());
@@ -118,29 +118,7 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
       sx={{ width: '100%' }}
       className={`SteppedProjectForm SteppedProjectForm__Container ${className}`}
     >
-      {isNotMobile ? (
-        <Stepper className="NewProject__Stepper" activeStep={activeStep}>
-          {steps.map((step, index) => {
-            const stepProps = {};
-            const labelProps = {};
-            if (isStepOptional(index)) {
-              labelProps.optional = (
-                <Typography fontSize="0.9rem" variant="caption">
-                  Optional
-                </Typography>
-              );
-            }
-            if (isStepSkipped(index)) {
-              stepProps.completed = false;
-            }
-            return (
-              <Step key={step.label} {...stepProps}>
-                <StepLabel {...labelProps}>{step.label}</StepLabel>
-              </Step>
-            );
-          })}
-        </Stepper>
-      ) : (
+      {isMobile ? (
         <MobileStepper
           className="NewProject__MobileStepper"
           variant="dots"
@@ -177,6 +155,28 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
             </Button>
           }
         />
+      ) : (
+        <Stepper className="NewProject__Stepper" activeStep={activeStep}>
+          {steps.map((step, index) => {
+            const stepProps = {};
+            const labelProps = {};
+            if (isStepOptional(index)) {
+              labelProps.optional = (
+                <Typography fontSize="0.9rem" variant="caption">
+                  Optional
+                </Typography>
+              );
+            }
+            if (isStepSkipped(index)) {
+              stepProps.completed = false;
+            }
+            return (
+              <Step key={step.label} {...stepProps}>
+                <StepLabel {...labelProps}>{step.label}</StepLabel>
+              </Step>
+            );
+          })}
+        </Stepper>
       )}
       {activeStep === steps.length ? (
         <React.Fragment>
@@ -190,12 +190,25 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
             formData={formData}
             onFormChange={onFormChange}
             withDescription
-            isNotMobile={isNotMobile}
+            isMobile={isMobile}
             setIsCompleted={setCompletedStep}
             wasSubmitted={stepWasSubmitted}
             onInputKeyPressed={onInputKeyPressed}
           />
-          {isNotMobile ? (
+          {isMobile ? (
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+              {isLastStep && (
+                <Button
+                  type="submit"
+                  color="primary"
+                  variant="contained"
+                  ref={submitInputRef}
+                >
+                  Finish
+                </Button>
+              )}
+            </Box>
+          ) : (
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Button
                 color="inherit"
@@ -223,19 +236,6 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
                 </Button>
               ) : (
                 <Button onClick={handleNext}>Next</Button>
-              )}
-            </Box>
-          ) : (
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              {isLastStep && (
-                <Button
-                  type="submit"
-                  color="primary"
-                  variant="contained"
-                  ref={submitInputRef}
-                >
-                  Finish
-                </Button>
               )}
             </Box>
           )}

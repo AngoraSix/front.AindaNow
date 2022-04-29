@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import MediaPreview from '../../../../common/Media/Previews';
+import MediaPreview from '../../../../../common/Media/Previews';
 
 const SectionPresentation = ({ sectionTitle, description, mainMedia }) => {
   return (

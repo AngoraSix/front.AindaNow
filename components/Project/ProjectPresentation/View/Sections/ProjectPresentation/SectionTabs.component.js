@@ -1,7 +1,4 @@
-import {
-  Box, SwipeableDrawer, Tab,
-  Tabs
-} from '@mui/material';
+import { Box, SwipeableDrawer, Tab, Tabs } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/styles';
@@ -10,10 +7,14 @@ import React, { useState } from 'react';
 
 const drawerBleeding = 35;
 
-const SectionTabs = ({ projectPresentation, setActiveSectionIndex, activeSectionindex }) => {
-  const isNotMobile = useMediaQuery('(min-width:600px)');
-  const [openedDrawer, setOpenedDrawer] = useState(false);
+const SectionTabs = ({
+  projectPresentation,
+  setActiveSectionIndex,
+  activeSectionindex,
+}) => {
   const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const [openedDrawer, setOpenedDrawer] = useState(false);
 
   const StyledBox = styled(Box)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'light' ? '#fff' : grey[800],
@@ -61,11 +62,7 @@ const SectionTabs = ({ projectPresentation, setActiveSectionIndex, activeSection
     </Tabs>
   );
 
-  return isNotMobile ? (
-    <Box className="SectionTabs__Container SectionTabs__Container--contained">
-      {tabsComponents}
-    </Box>
-  ) : (
+  return isMobile ? (
     <SwipeableDrawer
       className="SectionTabs__SectionsDrawer"
       anchor="bottom"
@@ -87,10 +84,12 @@ const SectionTabs = ({ projectPresentation, setActiveSectionIndex, activeSection
       >
         <Puller />
       </StyledBox>
-      <Box className="SectionTabs__Container">
-        {tabsComponents}
-      </Box>
+      <Box className="SectionTabs__Container">{tabsComponents}</Box>
     </SwipeableDrawer>
+  ) : (
+    <Box className="SectionTabs__Container SectionTabs__Container--contained">
+      {tabsComponents}
+    </Box>
   );
 };
 

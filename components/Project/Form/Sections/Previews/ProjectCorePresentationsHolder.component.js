@@ -18,7 +18,7 @@ const ProjectCorePresentationsHolder = ({
   formData,
   onFormChange,
   withDescription,
-  isNotMobile,
+  isMobile,
   setIsCompleted,
   wasSubmitted,
   onInputKeyPressed,
@@ -51,7 +51,7 @@ const ProjectCorePresentationsHolder = ({
               noWrap={true}
             >
               {p.sections[0].title} [{p.sections?.length}
-              {isNotMobile
+              {!isMobile
                 ? p.sections?.length > 1
                   ? ' Sections'
                   : ' Section'
@@ -76,7 +76,7 @@ const ProjectCorePresentationsHolder = ({
               <PresentationSectionPreview
                 key={ps.title}
                 presentationSection={ps}
-                isNotMobile={isNotMobile}
+                isMobile={isMobile}
               />
             ))}
           </AccordionDetails>
@@ -88,24 +88,12 @@ const ProjectCorePresentationsHolder = ({
 
 ProjectCorePresentationsHolder.defaultProps = {
   formData: {},
-  isNotMobile: false,
-  // withDescription: false,
-  // setIsCompleted: () => {},
-  // onInputKeyPressed: (e) => {
-  //   e.key === 'Enter' && e.preventDefault();
-  // },
+  isMobile: false,
 };
 
 ProjectCorePresentationsHolder.propTypes = {
   formData: PropTypes.object,
-  isNotMobile: PropTypes.bool,
-  // formData: PropTypes.object,
-  // onFormChange: PropTypes.func.isRequired,
-  // withDescription: PropTypes.bool,
-  // isNotMobile: PropTypes.bool,
-  // wasSubmitted: PropTypes.bool,
-  // setIsCompleted: PropTypes.func,
-  // onInputKeyPressed: PropTypes.func,
+  isMobile: PropTypes.bool,
 };
 
 export default ProjectCorePresentationsHolder;

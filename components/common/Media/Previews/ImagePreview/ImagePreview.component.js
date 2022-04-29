@@ -1,13 +1,15 @@
-import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { Box, Grid, Skeleton, IconButton } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import ZoomInIcon from '@mui/icons-material/ZoomIn';
 import ZoomOutIcon from '@mui/icons-material/ZoomOut';
+import { Box, Grid, IconButton, Skeleton } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 const ImagePreview = ({ media, allowsZoomingIn }) => {
   const [isZoomed, setIsZoomed] = useState(false);
-  const isNotMobile = useMediaQuery('(min-width:600px)');
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   const onZoomIn = () => {
     if (allowsZoomingIn) {
@@ -18,18 +20,18 @@ const ImagePreview = ({ media, allowsZoomingIn }) => {
   return media ? (
     <React.Fragment>
       <img
-        onClick={!isNotMobile ? onZoomIn : undefined}
+        onClick={isMobile ? onZoomIn : undefined}
         className={`MediaPreview__Image ${
           isZoomed ? 'MediaPreview__Image__Zoomed' : ''
         }`}
         src={media?.thumbnailUrl}
       />
-      {allowsZoomingIn && !isNotMobile && (
+      {allowsZoomingIn && isMobile && (
         <IconButton
           className={`MediaPreview__Image__ZoomIcon ${
             isZoomed ? 'ZoomedIn' : 'ZoomedOut'
           }`}
-          onClick={!isNotMobile ? onZoomIn : undefined}
+          onClick={isMobile ? onZoomIn : undefined}
         >
           {isZoomed ? (
             <ZoomOutIcon fontSize="small" />

@@ -1,19 +1,8 @@
 import { Box, Divider, Typography } from '@mui/material';
-import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-const PresentationSectionPreview = ({ presentationSection, isNotMobile }) => {
-  const isMedium = useMediaQuery('(min-width:900px)');
-  const isLarge = useMediaQuery('(min-width:1200px)');
-
-  const allMedia = [
-    presentationSection.mainMedia,
-    ...presentationSection.media,
-  ];
-  const maxQtyOfCols = isNotMobile ? (isMedium ? (isLarge ? 10 : 6) : 4) : 2;
-  const qtyOfCols =
-    allMedia.length < maxQtyOfCols ? allMedia.length : maxQtyOfCols;
+const PresentationSectionPreview = ({ presentationSection }) => {
   return (
     <Box className="PresentationSectionPreview PresentationSectionPreview__Container">
       <Divider className="PresentationSectionPreview__Title__Container">

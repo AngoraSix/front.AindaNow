@@ -1,12 +1,21 @@
 import { Box, Button, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React from 'react';
+import ProjectPresentationForm from '../../ProjectPresentation/Form';
 import ProjectCorePresentationsHolder from '../Sections/Previews/ProjectCorePresentationsHolder.component';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
 
 const PlainProjectForm = ({ formData, onFormChange, className }) => {
-  const isNotMobile = useMediaQuery('(min-width:600px)');
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const router = useRouter();
+  const editingPresentationId = router.query.editingPresentationId;
+  const editingPresentationObject = formData.presentations.find(
+    (pr) => pr.id === editingPresentationId
+  );
 
   return (
     <Box
@@ -23,7 +32,7 @@ const PlainProjectForm = ({ formData, onFormChange, className }) => {
         <ProjectCoreData
           formData={formData}
           onFormChange={onFormChange}
-          isNotMobile={isNotMobile}
+          isMobile={isMobile}
         />
       </Box>
       <Box className="ProjectForm__PlainForm__Section">
@@ -36,7 +45,7 @@ const PlainProjectForm = ({ formData, onFormChange, className }) => {
         </Typography>
         <ProjectCorePresentationsHolder
           formData={formData}
-          isNotMobile={isNotMobile}
+          isMobile={isMobile}
         />
       </Box>
       <Box className="ProjectForm__PlainForm__Section">
@@ -44,6 +53,11 @@ const PlainProjectForm = ({ formData, onFormChange, className }) => {
           Save
         </Button>
       </Box>
+      {editingPresentationObject && (
+        <ProjectPresentationForm
+          projectPresentation={editingPresentationObject}
+        />
+      )}
     </Box>
   );
 };
