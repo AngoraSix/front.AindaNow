@@ -2,7 +2,7 @@ import { Box, Paper, Typography } from '@mui/material';
 import classnames from 'classnames';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MEDIA_TYPES, resolveRoute, ROUTES } from '../../../constants';
 import YoutubePreview from '../../common/Media/Previews/YoutubePreview';
 
@@ -25,6 +25,14 @@ const ProjectCard = ({ projectPresentation }) => {
   const [isActive, setIsActive] = useState(false);
   const [currentActiveVideo, setCurrentActiveVideo] = useState(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    mounted.current = true;
+    return () => {
+      mounted.current = false;
+    };
+  }, []);
 
   const handleCardHover = (isHovered) => () => {
     setIsActive(isHovered);
@@ -41,7 +49,10 @@ const ProjectCard = ({ projectPresentation }) => {
   };
 
   const handleVideoIsReady = () => {
-    setIsVideoPlaying(true);
+    // with this check we should avoid the 'Can't perform a React state update on an unmounted component' error message
+    if (mounted.current === true) {
+      setIsVideoPlaying(true);
+    }
   };
 
   const handleVideoEnded = () => {

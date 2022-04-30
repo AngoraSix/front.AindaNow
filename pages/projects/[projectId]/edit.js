@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import api from '../../../api';
 import FormSkeleton from '../../../components/common/Skeletons/FormSkeleton.component';
@@ -22,7 +23,6 @@ const EditProjectPage = ({ session, project, isAdmin }) => {
   useEffect(() => {
     if (session && !session.error && !isAdmin) {
       onError(NOT_ADMIN_ERROR_MESSAGE);
-      // const viewURL = resolveRoute(ROUTES.projects.view, project.id);
       const viewURL = resolveRoute(
         ROUTES.projects.presentations.view,
         '6248ba904b2bd043c9e5487a',
@@ -50,9 +50,15 @@ const EditProjectPage = ({ session, project, isAdmin }) => {
   );
 };
 
-EditProjectPage.defaultProps = {};
+EditProjectPage.defaultProps = {
+  isAdmin: false,
+};
 
-EditProjectPage.propTypes = {};
+EditProjectPage.propTypes = {
+  project: PropTypes.object,
+  session: PropTypes.object,
+  isAdmin: PropTypes.bool,
+};
 
 export const getServerSideProps = async (ctx) => {
   let props = {};
@@ -63,7 +69,7 @@ export const getServerSideProps = async (ctx) => {
   let isAdmin = false;
   try {
     const project = await api.projects.getProject(projectId, validatedToken);
-    isAdmin = session?.user.id === project.adminId;
+    isAdmin = session?.user.id != null && session?.user.id === project.adminId;
     props = {
       ...props,
       project,

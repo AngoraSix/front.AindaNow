@@ -6,7 +6,7 @@ import {
   AccordionSummary,
   Box,
   IconButton,
-  Typography,
+  Typography
 } from '@mui/material';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -14,15 +14,7 @@ import React, { useState } from 'react';
 import { resolveRoute, ROUTES } from '../../../../../constants';
 import PresentationSectionPreview from './PresentationSectionPreview.component';
 
-const ProjectCorePresentationsHolder = ({
-  formData,
-  onFormChange,
-  withDescription,
-  isMobile,
-  setIsCompleted,
-  wasSubmitted,
-  onInputKeyPressed,
-}) => {
+const ProjectCorePresentationsHolder = ({ formData, isMobile }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -56,7 +48,13 @@ const ProjectCorePresentationsHolder = ({
                 : ''}
               ]
             </Typography>
-            <Link href={resolveRoute(ROUTES.projects.presentations.edit, p.projectId, p.id)}>
+            <Link
+              href={resolveRoute(
+                ROUTES.projects.presentations.directEdit,
+                p.projectId,
+                p.id
+              )}
+            >
               <IconButton
                 onClick={(e) => {
                   e.stopPropagation();

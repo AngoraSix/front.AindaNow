@@ -1,6 +1,6 @@
 import NewIconContained from '@mui/icons-material/AddCircle';
 import NewIcon from '@mui/icons-material/AddCircleOutline';
-import { Button, Grid, IconButton, TextField } from '@mui/material';
+import { Box, Button, Grid, IconButton, TextField } from '@mui/material';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -16,9 +16,9 @@ const ProjectPresentationsList = ({
   const [search, setSearch] = useState('');
 
   return (
-    <div className="ProjectPresentationsList ProjectPresentationsList__Container">
-      <div className="ProjectPresentationsList__Toolbar">
-        <div className="ProjectPresentationsList__Toolbar__Column Column__Large">
+    <Box className="ProjectPresentationsList ProjectPresentationsList__Container">
+      <Box className="ProjectPresentationsList__Toolbar">
+        <Box className="ProjectPresentationsList__Toolbar__Column Column__Large">
           <TextField
             className="ProjectPresentationsList__Toolbar__Input"
             label="Search"
@@ -26,8 +26,8 @@ const ProjectPresentationsList = ({
             onChange={({ target: value }) => onSearchChange(value)}
             fullWidth
           />
-        </div>
-        <div className="ProjectPresentationsList__Toolbar__Column">
+        </Box>
+        <Box className="ProjectPresentationsList__Toolbar__Column">
           <Link href={ROUTES.projects.new}>
             <Button
               color="primary"
@@ -47,10 +47,10 @@ const ProjectPresentationsList = ({
               <NewIconContained />
             </IconButton>
           </Link>
-        </div>
-      </div>
+        </Box>
+      </Box>
 
-      <div className="ProjectPresentationsList__Content">
+      <Box className="ProjectPresentationsList__Content">
         <Grid container spacing={2}>
           {projectPresentationsList?.map((projectPresentation) => (
             <Grid
@@ -67,7 +67,7 @@ const ProjectPresentationsList = ({
         </Grid>
 
         {total > projectPresentationsList.length && (
-          <div className="ProjectPresentationsList__LoadMore">
+          <Box className="ProjectPresentationsList__LoadMore">
             <Button
               variant="outlined"
               color="primary"
@@ -75,10 +75,10 @@ const ProjectPresentationsList = ({
             >
               Mostrar más
             </Button>
-          </div>
+          </Box>
         )}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

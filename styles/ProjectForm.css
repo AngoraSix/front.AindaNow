@@ -39,7 +39,7 @@
   }
 }
 
-/* PlanForm */
+/* PlainForm */
 
 .ProjectForm__PlainForm__Section {
   margin-top: 1.5em;
@@ -50,12 +50,30 @@
   margin-bottom: 1em;
 }
 
+/* Project Presentation Form */
+
+.DialogEmbeddedNavbar__Container {
+  position: sticky;
+  min-height: 8vh;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 5%;
+}
+
+.DialogEmbeddedNavbar__Button {
+  color: #fff;
+}
+
+@media (min-width: 600px) {
+}
+
 /* PREVIEWS */
 
 /* ProjectCorePresentations */
 
 .ProjectPresentationsData__Summary__Text {
-  /* text-transform: uppercase; */
   min-width: 0;
   max-width: 80%;
   text-overflow: ellipsis;

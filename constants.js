@@ -17,6 +17,19 @@ export const PROFILE_ATTRIBUTES = {
   },
 };
 
+export const resolveStaticFileRoute = (route) => {
+  if (route.includes(':')) {
+    const updatedRoute = route.replace(
+      /:\w+/,
+      (a) => a.replace(':', '[') + ']'
+    );
+    return resolveStaticFileRoute(updatedRoute);
+  }
+  console.log('ALFINALK');
+  console.log(route);
+  return route;
+};
+
 export const resolveRoute = (route, ...args) => {
   return args.reduce(
     // replace each path pattern
@@ -34,7 +47,9 @@ export const ROUTES = {
       list: '/',
       view: '/projects/:projectId/presentations/:projectPresentationId',
       edit: '/projects/:projectId/presentations/:projectPresentationId/edit',
-    }
+      directEdit:
+        '/projects/:projectId/edit?editingPresentationId=:projectPresentationId',
+    },
   },
   profile: {
     view: '/profile/:profileId',
@@ -43,8 +58,8 @@ export const ROUTES = {
 
 export const HEADERS = {
   messages: {
-    error: 'A6-REDIRECT-ERROR-MESSAGE'
-  }
+    error: 'A6-REDIRECT-ERROR-MESSAGE',
+  },
 };
 
 export const INPUT_FIELD_TYPES = {

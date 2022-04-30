@@ -8,7 +8,7 @@ import ProjectPresentationForm from '../../ProjectPresentation/Form';
 import ProjectCorePresentationsHolder from '../Sections/Previews/ProjectPresentationsHolder.component';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
 
-const PlainProjectForm = ({ formData, project, onFormChange, className }) => {
+const PlainProjectForm = ({ formData, onFormChange, className }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
@@ -56,6 +56,7 @@ const PlainProjectForm = ({ formData, project, onFormChange, className }) => {
       {editingPresentationObject && (
         <ProjectPresentationForm
           projectPresentation={editingPresentationObject}
+          isTriggeredAction={true}
         />
       )}
     </Box>
