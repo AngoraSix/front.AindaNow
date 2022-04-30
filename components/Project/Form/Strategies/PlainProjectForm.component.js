@@ -5,10 +5,10 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ProjectPresentationForm from '../../ProjectPresentation/Form';
-import ProjectCorePresentationsHolder from '../Sections/Previews/ProjectCorePresentationsHolder.component';
+import ProjectCorePresentationsHolder from '../Sections/Previews/ProjectPresentationsHolder.component';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
 
-const PlainProjectForm = ({ formData, onFormChange, className }) => {
+const PlainProjectForm = ({ formData, project, onFormChange, className }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();

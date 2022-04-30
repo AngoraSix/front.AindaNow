@@ -3,7 +3,7 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { MEDIA_TYPES } from '../../../../../constants';
+import { MEDIA_TYPES } from '../../../../../../constants';
 import ProjectPresentationViewMediaCard from './ProjectPresentationViewMediaCard.component';
 
 const QUANTITY_OF_CARDS = {

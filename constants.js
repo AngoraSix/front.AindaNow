@@ -28,12 +28,12 @@ export const resolveRoute = (route, ...args) => {
 export const ROUTES = {
   projects: {
     new: '/projects/new',
-    view: '/projects/view/:projectId',
-    edit: '/projects/edit/:projectId',
+    view: '/projects/:projectId',
+    edit: '/projects/:projectId/edit',
     presentations: {
       list: '/',
-      view: '/projects/presentations/view/:projectPresentationId',
-      edit: '/projects/presentations/edit/:projectPresentationId',
+      view: '/projects/:projectId/presentations/:projectPresentationId',
+      edit: '/projects/:projectId/presentations/:projectPresentationId/edit',
     }
   },
   profile: {

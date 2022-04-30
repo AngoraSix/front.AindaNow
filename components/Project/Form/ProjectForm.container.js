@@ -47,6 +47,7 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
 
       const viewURL = resolveRoute(
         ROUTES.projects.presentations.view,
+        projectResponse.id,
         projectResponse.presentation.id
       );
       router.push(viewURL);

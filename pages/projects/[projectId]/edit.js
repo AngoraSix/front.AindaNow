@@ -25,6 +25,7 @@ const EditProjectPage = ({ session, project, isAdmin }) => {
       // const viewURL = resolveRoute(ROUTES.projects.view, project.id);
       const viewURL = resolveRoute(
         ROUTES.projects.presentations.view,
+        '6248ba904b2bd043c9e5487a',
         '6248ba9bda2c4941bf9df036'
       );
       router.push(viewURL);

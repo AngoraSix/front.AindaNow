@@ -60,6 +60,7 @@ const ProjectCard = ({ projectPresentation }) => {
 
   const viewURL = resolveRoute(
     ROUTES.projects.presentations.view,
+    projectPresentation.projectId,
     projectPresentation.id
   );
 

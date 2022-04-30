@@ -2,7 +2,7 @@ import { getSession } from 'next-auth/react';
 import PropTypes from 'prop-types';
 import React from 'react';
 import api from '../../../../api';
-import ProjectPresentationView from '../../../../components/Project/ProjectPresentationView';
+import ProjectPresentationView from '../../../../components/Project/ProjectPresentation/View';
 import ProjectPresentationViewLayout from '../../../../layouts/ProjectPresentationViewLayout/ProjectPresentationViewLayout';
 import logger from '../../../../utils/logger';
 

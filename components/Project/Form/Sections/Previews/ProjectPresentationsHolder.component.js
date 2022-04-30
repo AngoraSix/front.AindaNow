@@ -25,15 +25,13 @@ const ProjectCorePresentationsHolder = ({
 }) => {
   const [expanded, setExpanded] = useState(false);
 
-  const presentations = formData.presentations;
-
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   return (
     <Box className="ProjectPresentationsData ProjectPresentationsData__Container ProjectForm__Container">
-      {presentations.map((p) => (
+      {formData.presentations.map((p) => (
         <Accordion
           key={p.id}
           expanded={expanded === p.id}
@@ -58,7 +56,7 @@ const ProjectCorePresentationsHolder = ({
                 : ''}
               ]
             </Typography>
-            <Link href={resolveRoute(ROUTES.projects.presentations.edit, p.id)}>
+            <Link href={resolveRoute(ROUTES.projects.presentations.edit, p.projectId, p.id)}>
               <IconButton
                 onClick={(e) => {
                   e.stopPropagation();

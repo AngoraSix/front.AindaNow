@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import PlainProjectForm from './Presentations/PlainProjectForm.component';
-import SteppedProjectForm from './Presentations/SteppedProjectForm.component';
+import PlainProjectForm from './Strategies/PlainProjectForm.component';
+import SteppedProjectForm from './Strategies/SteppedProjectForm.component';
 
 const ProjectForm = ({
   className,
