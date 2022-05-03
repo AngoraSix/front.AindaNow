@@ -74,10 +74,13 @@
 /* ProjectCorePresentations */
 
 .ProjectPresentationsData__Summary__Text {
-  min-width: 0;
-  max-width: 80%;
-  text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.ProjectPresentationsData__Summary__Text.Long {
+  min-width: 0;
+  max-width: 70%;
+  text-overflow: ellipsis;
 }
 
 .ProjectPresentationsData__Summary .MuiAccordionSummary-content {

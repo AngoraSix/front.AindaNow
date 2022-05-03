@@ -88,10 +88,10 @@ ProjectPresentationsList.defaultProps = {
 };
 
 ProjectPresentationsList.propTypes = {
+  projectPresentationsList: PropTypes.array.isRequired,
   total: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   onNextPageClick: PropTypes.func.isRequired,
   onSearch: PropTypes.func.isRequired,
-  projects: PropTypes.array,
 };
 
 export default ProjectPresentationsList;

@@ -14,7 +14,7 @@ const ProjectPresentationsListContainer = ({ data }) => {
 
   const [state, dispatch] = useReducer(ProjectPresentationsListReducer, {
     ...INITIAL_STATE,
-    data,
+    ...data,
   });
 
   const onNextPageClick = async () => {
@@ -24,9 +24,12 @@ const ProjectPresentationsListContainer = ({ data }) => {
         search: state.data.search,
       });
 
-    const projectPresentationsList = state.data.projects.concat(data);
+    const projectPresentationsList =
+      state.data.projectPresentationsList.concat(data);
 
-    dispatch(updateDataAction({ total, page, limit, search, projectPresentationsList }));
+    dispatch(
+      updateDataAction({ total, page, limit, search, projectPresentationsList })
+    );
   };
 
   const onSearch = async (value) => {
@@ -39,22 +42,22 @@ const ProjectPresentationsListContainer = ({ data }) => {
     //   search,
     //   data: projects,
     // } =
-    const projectPresentationsList = await api.projects.fetchProjectPresentations(
-      session.user.attributes,
-      {
+    const projectPresentationsList =
+      await api.projects.fetchProjectPresentations(session.user.attributes, {
         search: value,
-      }
-    );
+      });
 
     const total = projectPresentationsList.length,
       page = 1,
       limit = 5,
       search = value;
-    dispatch(updateDataAction({ total, page, limit, search, projectPresentationsList }));
+    dispatch(
+      updateDataAction({ total, page, limit, search, projectPresentationsList })
+    );
   };
   return (
     <ProjectPresentationsList
-      {...state.data}
+      {...state}
       onNextPageClick={onNextPageClick}
       onSearch={onSearch}
     />

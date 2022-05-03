@@ -95,7 +95,7 @@ const ProjectCard = ({ projectPresentation }) => {
             variant="subtitle1"
             color="primary"
           >
-            {projectPresentation.sections[0].title}
+            {projectPresentation.project.name}
           </Typography>
           <Typography
             className="ProjectCard__DescriptionSection__Text"

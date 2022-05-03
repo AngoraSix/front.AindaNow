@@ -13,6 +13,7 @@ const DialogEmbeddedNavbar = ({ projectPresentation, isEmbeddedDialog }) => {
     >
       <Link
         href={resolveRoute(ROUTES.projects.edit, projectPresentation.projectId)}
+        shallow={isEmbeddedDialog}
       >
         {isEmbeddedDialog ? (
           <Button

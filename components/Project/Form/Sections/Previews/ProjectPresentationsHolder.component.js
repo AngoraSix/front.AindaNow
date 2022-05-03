@@ -6,7 +6,7 @@ import {
   AccordionSummary,
   Box,
   IconButton,
-  Typography
+  Typography,
 } from '@mui/material';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -37,10 +37,15 @@ const ProjectCorePresentationsHolder = ({ formData, isMobile }) => {
             id={`${p.id}-header`}
           >
             <Typography
-              className="ProjectPresentationsData__Summary__Text"
+              className="ProjectPresentationsData__Summary__Text Long"
               noWrap={true}
             >
-              {p.sections[0].title} [{p.sections?.length}
+              {p.referenceName}
+            </Typography>
+            <Typography
+              className="ProjectPresentationsData__Summary__Text"
+            >
+              [{p.sections?.length}
               {!isMobile
                 ? p.sections?.length > 1
                   ? ' Sections'
@@ -54,6 +59,7 @@ const ProjectCorePresentationsHolder = ({ formData, isMobile }) => {
                 p.projectId,
                 p.id
               )}
+              shallow={true}
             >
               <IconButton
                 onClick={(e) => {

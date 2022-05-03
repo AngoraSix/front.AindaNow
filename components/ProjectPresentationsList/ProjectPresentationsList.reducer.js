@@ -3,7 +3,11 @@ const UPDATE_DATA = 'ProjectPresentationsList/UPDATE_DATA';
 export const updateDataAction = (payload) => ({ type: UPDATE_DATA, payload });
 
 export const INITIAL_STATE = {
-  data: {},
+  total: 0,
+  page: 1,
+  limit: 10,
+  search: '',
+  projectPresentationsList: [],
 };
 
 const ProjectPresentationsListReducer = (state = INITIAL_STATE, action) => {
@@ -11,7 +15,7 @@ const ProjectPresentationsListReducer = (state = INITIAL_STATE, action) => {
     case UPDATE_DATA:
       return {
         ...state,
-        data: action.payload,
+        ...action.payload,
       };
 
     default:
