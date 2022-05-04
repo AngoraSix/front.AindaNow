@@ -1,92 +1,41 @@
-import { Box, Dialog, Paper } from '@mui/material';
-import Fade from '@mui/material/Fade';
-import Slide from '@mui/material/Slide';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useRouter } from 'next/router';
+import { Box, Button, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
-import { resolveRoute, ROUTES } from '../../../../constants';
-import SectionPresentation from '../View/Sections/ProjectPresentation/SectionPresentation.component';
-import SectionPresentationHolder from '../View/Sections/ProjectPresentation/SectionPresentationHolder.component';
-import SectionTabs from '../View/Sections/ProjectPresentation/SectionTabs.component';
-import DialogEmbeddedNavbar from './DialogEmbeddedNavbar.component';
+import React from 'react';
+import ProjectPresentationCoreData from './Sections/ProjectPresentationCoreData.component';
 
-const SlideTransition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
-const FadeTransition = React.forwardRef(function Transition(props, ref) {
-  return <Fade ref={ref} {...props} />;
-});
-
-const ProjectPresentationForm = ({
-  projectPresentation,
-  isTriggeredAction,
-}) => {
-  const [activeSectionindex, setActiveSectionIndex] = useState(0);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const fullScreenDialog = isMobile && isTriggeredAction;
-  const router = useRouter();
-
-  const closeDialog = () => {
-    const editProjectURL = resolveRoute(
-      ROUTES.projects.edit,
-      projectPresentation.projectId
-    );
-    router.push(editProjectURL);
-  };
-
+const ProjectPresentationForm = ({ formData, onFormChange }) => {
   return (
-    <Dialog
-      className="ProjectPresentationForm ProjectPresentationForm__Container"
-      open={true}
-      TransitionComponent={isTriggeredAction ? SlideTransition : FadeTransition}
-      onClose={closeDialog}
-      maxWidth="lg"
-      fullScreen={fullScreenDialog}
-      fullWidth
+    <Box
+      className={`ProjectPresentationForm ProjectPresentationForm__Container`}
     >
-      <DialogEmbeddedNavbar
-        projectPresentation={projectPresentation}
-        isEmbeddedDialog={fullScreenDialog}
-      />
-      <Paper className="ProjectPresentation__MainSection">
-        <Box className="ProjectPresentation__SectionsPresentation">
-          <Box className="SectionsPresentation__PresentationArea">
-            {projectPresentation.sections.map((s, i) => (
-              <SectionPresentationHolder
-                value={activeSectionindex}
-                index={i}
-                key={i}
-              >
-                <SectionPresentation
-                  sectionTitle={s.title}
-                  description={s.description}
-                  mainMedia={s.mainMedia}
-                />
-              </SectionPresentationHolder>
-            ))}
-          </Box>
-          <SectionTabs
-            projectPresentation={projectPresentation}
-            setActiveSectionIndex={setActiveSectionIndex}
-            activeSectionindex={activeSectionindex}
-          />
-        </Box>
-      </Paper>
-    </Dialog>
+      <Box className="ProjectPresentationForm__Section">
+        <Typography
+          className="ProjectPresentationForm__Section__Name"
+          variant="subtitle1"
+          color="primary"
+        >
+          Presentation Reference Name
+        </Typography>
+        <ProjectPresentationCoreData
+          formData={formData}
+          onFormChange={onFormChange}
+          wasSubmitted={false}
+        />
+      </Box>
+      <Box className="ProjectPresentationForm__Section">
+        <Button type="submit" color="primary" variant="contained" fullWidth>
+          Save
+        </Button>
+      </Box>
+    </Box>
   );
 };
 
-ProjectPresentationForm.defaultProps = {
-  isTriggeredAction: false,
-};
+ProjectPresentationForm.defaultProps = {};
 
 ProjectPresentationForm.propTypes = {
-  projectPresentation: PropTypes.object.isRequired,
-  isTriggeredAction: PropTypes.bool,
+  formData: PropTypes.object.isRequired,
+  onFormChange: PropTypes.func.isRequired,
 };
 
 export default ProjectPresentationForm;

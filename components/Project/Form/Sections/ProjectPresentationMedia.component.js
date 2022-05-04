@@ -29,7 +29,7 @@ const ProjectPresentationMedia = ({
     };
 
   return (
-    <div className="ProjectPresentationMedia ProjectPresentationMedia__Container ProjectForm__Container">
+    <div className="ProjectPresentationMedia ProjectPresentationMedia__Container ProjectForm__Section__Container">
       {withDescription && (
         <Box className="ProjectForm__Description ProjectPresentationMedia__Description">
           <Typography>
@@ -38,7 +38,7 @@ const ProjectPresentationMedia = ({
         </Box>
       )}
       <Grid
-        className="ProjectForm__Fields ProjectPresentationMedia__MainMedia"
+        className="ProjectForm__Section__Fields ProjectPresentationMedia__MainMedia"
         container
         spacing={2}
         justifyContent="center"
@@ -62,7 +62,7 @@ const ProjectPresentationMedia = ({
         </Grid>
       </Grid>
       <Grid
-        className="ProjectForm__Fields ProjectPresentationMedia__Fields"
+        className="ProjectForm__Section__Fields ProjectPresentationMedia__Fields"
         container
         spacing={2}
         justifyContent="center"

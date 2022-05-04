@@ -4,13 +4,7 @@ import React from 'react';
 import PlainProjectForm from './Strategies/PlainProjectForm.component';
 import SteppedProjectForm from './Strategies/SteppedProjectForm.component';
 
-const ProjectForm = ({
-  className,
-  formData,
-  onFormChange,
-  onSubmit,
-  stepped,
-}) => {
+const ProjectForm = ({ formData, onFormChange, onSubmit, stepped }) => {
   const onFormSubmit = (event) => {
     event.preventDefault();
 
@@ -20,7 +14,7 @@ const ProjectForm = ({
   const FormPresentation = stepped ? SteppedProjectForm : PlainProjectForm;
 
   return (
-    <Box className={`ProjectForm ProjectForm__Container ${className}`}>
+    <Box className={`ProjectForm ProjectForm__Section__Container`}>
       <form onSubmit={onFormSubmit}>
         <FormPresentation onFormChange={onFormChange} formData={formData} />
       </form>

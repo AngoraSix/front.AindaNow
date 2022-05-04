@@ -20,7 +20,6 @@ const EditProjectPresentationPage = ({
   projectPresentation,
   isAdmin,
 }) => {
-  try{
   useActiveSession();
   const { onError } = useNotifications();
   const router = useRouter();
@@ -53,10 +52,6 @@ const EditProjectPresentationPage = ({
       <ProjectPresentationForm projectPresentation={projectPresentation} />
     </DefaultLayout>
   );
-} catch (err) {
-  console.log("ERRORAZOOO22222");
-  console.log(err)
-}
 };
 
 EditProjectPresentationPage.defaultProps = {
@@ -70,7 +65,6 @@ EditProjectPresentationPage.propTypes = {
 };
 
 export const getServerSideProps = async (ctx) => {
-  try{
   let props = {};
   const { projectPresentationId } = ctx.params,
     session = await getSession(ctx);
@@ -100,10 +94,6 @@ export const getServerSideProps = async (ctx) => {
       session,
     },
   };
-} catch (err) {
-  console.log("ERRORAZOOO");
-  console.log(err)
-}
 };
 
 export default EditProjectPresentationPage;

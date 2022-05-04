@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { resolveRoute, ROUTES } from '../../../../constants';
 
-const DialogEmbeddedNavbar = ({ projectPresentation, isEmbeddedDialog }) => {
+const DialogEmbeddedNavbar = ({ projectId, isEmbeddedDialog }) => {
   return (
     <Box
       className="DialogEmbeddedNavbar DialogEmbeddedNavbar__Container"
       sx={{ backgroundColor: 'primary.main' }}
     >
       <Link
-        href={resolveRoute(ROUTES.projects.edit, projectPresentation.projectId)}
+        href={resolveRoute(ROUTES.projects.edit, projectId)}
         shallow={isEmbeddedDialog}
       >
         {isEmbeddedDialog ? (
@@ -44,12 +44,10 @@ const DialogEmbeddedNavbar = ({ projectPresentation, isEmbeddedDialog }) => {
   );
 };
 
-DialogEmbeddedNavbar.defaultProps = {
-  projectPresentation: false,
-};
+DialogEmbeddedNavbar.defaultProps = {};
 
 DialogEmbeddedNavbar.propTypes = {
-  projectPresentation: PropTypes.object.isRequired,
+  parentProjectId: PropTypes.string.isRequired,
 };
 
 export default DialogEmbeddedNavbar;

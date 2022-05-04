@@ -8,7 +8,7 @@ import ProjectPresentationForm from '../../ProjectPresentation/Form';
 import ProjectCorePresentationsHolder from '../Sections/Previews/ProjectPresentationsHolder.component';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
 
-const PlainProjectForm = ({ formData, onFormChange, className }) => {
+const PlainProjectForm = ({ formData, onFormChange }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
@@ -18,9 +18,7 @@ const PlainProjectForm = ({ formData, onFormChange, className }) => {
   );
 
   return (
-    <Box
-      className={`PlainProjectForm PlainProjectForm__Container ${className}`}
-    >
+    <Box className={`PlainProjectForm PlainProjectForm__Section__Container`}>
       <Box className="ProjectForm__PlainForm__Section">
         <Typography
           className="ProjectForm__PlainForm__Section__Title"

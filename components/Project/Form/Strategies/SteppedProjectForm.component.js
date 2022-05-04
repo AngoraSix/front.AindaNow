@@ -35,7 +35,7 @@ const steps = [
   { label: 'Parameters', component: ProjectPresentationParams, optional: true },
 ];
 
-const SteppedProjectForm = ({ formData, onFormChange, className }) => {
+const SteppedProjectForm = ({ formData, onFormChange }) => {
   const { onError } = useNotifications();
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
@@ -116,7 +116,7 @@ const SteppedProjectForm = ({ formData, onFormChange, className }) => {
   return (
     <Box
       sx={{ width: '100%' }}
-      className={`SteppedProjectForm SteppedProjectForm__Container ${className}`}
+      className={`SteppedProjectForm SteppedProjectForm__Section__Container`}
     >
       {isMobile ? (
         <MobileStepper

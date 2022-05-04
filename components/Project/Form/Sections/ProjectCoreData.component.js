@@ -29,7 +29,7 @@ const ProjectCoreData = ({
   };
 
   return (
-    <div className="ProjectCoreData ProjectCoreData__Container ProjectForm__Container">
+    <div className="ProjectCoreData ProjectCoreData__Container ProjectForm__Section__Container">
       {withDescription && (
         <Box className="ProjectForm__Description ProjectCoreData__Description">
           <Typography>
@@ -38,7 +38,7 @@ const ProjectCoreData = ({
         </Box>
       )}
       <Grid
-        className="ProjectForm__Fields ProjectCoreData__Fields"
+        className="ProjectForm__Section__Fields ProjectCoreData__Fields"
         container
         spacing={2}
         justifyContent="center"

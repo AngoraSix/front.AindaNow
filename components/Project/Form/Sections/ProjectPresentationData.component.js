@@ -27,7 +27,7 @@ const ProjectPresentationData = ({
   };
 
   return (
-    <div className="ProjectPresentationData ProjectPresentationData__Container ProjectForm__Container">
+    <Box className="ProjectPresentationData ProjectPresentationData__Container ProjectForm__Section__Container">
       {withDescription && (
         <Box className="ProjectForm__Description ProjectPresentationData__Description">
           <Typography>
@@ -36,7 +36,7 @@ const ProjectPresentationData = ({
         </Box>
       )}
       <Grid
-        className="ProjectForm__Fields ProjectPresentationData__Fields"
+        className="ProjectForm__Section__Fields ProjectPresentationData__Fields"
         container
         spacing={2}
         justifyContent="center"
@@ -55,7 +55,7 @@ const ProjectPresentationData = ({
           />
         </Grid>
       </Grid>
-    </div>
+    </Box>
   );
 };
 
