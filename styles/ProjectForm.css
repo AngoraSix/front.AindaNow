@@ -52,7 +52,7 @@
 
 /* Project Presentation Form */
 
-.DialogEmbeddedNavbar__Container {
+.ProjectPresentationDialogNavbar__Container {
   position: sticky;
   min-height: 8vh;
   top: 0;
@@ -62,11 +62,21 @@
   padding: 0 5%;
 }
 
-.DialogEmbeddedNavbar__Button {
+.ProjectPresentationDialogNavbar__Button {
   color: #fff;
 }
 
-@media (min-width: 600px) {
+.ProjectPresentationForm__Container {
+  margin: 0 7%;
+}
+
+.ProjectPresentationForm__Section {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+
+.ProjectPresentationForm__Section__Name {
+  margin-bottom: 1em;
 }
 
 /* PREVIEWS */
@@ -78,6 +88,7 @@
 }
 
 .ProjectPresentationsData__Summary__Text.Long {
+  flex-grow: 1;
   min-width: 0;
   max-width: 70%;
   text-overflow: ellipsis;

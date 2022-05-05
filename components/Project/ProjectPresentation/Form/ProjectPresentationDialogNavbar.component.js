@@ -1,42 +1,47 @@
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Box, Button, IconButton } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { resolveRoute, ROUTES } from '../../../../constants';
 
-const DialogEmbeddedNavbar = ({ projectId, isEmbeddedDialog }) => {
+const ProjectPresentationDialogNavbar = ({ projectId, isEmbeddedDialog }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   return (
     <Box
-      className="DialogEmbeddedNavbar DialogEmbeddedNavbar__Container"
+      className="ProjectPresentationDialogNavbar ProjectPresentationDialogNavbar__Container"
       sx={{ backgroundColor: 'primary.main' }}
     >
       <Link
         href={resolveRoute(ROUTES.projects.edit, projectId)}
         shallow={isEmbeddedDialog}
       >
-        {isEmbeddedDialog ? (
+        {!isMobile ? (
           <Button
-            className="DialogEmbeddedNavbar__Button"
+            className="ProjectPresentationDialogNavbar__Button"
             onClick={(e) => {
               e.stopPropagation();
             }}
             variant="text"
             startIcon={
-              <ArrowBackIcon className="DialogEmbeddedNavbar__Button" />
+              <ArrowBackIcon className="ProjectPresentationDialogNavbar__Button" />
             }
           >
             Go to Project
           </Button>
         ) : (
           <IconButton
-            className="DialogEmbeddedNavbar__Button"
+            className="ProjectPresentationDialogNavbar__Button"
             onClick={(e) => {
               e.stopPropagation();
             }}
             variant="text"
           >
-            <ArrowBackIcon className="DialogEmbeddedNavbar__Button" />
+            <ArrowBackIcon className="ProjectPresentationDialogNavbar__Button" />
           </IconButton>
         )}
       </Link>
@@ -44,10 +49,10 @@ const DialogEmbeddedNavbar = ({ projectId, isEmbeddedDialog }) => {
   );
 };
 
-DialogEmbeddedNavbar.defaultProps = {};
+ProjectPresentationDialogNavbar.defaultProps = {};
 
-DialogEmbeddedNavbar.propTypes = {
-  parentProjectId: PropTypes.string.isRequired,
+ProjectPresentationDialogNavbar.propTypes = {
+  projectId: PropTypes.string.isRequired,
 };
 
-export default DialogEmbeddedNavbar;
+export default ProjectPresentationDialogNavbar;
