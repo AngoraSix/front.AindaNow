@@ -1,11 +1,16 @@
 .ProjectPresentationView__Container {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .MediaHeader__Container {
   position: relative;
   height: 15vh;
   z-index: 0;
+  width: 90%;
+  margin-top: 10px;
 }
 
 .MediaCard__Container {
@@ -17,7 +22,7 @@
   position: relative;
   color: #ffffff;
   backface-visibility: hidden;
-  border-radius: 20px;
+  border-radius: 25px;
 }
 
 .MediaCard__Container .MediaCard__Image {
@@ -142,11 +147,21 @@
 
 @media (min-width: 600px) {
   .MediaHeader__Container {
+    height: 10vh;
+  }
+
+  .MediaCard__Container {
+    border-radius: 25px;
+  }
+}
+
+@media (min-width: 900px) {
+  .MediaHeader__Container {
     height: 20vh;
   }
 
   .MediaCard__Container {
-    border-radius: 30px;
+    border-radius: 20px;
   }
 }
 
@@ -241,10 +256,6 @@
 }
 
 @media (min-width: 600px) {
-  .ProjectPresentation__Container {
-    margin-top: 10vh;
-  }
-
   .ProjectPresentation__AreaExtension {
     height: 30vh;
     clip-path: ellipse(150% 300% at 100% 310%);

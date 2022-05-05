@@ -7,8 +7,9 @@ import { MEDIA_TYPES } from '../../../../../../constants';
 import ProjectPresentationViewMediaCard from './ProjectPresentationViewMediaCard.component';
 
 const QUANTITY_OF_CARDS = {
-  MOBILE: 6,
-  DESKTOP: 12,
+  XS: 6,
+  SMALL: 8,
+  MEDIUM: 12,
 };
 const INTERVAL_RANGE = {
   MIN: 12500,
@@ -23,12 +24,19 @@ const _getRandomInterval = () => {
   return interval;
 };
 
+const _getQuantityOfCards = (isSmall, isMedium) =>
+  isMedium
+    ? QUANTITY_OF_CARDS.MEDIUM
+    : isSmall
+    ? QUANTITY_OF_CARDS.SMALL
+    : QUANTITY_OF_CARDS.XS;
+
 const MediaHeader = ({ media }) => {
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const quantityOfCards = isMobile
-    ? QUANTITY_OF_CARDS.MOBILE
-    : QUANTITY_OF_CARDS.DESKTOP;
+  const isSmall = useMediaQuery(theme.breakpoints.up('sm'));
+  const isMedium = useMediaQuery(theme.breakpoints.up('md'));
+  const quantityOfCards = _getQuantityOfCards(isSmall, isMedium);
+  isSmall ? QUANTITY_OF_CARDS.MOBILE : QUANTITY_OF_CARDS.DESKTOP;
 
   const images = media
     .filter((m) => m.mediaType === MEDIA_TYPES.IMAGE)
@@ -36,10 +44,10 @@ const MediaHeader = ({ media }) => {
 
   return (
     <Box className="MediaHeader MediaHeader__Container">
-      <Grid container spacing={{ xs: 1, sm: 2 }}>
+      <Grid container spacing={{ xs: 1, sm: 1.5, md: 2 }}>
         {new Array(quantityOfCards).fill('', 0, quantityOfCards).map((_, i) => {
           return (
-            <Grid item key={i} xs={4} sm={2}>
+            <Grid item key={i} xs={4} sm={3} md={2}>
               <ProjectPresentationViewMediaCard
                 imagesList={images}
                 interval={_getRandomInterval()}
