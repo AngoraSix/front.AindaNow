@@ -5,6 +5,7 @@ import ProjectPresentationDialog from './ProjectPresentationDialog.component';
 import ProjectPresentationForm from './ProjectPresentationForm.component';
 import ProjectPresentationFormReducer, {
   INITIAL_STATE,
+  updateFieldsAction,
 } from './ProjectPresentationForm.reducer';
 
 const ProjectPresentationFormContainer = ({
@@ -16,13 +17,27 @@ const ProjectPresentationFormContainer = ({
     ...projectToForm(projectPresentation),
   });
 
-  const onFormChange = () => {};
+  const onFormChange = (property) => (eventOrValue) => {
+    const partialFormData = {
+      [property]: eventOrValue.target
+        ? eventOrValue.target.value
+        : eventOrValue,
+    };
+
+    dispatch(updateFieldsAction(partialFormData));
+  };
+
+  const onSaveFormField = (property) => () => {
+    console.log('SAVE ' + property + ' NOW');
+    console.log(formData[property]);
+  };
 
   return isTriggeredAction ? (
     <ProjectPresentationDialog projectId={projectPresentation.projectId}>
       <ProjectPresentationForm
         formData={formData}
         onFormChange={onFormChange}
+        onSaveFormField={onSaveFormField}
       />
     </ProjectPresentationDialog>
   ) : (
