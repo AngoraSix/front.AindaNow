@@ -1,10 +1,10 @@
 import { Box, Button, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import ProjectPresentationCoreData from './Sections/ProjectPresentationCoreData/ProjectPresentationCoreData.component';
+import ProjectPresentationCoreData from './Sections/ProjectPresentationCoreData.component';
 import ProjectPresentationsSectionsData from './Sections/ProjectPresentationsSectionsData.component';
 
-const ProjectPresentationForm = ({ formData, onFormChange, onSaveFormField }) => {
+const ProjectPresentationForm = ({ formData, onFormChange }) => {
   return (
     <Box
       className={`ProjectPresentationForm ProjectPresentationForm__Container`}
@@ -20,7 +20,6 @@ const ProjectPresentationForm = ({ formData, onFormChange, onSaveFormField }) =>
         <ProjectPresentationCoreData
           formData={formData}
           onFormChange={onFormChange}
-          onSaveFormField={onSaveFormField}
           wasSubmitted={false}
         />
       </Box>
@@ -35,7 +34,6 @@ const ProjectPresentationForm = ({ formData, onFormChange, onSaveFormField }) =>
         <ProjectPresentationsSectionsData
           formData={formData}
           onFormChange={onFormChange}
-          onSaveFormField={onSaveFormField}
         />
       </Box>
       <Box className="ProjectPresentationForm__Section">

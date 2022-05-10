@@ -27,17 +27,11 @@ const ProjectPresentationFormContainer = ({
     dispatch(updateFieldsAction(partialFormData));
   };
 
-  const onSaveFormField = (property) => () => {
-    console.log('SAVE ' + property + ' NOW');
-    console.log(formData[property]);
-  };
-
   return isTriggeredAction ? (
     <ProjectPresentationDialog projectId={projectPresentation.projectId}>
       <ProjectPresentationForm
         formData={formData}
         onFormChange={onFormChange}
-        onSaveFormField={onSaveFormField}
       />
     </ProjectPresentationDialog>
   ) : (

@@ -11,17 +11,10 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { PROJECT_PRESENTATION_SECTION_FORM_FIELDS as PRESENTATION_SECTION_FIELDS } from '../ProjectPresentationForm.properties';
 
-const ProjectPresentationsSectionsData = ({
-  formData,
-  onFormChange,
-  onSaveFormField,
-}) => {
+const ProjectPresentationsSectionsData = ({ formData, onFormChange }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleFocusChange = (panel) => (event, isExpanded) => {
-    if (expanded) {
-      onSaveFormField('sections');
-    }
     setExpanded(isExpanded ? panel : false);
   };
 

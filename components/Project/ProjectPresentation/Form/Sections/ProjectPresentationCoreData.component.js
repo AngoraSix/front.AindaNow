@@ -6,7 +6,6 @@ import { PROJECT_PRESENTATION_CORE_FORM_FIELDS as PRESENTATION_CORE_FIELDS } fro
 const ProjectPresentationCoreData = ({
   formData,
   onFormChange,
-  onSaveFormField,
   wasSubmitted,
 }) => {
   const onFieldChange = (property) => (event) => {
@@ -32,7 +31,6 @@ const ProjectPresentationCoreData = ({
             {...PRESENTATION_CORE_FIELDS.referenceName}
             value={formData['referenceName'] || ''}
             onChange={onFieldChange('referenceName')}
-            onBlur={onSaveFormField('referenceName')}
             error={
               wasSubmitted &&
               PRESENTATION_CORE_FIELDS.referenceName.required &&
