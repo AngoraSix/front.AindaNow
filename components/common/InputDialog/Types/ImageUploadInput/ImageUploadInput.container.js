@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { MEDIA_TYPES } from '../../../../../constants';
 import { useNotifications } from '../../../../../hooks/app';
+import { asArray } from '../../../../../utils/helpers';
 import resolveToMediaArray from '../../../../../utils/media/mediaProcessor';
 import ImageUploadInput from './ImageUploadInput.component';
 
@@ -29,13 +30,7 @@ const ImageUploadInputContainer = ({
     onChange(media);
   };
 
-  if (currentFieldValue) {
-    currentFieldValue = Array.isArray(currentFieldValue)
-      ? currentFieldValue
-      : [currentFieldValue];
-  } else {
-    currentFieldValue = [];
-  }
+  currentFieldValue = asArray(currentFieldValue, []);
 
   return (
     <ImageUploadInput

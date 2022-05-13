@@ -14,7 +14,7 @@ const ProjectPresentationCoreData = ({
     } = event;
 
     // we only have one field in this section
-    value ? setIsCompleted(true) : setIsCompleted(false);
+    // value ? setIsCompleted(true) : setIsCompleted(false);
     onFormChange(property)(event);
   };
 

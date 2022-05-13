@@ -18,11 +18,13 @@ const MediaPreviewDialog = ({ mediaType, open, handleDialogClose, media }) => {
       TransitionComponent={Transition}
     >
       <DialogContent>
-        <MediaPreview
-          mediaType={mediaType || MEDIA_TYPES.IMAGE}
-          media={media}
-          allowsZoomingIn={true}
-        />
+        {open && media && (
+          <MediaPreview
+            mediaType={mediaType || MEDIA_TYPES.IMAGE}
+            media={media}
+            allowsZoomingIn={true}
+          />
+        )}
       </DialogContent>
     </Dialog>
   );

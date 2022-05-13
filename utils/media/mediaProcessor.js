@@ -1,8 +1,12 @@
+import api from '../../api';
+import config from '../../config';
 import { MEDIA_TYPES } from '../../constants';
 import Media from '../../models/Media';
+import Project from '../../models/Project';
+import logger from '../logger';
 import { isImage, processImage } from './image';
+import projectUploadAllMedia from './Strategies/projectMediaProcessor';
 import { isYoutubeURL, processYoutubeUrl } from './youtube';
-import api from '../../api';
 
 export const uploadMedia = async (media) => {
   const file = media.file;
@@ -26,6 +30,17 @@ export const uploadMedia = async (media) => {
     thumbnailUrl: thumbnailURL,
     resourceId: resourceId,
   };
+};
+
+export const uploadAllMedia = (model) => {
+  switch (true) {
+    case model instanceof Project:
+      return projectUploadAllMedia(model);
+    default:
+      logger.error(
+        `Error - Trying to upload Media for: ${JSON.stringify(model)}`
+      );
+  }
 };
 
 const _processInputElement = async (mediaDataElement, allowedMediaTypes) => {

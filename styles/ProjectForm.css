@@ -32,6 +32,13 @@
   margin: 0 auto;
 }
 
+.SteppedProjectForm__Actions {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 1em;
+}
+
 @media (min-width: 600px) {
   .ProjectForm__Description {
     margin: 2em auto;

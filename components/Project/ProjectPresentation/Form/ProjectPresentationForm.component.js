@@ -34,6 +34,7 @@ const ProjectPresentationForm = ({ formData, onFormChange }) => {
         <ProjectPresentationsSectionsData
           formData={formData}
           onFormChange={onFormChange}
+          wasSubmitted={false}
         />
       </Box>
       <Box className="ProjectPresentationForm__Section">

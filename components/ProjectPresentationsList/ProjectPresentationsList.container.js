@@ -2,30 +2,46 @@ import { useSession } from 'next-auth/react';
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
 import api from '../../api';
+import ProjectPresentation from '../../models/ProjectPresentation';
 import ProjectPresentationsList from './ProjectPresentationsList.component';
 import ProjectPresentationsListReducer, {
   INITIAL_STATE,
   updateDataAction,
 } from './ProjectPresentationsList.reducer';
 
-const ProjectPresentationsListContainer = ({ data }) => {
+const ProjectPresentationsListContainer = ({
+  projectPresentationsList: projectPresentationsListObj,
+}) => {
+  let projectPresentationsList = projectPresentationsListObj.map(
+    (pr) => new ProjectPresentation(pr)
+  );
   const { data: session, status } = useSession();
   const loading = status === 'loading';
 
   const [state, dispatch] = useReducer(ProjectPresentationsListReducer, {
     ...INITIAL_STATE,
-    ...data,
+    projectPresentationsList,
   });
 
   const onNextPageClick = async () => {
-    const { total, page, limit, search, data } =
-      await api.projects.fetchProjects(session.user.attributes, {
-        page: state.data.page + 1,
-        search: state.data.search,
-      });
+    const {
+      total,
+      page,
+      limit,
+      search,
+      data: fetchedPresentationsListObj,
+    } = await api.projects.fetchProjects(session.user.attributes, {
+      page: state.data.page + 1,
+      search: state.data.search,
+    });
 
-    const projectPresentationsList =
-      state.data.projectPresentationsList.concat(data);
+    fetchedPresentationsList = fetchedPresentationsListObj.map(
+      (pr) => new ProjectPresentation(pr)
+    );
+
+    const projectPresentationsList = state.data.projectPresentationsList.concat(
+      fetchedPresentationsList
+    );
 
     dispatch(
       updateDataAction({ total, page, limit, search, projectPresentationsList })
@@ -42,15 +58,19 @@ const ProjectPresentationsListContainer = ({ data }) => {
     //   search,
     //   data: projects,
     // } =
-    const projectPresentationsList =
+    const projectPresentationsListObj =
       await api.projects.fetchProjectPresentations(session.user.attributes, {
         search: value,
       });
 
-    const total = projectPresentationsList.length,
+    const total = projectPresentationsListObj.length,
       page = 1,
       limit = 5,
       search = value;
+
+    const projectPresentationsList = projectPresentationsListObj.map(
+      (pr) => new ProjectPresentation(pr)
+    );
     dispatch(
       updateDataAction({ total, page, limit, search, projectPresentationsList })
     );
@@ -65,10 +85,10 @@ const ProjectPresentationsListContainer = ({ data }) => {
 };
 
 ProjectPresentationsListContainer.defaultProps = {
-  data: {},
+  projectPresentationsList: {},
 };
 ProjectPresentationsListContainer.propTypes = {
-  data: PropTypes.object,
+  projectPresentationsList: PropTypes.array,
 };
 
 export default ProjectPresentationsListContainer;

@@ -4,13 +4,11 @@ import React, { useReducer } from 'react';
 import api from '../../../api';
 import { resolveRoute, ROUTES } from '../../../constants';
 import { useLoading } from '../../../hooks/app';
-import {
-  formToProject,
-  projectToForm,
-} from '../../../utils/converters/projectConverters';
+import Project from '../../../models/Project';
+import { projectToForm } from '../../../utils/converters/projectConverters';
 import logger from '../../../utils/logger';
+import { uploadAllMedia } from '../../../utils/media/mediaProcessor';
 import ProjectForm from './ProjectForm.component';
-import { PROJECT_PRESENTATION_REQUIRED_FIELDS } from './ProjectForm.properties';
 import ProjectFormReducer, {
   INITIAL_STATE,
   updateFieldsAction,
@@ -37,18 +35,18 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
   const onSubmit = async (flatFormData) => {
     doLoad(true);
     try {
-      let projectObject = await formToProject(
-        flatFormData,
-        PROJECT_PRESENTATION_REQUIRED_FIELDS
-      );
+      let project = Project.fromFormData(flatFormData);
+      project = await uploadAllMedia(project);
+      project.completeRequiredFields();
 
-      const projectResponse = await api.front.newProject(projectObject);
+      const projectResponse = await api.front.newProject(project);
+
       onDone(projectResponse);
 
       const viewURL = resolveRoute(
         ROUTES.projects.presentations.view,
         projectResponse.id,
-        projectResponse.presentation.id
+        projectResponse.presentations.id
       );
       router.push(viewURL);
     } catch (err) {

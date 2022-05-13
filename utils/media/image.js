@@ -44,11 +44,11 @@ export const processImage = async (mediaDataElement) => {
   const blobURL = await _loadImageSrc(mediaDataElement);
   mediaDataElement.blob = blobURL;
   return new Media(
-    INPUT_FIELD_TYPES.IMAGE,
-    mediaDataElement.name,
-    blobURL,
-    null,
-    mediaDataElement
+    {mediaType: INPUT_FIELD_TYPES.IMAGE,
+    key: mediaDataElement.name,
+    thumbnailUrl: blobURL,
+    resourceId: null,
+    file: mediaDataElement}
   );
 };
 

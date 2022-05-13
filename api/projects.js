@@ -13,8 +13,8 @@ class ProjectsAPI {
   async newProject(newProject, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
-    let newPresentation = newProject.presentation;
-    delete newProject.presentation;
+    let newPresentation = newProject.presentations;
+    delete newProject.presentations;
     let createdPresentation = null;
     const { data: createdProject } = await this.axios.post(
       `/core`,
@@ -41,7 +41,7 @@ class ProjectsAPI {
       );
       createdPresentation = data;
     }
-    return { ...createdProject, presentation: createdPresentation };
+    return { ...createdProject, presentations: createdPresentation };
   }
 
   async getProjectPresentation(projectPresentationId, token) {

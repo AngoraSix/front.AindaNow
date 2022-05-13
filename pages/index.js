@@ -16,18 +16,20 @@ const HomePage = ({ projectPresentationsList }) => {
       </Head>
 
       <ProjectsLayout>
-        <ProjectPresentationsList data={{ projectPresentationsList }} />
+        <ProjectPresentationsList
+          projectPresentationsList={projectPresentationsList}
+        />
       </ProjectsLayout>
     </React.Fragment>
   );
 };
 
 HomePage.defaultProps = {
-  projectsList: [],
+  projectPresentationsList: [],
 };
 
 HomePage.propTypes = {
-  projectsList: PropTypes.array,
+  projectPresentationsList: PropTypes.array,
 };
 
 export const getServerSideProps = async (ctx) => {

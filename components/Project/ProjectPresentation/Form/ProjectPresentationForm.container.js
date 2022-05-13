@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
 import { projectToForm } from '../../../../utils/converters/projectConverters';
-import ProjectPresentationDialog from './ProjectPresentationDialog.component';
+import ProjectPresentationDialog from './Dialog';
 import ProjectPresentationForm from './ProjectPresentationForm.component';
 import ProjectPresentationFormReducer, {
   INITIAL_STATE,

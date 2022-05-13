@@ -84,7 +84,7 @@ const ProjectPresentationsList = ({
 
 ProjectPresentationsList.defaultProps = {
   total: 0,
-  projects: [],
+  projectPresentationsList: [],
 };
 
 ProjectPresentationsList.propTypes = {

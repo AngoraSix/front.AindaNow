@@ -1,5 +1,5 @@
 export default class Media {
-  constructor(mediaType, key, thumbnailUrl = '', resourceId, file) {
+  constructor({ mediaType, key, thumbnailUrl = '', resourceId, file }) {
     this.mediaType = mediaType;
     this.resourceId = resourceId || thumbnailUrl;
     this.thumbnailUrl = thumbnailUrl;

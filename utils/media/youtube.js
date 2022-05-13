@@ -24,7 +24,12 @@ export const processYoutubeUrl = async (value) => {
   if (isValid) {
     videoThumbnail = await _requestThumbnail(id);
   }
-  return new Media(INPUT_FIELD_TYPES.YOUTUBEVIDEO, id, videoThumbnail, id);
+  return new Media({
+    mediaType: INPUT_FIELD_TYPES.YOUTUBEVIDEO,
+    key: id,
+    thumbnailUrl: videoThumbnail,
+    resourceId: id,
+  });
 };
 
 export const isYoutubeURL = (text) => {

@@ -196,7 +196,7 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
             onInputKeyPressed={onInputKeyPressed}
           />
           {isMobile ? (
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Box className="SteppedProjectForm__Actions">
               {isLastStep && (
                 <Button
                   type="submit"
@@ -209,7 +209,7 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
               )}
             </Box>
           ) : (
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            <Box className="SteppedProjectForm__Actions">
               <Button
                 color="inherit"
                 disabled={activeStep === 0}

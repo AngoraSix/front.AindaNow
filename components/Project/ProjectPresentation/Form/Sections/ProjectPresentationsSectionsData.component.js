@@ -5,21 +5,27 @@ import {
   AccordionSummary,
   Box,
   Grid,
-  Typography,
+  TextField,
+  Typography
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { PROJECT_PRESENTATION_SECTION_FORM_FIELDS as PRESENTATION_SECTION_FIELDS } from '../ProjectPresentationForm.properties';
+import ProjectPresentationMediaData from './ProjectPresentationMediaData.component';
 
-const ProjectPresentationsSectionsData = ({ formData, onFormChange }) => {
+const ProjectPresentationsSectionsData = ({
+  formData,
+  onFormChange,
+  wasSubmitted,
+}) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleFocusChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
-  const onFieldChange = (property, index) => (eventOrValue) => {
-    const updatedSections = [...formData.sections];
+  const onSectionFieldChange = (property, index) => (eventOrValue) => {
+    const updatedSections = [...(formData.sections || [{}])];
     updatedSections[index][property] = eventOrValue.target
       ? eventOrValue.target.value
       : eventOrValue;
@@ -55,11 +61,11 @@ const ProjectPresentationsSectionsData = ({ formData, onFormChange }) => {
               spacing={2}
               justifyContent="center"
             >
-              <Grid item xs={10}>
+              <Grid item xs={12}>
                 <TextField
                   {...PRESENTATION_SECTION_FIELDS.title}
-                  value={formData['sections'][i] || ''}
-                  onChange={onFieldChange('section')}
+                  value={formData['sections'][i].title || ''}
+                  onChange={onSectionFieldChange('title', i)}
                   error={
                     wasSubmitted &&
                     PRESENTATION_SECTION_FIELDS.referenceName.required &&
@@ -68,6 +74,13 @@ const ProjectPresentationsSectionsData = ({ formData, onFormChange }) => {
                   fullWidth
                 />
               </Grid>
+              <ProjectPresentationMediaData
+                formData={formData}
+                onFormChange={onFormChange('sections')}
+                wasSubmitted={wasSubmitted}
+                fullWidth={true}
+                presentationIndex={i}
+              />
             </Grid>
           </AccordionDetails>
         </Accordion>

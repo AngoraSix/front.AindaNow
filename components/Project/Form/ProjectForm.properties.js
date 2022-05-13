@@ -17,7 +17,7 @@ export const PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS = {
   mainMedia: {
     key: 'mainMedia',
     label: 'Set Main Media',
-    required: true
+    required: true,
   },
   media: {
     key: 'media',
@@ -35,7 +35,7 @@ export const PROJECT_PRESENTATION_SECTION_ADDITIONAL_FORM_FIELDS = {
     key: 'referenceName',
     label: 'Project Presentation Reference Name',
     required: true,
-  }
+  },
 };
 
 export const PROJECT_PRESENTATION_PARAMS_FIELDS = {
@@ -46,17 +46,6 @@ export const PROJECT_PRESENTATION_PARAMS_FIELDS = {
   technologies: {
     key: 'skills',
     label: 'Skills',
-  },
-};
-
-export const PROJECT_PRESENTATION_REQUIRED_FIELDS = {
-  title: {
-    ...PROJECT_PRESENTATION_SECTION_ADDITIONAL_FORM_FIELDS.title,
-    mapFromProject: (project) => project[PROJECT_CORE_FORM_FIELDS.name.key],
-  },
-  referenceName: {
-    ...PROJECT_PRESENTATION_SECTION_ADDITIONAL_FORM_FIELDS.title,
-    mapFromProject: (project) => project[PROJECT_CORE_FORM_FIELDS.name.key],
   },
 };
 

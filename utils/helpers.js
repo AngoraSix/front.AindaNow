@@ -57,3 +57,27 @@ export const createObjectWithFlatParams = (deepObject) => {
   }
   return result;
 };
+
+export const asArray = (potentialObject, ifNull = potentialObject) => {
+  if (potentialObject != null) {
+    return Array.isArray(potentialObject) ? potentialObject : [potentialObject];
+  } else {
+    return ifNull;
+  }
+};
+
+const _createIfNotOfType = (input, Type) =>
+  input instanceof Type ? input : new Type(input);
+
+export const toType = (input, Type, toSingleElement = false) => {
+  if (input == null) return input;
+  if (Array.isArray(input)) {
+    input = asArray(input, []);
+    input = input.map((i) =>
+      i instanceof Type ? i : _createIfNotOfType(i, Type)
+    );
+    return toSingleElement && input.length ? input[0] : input;
+  } else {
+    return input instanceof Type ? input : _createIfNotOfType(input, Type);
+  }
+};

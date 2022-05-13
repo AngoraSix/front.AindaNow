@@ -73,7 +73,7 @@ const MediaListDnD = ({ media, onModifyMediaOrder, onRemoveMediaItem }) => {
                 : null;
             return (
               <MediaListCard
-                key={mediaElement.key}
+                key={mediaElement.key || mediaElement.resourceId || index}
                 colSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
                 rowSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
                 media={mediaElement}

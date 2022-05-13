@@ -5,7 +5,7 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { resolveRoute, ROUTES } from '../../../../constants';
+import { resolveRoute, ROUTES } from '../../../../../constants';
 
 const ProjectPresentationDialogNavbar = ({ projectId, isEmbeddedDialog }) => {
   const theme = useTheme();
