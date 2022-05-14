@@ -24,8 +24,6 @@ const EditProjectPresentationPage = ({
   const { onError } = useNotifications();
   const router = useRouter();
 
-  console.log(session);
-
   useEffect(() => {
     if (session && !session.error && !isAdmin) {
       onError(NOT_ADMIN_ERROR_MESSAGE);

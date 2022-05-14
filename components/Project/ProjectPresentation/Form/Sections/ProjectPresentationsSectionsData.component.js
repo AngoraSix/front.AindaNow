@@ -4,7 +4,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Grid,
   TextField,
   Typography,
 } from '@mui/material';
@@ -18,16 +17,11 @@ const ProjectPresentationsSectionsData = ({
   onFormChange,
   wasSubmitted,
 }) => {
-  console.log('PUPUPUPUPU');
-  console.log(formData);
   const [expanded, setExpanded] = useState(false);
 
   const handleFocusChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
-
-  console.log('YYYYYYYYYY');
-  console.log(formData);
 
   const onSectionFieldChange = (property, index) => (eventOrValue) => {
     const updatedSections = [...(formData.sections || [{}])];
@@ -38,7 +32,7 @@ const ProjectPresentationsSectionsData = ({
   };
 
   return (
-    <Box className="ProjectPresentationsData ProjectPresentationsData__Container ProjectForm__Section__Container">
+    <Box className="ProjectPresentationsSectionsData ProjectPresentationsSectionsData__Container ProjectForm__Section__Container">
       {formData.sections.map((s, i) => (
         <Accordion
           key={i}
@@ -47,38 +41,33 @@ const ProjectPresentationsSectionsData = ({
           TransitionProps={{ unmountOnExit: true }}
         >
           <AccordionSummary
-            className="ProjectPresentationsData__Summary"
+            className="ProjectPresentationsSectionsData__Summary"
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`${i}-content1`}
             id={`${i}-header`}
           >
             <Typography
-              className="ProjectPresentationsData__Summary__Text Long"
+              className="ProjectPresentationsSectionsData__Summary__Text Long"
               noWrap={true}
             >
               {s.title}
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Grid
-              className="ProjectPresentationForm__Section__Fields ProjectPresentationSectionsData__Fields"
-              container
-              spacing={2}
-              justifyContent="center"
-            >
-              <Grid item xs={12}>
-                <TextField
-                  {...PRESENTATION_SECTION_FIELDS.title}
-                  value={formData['sections'][i].title || ''}
-                  onChange={onSectionFieldChange('title', i)}
-                  error={
-                    wasSubmitted &&
-                    PRESENTATION_SECTION_FIELDS.referenceName.required &&
-                    !formData.referenceName
-                  }
-                  fullWidth
-                />
-              </Grid>
+            <Box className="ProjectPresentationsSectionsData__Field">
+              <TextField
+                {...PRESENTATION_SECTION_FIELDS.title}
+                value={formData['sections'][i].title || ''}
+                onChange={onSectionFieldChange('title', i)}
+                error={
+                  wasSubmitted &&
+                  PRESENTATION_SECTION_FIELDS.referenceName.required &&
+                  !formData.referenceName
+                }
+                fullWidth
+              />
+            </Box>
+            <Box className="ProjectPresentationsSectionsData__Field">
               <PresentationSectionMediaData
                 sectionsFormData={formData.sections}
                 onSectionsChange={onFormChange('sections')}
@@ -86,7 +75,7 @@ const ProjectPresentationsSectionsData = ({
                 fullWidth={true}
                 presentationIndex={i}
               />
-            </Grid>
+            </Box>
           </AccordionDetails>
         </Accordion>
       ))}

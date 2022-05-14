@@ -36,12 +36,9 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
     doLoad(true);
     try {
       let project = Project.fromFormData(flatFormData);
-      console.log('OOOOOOO');
-      console.log(project);
       project = await uploadAllMedia(project);
       project.completeRequiredFields();
 
-      console.log(project);
       const projectResponse = await api.front.newProject(project);
 
       onDone(projectResponse);

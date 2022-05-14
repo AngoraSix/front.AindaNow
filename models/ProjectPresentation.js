@@ -18,8 +18,6 @@ export default class ProjectPresentation {
 
   toFormData() {
     let asd = createObjectWithFlatParams(this);
-    console.log("JJJJJJ");
-    console.log(asd);
     return asd;
   }
 }

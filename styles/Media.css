@@ -163,7 +163,7 @@
 
 .MediaSingleDnD__DropZone__Preview__Container {
   flex-grow: 1;
-  width: 60%;
+  width: 120px;
   position: relative;
   overflow: hidden;
 }
@@ -192,10 +192,6 @@
 
 @media (min-width: 900px) {
   .MediaSingleDnD__DropZone__PreviewPlaceholder {
-    width: 20%;
-  }
-
-  .MediaSingleDnD__DropZone__Preview__Container {
     width: 20%;
   }
 }

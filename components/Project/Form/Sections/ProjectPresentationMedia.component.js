@@ -16,8 +16,6 @@ const ProjectPresentationMedia = ({
   setIsCompleted,
   wasSubmitted,
 }) => {
-  console.log('ASDASDASDASA');
-  console.log(formData);
   return (
     <Box className="ProjectPresentationMedia ProjectPresentationMedia__Container ProjectForm__Section__Container">
       {withDescription && (

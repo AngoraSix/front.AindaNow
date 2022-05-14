@@ -17,18 +17,10 @@ const PresentationSectionMediaData = ({
     (innerField, isRequired = false) =>
     (mediaData) => {
       const updatedSections = [...(sectionsFormData || [])];
-      console.log('EEEEEE');
-      console.log(updatedSections);
-      console.log(sectionsFormData);
       if (!sectionsFormData || !sectionsFormData[presentationIndex]) {
-        console.log('IIIIIIIII');
         updatedSections[presentationIndex] = {};
       }
-      console.log('UUUUUUUUU');
-      console.log(updatedSections);
       updatedSections[presentationIndex][innerField] = mediaData;
-      console.log('XXXXXXXX');
-      console.log(updatedSections);
       if (isRequired && mediaData.length) {
         // there is only one required field here
         setIsCompleted(true);
@@ -68,7 +60,7 @@ const PresentationSectionMediaData = ({
         spacing={2}
         justifyContent="center"
       >
-        <Grid item xs={10}>
+        <Grid item xs={12}>
           <Typography>{PRESENTATION_SECTION_FIELDS.media.label}</Typography>
           <Media
             allowsMultiple={true}
@@ -93,8 +85,8 @@ PresentationSectionMediaData.defaultProps = {
 };
 
 PresentationSectionMediaData.propTypes = {
-  presentationFormData: PropTypes.object,
-  onSectionChange: PropTypes.func.isRequired,
+  sectionsFormData: PropTypes.array,
+  onSectionsChange: PropTypes.func.isRequired,
   setIsCompleted: PropTypes.func,
   wasSubmitted: PropTypes.bool,
   fullWidth: PropTypes.bool,
