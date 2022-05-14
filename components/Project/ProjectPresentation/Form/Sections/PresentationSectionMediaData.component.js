@@ -6,9 +6,9 @@ import { asArray } from '../../../../../utils/helpers';
 import Media from '../../../../common/Media';
 import { PROJECT_PRESENTATION_SECTION_FORM_FIELDS as PRESENTATION_SECTION_FIELDS } from '../ProjectPresentationForm.properties';
 
-const ProjectPresentationMediaData = ({
-  presentationFormData,
-  onFormChange,
+const PresentationSectionMediaData = ({
+  sectionsFormData,
+  onSectionsChange,
   setIsCompleted,
   wasSubmitted,
   presentationIndex,
@@ -16,25 +16,30 @@ const ProjectPresentationMediaData = ({
   const onMediaChange =
     (innerField, isRequired = false) =>
     (mediaData) => {
-      const updatedSections = [...(presentationFormData.sections || [])];
-      if (
-        !presentationFormData.sections ||
-        !presentationFormData.sections[presentationIndex]
-      ) {
+      const updatedSections = [...(sectionsFormData || [])];
+      console.log('EEEEEE');
+      console.log(updatedSections);
+      console.log(sectionsFormData);
+      if (!sectionsFormData || !sectionsFormData[presentationIndex]) {
+        console.log('IIIIIIIII');
         updatedSections[presentationIndex] = {};
       }
+      console.log('UUUUUUUUU');
+      console.log(updatedSections);
       updatedSections[presentationIndex][innerField] = mediaData;
+      console.log('XXXXXXXX');
+      console.log(updatedSections);
       if (isRequired && mediaData.length) {
         // there is only one required field here
         setIsCompleted(true);
       }
-      onFormChange({ ...presentationFormData, sections: updatedSections });
+      onSectionsChange(updatedSections);
     };
 
   return (
-    <Box className="ProjectPresentationMediaData ProjectPresentationMediaData__Container">
+    <Box className="PresentationSectionMediaData PresentationSectionMediaData__Container">
       <Grid
-        className="ProjectPresentationMediaData__MainMedia"
+        className="PresentationSectionMediaData__MainMedia"
         container
         spacing={2}
         justifyContent="center"
@@ -48,19 +53,17 @@ const ProjectPresentationMediaData = ({
               'mainMedia',
               PRESENTATION_SECTION_FIELDS.mainMedia.required
             )}
-            mediaData={asArray(
-              presentationFormData.sections?.[presentationIndex]?.mainMedia
-            )}
+            mediaData={asArray(sectionsFormData[presentationIndex]?.mainMedia)}
             error={
               wasSubmitted &&
               PRESENTATION_SECTION_FIELDS.mainMedia.required &&
-              !presentationFormData.sections?.[presentationIndex]?.mainMedia
+              !sectionsFormData[presentationIndex]?.mainMedia
             }
           />
         </Grid>
       </Grid>
       <Grid
-        className="ProjectForm__Section__Fields ProjectPresentationMediaData__Fields"
+        className="ProjectForm__Section__Fields PresentationSectionMediaData__Fields"
         container
         spacing={2}
         justifyContent="center"
@@ -74,9 +77,7 @@ const ProjectPresentationMediaData = ({
               'media',
               PRESENTATION_SECTION_FIELDS.media.required
             )}
-            mediaData={
-              presentationFormData.sections?.[presentationIndex]?.media
-            }
+            mediaData={sectionsFormData[presentationIndex]?.media}
           />
         </Grid>
       </Grid>
@@ -84,19 +85,19 @@ const ProjectPresentationMediaData = ({
   );
 };
 
-ProjectPresentationMediaData.defaultProps = {
-  presentationFormData: {},
+PresentationSectionMediaData.defaultProps = {
+  sectionsFormData: [],
   setIsCompleted: () => {},
   wasSubmitted: false,
   fullWidth: false,
 };
 
-ProjectPresentationMediaData.propTypes = {
+PresentationSectionMediaData.propTypes = {
   presentationFormData: PropTypes.object,
-  onFormChange: PropTypes.func.isRequired,
+  onSectionChange: PropTypes.func.isRequired,
   setIsCompleted: PropTypes.func,
   wasSubmitted: PropTypes.bool,
   fullWidth: PropTypes.bool,
 };
 
-export default ProjectPresentationMediaData;
+export default PresentationSectionMediaData;

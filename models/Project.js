@@ -1,4 +1,8 @@
-import { createObjectFromFlatParams, toType } from '../utils/helpers';
+import {
+  createObjectFromFlatParams,
+  createObjectWithFlatParams,
+  toType,
+} from '../utils/helpers';
 import ProjectPresentation from './ProjectPresentation';
 
 export default class Project {
@@ -12,6 +16,10 @@ export default class Project {
   static fromFormData(formData) {
     let projectObject = createObjectFromFlatParams(formData);
     return new Project(projectObject);
+  }
+
+  toFormData() {
+    return createObjectWithFlatParams(this);
   }
 
   completeRequiredFields() {

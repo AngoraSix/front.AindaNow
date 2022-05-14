@@ -5,7 +5,7 @@ import api from '../../../api';
 import { resolveRoute, ROUTES } from '../../../constants';
 import { useLoading } from '../../../hooks/app';
 import Project from '../../../models/Project';
-import { projectToForm } from '../../../utils/converters/projectConverters';
+import { toType } from '../../../utils/helpers';
 import logger from '../../../utils/logger';
 import { uploadAllMedia } from '../../../utils/media/mediaProcessor';
 import ProjectForm from './ProjectForm.component';
@@ -19,7 +19,7 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
   const router = useRouter();
   const [formData, dispatch] = useReducer(ProjectFormReducer, {
     ...INITIAL_STATE,
-    ...projectToForm(project),
+    ...toType(project, Project).toFormData(),
   });
 
   const onFormChange = (property) => (eventOrValue) => {
@@ -36,9 +36,12 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
     doLoad(true);
     try {
       let project = Project.fromFormData(flatFormData);
+      console.log('OOOOOOO');
+      console.log(project);
       project = await uploadAllMedia(project);
       project.completeRequiredFields();
 
+      console.log(project);
       const projectResponse = await api.front.newProject(project);
 
       onDone(projectResponse);

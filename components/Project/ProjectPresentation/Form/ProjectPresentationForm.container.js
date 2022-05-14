@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
-import { projectToForm } from '../../../../utils/converters/projectConverters';
+import ProjectPresentation from '../../../../models/ProjectPresentation';
+import { createObjectWithFlatParams, toType } from '../../../../utils/helpers';
 import ProjectPresentationDialog from './Dialog';
 import ProjectPresentationForm from './ProjectPresentationForm.component';
 import ProjectPresentationFormReducer, {
@@ -12,9 +13,11 @@ const ProjectPresentationFormContainer = ({
   projectPresentation,
   isTriggeredAction,
 }) => {
+  console.log('GGGG');
+  console.log(createObjectWithFlatParams(projectPresentation));
   const [formData, dispatch] = useReducer(ProjectPresentationFormReducer, {
     ...INITIAL_STATE,
-    ...projectToForm(projectPresentation),
+    ...toType(projectPresentation, ProjectPresentation).toFormData(),
   });
 
   const onFormChange = (property) => (eventOrValue) => {

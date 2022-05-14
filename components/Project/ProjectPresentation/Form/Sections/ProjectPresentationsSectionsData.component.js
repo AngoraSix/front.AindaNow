@@ -6,23 +6,28 @@ import {
   Box,
   Grid,
   TextField,
-  Typography
+  Typography,
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { PROJECT_PRESENTATION_SECTION_FORM_FIELDS as PRESENTATION_SECTION_FIELDS } from '../ProjectPresentationForm.properties';
-import ProjectPresentationMediaData from './ProjectPresentationMediaData.component';
+import PresentationSectionMediaData from './PresentationSectionMediaData.component';
 
 const ProjectPresentationsSectionsData = ({
   formData,
   onFormChange,
   wasSubmitted,
 }) => {
+  console.log('PUPUPUPUPU');
+  console.log(formData);
   const [expanded, setExpanded] = useState(false);
 
   const handleFocusChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
+
+  console.log('YYYYYYYYYY');
+  console.log(formData);
 
   const onSectionFieldChange = (property, index) => (eventOrValue) => {
     const updatedSections = [...(formData.sections || [{}])];
@@ -74,9 +79,9 @@ const ProjectPresentationsSectionsData = ({
                   fullWidth
                 />
               </Grid>
-              <ProjectPresentationMediaData
-                formData={formData}
-                onFormChange={onFormChange('sections')}
+              <PresentationSectionMediaData
+                sectionsFormData={formData.sections}
+                onSectionsChange={onFormChange('sections')}
                 wasSubmitted={wasSubmitted}
                 fullWidth={true}
                 presentationIndex={i}

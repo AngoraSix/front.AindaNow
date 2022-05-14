@@ -1,7 +1,7 @@
 import { Box, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
-import ProjectPresentationMediaData from '../../ProjectPresentation/Form/Sections/ProjectPresentationMediaData.component';
+import PresentationSectionMediaData from '../../ProjectPresentation/Form/Sections/PresentationSectionMediaData.component';
 
 const MOBILE_DESCRIPTION = 'Time to add some visual aids...';
 
@@ -16,6 +16,8 @@ const ProjectPresentationMedia = ({
   setIsCompleted,
   wasSubmitted,
 }) => {
+  console.log('ASDASDASDASA');
+  console.log(formData);
   return (
     <Box className="ProjectPresentationMedia ProjectPresentationMedia__Container ProjectForm__Section__Container">
       {withDescription && (
@@ -25,9 +27,9 @@ const ProjectPresentationMedia = ({
           </Typography>
         </Box>
       )}
-      <ProjectPresentationMediaData
-        presentationFormData={formData.presentations}
-        onFormChange={onFormChange('presentations')}
+      <PresentationSectionMediaData
+        sectionsFormData={formData['presentations.sections']}
+        onSectionsChange={onFormChange('presentations.sections')}
         setIsCompleted={setIsCompleted}
         wasSubmitted={wasSubmitted}
         presentationIndex={0}

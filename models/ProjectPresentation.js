@@ -1,4 +1,4 @@
-import { toType } from '../utils/helpers';
+import { createObjectWithFlatParams, toType } from '../utils/helpers';
 import Media from './Media';
 import Project from './Project';
 
@@ -14,6 +14,13 @@ export default class ProjectPresentation {
   completeRequiredFields(project) {
     this.referenceName = this.referenceName || project.name;
     this.sections.forEach((s) => s.completeRequiredFields(project));
+  }
+
+  toFormData() {
+    let asd = createObjectWithFlatParams(this);
+    console.log("JJJJJJ");
+    console.log(asd);
+    return asd;
   }
 }
 
