@@ -32,10 +32,10 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
     dispatch(updateFieldsAction(partialFormData));
   };
 
-  const onSubmit = async (flatFormData) => {
+  const onSubmit = async () => {
     doLoad(true);
     try {
-      let project = Project.fromFormData(flatFormData);
+      let project = Project.fromFormData(formData);
       project = await uploadAllMedia(project);
       project.completeRequiredFields();
 

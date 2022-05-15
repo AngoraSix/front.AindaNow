@@ -2,40 +2,50 @@ import api from '../../api';
 import config from '../../config';
 import { MEDIA_TYPES } from '../../constants';
 import Media from '../../models/Media';
+import PresentationSection from '../../models/PresentationSection';
 import Project from '../../models/Project';
+import ProjectPresentation from '../../models/ProjectPresentation';
 import logger from '../logger';
 import { isImage, processImage } from './image';
+import presentationSectionUploadAllMedia from './Strategies/presentationSectionMediaProcessor';
 import projectUploadAllMedia from './Strategies/projectMediaProcessor';
+import projectPresentationUploadAllMedia from './Strategies/projectPresentationMediaProcessor';
 import { isYoutubeURL, processYoutubeUrl } from './youtube';
 
 export const uploadMedia = async (media) => {
   const file = media.file;
   let resourceId = media.resourceId;
-  let thumbnailURL = media.thumbnailUrl;
-  let mediaURL;
-  if (file && (file instanceof File || typeof file === 'object')) {
-    [mediaURL, thumbnailURL] = await api.front.uploadFile(file);
-    resourceId = mediaURL.split('/').pop();
-  } else if (media.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE) {
-    const resolvedEmbedUrl =
-      config.thirdParties.youtube.embedUrlPattern.replace(
-        ':resourceId',
-        media.resourceId
-      );
-    mediaURL = resolvedEmbedUrl;
+  let thumbnailUrl = media.thumbnailUrl;
+  let mediaURL = media.url;
+  if (!media.url) {
+    if (file && (file instanceof File || typeof file === 'object')) {
+      [mediaURL, thumbnailUrl] = await api.front.uploadFile(file);
+      resourceId = mediaURL.split('/').pop();
+    } else if (media.mediaType === MEDIA_TYPES.VIDEO_YOUTUBE) {
+      const resolvedEmbedUrl =
+        config.thirdParties.youtube.embedUrlPattern.replace(
+          ':resourceId',
+          media.resourceId
+        );
+      mediaURL = resolvedEmbedUrl;
+    }
   }
-  return {
+  return new Media({
     mediaType: media.mediaType,
     url: mediaURL,
-    thumbnailUrl: thumbnailURL,
-    resourceId: resourceId,
-  };
+    thumbnailUrl,
+    resourceId,
+  });
 };
 
 export const uploadAllMedia = (model) => {
   switch (true) {
     case model instanceof Project:
       return projectUploadAllMedia(model);
+    case model instanceof ProjectPresentation:
+      return projectPresentationUploadAllMedia(model);
+    case model instanceof PresentationSection:
+      return presentationSectionUploadAllMedia(model);
     default:
       logger.error(
         `Error - Trying to upload Media for: ${JSON.stringify(model)}`

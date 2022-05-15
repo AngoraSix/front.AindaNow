@@ -8,7 +8,7 @@ const ProjectForm = ({ formData, onFormChange, onSubmit, stepped }) => {
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    onSubmit(formData);
+    onSubmit();
   };
 
   const FormPresentation = stepped ? SteppedProjectForm : PlainProjectForm;

@@ -1,5 +1,9 @@
-import { createObjectWithFlatParams, toType } from '../utils/helpers';
-import Media from './Media';
+import {
+  createObjectFromFlatParams,
+  createObjectWithFlatParams,
+  toType
+} from '../utils/helpers';
+import PresentationSection from './PresentationSection';
 import Project from './Project';
 
 export default class ProjectPresentation {
@@ -11,6 +15,11 @@ export default class ProjectPresentation {
     this.project = toType(project, Project);
   }
 
+  static fromFormData(formData) {
+    let projectPresentationObject = createObjectFromFlatParams(formData);
+    return new ProjectPresentation(projectPresentationObject);
+  }
+
   completeRequiredFields(project) {
     this.referenceName = this.referenceName || project.name;
     this.sections.forEach((s) => s.completeRequiredFields(project));
@@ -19,18 +28,5 @@ export default class ProjectPresentation {
   toFormData() {
     let asd = createObjectWithFlatParams(this);
     return asd;
-  }
-}
-
-class PresentationSection {
-  constructor({ title, description, media, mainMedia }) {
-    this.title = title;
-    this.description = description;
-    this.media = toType(media, Media);
-    this.mainMedia = toType(mainMedia, Media, true);
-  }
-
-  completeRequiredFields(project) {
-    this.title = this.title || project.name;
   }
 }
