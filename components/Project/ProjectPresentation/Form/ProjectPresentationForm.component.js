@@ -4,7 +4,7 @@ import React from 'react';
 import ProjectPresentationCoreData from './Sections/ProjectPresentationCoreData.component';
 import ProjectPresentationsSectionsData from './Sections/ProjectPresentationsSectionsData.component';
 
-const ProjectPresentationForm = ({ formData, onFormChange }) => {
+const ProjectPresentationForm = ({ formData, onFormChange, onSubmit }) => {
   return (
     <Box
       className={`ProjectPresentationForm ProjectPresentationForm__Container`}
@@ -38,7 +38,13 @@ const ProjectPresentationForm = ({ formData, onFormChange }) => {
         />
       </Box>
       <Box className="ProjectPresentationForm__Section">
-        <Button type="submit" color="primary" variant="contained" fullWidth>
+        <Button
+          type="submit"
+          onClick={onSubmit}
+          color="primary"
+          variant="contained"
+          fullWidth
+        >
           Save
         </Button>
       </Box>
@@ -51,6 +57,7 @@ ProjectPresentationForm.defaultProps = {};
 ProjectPresentationForm.propTypes = {
   formData: PropTypes.object.isRequired,
   onFormChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
 };
 
 export default ProjectPresentationForm;

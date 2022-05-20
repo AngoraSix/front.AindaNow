@@ -42,6 +42,8 @@ class BaseAPI {
 
   getAuthorizationHeaders = (token, isRequired = true) => {
     if (token?.accessToken) {
+      console.log('OAUTHDEBUGG');
+      console.log(token.accessToken);
       return { Authorization: `Bearer ${token.accessToken}` };
     } else if (isRequired) {
       throw new Error(

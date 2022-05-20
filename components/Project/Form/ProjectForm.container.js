@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
 import api from '../../../api';
 import { resolveRoute, ROUTES } from '../../../constants';
-import { useLoading } from '../../../hooks/app';
+import { useLoading, useNotifications } from '../../../hooks/app';
 import Project from '../../../models/Project';
 import { toType } from '../../../utils/helpers';
 import logger from '../../../utils/logger';
@@ -14,9 +14,10 @@ import ProjectFormReducer, {
   updateFieldsAction,
 } from './ProjectForm.reducer';
 
-const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
+const ProjectFormContainer = ({ project, ...args }) => {
   const { doLoad } = useLoading();
   const router = useRouter();
+  const { onSuccess, onError } = useNotifications();
   const [formData, dispatch] = useReducer(ProjectFormReducer, {
     ...INITIAL_STATE,
     ...toType(project, Project).toFormData(),
@@ -41,7 +42,7 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
 
       const projectResponse = await api.front.newProject(project);
 
-      onDone(projectResponse);
+      onSuccess('Project Saved Successfully');
 
       const viewURL = resolveRoute(
         ROUTES.projects.presentations.view,
@@ -69,15 +70,11 @@ const ProjectFormContainer = ({ project, onDone, onError, ...args }) => {
 
 ProjectFormContainer.defaultProps = {
   project: {},
-  onDone: () => {},
-  onError: () => {},
 };
 
 ProjectFormContainer.propTypes = {
   project: PropTypes.object,
   props: PropTypes.object,
-  onDone: PropTypes.func,
-  onError: PropTypes.func,
 };
 
 export default ProjectFormContainer;

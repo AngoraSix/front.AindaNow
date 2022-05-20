@@ -44,6 +44,27 @@ class ProjectsAPI {
     return { ...createdProject, presentations: createdPresentation };
   }
 
+  async saveProjectPresentation(
+    projectPresentation,
+    token,
+    projectPresentationId
+  ) {
+    const headers = this.axios.getCommonHeaders();
+    const authHeaders = this.axios.getAuthorizationHeaders(token, true);
+
+    const { data } = await this.axios.put(
+      `/presentations/${projectPresentationId || ''}`,
+      projectPresentation,
+      {
+        headers: {
+          ...headers,
+          ...authHeaders,
+        },
+      }
+    );
+    return data;
+  }
+
   async getProjectPresentation(projectPresentationId, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, false);

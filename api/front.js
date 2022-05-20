@@ -45,6 +45,19 @@ class FrontAPI {
     const { data } = await this.axios.post(`api/projects/new`, projectBody);
     return data;
   }
+
+  async saveProjectPresentation(projectPresentationBody, isUpdate = false) {
+    const { data } = isUpdate
+      ? await this.axios.put(
+          `api/projects/presentations`,
+          projectPresentationBody
+        )
+      : await this.axios.post(
+          `api/projects/presentations`,
+          projectPresentationBody
+        );
+    return data;
+  }
 }
 
 export default FrontAPI;

@@ -1,8 +1,12 @@
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
-import { useLoading } from '../../../../hooks/app';
+import api from '../../../../api';
+import { resolveRoute, ROUTES } from '../../../../constants';
+import { useLoading, useNotifications } from '../../../../hooks/app';
 import ProjectPresentation from '../../../../models/ProjectPresentation';
 import { toType } from '../../../../utils/helpers';
+import logger from '../../../../utils/logger';
 import { uploadAllMedia } from '../../../../utils/media/mediaProcessor';
 import ProjectPresentationDialog from './Dialog';
 import ProjectPresentationForm from './ProjectPresentationForm.component';
@@ -16,6 +20,8 @@ const ProjectPresentationFormContainer = ({
   isTriggeredAction,
 }) => {
   const { doLoad } = useLoading();
+  const { onSuccess, onError } = useNotifications();
+  const router = useRouter();
   const [formData, dispatch] = useReducer(ProjectPresentationFormReducer, {
     ...INITIAL_STATE,
     ...toType(projectPresentation, ProjectPresentation).toFormData(),
@@ -34,24 +40,30 @@ const ProjectPresentationFormContainer = ({
   const onSubmit = async () => {
     doLoad(true);
     try {
-      let projectPresentation = ProjectPresentation.fromFormData(formData);
-      projectPresentation = await uploadAllMedia(projectPresentation);
-      //@TODO
-      project.completeRequiredFields();
+      let projectPresentationToSubmit =
+        ProjectPresentation.fromFormData(formData);
+      projectPresentationToSubmit = await uploadAllMedia(
+        projectPresentationToSubmit
+      );
+      //@TODO check required fields or trigger error
 
-      const projectResponse = await api.front.newProject(project);
+      const projectPresentationResponse =
+        await api.front.saveProjectPresentation(
+          projectPresentationToSubmit,
+          !!projectPresentation
+        );
 
-      onDone(projectResponse);
+      onSuccess('Project Presentation Saved Successfully');
 
       const viewURL = resolveRoute(
         ROUTES.projects.presentations.view,
-        projectResponse.id,
-        projectResponse.presentations.id
+        projectPresentationResponse.projectId,
+        projectPresentationResponse.id
       );
       router.push(viewURL);
     } catch (err) {
       logger.error(err);
-      onError(err);
+      onError('Error Saving Project Presentation');
     }
 
     doLoad(false);
@@ -62,10 +74,15 @@ const ProjectPresentationFormContainer = ({
       <ProjectPresentationForm
         formData={formData}
         onFormChange={onFormChange}
+        onSubmit={onSubmit}
       />
     </ProjectPresentationDialog>
   ) : (
-    <ProjectPresentationForm formData={formData} onFormChange={onFormChange} />
+    <ProjectPresentationForm
+      formData={formData}
+      onFormChange={onFormChange}
+      onSubmit={onSubmit}
+    />
   );
 };
 
