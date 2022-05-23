@@ -44,8 +44,8 @@ const ProjectPresentationData = ({
         <Grid item xs={10}>
           <TextField
             {...PRESENTATION_BASE_FIELDS.description}
-            value={formData['presentation.description'] || ''}
-            onChange={onFieldChange('presentation.description')}
+            value={formData['presentations[0].sections[0].description'] || ''}
+            onChange={onFieldChange('presentations[0].sections[0].description')}
             error={
               wasSubmitted &&
               PRESENTATION_BASE_FIELDS.description.required &&

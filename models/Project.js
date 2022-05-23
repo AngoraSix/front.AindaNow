@@ -9,7 +9,7 @@ export default class Project {
   constructor({ id, name, presentations, adminId }) {
     this.id = id;
     this.name = name;
-    this.presentations = toType(presentations, ProjectPresentation);
+    this.presentations = presentations;
     this.adminId = adminId;
   }
 
@@ -23,6 +23,26 @@ export default class Project {
   }
 
   completeRequiredFields() {
-    this.presentations.completeRequiredFields(this);
+    this.presentations.forEach((pr) => pr.completeRequiredFields(this));
+  }
+
+  /**
+   * @param {ProjectPresentation} presentations
+   */
+  set presentations(presentations) {
+    this._presentations = toType(presentations, ProjectPresentation);
+  }
+
+  get presentations() {
+    return this._presentations;
+  }
+
+  toJSON() {
+    return {
+      id: this.id,
+      name: this.name,
+      presentations: this.presentations,
+      adminId: this.adminId,
+    };
   }
 }

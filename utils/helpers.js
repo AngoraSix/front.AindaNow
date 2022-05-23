@@ -15,32 +15,69 @@ const _mapFlatParam = ([field, value]) => {
   }
 };
 
-export function _isObject(item) {
+const _isObject = (item) => {
   return item && typeof item === 'object' && !Array.isArray(item);
-}
+};
 
-export function _mergeDeep(target, ...sources) {
+const _resolveKey = (key) => {
+  let normalizedKey = key;
+  let extractedIndex = key.match(/([^[]+(?=]))/g);
+
+  if (extractedIndex && extractedIndex.length) {
+    extractedIndex = extractedIndex[0];
+    normalizedKey = key.replace(`[${extractedIndex}]`, '');
+  }
+  return [normalizedKey, extractedIndex];
+};
+
+export function _mergeDeep(target, targetIndex = null, ...sources) {
   if (!sources.length) return target;
   const source = sources.shift();
 
   if (_isObject(target) && _isObject(source)) {
     for (const key in source) {
+      const [normalizedKey, keyIndex] = _resolveKey(key);
       if (_isObject(source[key])) {
-        if (!target[key]) Object.assign(target, { [key]: {} });
-        _mergeDeep(target[key], source[key]);
+        if (!target[normalizedKey])
+          Object.assign(target, { [normalizedKey]: keyIndex ? [{}] : {} });
+        _mergeDeep(target[normalizedKey], keyIndex, source[key]);
       } else {
-        Object.assign(target, { [key]: source[key] });
+        Object.assign(target, {
+          [normalizedKey]: keyIndex ? [source[key]] : source[key],
+        });
+      }
+    }
+  } else if (
+    Array.isArray(target) &&
+    targetIndex != null &&
+    _isObject(source)
+  ) {
+    for (const key in source) {
+      const [normalizedKey, keyIndex] = _resolveKey(key);
+      if (_isObject(source[key])) {
+        if (!target[targetIndex][normalizedKey])
+          Object.assign(target[targetIndex], {
+            [normalizedKey]: keyIndex ? [{}] : {},
+          });
+        _mergeDeep(target[targetIndex][normalizedKey], keyIndex, source[key]);
+      } else {
+        Object.assign(target[targetIndex], {
+          [normalizedKey]: keyIndex ? [source[key]] : source[key],
+        });
       }
     }
   }
 
-  return _mergeDeep(target, ...sources);
+  return _mergeDeep(target, null, ...sources);
 }
 
 export const createObjectFromFlatParams = (flatObject) => {
   return Object.entries(flatObject)
     .filter(([, value]) => (Array.isArray(value) ? value.length : !!value))
-    .reduce((output, field) => _mergeDeep(output, _mapFlatParam(field)), {});
+    .reduce(
+      (output, field) => _mergeDeep(output, null, _mapFlatParam(field)),
+      {}
+    );
 };
 
 export const createObjectWithFlatParams = (deepObject) => {

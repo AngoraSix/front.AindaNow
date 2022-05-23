@@ -10,15 +10,16 @@ class ProjectsAPI {
     return projectPresentationdata;
   }
 
-  async newProject(newProject, token) {
+  async saveProject(project, token, projectId) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
-    let newPresentation = newProject.presentations;
-    delete newProject.presentations;
-    let createdPresentation = null;
-    const { data: createdProject } = await this.axios.post(
-      `/core`,
-      newProject,
+
+    let projectPresentations = project.presentations;
+    delete project.presentations;
+
+    const { data: savedProject } = await this.axios[projectId ? 'put' : 'post'](
+      `/core/${projectId || ''}`,
+      project,
       {
         headers: {
           ...headers,
@@ -27,21 +28,19 @@ class ProjectsAPI {
       }
     );
 
-    if (newPresentation) {
-      newPresentation.projectId = createdProject.id;
-      const { data } = await this.axios.post(
-        `/presentations`,
-        newPresentation,
-        {
-          headers: {
-            ...headers,
-            ...authHeaders,
-          },
-        }
+    let createdPresentations = projectPresentations;
+    // we won't be saving Project Presentations if we're just updating the Project
+    if (!projectId && projectPresentations) {
+      createdPresentations = await Promise.all(
+        projectPresentations
+          .map((pr) => {
+            pr.projectId = savedProject.id;
+            return pr;
+          })
+          .map((pr) => this.saveProjectPresentation(pr, token))
       );
-      createdPresentation = data;
     }
-    return { ...createdProject, presentations: createdPresentation };
+    return { ...savedProject, presentations: createdPresentations };
   }
 
   async saveProjectPresentation(
@@ -52,7 +51,7 @@ class ProjectsAPI {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
 
-    const { data } = await this.axios.put(
+    const { data } = await this.axios[projectPresentationId ? 'put' : 'post'](
       `/presentations/${projectPresentationId || ''}`,
       projectPresentation,
       {

@@ -5,16 +5,17 @@ import MethodNotAllowedError from '../../../../utils/errors/MethodNotAllowedErro
 import logger from '../../../../utils/logger';
 
 export default async (req, res) => {
-  if (req.method === 'POST') {
+  if (req.method === 'PUT') {
     const validatedToken = await obtainValidatedToken(req);
     try {
       const data = await api.projects.saveProjectPresentation(
         req.body,
-        validatedToken
+        validatedToken,
+        req.query.projectPresentationId
       );
       res.status(200).json(data);
     } catch (err) {
-      const errorMessage = `Error saving Project Presentation [${req.method}]`,
+      const errorMessage = `Error updating Project Presentation [${req.method}]`,
         internalServerErr = new InternalServerError(
           errorMessage,
           'PROJECT_PRESENTATION_SAVE'

@@ -36,23 +36,26 @@ const ProjectFormContainer = ({ project, ...args }) => {
   const onSubmit = async () => {
     doLoad(true);
     try {
-      let project = Project.fromFormData(formData);
-      project = await uploadAllMedia(project);
-      project.completeRequiredFields();
+      let projectToSubmit = Project.fromFormData(formData);
+      projectToSubmit = await uploadAllMedia(projectToSubmit);
+      projectToSubmit.completeRequiredFields();
 
-      const projectResponse = await api.front.newProject(project);
+      const projectResponse = await api.front.saveProject(
+        projectToSubmit,
+        project?.id
+      );
 
       onSuccess('Project Saved Successfully');
 
       const viewURL = resolveRoute(
         ROUTES.projects.presentations.view,
         projectResponse.id,
-        projectResponse.presentations.id
+        projectResponse.presentations[0].id
       );
       router.push(viewURL);
     } catch (err) {
       logger.error(err);
-      onError(err);
+      onError('Error Saving Project');
     }
 
     doLoad(false);

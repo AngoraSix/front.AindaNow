@@ -1,23 +1,24 @@
-import api from '../../../../api';
-import { obtainValidatedToken } from '../../../../utils/api/apiHelper';
-import InternalServerError from '../../../../utils/errors/InternalServerError';
-import MethodNotAllowedError from '../../../../utils/errors/MethodNotAllowedError';
-import logger from '../../../../utils/logger';
+import api from '../../../api';
+import { obtainValidatedToken } from '../../../utils/api/apiHelper';
+import InternalServerError from '../../../utils/errors/InternalServerError';
+import MethodNotAllowedError from '../../../utils/errors/MethodNotAllowedError';
+import logger from '../../../utils/logger';
 
 export default async (req, res) => {
-  if (req.method === 'POST') {
+  if (req.method === 'PUT') {
     const validatedToken = await obtainValidatedToken(req);
     try {
-      const data = await api.projects.saveProjectPresentation(
+      const data = await api.projects.saveProject(
         req.body,
-        validatedToken
+        validatedToken,
+        req.query.projectId
       );
       res.status(200).json(data);
     } catch (err) {
-      const errorMessage = `Error saving Project Presentation [${req.method}]`,
+      const errorMessage = `Error updating Project [${req.method}]`,
         internalServerErr = new InternalServerError(
           errorMessage,
-          'PROJECT_PRESENTATION_SAVE'
+          'PROJECT_SAVE'
         );
       logger.error(
         errorMessage,

@@ -8,6 +8,10 @@ export default class Media {
     this.url = url; // if url is set it means Media is already uploaded
   }
 
+  completeRequiredFields() {
+    delete this.file;
+  }
+
   static isMedia(object) {
     if (
       object == null ||

@@ -31,6 +31,25 @@ const ProjectPresentationsSectionsData = ({
     onFormChange('sections')(updatedSections);
   };
 
+  const onNestedFormChange = (parentField, index) => (nestedField, value) => {
+    onFormChange(`${parentField}[${index}].${nestedField}`)(value);
+  };
+
+  const filterParentFormDataPath = (formDataObj, parentFormDataPath, index) => {
+    parentFormDataPath = `${parentFormDataPath}[${index}].`;
+    return Object.entries(formDataObj).reduce(
+      (filteredFormData, [formDataField, formDataValue]) => {
+        if (formDataField.startsWith(parentFormDataPath)) {
+          return Object.assign(filterParentFormDataPath, {
+            [formDataField.replace(parentFormDataPath, '')]: formDataValue,
+          });
+        }
+        return filteredFormData;
+      },
+      {}
+    );
+  };
+
   return (
     <Box className="ProjectPresentationsSectionsData ProjectPresentationsSectionsData__Container ProjectForm__Section__Container">
       {formData.sections.map((s, i) => (
@@ -57,8 +76,12 @@ const ProjectPresentationsSectionsData = ({
             <Box className="ProjectPresentationsSectionsData__Field">
               <TextField
                 {...PRESENTATION_SECTION_FIELDS.title}
-                value={formData['sections'][i].title || ''}
-                onChange={onSectionFieldChange('title', i)}
+                value={
+                  formData[sections[i].PRESENTATION_SECTION_FIELDS.title.key]
+                }
+                onChange={onFormChange(
+                  `sections[${i}].${PRESENTATION_SECTION_FIELDS.title.key}`
+                )}
                 error={
                   wasSubmitted &&
                   PRESENTATION_SECTION_FIELDS.referenceName.required &&
@@ -69,11 +92,13 @@ const ProjectPresentationsSectionsData = ({
             </Box>
             <Box className="ProjectPresentationsSectionsData__Field">
               <PresentationSectionMediaData
-                sectionsFormData={formData.sections}
-                onSectionsChange={onFormChange('sections')}
+                formData={filterParentFormDataPath(
+                  formData,
+                  'sections',
+                  i
+                )}
+                onFormChange={onNestedFormChange('sections', i)}
                 wasSubmitted={wasSubmitted}
-                fullWidth={true}
-                presentationIndex={i}
               />
             </Box>
           </AccordionDetails>

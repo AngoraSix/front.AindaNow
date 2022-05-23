@@ -41,15 +41,20 @@ class FrontAPI {
     return data;
   }
 
-  async newProject(projectBody) {
-    const { data } = await this.axios.post(`api/projects/new`, projectBody);
+  async saveProject(projectBody, projectId) {
+    const { data } = projectId
+      ? await this.axios.put(`api/projects/${projectId}`, projectBody)
+      : await this.axios.post(`api/projects`, projectBody);
     return data;
   }
 
-  async saveProjectPresentation(projectPresentationBody, isUpdate = false) {
-    const { data } = isUpdate
+  async saveProjectPresentation(
+    projectPresentationBody,
+    projectPresentationId
+  ) {
+    const { data } = projectPresentationId
       ? await this.axios.put(
-          `api/projects/presentations`,
+          `api/projects/presentations/${projectPresentationId}`,
           projectPresentationBody
         )
       : await this.axios.post(

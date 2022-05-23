@@ -11,6 +11,8 @@ export default class PresentationSection {
 
   completeRequiredFields(project) {
     this.title = this.title || project.name;
+    this.media?.forEach((m) => m.completeRequiredFields());
+    this.mainMedia.completeRequiredFields();
   }
 
   /**
@@ -27,7 +29,7 @@ export default class PresentationSection {
   /**
    * @param {Media} media
    */
-   set media(media) {
+  set media(media) {
     this._media = toType(media, Media);
   }
 

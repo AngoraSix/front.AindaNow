@@ -16,6 +16,26 @@ const ProjectPresentationMedia = ({
   setIsCompleted,
   wasSubmitted,
 }) => {
+  const onNestedFormChange = (parentField) => (nestedField, value) => {
+    onFormChange(`${parentField}.${nestedField}`)(value);
+  };
+
+  const filterParentFormDataPath = (formDataObj, parentFormDataPath) => {
+    parentFormDataPath = `${parentFormDataPath}.`;
+    let asd = Object.entries(formDataObj).reduce(
+      (filteredFormData, [formDataField, formDataValue]) => {
+        if (formDataField.startsWith(parentFormDataPath)) {
+          return Object.assign(filteredFormData, {
+            [formDataField.replace(parentFormDataPath, '')]: formDataValue,
+          });
+        }
+        return filteredFormData;
+      },
+      {}
+    );
+    return asd;
+  };
+
   return (
     <Box className="ProjectPresentationMedia ProjectPresentationMedia__Container ProjectForm__Section__Container">
       {withDescription && (
@@ -26,11 +46,13 @@ const ProjectPresentationMedia = ({
         </Box>
       )}
       <PresentationSectionMediaData
-        sectionsFormData={formData['presentations.sections']}
-        onSectionsChange={onFormChange('presentations.sections')}
+        formData={filterParentFormDataPath(
+          formData,
+          'presentations[0].sections[0]'
+        )}
+        onFormChange={onNestedFormChange('presentations[0].sections[0]')}
         setIsCompleted={setIsCompleted}
         wasSubmitted={wasSubmitted}
-        presentationIndex={0}
       />
     </Box>
   );

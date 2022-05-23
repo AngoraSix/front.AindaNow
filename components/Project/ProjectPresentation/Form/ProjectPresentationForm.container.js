@@ -50,7 +50,7 @@ const ProjectPresentationFormContainer = ({
       const projectPresentationResponse =
         await api.front.saveProjectPresentation(
           projectPresentationToSubmit,
-          !!projectPresentation
+          projectPresentation?.id
         );
 
       onSuccess('Project Presentation Saved Successfully');
