@@ -54,6 +54,9 @@ export function _mergeDeep(target, targetIndex = null, ...sources) {
   ) {
     for (const key in source) {
       const [normalizedKey, keyIndex] = _resolveKey(key);
+      if (target[targetIndex] == null) {
+        target[targetIndex] = keyIndex ? [{}] : {};
+      }
       if (_isObject(source[key])) {
         if (!target[targetIndex][normalizedKey])
           Object.assign(target[targetIndex], {

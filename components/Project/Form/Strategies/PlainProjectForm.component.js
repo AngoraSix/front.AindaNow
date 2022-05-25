@@ -13,7 +13,7 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
   const editingPresentationId = router.query.editingPresentationId;
-  const editingPresentationObject = project.presentations.find(
+  const editingPresentationObject = project.presentations?.find(
     (pr) => pr.id === editingPresentationId
   );
 

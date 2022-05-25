@@ -23,7 +23,7 @@ const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
 
   return (
     <Box className="ProjectPresentationsData ProjectPresentationsData__Container ProjectForm__Section__Container">
-      {project.presentations.map((p) => (
+      {project.presentations?.map((p) => (
         <Accordion
           key={p.id}
           expanded={expanded === p.id}
