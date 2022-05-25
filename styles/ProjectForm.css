@@ -63,7 +63,7 @@
   position: sticky;
   min-height: 8vh;
   top: 0;
-  z-index: 1;
+  z-index: 5;
   display: flex;
   align-items: center;
   padding: 0 5%;
