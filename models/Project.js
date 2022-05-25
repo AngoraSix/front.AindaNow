@@ -1,11 +1,8 @@
-import {
-  createObjectFromFlatParams,
-  createObjectWithFlatParams,
-  toType,
-} from '../utils/helpers';
+import { createObjectFromFlatParams, toType } from '../utils/helpers';
 import ProjectPresentation from './ProjectPresentation';
 
 export default class Project {
+  #presentations;
   constructor({ id, name, presentations, adminId }) {
     this.id = id;
     this.name = name;
@@ -18,23 +15,32 @@ export default class Project {
     return new Project(projectObject);
   }
 
-  toFormData() {
-    return createObjectWithFlatParams(this);
+  toFormData(fieldSuffix = '') {
+    return Object.assign(
+      {
+        [`${fieldSuffix}id`]: this.id,
+        [`${fieldSuffix}name`]: this.name,
+        [`${fieldSuffix}adminId`]: this.adminId,
+      },
+      ...(this.presentations?.flatMap((pr, i) =>
+        pr.toFormData(`${fieldSuffix}presentations[${i}].`)
+      ) || [])
+    );
   }
 
   completeRequiredFields() {
-    this.presentations.forEach((pr) => pr.completeRequiredFields(this));
+    this.presentations?.forEach((pr) => pr.completeRequiredFields(this));
   }
 
   /**
    * @param {ProjectPresentation} presentations
    */
   set presentations(presentations) {
-    this._presentations = toType(presentations, ProjectPresentation);
+    this.#presentations = toType(presentations, ProjectPresentation);
   }
 
   get presentations() {
-    return this._presentations;
+    return this.#presentations;
   }
 
   toJSON() {

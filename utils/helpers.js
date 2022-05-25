@@ -82,16 +82,71 @@ export const createObjectFromFlatParams = (flatObject) => {
 
 export const createObjectWithFlatParams = (deepObject) => {
   let result = {};
-  for (const i in deepObject) {
-    if (typeof deepObject[i] === 'object' && !Array.isArray(deepObject[i])) {
-      const temp = createObjectWithFlatParams(deepObject[i]);
-      for (const j in temp) {
-        result[i + '.' + j] = temp[j];
+  for (const field in deepObject) {
+    if (Array.isArray(deepObject[field])) {
+      deepObject[field].forEach((arrayValue, i) => {
+        const temp =
+          arrayValue.toFormData?.() || createObjectWithFlatParams(arrayValue);
+        if (temp.toFormData) {
+          result[`${field}[${i}]`] = temp;
+        } else {
+          for (const innerField in temp) {
+            result[`${field}[${i}].${innerField}`] = temp[innerField];
+          }
+        }
+      });
+    } else if (typeof deepObject[field] === 'object') {
+      const temp =
+        deepObject[field].toFormData?.() ||
+        createObjectWithFlatParams(deepObject[field]);
+      if (temp.toFormData) {
+        result[field] = temp;
+      } else {
+        for (const innerField in temp) {
+          result[field + '.' + innerField] = temp[innerField];
+        }
       }
     } else {
-      result[i] = deepObject[i];
+      result[field] = deepObject[field];
     }
   }
+  // check properties that have "getters"
+  Object.entries(
+    Object.getOwnPropertyDescriptors(Object.getPrototypeOf(deepObject))
+  ).forEach(([protoFieldKey, protoFieldValue]) => {
+    if (
+      typeof protoFieldValue === 'object' &&
+      protoFieldValue.get &&
+      !protoFieldKey.startsWith('_')
+    ) {
+      const fieldValue = protoFieldValue.get.call(deepObject);
+      if (Array.isArray(fieldValue)) {
+        fieldValue.forEach((arrayValue, i) => {
+          const temp =
+            arrayValue.toFormData?.() || createObjectWithFlatParams(arrayValue);
+          if (temp.toFormData) {
+            result[`${protoFieldKey}[${i}]`] = temp;
+          } else {
+            for (const innerField in temp) {
+              result[`${protoFieldKey}[${i}].${innerField}`] = temp[innerField];
+            }
+          }
+        });
+      } else if (typeof fieldValue === 'object') {
+        const temp =
+          fieldValue.toFormData?.() || createObjectWithFlatParams(fieldValue);
+        if (temp.toFormData) {
+          result[protoFieldKey] = temp;
+        } else {
+          for (const j in temp) {
+            result[protoFieldKey + '.' + j] = temp[j];
+          }
+        }
+      } else {
+        result[protoFieldKey] = fieldValue;
+      }
+    }
+  });
   return result;
 };
 

@@ -73,6 +73,7 @@ const ProjectPresentationFormContainer = ({
     <ProjectPresentationDialog projectId={projectPresentation.projectId}>
       <ProjectPresentationForm
         formData={formData}
+        projectPresentation={projectPresentation}
         onFormChange={onFormChange}
         onSubmit={onSubmit}
       />
@@ -80,6 +81,7 @@ const ProjectPresentationFormContainer = ({
   ) : (
     <ProjectPresentationForm
       formData={formData}
+      projectPresentation={projectPresentation}
       onFormChange={onFormChange}
       onSubmit={onSubmit}
     />

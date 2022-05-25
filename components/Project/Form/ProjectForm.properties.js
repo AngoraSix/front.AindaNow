@@ -25,19 +25,6 @@ export const PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS = {
   },
 };
 
-export const PROJECT_PRESENTATION_SECTION_ADDITIONAL_FORM_FIELDS = {
-  title: {
-    key: 'title',
-    label: 'Project name',
-    required: true,
-  },
-  referenceName: {
-    key: 'referenceName',
-    label: 'Project Presentation Reference Name',
-    required: true,
-  },
-};
-
 export const PROJECT_PRESENTATION_PARAMS_FIELDS = {
   location: {
     key: 'location',
@@ -51,9 +38,6 @@ export const PROJECT_PRESENTATION_PARAMS_FIELDS = {
 
 export default {
   core: PROJECT_CORE_FORM_FIELDS,
-  section: {
-    base: PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS,
-    additional: PROJECT_PRESENTATION_SECTION_ADDITIONAL_FORM_FIELDS,
-  },
+  section: PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS,
   presentationParams: PROJECT_PRESENTATION_PARAMS_FIELDS,
 };

@@ -9,14 +9,15 @@ export const PROJECT_PRESENTATION_CORE_FORM_FIELDS = {
 export const PROJECT_PRESENTATION_SECTION_FORM_FIELDS = {
   title: {
     key: 'title',
-    label: 'Project name',
+    label: 'Presentation Section Title',
     required: true,
   },
   description: {
     key: 'description',
-    label: 'Project description',
+    label: 'Presentation Section Description',
     multiline: true,
     minRows: 3,
+    maxRows: 8,
     required: false,
   },
   mainMedia: {

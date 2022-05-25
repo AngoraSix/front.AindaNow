@@ -64,6 +64,7 @@ const ProjectFormContainer = ({ project, ...args }) => {
   return (
     <ProjectForm
       formData={formData}
+      project={project}
       onFormChange={onFormChange}
       onSubmit={onSubmit}
       {...args}

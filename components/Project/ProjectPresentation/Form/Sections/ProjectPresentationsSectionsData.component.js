@@ -14,6 +14,7 @@ import PresentationSectionMediaData from './PresentationSectionMediaData.compone
 
 const ProjectPresentationsSectionsData = ({
   formData,
+  projectPresentation,
   onFormChange,
   wasSubmitted,
 }) => {
@@ -24,7 +25,7 @@ const ProjectPresentationsSectionsData = ({
   };
 
   const onSectionFieldChange = (property, index) => (eventOrValue) => {
-    const updatedSections = [...(formData.sections || [{}])];
+    const updatedSections = [...(projectPresentation.sections || [{}])];
     updatedSections[index][property] = eventOrValue.target
       ? eventOrValue.target.value
       : eventOrValue;
@@ -40,7 +41,7 @@ const ProjectPresentationsSectionsData = ({
     return Object.entries(formDataObj).reduce(
       (filteredFormData, [formDataField, formDataValue]) => {
         if (formDataField.startsWith(parentFormDataPath)) {
-          return Object.assign(filterParentFormDataPath, {
+          return Object.assign(filteredFormData, {
             [formDataField.replace(parentFormDataPath, '')]: formDataValue,
           });
         }
@@ -52,7 +53,7 @@ const ProjectPresentationsSectionsData = ({
 
   return (
     <Box className="ProjectPresentationsSectionsData ProjectPresentationsSectionsData__Container ProjectForm__Section__Container">
-      {formData.sections.map((s, i) => (
+      {projectPresentation.sections.map((s, i) => (
         <Accordion
           key={i}
           expanded={expanded === i}
@@ -77,26 +78,47 @@ const ProjectPresentationsSectionsData = ({
               <TextField
                 {...PRESENTATION_SECTION_FIELDS.title}
                 value={
-                  formData[sections[i].PRESENTATION_SECTION_FIELDS.title.key]
+                  formData[
+                    `sections[${i}].${PRESENTATION_SECTION_FIELDS.title.key}`
+                  ]
                 }
                 onChange={onFormChange(
                   `sections[${i}].${PRESENTATION_SECTION_FIELDS.title.key}`
                 )}
                 error={
                   wasSubmitted &&
-                  PRESENTATION_SECTION_FIELDS.referenceName.required &&
-                  !formData.referenceName
+                  PRESENTATION_SECTION_FIELDS.title.required &&
+                  !formData[
+                    `sections[${i}].${PRESENTATION_SECTION_FIELDS.title.key}`
+                  ]
+                }
+                fullWidth
+              />
+            </Box>
+            <Box className="ProjectPresentationsSectionsData__Field">
+              <TextField
+                {...PRESENTATION_SECTION_FIELDS.description}
+                value={
+                  formData[
+                    `sections[${i}].${PRESENTATION_SECTION_FIELDS.description.key}`
+                  ] || ''
+                }
+                onChange={onFormChange(
+                  `sections[${i}].${PRESENTATION_SECTION_FIELDS.description.key}`
+                )}
+                error={
+                  wasSubmitted &&
+                  PRESENTATION_SECTION_FIELDS.description.required &&
+                  !formData[
+                    `sections[${i}].${PRESENTATION_SECTION_FIELDS.description.key}`
+                  ]
                 }
                 fullWidth
               />
             </Box>
             <Box className="ProjectPresentationsSectionsData__Field">
               <PresentationSectionMediaData
-                formData={filterParentFormDataPath(
-                  formData,
-                  'sections',
-                  i
-                )}
+                formData={filterParentFormDataPath(formData, 'sections', i)}
                 onFormChange={onNestedFormChange('sections', i)}
                 wasSubmitted={wasSubmitted}
               />
@@ -110,11 +132,13 @@ const ProjectPresentationsSectionsData = ({
 
 ProjectPresentationsSectionsData.defaultProps = {
   formData: {},
+  projectPresentation: {},
   isMobile: false,
 };
 
 ProjectPresentationsSectionsData.propTypes = {
   formData: PropTypes.object,
+  projectPresentation: PropTypes.object,
   isMobile: PropTypes.bool,
 };
 

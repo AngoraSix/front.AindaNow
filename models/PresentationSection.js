@@ -2,6 +2,8 @@ import { toType } from '../utils/helpers';
 import Media from './Media';
 
 export default class PresentationSection {
+  #mainMedia;
+  #media;
   constructor({ title, description, media, mainMedia }) {
     this.title = title;
     this.description = description;
@@ -19,22 +21,31 @@ export default class PresentationSection {
    * @param {Media} mainMedia
    */
   set mainMedia(mainMedia) {
-    this._mainMedia = toType(mainMedia, Media, true);
+    this.#mainMedia = toType(mainMedia, Media, true);
   }
 
   get mainMedia() {
-    return this._mainMedia;
+    return this.#mainMedia;
   }
 
   /**
    * @param {Media} media
    */
   set media(media) {
-    this._media = toType(media, Media);
+    this.#media = toType(media, Media);
   }
 
   get media() {
-    return this._media;
+    return this.#media;
+  }
+
+  toFormData(fieldSuffix = '') {
+    return {
+      [`${fieldSuffix}title`]: this.title,
+      [`${fieldSuffix}description`]: this.description,
+      [`${fieldSuffix}mainMedia`]: this.mainMedia,
+      [`${fieldSuffix}media`]: this.media,
+    };
   }
 
   toJSON() {

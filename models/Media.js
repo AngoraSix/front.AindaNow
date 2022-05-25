@@ -22,4 +22,19 @@ export default class Media {
     }
     return !!object.mediaType;
   }
+
+  static isMedia(object) {
+    if (
+      object == null ||
+      !object instanceof Media ||
+      !(typeof object === 'object' && !Array.isArray(object))
+    ) {
+      return false;
+    }
+    return !!object.mediaType;
+  }
+
+  toFormData() {
+    return this;
+  }
 }

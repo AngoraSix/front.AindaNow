@@ -8,12 +8,12 @@ import ProjectPresentationForm from '../../ProjectPresentation/Form';
 import ProjectCorePresentationsHolder from '../Sections/Previews/ProjectPresentationsHolder.component';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
 
-const PlainProjectForm = ({ formData, onFormChange }) => {
+const PlainProjectForm = ({ formData, onFormChange, project }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
   const editingPresentationId = router.query.editingPresentationId;
-  const editingPresentationObject = formData.presentations.find(
+  const editingPresentationObject = project.presentations.find(
     (pr) => pr.id === editingPresentationId
   );
 
@@ -42,6 +42,7 @@ const PlainProjectForm = ({ formData, onFormChange }) => {
           Presentations
         </Typography>
         <ProjectCorePresentationsHolder
+          project={project}
           formData={formData}
           isMobile={isMobile}
         />
@@ -63,10 +64,12 @@ const PlainProjectForm = ({ formData, onFormChange }) => {
 
 PlainProjectForm.defaultProps = {
   className: '',
+  project: {},
 };
 
 PlainProjectForm.propTypes = {
   formData: PropTypes.object.isRequired,
+  project: PropTypes.object,
   onFormChange: PropTypes.func.isRequired,
   className: PropTypes.string,
 };

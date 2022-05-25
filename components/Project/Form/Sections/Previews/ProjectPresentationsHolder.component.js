@@ -6,7 +6,7 @@ import {
   AccordionSummary,
   Box,
   IconButton,
-  Typography,
+  Typography
 } from '@mui/material';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -14,7 +14,7 @@ import React, { useState } from 'react';
 import { resolveRoute, ROUTES } from '../../../../../constants';
 import PresentationSectionPreview from './PresentationSectionPreview.component';
 
-const ProjectCorePresentationsHolder = ({ formData, isMobile }) => {
+const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleChange = (panel) => (event, isExpanded) => {
@@ -23,7 +23,7 @@ const ProjectCorePresentationsHolder = ({ formData, isMobile }) => {
 
   return (
     <Box className="ProjectPresentationsData ProjectPresentationsData__Container ProjectForm__Section__Container">
-      {formData.presentations.map((p) => (
+      {project.presentations.map((p) => (
         <Accordion
           key={p.id}
           expanded={expanded === p.id}
@@ -42,9 +42,7 @@ const ProjectCorePresentationsHolder = ({ formData, isMobile }) => {
             >
               {p.referenceName}
             </Typography>
-            <Typography
-              className="ProjectPresentationsData__Summary__Text"
-            >
+            <Typography className="ProjectPresentationsData__Summary__Text">
               [{p.sections?.length}
               {!isMobile
                 ? p.sections?.length > 1
@@ -89,12 +87,12 @@ const ProjectCorePresentationsHolder = ({ formData, isMobile }) => {
 };
 
 ProjectCorePresentationsHolder.defaultProps = {
-  formData: {},
+  project: {},
   isMobile: false,
 };
 
 ProjectCorePresentationsHolder.propTypes = {
-  formData: PropTypes.object,
+  project: PropTypes.object,
   isMobile: PropTypes.bool,
 };
 

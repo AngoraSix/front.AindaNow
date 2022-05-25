@@ -306,6 +306,10 @@
   max-width: 100%;
 }
 
+.Youtube__Container{
+  display: flex;
+}
+
 .Youtube__Iframe {
   max-width: 100%;
 }

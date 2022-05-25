@@ -86,7 +86,7 @@
   margin-bottom: 1em;
 }
 
-/* Project Section Media */
+/* Presentation Section */
 
 .PresentationSectionMediaData__Container {
   min-width: 100%;
@@ -95,6 +95,12 @@
 .ProjectPresentationsSectionsData__Field {
   width: 100%;
   margin-bottom: 20px;
+}
+
+.ProjectPresentationsSectionsData__Summary > .MuiAccordionSummary-content {
+  display: flex;
+  justify-content: space-between;
+  max-width: 90%;
 }
 
 /* PREVIEWS */
@@ -112,7 +118,7 @@
   text-overflow: ellipsis;
 }
 
-.ProjectPresentationsData__Summary .MuiAccordionSummary-content {
+.ProjectPresentationsData__Summary > .MuiAccordionSummary-content {
   display: flex;
   justify-content: space-between;
   max-width: 90%;
@@ -143,6 +149,7 @@
 
 .PresentationSectionPreview__Media__Image {
   max-width: 70vw;
+  object-fit: cover;
 }
 
 .PresentationSectionPreview__Description__Container {

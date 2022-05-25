@@ -7,6 +7,8 @@ import PresentationSection from './PresentationSection';
 import Project from './Project';
 
 export default class ProjectPresentation {
+  #sections;
+  #project;
   constructor({ id, referenceName, sections, projectId, project }) {
     this.id = id;
     this.referenceName = referenceName;
@@ -22,34 +24,47 @@ export default class ProjectPresentation {
 
   completeRequiredFields(project) {
     this.referenceName = this.referenceName || project.name;
-    this.sections.forEach((s) => s.completeRequiredFields(project));
+    this.sections?.forEach((s) => s.completeRequiredFields(project));
   }
 
   toFormData() {
-    let asd = createObjectWithFlatParams(this);
-    return asd;
+    return createObjectWithFlatParams(this);
   }
 
   /**
    * @param {PresentationSection} sections
    */
   set sections(sections) {
-    this._sections = toType(sections, PresentationSection);
+    this.#sections = toType(sections, PresentationSection);
   }
 
   get sections() {
-    return this._sections;
+    return this.#sections;
   }
 
   /**
    * @param {Project} project
    */
   set project(project) {
-    this._project = toType(project, Project, true);
+    this.#project = toType(project, Project, true);
   }
 
   get project() {
-    return this._project;
+    return this.#project;
+  }
+
+  toFormData(fieldSuffix = '') {
+    return Object.assign(
+      {
+        [`${fieldSuffix}id`]: this.id,
+        [`${fieldSuffix}referenceName`]: this.referenceName,
+        [`${fieldSuffix}projectId`]: this.projectId,
+        [`${fieldSuffix}project`]: this.project?.toFormData(),
+      },
+      ...(this.sections?.flatMap((s, i) =>
+        s.toFormData(`${fieldSuffix}sections[${i}].`)
+      ) || [])
+    );
   }
 
   toJSON() {
