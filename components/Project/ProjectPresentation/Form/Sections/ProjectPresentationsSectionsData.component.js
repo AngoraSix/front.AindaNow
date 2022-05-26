@@ -9,8 +9,11 @@ import {
 } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import { createObjectFromFlatParams } from '../../../../../utils/helpers';
 import { PROJECT_PRESENTATION_SECTION_FORM_FIELDS as PRESENTATION_SECTION_FIELDS } from '../ProjectPresentationForm.properties';
 import PresentationSectionMediaData from './PresentationSectionMediaData.component';
+
+const SECTIONS_PARENT_FORM_DATA_PATH = 'sections';
 
 const ProjectPresentationsSectionsData = ({
   formData,
@@ -24,20 +27,14 @@ const ProjectPresentationsSectionsData = ({
     setExpanded(isExpanded ? panel : false);
   };
 
-  const onSectionFieldChange = (property, index) => (eventOrValue) => {
-    const updatedSections = [...(projectPresentation.sections || [{}])];
-    updatedSections[index][property] = eventOrValue.target
-      ? eventOrValue.target.value
-      : eventOrValue;
-    onFormChange('sections')(updatedSections);
+  const onNestedFormChange = (index) => (nestedField, value) => {
+    onFormChange(`${SECTIONS_PARENT_FORM_DATA_PATH}[${index}].${nestedField}`)(
+      value
+    );
   };
 
-  const onNestedFormChange = (parentField, index) => (nestedField, value) => {
-    onFormChange(`${parentField}[${index}].${nestedField}`)(value);
-  };
-
-  const filterParentFormDataPath = (formDataObj, parentFormDataPath, index) => {
-    parentFormDataPath = `${parentFormDataPath}[${index}].`;
+  const filterParentFormDataPath = (formDataObj, index) => {
+    const parentFormDataPath = `${SECTIONS_PARENT_FORM_DATA_PATH}[${index}].`;
     return Object.entries(formDataObj).reduce(
       (filteredFormData, [formDataField, formDataValue]) => {
         if (formDataField.startsWith(parentFormDataPath)) {
@@ -50,10 +47,21 @@ const ProjectPresentationsSectionsData = ({
       {}
     );
   };
+  const sectionsObj = Object.assign(
+    {},
+    ...Object.entries(formData)
+      .filter(([formKey]) => formKey.startsWith(SECTIONS_PARENT_FORM_DATA_PATH))
+      .map(([formKey, formValue]) => ({
+        [formKey.replace(SECTIONS_PARENT_FORM_DATA_PATH, 'sections')]:
+          formValue,
+      }))
+  );
+
+  const sections = createObjectFromFlatParams(sectionsObj).sections || [];
 
   return (
     <Box className="ProjectPresentationsSectionsData ProjectPresentationsSectionsData__Container ProjectForm__Section__Container">
-      {projectPresentation.sections.map((s, i) => (
+      {sections.map((s, i) => (
         <Accordion
           key={i}
           expanded={expanded === i}
@@ -118,8 +126,8 @@ const ProjectPresentationsSectionsData = ({
             </Box>
             <Box className="ProjectPresentationsSectionsData__Field">
               <PresentationSectionMediaData
-                formData={filterParentFormDataPath(formData, 'sections', i)}
-                onFormChange={onNestedFormChange('sections', i)}
+                formData={filterParentFormDataPath(formData, i)}
+                onFormChange={onNestedFormChange(i)}
                 wasSubmitted={wasSubmitted}
               />
             </Box>

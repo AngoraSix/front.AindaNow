@@ -49,7 +49,10 @@ const EditProjectPresentationPage = ({
   }
   return (
     <DefaultLayout>
-      <ProjectPresentationForm projectPresentation={projectPresentation} />
+      <ProjectPresentationForm
+        projectPresentation={projectPresentation}
+        project={projectPresentation.project}
+      />
     </DefaultLayout>
   );
 };
@@ -66,8 +69,9 @@ EditProjectPresentationPage.propTypes = {
 
 export const getServerSideProps = async (ctx) => {
   let props = {};
-  const { projectPresentationId } = ctx.params,
-    session = await getSession(ctx);
+  const { projectPresentationId } = ctx.params;
+  const { projectId } = ctx.params;
+  const session = await getSession(ctx);
   const validatedToken =
     session?.error !== 'RefreshAccessTokenError' ? session : null;
   let isAdmin = false;
@@ -79,6 +83,7 @@ export const getServerSideProps = async (ctx) => {
     isAdmin =
       session?.user.id != null &&
       session?.user.id === projectPresentation.project.adminId;
+    projectPresentation.projectId === projectId;
     props = {
       ...props,
       projectPresentation,

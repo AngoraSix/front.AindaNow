@@ -3,19 +3,19 @@ import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
-import api from '../../../api';
-import FormSkeleton from '../../../components/common/Skeletons/FormSkeleton.component';
-import ManageProject from '../../../components/Project/ManageProject';
-import { resolveRoute, ROUTES } from '../../../constants';
-import { useNotifications } from '../../../hooks/app';
-import { useActiveSession } from '../../../hooks/oauth';
-import DefaultLayout from '../../../layouts/DefaultLayout';
-import logger from '../../../utils/logger';
+import api from '../../../../api';
+import FormSkeleton from '../../../../components/common/Skeletons/FormSkeleton.component';
+import ProjectPresentationForm from '../../../../components/Project/ProjectPresentation/Form';
+import { resolveRoute, ROUTES } from '../../../../constants';
+import { useNotifications } from '../../../../hooks/app';
+import { useActiveSession } from '../../../../hooks/oauth';
+import DefaultLayout from '../../../../layouts/DefaultLayout';
+import logger from '../../../../utils/logger';
 
 const NOT_ADMIN_ERROR_MESSAGE =
   'You need admin privileges to edit this Project';
 
-const EditProjectPage = ({ session, project, isAdmin }) => {
+const NewProjectPresentationPage = ({ session, project, isAdmin }) => {
   useActiveSession();
   const { onError } = useNotifications();
   const router = useRouter();
@@ -41,25 +41,25 @@ const EditProjectPage = ({ session, project, isAdmin }) => {
   }
   return (
     <DefaultLayout>
-      <ManageProject stepped={false} project={project} />
+      <ProjectPresentationForm project={project} />
     </DefaultLayout>
   );
 };
 
-EditProjectPage.defaultProps = {
+NewProjectPresentationPage.defaultProps = {
   isAdmin: false,
 };
 
-EditProjectPage.propTypes = {
-  project: PropTypes.object,
+NewProjectPresentationPage.propTypes = {
+  projectPresentation: PropTypes.object,
   session: PropTypes.object,
   isAdmin: PropTypes.bool,
 };
 
 export const getServerSideProps = async (ctx) => {
   let props = {};
-  const { projectId } = ctx.params;
-  const session = await getSession(ctx);
+  const { projectId } = ctx.params,
+    session = await getSession(ctx);
   const validatedToken =
     session?.error !== 'RefreshAccessTokenError' ? session : null;
   let isAdmin = false;
@@ -83,4 +83,4 @@ export const getServerSideProps = async (ctx) => {
   };
 };
 
-export default EditProjectPage;
+export default NewProjectPresentationPage;

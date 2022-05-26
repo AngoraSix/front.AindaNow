@@ -1,12 +1,13 @@
 import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ViewIcon from '@mui/icons-material/Visibility';
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Box,
   IconButton,
-  Typography
+  Typography,
 } from '@mui/material';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
@@ -51,6 +52,24 @@ const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
                 : ''}
               ]
             </Typography>
+            <Link
+              href={resolveRoute(
+                ROUTES.projects.presentations.view,
+                p.projectId,
+                p.id
+              )}
+            >
+              <IconButton
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+                className="ProjectPresentationsData__Button"
+                color="primary"
+                size="small"
+              >
+                <ViewIcon fontSize="small" />
+              </IconButton>
+            </Link>
             <Link
               href={resolveRoute(
                 ROUTES.projects.presentations.directEdit,

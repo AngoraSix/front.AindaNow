@@ -31,7 +31,7 @@ const ProjectPresentation = ({ projectPresentation }) => {
         </Typography>
         <Box className="ProjectPresentation__SectionsPresentation">
           <Box className="SectionsPresentation__PresentationArea">
-            {projectPresentation.sections.map((s, i) => (
+            {projectPresentation.sections?.map((s, i) => (
               <SectionPresentationHolder
                 value={activeSectionindex}
                 index={i}

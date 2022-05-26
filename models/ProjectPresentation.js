@@ -24,6 +24,7 @@ export default class ProjectPresentation {
 
   completeRequiredFields(project) {
     this.referenceName = this.referenceName || project.name;
+    this.projectId = this.projectId || project.id;
     this.sections?.forEach((s) => s.completeRequiredFields(project));
   }
 

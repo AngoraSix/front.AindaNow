@@ -15,11 +15,11 @@ export default async (req, res) => {
       );
       res.status(200).json(data);
     } catch (err) {
-      const errorMessage = `Error updating Project Presentation [${req.method}]`,
-        internalServerErr = new InternalServerError(
-          errorMessage,
-          'PROJECT_PRESENTATION_SAVE'
-        );
+      const errorMessage = `Error updating Project Presentation [${req.method}]`;
+      const internalServerErr = new InternalServerError(
+        errorMessage,
+        'PROJECT_PRESENTATION_SAVE'
+      );
       logger.error(
         errorMessage,
         typeof err === 'object' && !err instanceof Error

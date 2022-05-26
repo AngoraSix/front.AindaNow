@@ -8,7 +8,7 @@ const ProjectPresentationView = ({ projectPresentation }) => {
   return (
     <Box className="ProjectPresentationView ProjectPresentationView__Container">
       <MediaHeader
-        media={projectPresentation.sections.flatMap((s) => s.media)}
+        media={projectPresentation.sections?.flatMap((s) => s.media)}
       />
       <ProjectPresentation projectPresentation={projectPresentation} />
     </Box>

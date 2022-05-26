@@ -55,6 +55,7 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
       {editingPresentationObject && (
         <ProjectPresentationForm
           projectPresentation={editingPresentationObject}
+          project={project}
           isTriggeredAction={true}
         />
       )}

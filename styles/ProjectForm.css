@@ -114,7 +114,7 @@
 .ProjectPresentationsData__Summary__Text.Long {
   flex-grow: 1;
   min-width: 0;
-  max-width: 70%;
+  max-width: 60%;
   text-overflow: ellipsis;
 }
 

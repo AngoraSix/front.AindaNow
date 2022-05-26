@@ -12,10 +12,11 @@ import ProjectPresentationDialog from './Dialog';
 import ProjectPresentationForm from './ProjectPresentationForm.component';
 import ProjectPresentationFormReducer, {
   INITIAL_STATE,
-  updateFieldsAction,
+  updateFieldsAction
 } from './ProjectPresentationForm.reducer';
 
 const ProjectPresentationFormContainer = ({
+  project,
   projectPresentation,
   isTriggeredAction,
 }) => {
@@ -24,7 +25,7 @@ const ProjectPresentationFormContainer = ({
   const router = useRouter();
   const [formData, dispatch] = useReducer(ProjectPresentationFormReducer, {
     ...INITIAL_STATE,
-    ...toType(projectPresentation, ProjectPresentation).toFormData(),
+    ...(toType(projectPresentation, ProjectPresentation)?.toFormData() || {}),
   });
 
   const onFormChange = (property) => (eventOrValue) => {
@@ -45,6 +46,7 @@ const ProjectPresentationFormContainer = ({
       projectPresentationToSubmit = await uploadAllMedia(
         projectPresentationToSubmit
       );
+      projectPresentationToSubmit.completeRequiredFields(project);
       //@TODO check required fields or trigger error
 
       const projectPresentationResponse =
@@ -90,10 +92,12 @@ const ProjectPresentationFormContainer = ({
 
 ProjectPresentationFormContainer.defaults = {
   isTriggeredAction: false,
+  projectPresentation: {},
 };
 
 ProjectPresentationFormContainer.propTypes = {
-  projectPresentation: PropTypes.object.isRequired,
+  projectPresentation: PropTypes.object,
+  project: PropTypes.object.isRequired,
   isTriggeredAction: PropTypes.bool,
 };
 
