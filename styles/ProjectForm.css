@@ -103,6 +103,12 @@
   max-width: 90%;
 }
 
+.ProjectPresentationsSectionsData__ListActions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 /* PREVIEWS */
 
 /* ProjectCorePresentations */

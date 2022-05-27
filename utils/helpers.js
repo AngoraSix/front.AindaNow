@@ -76,7 +76,9 @@ export function _mergeDeep(target, targetIndex = null, ...sources) {
 
 export const createObjectFromFlatParams = (flatObject) => {
   return Object.entries(flatObject)
-    .filter(([, value]) => (Array.isArray(value) ? value.length : !!value))
+    .filter(([, value]) =>
+      Array.isArray(value) ? value.length : value != null
+    )
     .reduce(
       (output, field) => _mergeDeep(output, null, _mapFlatParam(field)),
       {}

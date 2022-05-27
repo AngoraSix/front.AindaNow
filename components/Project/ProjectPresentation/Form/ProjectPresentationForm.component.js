@@ -4,12 +4,7 @@ import React from 'react';
 import ProjectPresentationCoreData from './Sections/ProjectPresentationCoreData.component';
 import ProjectPresentationsSectionsData from './Sections/ProjectPresentationsSectionsData.component';
 
-const ProjectPresentationForm = ({
-  formData,
-  projectPresentation,
-  onFormChange,
-  onSubmit,
-}) => {
+const ProjectPresentationForm = ({ formData, onFormChange, onSubmit }) => {
   return (
     <Box
       className={`ProjectPresentationForm ProjectPresentationForm__Container`}
@@ -38,7 +33,6 @@ const ProjectPresentationForm = ({
         </Typography>
         <ProjectPresentationsSectionsData
           formData={formData}
-          projectPresentation={projectPresentation}
           onFormChange={onFormChange}
           wasSubmitted={false}
         />

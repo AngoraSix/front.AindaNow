@@ -12,7 +12,7 @@ import ProjectPresentationDialog from './Dialog';
 import ProjectPresentationForm from './ProjectPresentationForm.component';
 import ProjectPresentationFormReducer, {
   INITIAL_STATE,
-  updateFieldsAction
+  updateFieldsAction,
 } from './ProjectPresentationForm.reducer';
 
 const ProjectPresentationFormContainer = ({
@@ -28,12 +28,16 @@ const ProjectPresentationFormContainer = ({
     ...(toType(projectPresentation, ProjectPresentation)?.toFormData() || {}),
   });
 
+  // we want to support updating several fields at once => value can be an array of fields
   const onFormChange = (property) => (eventOrValue) => {
-    const partialFormData = {
-      [property]: eventOrValue.target
-        ? eventOrValue.target.value
-        : eventOrValue,
-    };
+    const partialFormData =
+      Array.isArray(eventOrValue) && property == null
+        ? Object.assign({}, ...eventOrValue.map(([p, v]) => ({ [p]: v })))
+        : {
+            [property]: eventOrValue.target
+              ? eventOrValue.target.value
+              : eventOrValue,
+          };
 
     dispatch(updateFieldsAction(partialFormData));
   };
@@ -75,7 +79,6 @@ const ProjectPresentationFormContainer = ({
     <ProjectPresentationDialog projectId={projectPresentation.projectId}>
       <ProjectPresentationForm
         formData={formData}
-        projectPresentation={projectPresentation}
         onFormChange={onFormChange}
         onSubmit={onSubmit}
       />
@@ -83,7 +86,6 @@ const ProjectPresentationFormContainer = ({
   ) : (
     <ProjectPresentationForm
       formData={formData}
-      projectPresentation={projectPresentation}
       onFormChange={onFormChange}
       onSubmit={onSubmit}
     />

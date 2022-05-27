@@ -39,6 +39,7 @@ export default class PresentationSection {
     return this.#media;
   }
 
+  // Media is processed as a whole in a form, we don't update indivdual fields
   toFormData(fieldSuffix = '') {
     return {
       [`${fieldSuffix}title`]: this.title,
