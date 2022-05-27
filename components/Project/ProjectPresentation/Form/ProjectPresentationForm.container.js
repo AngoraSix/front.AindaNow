@@ -61,11 +61,13 @@ const ProjectPresentationFormContainer = ({
 
       onSuccess('Project Presentation Saved Successfully');
 
-      const viewURL = resolveRoute(
-        ROUTES.projects.presentations.view,
-        projectPresentationResponse.projectId,
-        projectPresentationResponse.id
-      );
+      const viewURL = isTriggeredAction
+        ? resolveRoute(ROUTES.projects.edit, project.id)
+        : resolveRoute(
+            ROUTES.projects.presentations.view,
+            projectPresentationResponse.projectId,
+            projectPresentationResponse.id
+          );
       router.push(viewURL);
     } catch (err) {
       logger.error(err);
@@ -76,7 +78,7 @@ const ProjectPresentationFormContainer = ({
   };
 
   return isTriggeredAction ? (
-    <ProjectPresentationDialog projectId={projectPresentation.projectId}>
+    <ProjectPresentationDialog projectId={project.id}>
       <ProjectPresentationForm
         formData={formData}
         onFormChange={onFormChange}

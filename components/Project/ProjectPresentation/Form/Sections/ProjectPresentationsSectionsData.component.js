@@ -206,7 +206,7 @@ const ProjectPresentationsSectionsData = ({
           startIcon={<NewIcon />}
           sx={{ display: { xs: 'none', sm: 'flex' } }}
         >
-          Create
+          Add Section
         </Button>
         <IconButton
           onClick={onAddNewSection(sections.length)}

@@ -19,7 +19,7 @@ const ProjectPresentationDialog = ({ projectId, children }) => {
 
   const closeDialog = () => {
     const editProjectURL = resolveRoute(ROUTES.projects.edit, projectId);
-    router.push(editProjectURL);
+    router.push(editProjectURL, editProjectURL, { shallow: true });
   };
 
   return (

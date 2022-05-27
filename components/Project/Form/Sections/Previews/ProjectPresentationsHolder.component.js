@@ -1,3 +1,5 @@
+import NewIconContained from '@mui/icons-material/AddCircle';
+import NewIcon from '@mui/icons-material/AddCircleOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ViewIcon from '@mui/icons-material/Visibility';
@@ -6,6 +8,7 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
+  Button,
   IconButton,
   Typography,
 } from '@mui/material';
@@ -101,6 +104,41 @@ const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
           </AccordionDetails>
         </Accordion>
       ))}
+      <Box className="ProjectPresentationsData__ListActions">
+        <Link
+          href={resolveRoute(
+            ROUTES.projects.presentations.directEdit,
+            project.id,
+            ''
+          )}
+          shallow={true}
+        >
+          <Button
+            color="primary"
+            variant="contained"
+            startIcon={<NewIcon />}
+            sx={{ display: { xs: 'none', sm: 'flex' } }}
+          >
+            Add Presentation
+          </Button>
+        </Link>
+        <Link
+          href={resolveRoute(
+            ROUTES.projects.presentations.directEdit,
+            project.id,
+            ''
+          )}
+          shallow={true}
+        >
+          <IconButton
+            aria-label="create"
+            color="primary"
+            sx={{ display: { xs: 'flex', sm: 'none' } }}
+          >
+            <NewIconContained />
+          </IconButton>
+        </Link>
+      </Box>
     </Box>
   );
 };

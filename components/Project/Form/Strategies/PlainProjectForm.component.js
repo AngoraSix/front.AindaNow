@@ -52,7 +52,7 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
           Save
         </Button>
       </Box>
-      {editingPresentationObject && (
+      {(editingPresentationObject || editingPresentationId != null) && (
         <ProjectPresentationForm
           projectPresentation={editingPresentationObject}
           project={project}
