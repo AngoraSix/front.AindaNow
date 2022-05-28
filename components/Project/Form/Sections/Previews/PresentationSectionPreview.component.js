@@ -21,11 +21,13 @@ const PresentationSectionPreview = ({ presentationSection }) => {
             loading="lazy"
           />
         </Box>
-        <Box className="PresentationSectionPreview__Description__Container">
-          <Typography className="PresentationSectionPreview__Description__Text">
-            {presentationSection.description}
-          </Typography>
-        </Box>
+        {presentationSection.description && (
+          <Box className="PresentationSectionPreview__Description__Container">
+            <Typography className="PresentationSectionPreview__Description__Text">
+              {presentationSection.description}
+            </Typography>
+          </Box>
+        )}
       </Box>
     </Box>
   );
