@@ -12,7 +12,9 @@ import ProjectPresentationDialog from './Dialog';
 import ProjectPresentationForm from './ProjectPresentationForm.component';
 import ProjectPresentationFormReducer, {
   INITIAL_STATE,
+  updatedCompletedFormSection,
   updateFieldsAction,
+  updateFormWasSubmitted,
 } from './ProjectPresentationForm.reducer';
 
 const ProjectPresentationFormContainer = ({
@@ -23,9 +25,11 @@ const ProjectPresentationFormContainer = ({
   const { doLoad } = useLoading();
   const { onSuccess, onError } = useNotifications();
   const router = useRouter();
-  const [formData, dispatch] = useReducer(ProjectPresentationFormReducer, {
+  const [formState, dispatch] = useReducer(ProjectPresentationFormReducer, {
     ...INITIAL_STATE,
-    ...(toType(projectPresentation, ProjectPresentation)?.toFormData() || {}),
+    formData: {
+      ...(toType(projectPresentation, ProjectPresentation)?.toFormData() || {}),
+    },
   });
 
   // we want to support updating several fields at once => value can be an array of fields
@@ -42,54 +46,66 @@ const ProjectPresentationFormContainer = ({
     dispatch(updateFieldsAction(partialFormData));
   };
 
+  const setIsSectionCompleted = (section) => (isCompleted) => {
+    dispatch(updatedCompletedFormSection(section, isCompleted));
+  };
+
   const onSubmit = async () => {
     doLoad(true);
-    try {
-      let projectPresentationToSubmit =
-        ProjectPresentation.fromFormData(formData);
-      projectPresentationToSubmit = await uploadAllMedia(
-        projectPresentationToSubmit
-      );
-      projectPresentationToSubmit.completeRequiredFields(project);
-      //@TODO check required fields or trigger error
-
-      const projectPresentationResponse =
-        await api.front.saveProjectPresentation(
-          projectPresentationToSubmit,
-          projectPresentation?.id
+    if (Object.values(formState.completedSections).some((v) => !v)) {
+      dispatch(updateFormWasSubmitted(true));
+    } else {
+      try {
+        let projectPresentationToSubmit = ProjectPresentation.fromFormData(
+          formState.formData
         );
+        projectPresentationToSubmit = await uploadAllMedia(
+          projectPresentationToSubmit
+        );
+        projectPresentationToSubmit.completeRequiredFields(project);
+        //@TODO check required fields or trigger error
 
-      onSuccess('Project Presentation Saved Successfully');
-
-      const viewURL = isTriggeredAction
-        ? resolveRoute(ROUTES.projects.edit, project.id)
-        : resolveRoute(
-            ROUTES.projects.presentations.view,
-            projectPresentationResponse.projectId,
-            projectPresentationResponse.id
+        const projectPresentationResponse =
+          await api.front.saveProjectPresentation(
+            projectPresentationToSubmit,
+            projectPresentation?.id
           );
-      router.push(viewURL);
-    } catch (err) {
-      logger.error(err);
-      onError('Error Saving Project Presentation');
-    }
 
+        onSuccess('Project Presentation Saved Successfully');
+
+        const viewURL = isTriggeredAction
+          ? resolveRoute(ROUTES.projects.edit, project.id)
+          : resolveRoute(
+              ROUTES.projects.presentations.view,
+              projectPresentationResponse.projectId,
+              projectPresentationResponse.id
+            );
+        router.push(viewURL);
+      } catch (err) {
+        logger.error(err);
+        onError('Error Saving Project Presentation');
+      }
+    }
     doLoad(false);
   };
 
   return isTriggeredAction ? (
     <ProjectPresentationDialog projectId={project.id}>
       <ProjectPresentationForm
-        formData={formData}
+        formData={formState.formData}
         onFormChange={onFormChange}
         onSubmit={onSubmit}
+        setIsSectionCompleted={setIsSectionCompleted}
+        wasSubmitted={formState.wasSubmitted}
       />
     </ProjectPresentationDialog>
   ) : (
     <ProjectPresentationForm
-      formData={formData}
+      formData={formState.formData}
       onFormChange={onFormChange}
       onSubmit={onSubmit}
+      setIsSectionCompleted={setIsSectionCompleted}
+      wasSubmitted={formState.wasSubmitted}
     />
   );
 };

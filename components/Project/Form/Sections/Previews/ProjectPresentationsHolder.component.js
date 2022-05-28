@@ -1,7 +1,6 @@
 import NewIconContained from '@mui/icons-material/AddCircle';
 import NewIcon from '@mui/icons-material/AddCircleOutline';
 import EditIcon from '@mui/icons-material/Edit';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ViewIcon from '@mui/icons-material/Visibility';
 import {
   Accordion,
@@ -12,7 +11,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { resolveRoute, ROUTES } from '../../../../../constants';
@@ -20,6 +19,7 @@ import PresentationSectionPreview from './PresentationSectionPreview.component';
 
 const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
   const [expanded, setExpanded] = useState(false);
+  const router = useRouter();
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
@@ -36,7 +36,6 @@ const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
         >
           <AccordionSummary
             className="ProjectPresentationsData__Summary"
-            expandIcon={<ExpandMoreIcon />}
             aria-controls={`${p.id}-content1`}
             id={`${p.id}-header`}
           >
@@ -55,43 +54,42 @@ const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
                 : ''}
               ]
             </Typography>
-            <Link
-              href={resolveRoute(
-                ROUTES.projects.presentations.view,
-                p.projectId,
-                p.id
-              )}
+            <IconButton
+              onClick={() =>
+                router.push(
+                  resolveRoute(
+                    ROUTES.projects.presentations.view,
+                    p.projectId,
+                    p.id
+                  ),
+                  null,
+                  { shallow: true }
+                )
+              }
+              className="ProjectPresentationsData__Button"
+              color="primary"
+              size="small"
             >
-              <IconButton
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-                className="ProjectPresentationsData__Button"
-                color="primary"
-                size="small"
-              >
-                <ViewIcon fontSize="small" />
-              </IconButton>
-            </Link>
-            <Link
-              href={resolveRoute(
-                ROUTES.projects.presentations.directEdit,
-                p.projectId,
-                p.id
-              )}
-              shallow={true}
+              <ViewIcon fontSize="small" />
+            </IconButton>
+            <IconButton
+              onClick={() =>
+                router.push(
+                  resolveRoute(
+                    ROUTES.projects.presentations.directEdit,
+                    p.projectId,
+                    p.id
+                  ),
+                  null,
+                  { shallow: true }
+                )
+              }
+              className="ProjectPresentationsData__Button"
+              color="primary"
+              size="small"
             >
-              <IconButton
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-                className="ProjectPresentationsData__Button"
-                color="primary"
-                size="small"
-              >
-                <EditIcon fontSize="small" />
-              </IconButton>
-            </Link>
+              <EditIcon fontSize="small" />
+            </IconButton>
           </AccordionSummary>
           <AccordionDetails>
             {p.sections.map((ps) => (
@@ -105,39 +103,43 @@ const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
         </Accordion>
       ))}
       <Box className="ProjectPresentationsData__ListActions">
-        <Link
-          href={resolveRoute(
-            ROUTES.projects.presentations.directEdit,
-            project.id,
-            ''
-          )}
-          shallow={true}
+        <Button
+          color="primary"
+          variant="contained"
+          startIcon={<NewIcon />}
+          sx={{ display: { xs: 'none', sm: 'flex' } }}
+          onClick={() =>
+            router.push(
+              resolveRoute(
+                ROUTES.projects.presentations.directEdit,
+                project.id,
+                ''
+              ),
+              null,
+              { shallow: true }
+            )
+          }
         >
-          <Button
-            color="primary"
-            variant="contained"
-            startIcon={<NewIcon />}
-            sx={{ display: { xs: 'none', sm: 'flex' } }}
-          >
-            Add Presentation
-          </Button>
-        </Link>
-        <Link
-          href={resolveRoute(
-            ROUTES.projects.presentations.directEdit,
-            project.id,
-            ''
-          )}
-          shallow={true}
+          Add Presentation
+        </Button>
+        <IconButton
+          aria-label="create"
+          color="primary"
+          sx={{ display: { xs: 'flex', sm: 'none' } }}
+          onClick={() =>
+            router.push(
+              resolveRoute(
+                ROUTES.projects.presentations.directEdit,
+                project.id,
+                ''
+              ),
+              null,
+              { shallow: true }
+            )
+          }
         >
-          <IconButton
-            aria-label="create"
-            color="primary"
-            sx={{ display: { xs: 'flex', sm: 'none' } }}
-          >
-            <NewIconContained />
-          </IconButton>
-        </Link>
+          <NewIconContained />
+        </IconButton>
       </Box>
     </Box>
   );

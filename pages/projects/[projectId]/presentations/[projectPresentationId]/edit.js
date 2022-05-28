@@ -18,6 +18,8 @@ const NOT_ADMIN_ERROR_MESSAGE =
 const EditProjectPresentationPage = ({
   session,
   projectPresentation,
+  projectId,
+  projectPresentationId,
   isAdmin,
 }) => {
   useActiveSession();
@@ -29,8 +31,8 @@ const EditProjectPresentationPage = ({
       onError(NOT_ADMIN_ERROR_MESSAGE);
       const viewURL = resolveRoute(
         ROUTES.projects.presentations.view,
-        projectPresentation.projectId,
-        projectPresentation.id
+        projectId,
+        projectPresentationId
       );
       router.push(viewURL);
     }
@@ -63,6 +65,8 @@ EditProjectPresentationPage.defaultProps = {
 
 EditProjectPresentationPage.propTypes = {
   projectPresentation: PropTypes.object,
+  projectId: PropTypes.string.isRequired,
+  projectPresentationId: PropTypes.string.isRequired,
   session: PropTypes.object,
   isAdmin: PropTypes.bool,
 };
@@ -82,10 +86,12 @@ export const getServerSideProps = async (ctx) => {
     );
     isAdmin =
       session?.user.id != null &&
-      session?.user.id === projectPresentation.project.adminId;
-    projectPresentation.projectId === projectId;
+      session?.user.id === projectPresentation.project.adminId &&
+      projectPresentation?.projectId === projectId;
     props = {
       ...props,
+      projectId,
+      projectPresentationId,
       projectPresentation,
       isAdmin,
     };

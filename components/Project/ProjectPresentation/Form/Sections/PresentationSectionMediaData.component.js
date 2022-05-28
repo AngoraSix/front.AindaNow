@@ -45,7 +45,8 @@ const PresentationSectionMediaData = ({
             error={
               wasSubmitted &&
               PRESENTATION_SECTION_FIELDS.mainMedia.required &&
-              !formData[PRESENTATION_SECTION_FIELDS.mainMedia.key]
+              (!formData[PRESENTATION_SECTION_FIELDS.mainMedia.key] ||
+                !formData[PRESENTATION_SECTION_FIELDS.mainMedia.key].length)
             }
           />
         </Grid>

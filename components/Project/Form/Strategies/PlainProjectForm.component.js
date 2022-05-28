@@ -3,19 +3,31 @@ import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import ProjectPresentationForm from '../../ProjectPresentation/Form';
 import ProjectCorePresentationsHolder from '../Sections/Previews/ProjectPresentationsHolder.component';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
+
+const REQUIRED_SECTIONS = {
+  CORE: 'CORE',
+};
 
 const PlainProjectForm = ({ formData, onFormChange, project }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
+  const [formWasSubmitted, setFormWasSubmitted] = useState(false);
+  const [completedSections, setCompletedSections] = useState({
+    [REQUIRED_SECTIONS.CORE]: false,
+  });
   const editingPresentationId = router.query.editingPresentationId;
   const editingPresentationObject = project.presentations?.find(
     (pr) => pr.id === editingPresentationId
   );
+
+  const updateCompletedStatus = (section) => (isCompleted) => {
+    setCompletedSections({ ...completedSections, [section]: isCompleted });
+  };
 
   return (
     <Box className={`PlainProjectForm PlainProjectForm__Section__Container`}>
@@ -31,6 +43,8 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
           formData={formData}
           onFormChange={onFormChange}
           isMobile={isMobile}
+          setIsCompleted={updateCompletedStatus(REQUIRED_SECTIONS.CORE)}
+          wasSubmitted={formWasSubmitted}
         />
       </Box>
       <Box className="ProjectForm__PlainForm__Section">
@@ -48,7 +62,18 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
         />
       </Box>
       <Box className="ProjectForm__PlainForm__Section">
-        <Button type="submit" color="primary" variant="contained" fullWidth>
+        <Button
+          onClick={(event) => {
+            if (Object.values(completedSections).some((v) => !v)) {
+              setFormWasSubmitted(true);
+              event.preventDefault();
+            }
+          }}
+          type="submit"
+          color="primary"
+          variant="contained"
+          fullWidth
+        >
           Save
         </Button>
       </Box>

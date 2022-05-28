@@ -10,7 +10,7 @@ const MediaSingleDnD = ({ media }) => {
       <Box
         key={singleMedia.key}
         style={{
-          backgroundImage: `url(${singleMedia.thumbnailUrl}) `,
+          backgroundImage: `url('${singleMedia.thumbnailUrl}') `,
         }}
         className="MediaSingleDnD__DropZone__Preview"
       />

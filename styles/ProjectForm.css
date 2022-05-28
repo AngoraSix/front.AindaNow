@@ -97,6 +97,16 @@
   margin-bottom: 20px;
 }
 
+.ProjectPresentationsSectionsData__Accordion {
+  border-style: solid;
+  border-width: thin;
+  border-color: transparent;
+}
+
+.ProjectPresentationsSectionsData__Accordion--error {
+  border-color: red;
+}
+
 .ProjectPresentationsSectionsData__Summary > .MuiAccordionSummary-content {
   display: flex;
   justify-content: space-between;

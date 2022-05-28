@@ -1,7 +1,6 @@
 import NewIconContained from '@mui/icons-material/AddCircle';
 import NewIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   Accordion,
   AccordionDetails,
@@ -12,32 +11,93 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createObjectFromFlatParams } from '../../../../../utils/helpers';
 import { PROJECT_PRESENTATION_SECTION_FORM_FIELDS as PRESENTATION_SECTION_FIELDS } from '../ProjectPresentationForm.properties';
 import PresentationSectionMediaData from './PresentationSectionMediaData.component';
 
 const SECTIONS_PARENT_FORM_DATA_PATH = 'sections';
 
+const REQUIRED_SECTION_FIELDS = Object.entries(PRESENTATION_SECTION_FIELDS)
+  .filter(([_, value]) => value.required)
+  .map(([key]) => key);
+
+const _normalizeSectionsFormData = (formData) => {
+  return Object.assign(
+    {},
+    ...Object.entries(formData)
+      .filter(([formKey]) => formKey.startsWith(SECTIONS_PARENT_FORM_DATA_PATH))
+      .map(([formKey, formValue]) => ({
+        [formKey.replace(SECTIONS_PARENT_FORM_DATA_PATH, 'sections')]:
+          formValue,
+      }))
+  );
+};
+
+const _convertFormDataToSectionsObj = (formData) => {
+  const sectionsObj = _normalizeSectionsFormData(formData);
+  return createObjectFromFlatParams(sectionsObj).sections || [];
+};
+
+const _sectionIsComplete = (section) => {
+  return REQUIRED_SECTION_FIELDS.every((reqField) => {
+    return section[reqField] != null && section[reqField] !== '';
+  });
+};
+
+const _determineIfIsComplete = (formData) => {
+  const sections = _convertFormDataToSectionsObj(formData);
+  return sections.length && sections.every((s) => _sectionIsComplete(s));
+};
+
+const _determineIfHasError = (fieldSpecs, wasSubmitted, formData, i) => {
+  return (
+    wasSubmitted &&
+    fieldSpecs.required &&
+    !formData[`${SECTIONS_PARENT_FORM_DATA_PATH}[${i}].${fieldSpecs.key}`]
+  );
+};
+
 const ProjectPresentationsSectionsData = ({
   formData,
   onFormChange,
   wasSubmitted,
+  setIsCompleted,
 }) => {
   const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    setIsCompleted(_determineIfIsComplete({ ...formData }));
+  }, []);
 
   const handleFocusChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
   const onNestedFormChange = (index) => (nestedField, value) => {
-    onFormChange(`${SECTIONS_PARENT_FORM_DATA_PATH}[${index}].${nestedField}`)(
-      value
+    const modifiedKey = `${SECTIONS_PARENT_FORM_DATA_PATH}[${index}].${nestedField}`;
+    setIsCompleted(
+      _determineIfIsComplete({ ...formData, [modifiedKey]: value })
     );
+    onFormChange(modifiedKey)(value);
+  };
+
+  const onDirectFormChange = (index, field) => (event) => {
+    let {
+      target: { value },
+    } = event;
+    const modifiedKey = `${SECTIONS_PARENT_FORM_DATA_PATH}[${index}].${field}`;
+    setIsCompleted(
+      _determineIfIsComplete({ ...formData, [modifiedKey]: value })
+    );
+    onFormChange(modifiedKey)(value);
   };
 
   const onAddNewSection = (currentQtyOfSections) => () => {
+    setIsCompleted(false);
+    setExpanded(currentQtyOfSections);
     onFormChange(
       `${SECTIONS_PARENT_FORM_DATA_PATH}[${currentQtyOfSections}].${PRESENTATION_SECTION_FIELDS.title.key}`
     )('');
@@ -51,7 +111,7 @@ const ProjectPresentationsSectionsData = ({
         .filter(([key]) =>
           key.startsWith(`${SECTIONS_PARENT_FORM_DATA_PATH}[${index}]`)
         )
-        .map(([key]) => [key, null]);
+        .map(([key]) => [key, undefined]);
     } else {
       // otherwise we move down the indexes by one since the removed index
       const reducedFields = Object.entries(formData).filter(([key]) =>
@@ -85,7 +145,9 @@ const ProjectPresentationsSectionsData = ({
         ...deletedLastItemFields,
       ];
     }
-
+    setIsCompleted(
+      _determineIfIsComplete({ ...formData, ...adjustedSectionsFieldsIndexes })
+    );
     onFormChange(null)(adjustedSectionsFieldsIndexes);
   };
 
@@ -103,105 +165,105 @@ const ProjectPresentationsSectionsData = ({
       {}
     );
   };
-  const sectionsObj = Object.assign(
-    {},
-    ...Object.entries(formData)
-      .filter(([formKey]) => formKey.startsWith(SECTIONS_PARENT_FORM_DATA_PATH))
-      .map(([formKey, formValue]) => ({
-        [formKey.replace(SECTIONS_PARENT_FORM_DATA_PATH, 'sections')]:
-          formValue,
-      }))
-  );
-
-  const sections = createObjectFromFlatParams(sectionsObj).sections || [];
+  const sections = _convertFormDataToSectionsObj(formData);
 
   return (
     <Box className="ProjectPresentationsSectionsData ProjectPresentationsSectionsData__Container ProjectForm__Section__Container">
-      {sections.map((s, i) => (
-        <Accordion
-          key={i}
-          expanded={expanded === i}
-          onChange={handleFocusChange(i)}
-          TransitionProps={{ unmountOnExit: true }}
-        >
-          <AccordionSummary
-            className="ProjectPresentationsSectionsData__Summary"
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls={`${i}-content1`}
-            id={`${i}-header`}
+      {sections.map((s, i) => {
+        const titleHasError = _determineIfHasError(
+          PRESENTATION_SECTION_FIELDS.title,
+          wasSubmitted,
+          formData,
+          i
+        );
+        const descriptionHasError = _determineIfHasError(
+          PRESENTATION_SECTION_FIELDS.description,
+          wasSubmitted,
+          formData,
+          i
+        );
+        return (
+          <Accordion
+            className={classnames(
+              'ProjectPresentationsSectionsData__Accordion',
+              {
+                'ProjectPresentationsSectionsData__Accordion--error':
+                  wasSubmitted && !_sectionIsComplete(s),
+              }
+            )}
+            key={i}
+            expanded={expanded === i}
+            onChange={handleFocusChange(i)}
+            TransitionProps={{ unmountOnExit: true }}
           >
-            <Typography
-              className="ProjectPresentationsSectionsData__Summary__Text Long"
-              noWrap={true}
+            <AccordionSummary
+              className="ProjectPresentationsSectionsData__Summary"
+              aria-controls={`${i}-content1`}
+              id={`${i}-header`}
             >
-              {s.title}
-            </Typography>
-            <IconButton
-              onClick={onRemoveSection(i, sections.length)}
-              className="ProjectPresentationsSectionsData__Summary__Button"
-              color="primary"
-              size="small"
-            >
-              <DeleteIcon fontSize="small" />
-            </IconButton>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Box className="ProjectPresentationsSectionsData__Field">
-              <TextField
-                {...PRESENTATION_SECTION_FIELDS.title}
-                value={
-                  formData[
-                    `sections[${i}].${PRESENTATION_SECTION_FIELDS.title.key}`
-                  ]
-                }
-                onChange={onFormChange(
-                  `sections[${i}].${PRESENTATION_SECTION_FIELDS.title.key}`
-                )}
-                error={
-                  wasSubmitted &&
-                  PRESENTATION_SECTION_FIELDS.title.required &&
-                  !formData[
-                    `sections[${i}].${PRESENTATION_SECTION_FIELDS.title.key}`
-                  ]
-                }
-                fullWidth
-              />
-            </Box>
-            <Box className="ProjectPresentationsSectionsData__Field">
-              <TextField
-                {...PRESENTATION_SECTION_FIELDS.description}
-                value={
-                  formData[
-                    `sections[${i}].${PRESENTATION_SECTION_FIELDS.description.key}`
-                  ] || ''
-                }
-                onChange={onFormChange(
-                  `sections[${i}].${PRESENTATION_SECTION_FIELDS.description.key}`
-                )}
-                error={
-                  wasSubmitted &&
-                  PRESENTATION_SECTION_FIELDS.description.required &&
-                  !formData[
-                    `sections[${i}].${PRESENTATION_SECTION_FIELDS.description.key}`
-                  ]
-                }
-                fullWidth
-              />
-            </Box>
-            <Box className="ProjectPresentationsSectionsData__Field">
-              <PresentationSectionMediaData
-                formData={filterParentFormDataPath(formData, i)}
-                onFormChange={onNestedFormChange(i)}
-                wasSubmitted={wasSubmitted}
-              />
-            </Box>
-          </AccordionDetails>
-        </Accordion>
-      ))}
+              <Typography
+                className="ProjectPresentationsSectionsData__Summary__Text Long"
+                noWrap={true}
+              >
+                {s.title}
+              </Typography>
+              <IconButton
+                onClick={onRemoveSection(i, sections.length)}
+                className="ProjectPresentationsSectionsData__Summary__Button"
+                color="primary"
+                size="small"
+              >
+                <DeleteIcon fontSize="small" />
+              </IconButton>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Box className="ProjectPresentationsSectionsData__Field">
+                <TextField
+                  {...PRESENTATION_SECTION_FIELDS.title}
+                  value={
+                    formData[
+                      `${SECTIONS_PARENT_FORM_DATA_PATH}[${i}].${PRESENTATION_SECTION_FIELDS.title.key}`
+                    ] || ''
+                  }
+                  onChange={onDirectFormChange(
+                    i,
+                    PRESENTATION_SECTION_FIELDS.title.key
+                  )}
+                  error={titleHasError}
+                  fullWidth
+                />
+              </Box>
+              <Box className="ProjectPresentationsSectionsData__Field">
+                <TextField
+                  {...PRESENTATION_SECTION_FIELDS.description}
+                  value={
+                    formData[
+                      `${SECTIONS_PARENT_FORM_DATA_PATH}[${i}].${PRESENTATION_SECTION_FIELDS.description.key}`
+                    ] || ''
+                  }
+                  onChange={onDirectFormChange(
+                    i,
+                    PRESENTATION_SECTION_FIELDS.description.key
+                  )}
+                  error={descriptionHasError}
+                  fullWidth
+                />
+              </Box>
+              <Box className="ProjectPresentationsSectionsData__Field">
+                <PresentationSectionMediaData
+                  formData={filterParentFormDataPath(formData, i)}
+                  onFormChange={onNestedFormChange(i)}
+                  wasSubmitted={wasSubmitted}
+                />
+              </Box>
+            </AccordionDetails>
+          </Accordion>
+        );
+      })}
       <Box className="ProjectPresentationsSectionsData__ListActions">
         <Button
           onClick={onAddNewSection(sections.length)}
-          color="primary"
+          color={wasSubmitted && !sections.length ? 'error' : 'primary'}
           variant="contained"
           startIcon={<NewIcon />}
           sx={{ display: { xs: 'none', sm: 'flex' } }}
@@ -211,7 +273,7 @@ const ProjectPresentationsSectionsData = ({
         <IconButton
           onClick={onAddNewSection(sections.length)}
           aria-label="create"
-          color="primary"
+          color={wasSubmitted && !sections.length ? 'error' : 'primary'}
           sx={{ display: { xs: 'flex', sm: 'none' } }}
         >
           <NewIconContained />

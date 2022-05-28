@@ -1,21 +1,25 @@
 import { Box, Grid, TextField } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PROJECT_PRESENTATION_CORE_FORM_FIELDS as PRESENTATION_CORE_FIELDS } from '../ProjectPresentationForm.properties';
 
 const ProjectPresentationCoreData = ({
   formData,
   onFormChange,
   wasSubmitted,
+  setIsCompleted,
 }) => {
+  useEffect(() => {
+    setIsCompleted(!!formData[PRESENTATION_CORE_FIELDS.referenceName.key]);
+  }, []);
+
   const onFieldChange = (property) => (event) => {
     let {
       target: { value },
     } = event;
 
-    // we only have one field in this section
-    // value ? setIsCompleted(true) : setIsCompleted(false);
-    onFormChange(property)(event);
+    value ? setIsCompleted(true) : setIsCompleted(false);
+    onFormChange(property)(value);
   };
 
   return (
@@ -29,8 +33,8 @@ const ProjectPresentationCoreData = ({
         <Grid item xs={10}>
           <TextField
             {...PRESENTATION_CORE_FIELDS.referenceName}
-            value={formData['referenceName'] || ''}
-            onChange={onFieldChange('referenceName')}
+            value={formData[PRESENTATION_CORE_FIELDS.referenceName.key] || ''}
+            onChange={onFieldChange(PRESENTATION_CORE_FIELDS.referenceName.key)}
             error={
               wasSubmitted &&
               PRESENTATION_CORE_FIELDS.referenceName.required &&
@@ -46,8 +50,6 @@ const ProjectPresentationCoreData = ({
 
 ProjectPresentationCoreData.defaultProps = {
   formData: {},
-  withDescription: false,
-  isNotMobile: false,
   setIsCompleted: () => {},
   wasSubmitted: false,
 };
@@ -55,8 +57,6 @@ ProjectPresentationCoreData.defaultProps = {
 ProjectPresentationCoreData.propTypes = {
   formData: PropTypes.object,
   onFormChange: PropTypes.func.isRequired,
-  withDescription: PropTypes.bool,
-  isNotMobile: PropTypes.bool,
   setIsCompleted: PropTypes.func,
   wasSubmitted: PropTypes.bool,
 };
