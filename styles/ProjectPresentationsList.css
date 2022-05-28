@@ -1,0 +1,78 @@
+.ProjectPresentationsList__Container {
+  padding: 0 20px;
+}
+
+.ProjectPresentationsList__Content {
+  position: relative;
+}
+
+.ProjectPresentationsList__Toolbar {
+  overflow: hidden;
+  width: calc(100% + 40px);
+  padding: 15px 40px 10px;
+  margin-left: -20px;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.ProjectPresentationsList__Toolbar__Input {
+  background-color: #fff;
+}
+
+.ProjectPresentationsList__Container {
+  padding: 0;
+}
+
+.ProjectPresentationsList__Toolbar {
+  top: calc(2em + 10px);
+}
+
+.ProjectPresentationsList__Toolbar__Column {
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.ProjectPresentationsList__Toolbar__Column:first-child {
+  justify-content: left;
+}
+
+.ProjectPresentationsList__Toolbar__Column:last-child {
+  justify-content: center;
+}
+
+.ProjectPresentationsList__Toolbar__Column.Column__Text > * {
+  margin-top: auto;
+}
+
+.ProjectPresentationsList__Toolbar__Column.Column__Large {
+  flex-grow: 2;
+}
+
+.ProjectPresentationsList__LoadMore {
+  text-align: center;
+}
+
+@media (min-width: 600px) {
+  .ProjectPresentationsList__Toolbar__Column:last-child {
+    justify-content: right;
+  }
+
+  .ProjectPresentationsList__Toolbar {
+    padding: 20px 40px 10px;
+  }
+
+  .ProjectPresentationsList__Toolbar {
+    top: 2.7em;
+  }
+}
+
+@media (min-width: 900px) {
+  .ProjectPresentationsList__Toolbar {
+    top: 3.2em;
+  }
+}

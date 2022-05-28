@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { useLoading } from '../../../../../hooks/app';
-import { processYoutubeUrl } from '../../../../../utils/media/youtube';
 import Media from '../../../../../models/Media';
+import { processYoutubeUrl } from '../../../../../utils/media/youtube';
 import YoutubeInput from './YoutubeInput.component';
 
 const YoutubeInputContainer = ({ onChange, setIsValid, ...args }) => {
   const { doLoad } = useLoading();
   const [processedVideo, setProcessedVideo] = useState({
     isValid: false,
-    videoMedia: new Media(),
+    videoMedia: new Media({}),
   });
   const [fieldValue, setFieldValue] = useState('');
 

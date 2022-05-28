@@ -6,8 +6,18 @@ export class Logger {
     this.prefix = prefix;
   }
 
+  _flatMessageArray = (potentialArray) => {
+    return Array.isArray(potentialArray)
+      ? potentialArray.flatMap((a) => this._flatMessageArray(a))
+      : potentialArray instanceof Error
+      ? potentialArray.message
+      : typeof potentialArray === 'object'
+      ? JSON.stringify(potentialArray)
+      : potentialArray;
+  };
+
   _logMessage(type, color, ...args) {
-    args = args.map((a) => (typeof a === 'object' ? JSON.stringify(a) : a));
+    args = args.flatMap(this._flatMessageArray);
     let message = [...args];
 
     const formatterCallback =

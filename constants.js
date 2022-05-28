@@ -28,11 +28,24 @@ export const resolveRoute = (route, ...args) => {
 export const ROUTES = {
   projects: {
     new: '/projects/new',
-    view: '/projects/view/:projectId',
-    list: '/',
+    view: '/projects/:projectId',
+    edit: '/projects/:projectId/edit',
+    presentations: {
+      list: '/',
+      view: '/projects/:projectId/presentations/:projectPresentationId',
+      edit: '/projects/:projectId/presentations/:projectPresentationId/edit',
+      directEdit:
+        '/projects/:projectId/edit?editingPresentationId=:projectPresentationId',
+    },
   },
   profile: {
     view: '/profile/:profileId',
+  },
+};
+
+export const HEADERS = {
+  messages: {
+    error: 'A6-REDIRECT-ERROR-MESSAGE',
   },
 };
 

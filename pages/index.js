@@ -1,14 +1,14 @@
 import { getSession } from 'next-auth/react';
 import Head from 'next/head';
-import React from 'react';
 import PropTypes from 'prop-types';
+import React from 'react';
 import api from '../api';
-import ProjectsList from '../components/ProjectsList';
+import ProjectPresentationsList from '../components/ProjectPresentationsList';
 import config from '../config';
 import ProjectsLayout from '../layouts/ProjectsLayout/ProjectsLayout';
 import logger from '../utils/logger';
 
-const HomePage = ({ projectsList }) => {
+const HomePage = ({ projectPresentationsList }) => {
   return (
     <React.Fragment>
       <Head>
@@ -16,18 +16,20 @@ const HomePage = ({ projectsList }) => {
       </Head>
 
       <ProjectsLayout>
-        <ProjectsList data={{ projectsList }} />
+        <ProjectPresentationsList
+          projectPresentationsList={projectPresentationsList}
+        />
       </ProjectsLayout>
     </React.Fragment>
   );
 };
 
 HomePage.defaultProps = {
-  projectsList: [],
+  projectPresentationsList: [],
 };
 
 HomePage.propTypes = {
-  projectsList: PropTypes.array,
+  projectPresentationsList: PropTypes.array,
 };
 
 export const getServerSideProps = async (ctx) => {
@@ -40,7 +42,7 @@ export const getServerSideProps = async (ctx) => {
 
     props = {
       ...props,
-      projectsList: projectPresentationsList,
+      projectPresentationsList,
     };
   } catch (err) {
     logger.error('err', err);

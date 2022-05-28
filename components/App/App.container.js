@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import api from '../../api';
 import { useLoading } from '../../hooks/app';
 import App from './App.component';
 

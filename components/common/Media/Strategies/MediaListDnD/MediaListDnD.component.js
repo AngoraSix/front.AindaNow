@@ -1,4 +1,5 @@
 import { Box, ImageList, Typography } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -21,8 +22,9 @@ const MediaListDnD = ({ media, onModifyMediaOrder, onRemoveMediaItem }) => {
     targetKey: null,
     originKey: null,
   });
-  const isMedium = useMediaQuery('(min-width:900px)');
-  const isLarge = useMediaQuery('(min-width:1200px)');
+  const theme = useTheme();
+  const isMedium = useMediaQuery(theme.breakpoints.up('md'));
+  const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
 
   const handlePreviewDialogClickOpen = (mediaItem) => {
     setOpenedPreviewDialogMedia(mediaItem);
@@ -71,7 +73,7 @@ const MediaListDnD = ({ media, onModifyMediaOrder, onRemoveMediaItem }) => {
                 : null;
             return (
               <MediaListCard
-                key={mediaElement.key}
+                key={mediaElement.key || mediaElement.resourceId || index}
                 colSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
                 rowSize={MEDIA_OPTIONS_GRID_SIZE[mediaElement.mediaType] || 1}
                 media={mediaElement}

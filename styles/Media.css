@@ -163,7 +163,7 @@
 
 .MediaSingleDnD__DropZone__Preview__Container {
   flex-grow: 1;
-  width: 20%;
+  width: 120px;
   position: relative;
   overflow: hidden;
 }
@@ -304,6 +304,10 @@
 
 .MediaPreview__Youtube {
   max-width: 100%;
+}
+
+.Youtube__Container{
+  display: flex;
 }
 
 .Youtube__Iframe {

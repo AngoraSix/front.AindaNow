@@ -18,7 +18,7 @@ const YoutubePreview = ({
       modestbranding: autoplay ? 0 : 1,
       rel: 0,
       disablekb: autoplay ? 1 : 0,
-      showinfo: 0
+      showinfo: 0,
     },
   };
 

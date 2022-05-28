@@ -5,6 +5,7 @@ import { createStore } from 'redux';
 import api from '../api';
 import App from '../components/App';
 import config from '../config';
+import { HEADERS } from '../constants';
 import reducers from '../store/reducers';
 import '../styles/App.css';
 import '../styles/Editable.css';
@@ -17,7 +18,7 @@ import '../styles/Navbar.css';
 import '../styles/Profile.css';
 import '../styles/ProjectCard.css';
 import '../styles/ProjectForm.css';
-import '../styles/ProjectsList.css';
+import '../styles/ProjectPresentationsList.css';
 import '../styles/ProjectPresentationView.css';
 import { getEnv } from '../utils/env';
 
@@ -50,7 +51,7 @@ A6WebApp.propTypes = {
   env: PropTypes.object,
 };
 
-A6WebApp.getInitialProps = async (ctx) => {
+A6WebApp.getInitialProps = async ({ ctx }) => {
   const env = getEnv();
 
   config.applyEnvConfig(env);
