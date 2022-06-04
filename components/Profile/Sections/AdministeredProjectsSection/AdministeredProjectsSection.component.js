@@ -77,7 +77,7 @@ const AdministeredProjectsSection = ({
                   />
                 </ListItemButton>
               </ListItem>
-              <Divider />
+              <Divider variant="middle" />
             </React.Fragment>
           ))}
         </List>
