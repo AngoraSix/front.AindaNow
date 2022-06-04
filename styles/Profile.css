@@ -3,6 +3,12 @@
   margin-top: 30px;
 }
 
+.Profile__Section {
+  margin-bottom: 1.3em;
+}
+
+/* Presentation */
+
 .Presentation {
   display: flex;
   flex-direction: column;
@@ -97,5 +103,45 @@
 @media (min-width: 900px) {
   .Presentation__ProfileImageContainer {
     left: 23%;
+  }
+}
+
+/* Administered Projects */
+
+.AdministeredProjects {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.AdministeredProjects__Heading {
+  margin: 0.75em auto;
+}
+
+.AdministeredProjects__Listing {
+  max-height: 30vh;
+  overflow-y: scroll;
+  background-color: #e5e5e5;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.AdministeredProjects__Listing__Title .MuiListItemText-primary {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+@media (min-width: 600px) {
+  .AdministeredProjects__Listing {
+    max-width: 90%;
+  }
+}
+
+@media (min-width: 900px) {
+  .AdministeredProjects__Listing {
+    max-width: 70%;
   }
 }

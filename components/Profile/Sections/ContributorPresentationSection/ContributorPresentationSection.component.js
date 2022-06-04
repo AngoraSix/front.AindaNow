@@ -1,10 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Box, Paper, Typography, Avatar } from '@mui/material';
-import Editable from '../../common/Editable';
-import { PROFILE_ATTRIBUTES } from '../../../constants';
-import { INPUT_FIELD_TYPES } from '../../../constants';
+import { Avatar, Box, Paper, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { INPUT_FIELD_TYPES, PROFILE_ATTRIBUTES } from '../../../../constants';
+import Editable from '../../../common/Editable';
 
 const ContributorPresentationSection = ({
   profile,
@@ -26,7 +25,7 @@ const ContributorPresentationSection = ({
   const theme = useTheme();
 
   return (
-    <Paper className="Presentation">
+    <Paper className="Presentation Profile__Section">
       <Box className="Profile__Editable__Container Presentation__HeadImageContainer">
         <Editable
           type={INPUT_FIELD_TYPES.IMAGE}
