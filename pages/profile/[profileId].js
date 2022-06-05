@@ -38,8 +38,9 @@ ContributorProfile.propTypes = {
 
 export const getServerSideProps = async (ctx) => {
   let props = {};
-  const { profileId } = ctx.params,
-    session = await getSession(ctx);
+  const { profileId } = ctx.params;
+  const session = await getSession(ctx);
+  const userId = session?.user.id;
   const validatedToken =
     session?.error !== 'RefreshAccessTokenError' ? session : null;
   try {
@@ -47,13 +48,13 @@ export const getServerSideProps = async (ctx) => {
       profileId,
       validatedToken
     );
-    const administeredProjects = await api.projects.fetchProjects(
-      session?.user?.attributes
-    );
+    const administeredProjects = await api.projects.fetchProjects({
+      adminId: userId,
+    });
     props = {
       ...props,
       profile,
-      isCurrentContributor: session?.user.id === profileId,
+      isCurrentContributor: userId === profileId,
       administeredProjects,
     };
   } catch (err) {
