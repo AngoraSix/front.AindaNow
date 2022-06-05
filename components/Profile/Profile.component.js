@@ -1,27 +1,35 @@
-import React from 'react';
+import { Box } from '@mui/material';
 import PropTypes from 'prop-types';
-import ContributorPresentationSection from './Sections/ContributorPresentationSection.component';
+import React from 'react';
+import AdministeredProjectsSection from './Sections/AdministeredProjectsSection';
+import ContributorPresentationSection from './Sections/ContributorPresentationSection';
 
 const Profile = ({
   profile,
   profileAttributes,
   isCurrentContributor,
   onEditField,
+  administeredProjects,
 }) => {
   return (
-    <div className="Profile Profile__Container">
+    <Box className="Profile Profile__Container">
       <ContributorPresentationSection
         profile={profile}
         profileAttributes={profileAttributes}
         isCurrentContributor={isCurrentContributor}
         onEditField={onEditField}
       />
-    </div>
+      <AdministeredProjectsSection
+        administeredProjects={administeredProjects}
+        isCurrentContributor={isCurrentContributor}
+      />
+    </Box>
   );
 };
 
 Profile.defaultProps = {
   profileAttributes: {},
+  administeredProjects: [],
 };
 
 Profile.propTypes = {
@@ -29,6 +37,7 @@ Profile.propTypes = {
   profileAttributes: PropTypes.object,
   isCurrentContributor: PropTypes.bool.isRequired,
   onEditField: PropTypes.func.isRequired,
+  administeredProjects: PropTypes.array,
 };
 
 export default Profile;

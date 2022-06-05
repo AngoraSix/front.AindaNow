@@ -10,6 +10,15 @@ class ProjectsAPI {
     return projectPresentationdata;
   }
 
+  async fetchProjects(attributes = {}) {
+    const params = new URLSearchParams();
+    Object.entries(attributes).forEach(([key, value]) =>
+      params.append(key, value)
+    );
+    const { data: projectData } = await this.axios.get(`/core`, { params });
+    return projectData;
+  }
+
   async saveProject(project, token, projectId) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);

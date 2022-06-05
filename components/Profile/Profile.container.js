@@ -1,17 +1,21 @@
-import React, { useReducer } from 'react';
-import PropTypes from 'prop-types';
 import { signIn } from 'next-auth/react';
-import Profile from './Profile.component';
+import PropTypes from 'prop-types';
+import React, { useReducer } from 'react';
 import api from '../../api';
+import { PROFILE_ATTRIBUTES } from '../../constants';
 import { useLoading, useNotifications } from '../../hooks/app';
+import logger from '../../utils/logger';
+import Profile from './Profile.component';
 import ProfileReducer, {
   INITIAL_STATE,
   updateAttributesAction,
 } from './Profile.reducer';
-import { PROFILE_ATTRIBUTES } from '../../constants';
-import logger from '../../utils/logger';
 
-const ProfileContainer = ({ profile, isCurrentContributor }) => {
+const ProfileContainer = ({
+  profile,
+  isCurrentContributor,
+  administeredProjects,
+}) => {
   const { doLoad } = useLoading();
   const { onSuccess, onError } = useNotifications();
   const [profileFields, dispatch] = useReducer(ProfileReducer, {
@@ -59,13 +63,19 @@ const ProfileContainer = ({ profile, isCurrentContributor }) => {
       profileAttributes={profileAttributes}
       isCurrentContributor={isCurrentContributor}
       onEditField={onEditAttributeField}
+      administeredProjects={administeredProjects}
     />
   );
+};
+
+ProfileContainer.defaultProps = {
+  administeredProjects: [],
 };
 
 ProfileContainer.propTypes = {
   profile: PropTypes.object.isRequired,
   isCurrentContributor: PropTypes.bool.isRequired,
+  administeredProjects: PropTypes.array,
 };
 
 export default ProfileContainer;
