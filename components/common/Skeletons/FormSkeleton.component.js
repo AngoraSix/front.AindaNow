@@ -1,6 +1,4 @@
-import React from 'react';
 import { Grid, Skeleton } from '@mui/material';
-
 const FormSkeleton = () => {
   return (
     <Grid container spacing={2}>

@@ -10,7 +10,7 @@ export class Logger {
     return Array.isArray(potentialArray)
       ? potentialArray.flatMap((a) => this._flatMessageArray(a))
       : potentialArray instanceof Error
-      ? potentialArray.message
+      ? `${potentialArray.message} - ${potentialArray.response?.data?.message}`
       : typeof potentialArray === 'object'
       ? JSON.stringify(potentialArray)
       : potentialArray;

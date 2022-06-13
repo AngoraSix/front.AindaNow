@@ -63,6 +63,14 @@ class FrontAPI {
         );
     return data;
   }
+
+  async addMemberToClub(projectId, clubType) {
+    const { data } = await this.axios.post(`api/clubs/well-known/add-member`, {
+      projectId,
+      clubType,
+    });
+    return data;
+  }
 }
 
 export default FrontAPI;

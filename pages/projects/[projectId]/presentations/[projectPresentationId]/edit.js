@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import api from '../../../../../api';
 import FormSkeleton from '../../../../../components/common/Skeletons/FormSkeleton.component';
 import ProjectPresentationForm from '../../../../../components/Project/ProjectPresentation/Form';
@@ -73,8 +73,7 @@ EditProjectPresentationPage.propTypes = {
 
 export const getServerSideProps = async (ctx) => {
   let props = {};
-  const { projectPresentationId } = ctx.params;
-  const { projectId } = ctx.params;
+  const { projectId, projectPresentationId } = ctx.params;
   const session = await getSession(ctx);
   const validatedToken =
     session?.error !== 'RefreshAccessTokenError' ? session : null;
