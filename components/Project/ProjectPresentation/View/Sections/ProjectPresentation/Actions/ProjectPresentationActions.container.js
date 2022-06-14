@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import api from '../../../../../../../api';
+import config from '../../../../../../../config';
 import { useLoading, useNotifications } from '../../../../../../../hooks/app';
 import ProjectPresentationActions from './ProjectPresentationActions.component';
 
@@ -7,7 +8,7 @@ const ProjectPresentationActionsContainer = ({
   projectPresentation,
   isAdmin,
 }) => {
-  const { isLoading, doLoad } = useLoading();
+  const { doLoad } = useLoading();
   const { onError, onSuccess } = useNotifications();
 
   const onShowInterest = async () => {
@@ -15,7 +16,7 @@ const ProjectPresentationActionsContainer = ({
     try {
       let { data: showInterestResponse } = await api.front.addMemberToClub(
         projectPresentation.projectId,
-        'contributor-candidates'
+        config.api.servicesAPIParams.clubsWellKnownContributorCandidatesType
       );
       onSuccess('Registered interest successfully');
     } catch (ex) {

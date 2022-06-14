@@ -14,6 +14,11 @@ class Api {
       contributors:
         env.API_CONTRIBUTORS_SERVER_APIGATEWAY_PATH || '/contributors',
     };
+    this.servicesAPIParams = {
+      clubsWellKnownContributorCandidatesType:
+        env.APIPARAMS_CLUBS_WELLKNOWN_CONTRIBUTORCANDIDATES ||
+        'contributor-candidates',
+    };
   }
 }
 
