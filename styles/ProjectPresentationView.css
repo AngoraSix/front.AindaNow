@@ -183,9 +183,25 @@
   transform: translateY(3px);
 }
 
+.ProjectPresentation__Heading {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 2vw;
+}
+
+.ProjectPresentation__Heading__Name {
+  flex-grow: 1;
+}
+
 .SectionPresentation__Project__Name {
   text-align: center;
   margin: 0 10px;
+}
+
+.ProjectPresentation__Heading__Actions{
+  margin-top: 20px;
 }
 
 .ProjectPresentation__SectionsPresentation {
@@ -271,6 +287,10 @@
   .SectionsPresentation__PresentationArea {
     flex-grow: 1;
     min-height: 100vh;
+  }
+
+  .ProjectPresentation__Heading {
+    flex-direction: row;
   }
 
   .SectionPresentation__Container {

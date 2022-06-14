@@ -5,9 +5,9 @@ import { createStore } from 'redux';
 import api from '../api';
 import App from '../components/App';
 import config from '../config';
-import { HEADERS } from '../constants';
 import reducers from '../store/reducers';
 import '../styles/App.css';
+import '../styles/Commons.css';
 import '../styles/Editable.css';
 import '../styles/globals.css';
 import '../styles/InputDialogs.css';
@@ -27,6 +27,7 @@ const A6WebApp = ({ Component, pageProps, preloadedState, env }) => {
 
   config.applyEnvConfig(env);
   api.applyEnvConfig(env);
+  
   return (
     <ReduxProvider store={store}>
       <NextAuthProvider session={pageProps.session} refetchInterval={1 * 30}>

@@ -1,10 +1,12 @@
 import { Box, Paper, Typography } from '@mui/material';
-import React, { useEffect, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useEffect, useRef, useState } from 'react';
+import ProjectPresentationActions from './Actions';
 import SectionPresentation from './SectionPresentation.component';
 import SectionPresentationHolder from './SectionPresentationHolder.component';
 import SectionTabs from './SectionTabs.component';
 
-const ProjectPresentation = ({ projectPresentation }) => {
+const ProjectPresentation = ({ projectPresentation, isAdmin }) => {
   const [activeSectionindex, setActiveSectionIndex] = useState(0);
   const presentationRef = useRef();
 
@@ -21,14 +23,20 @@ const ProjectPresentation = ({ projectPresentation }) => {
         className="ProjectPresentation__AreaExtension"
       />
       <Paper className="ProjectPresentation__MainSection">
-        <Typography
-          className="SectionPresentation__Project__Name"
-          variant="h3"
-          component="h1"
-          color="primary.main"
-        >
-          {projectPresentation.project.name}
-        </Typography>
+        <Box className="ProjectPresentation__Heading">
+          <Typography
+            className="ProjectPresentation__Heading__Name SectionPresentation__Project__Name"
+            variant="h3"
+            component="h1"
+            color="primary.main"
+          >
+            {projectPresentation.project.name}
+          </Typography>
+          <ProjectPresentationActions
+            projectPresentation={projectPresentation}
+            isAdmin={isAdmin}
+          />
+        </Box>
         <Box className="ProjectPresentation__SectionsPresentation">
           <Box className="SectionsPresentation__PresentationArea">
             {projectPresentation.sections?.map((s, i) => (
@@ -56,8 +64,13 @@ const ProjectPresentation = ({ projectPresentation }) => {
   );
 };
 
-ProjectPresentation.defaultProps = {};
+ProjectPresentation.defaultProps = {
+  isAdmin: false,
+};
 
-ProjectPresentation.propTypes = {};
+ProjectPresentation.propTypes = {
+  isAdmin: PropTypes.bool,
+  projectPresentation: PropTypes.object.isRequired,
+};
 
 export default ProjectPresentation;

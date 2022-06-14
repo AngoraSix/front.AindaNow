@@ -5,6 +5,7 @@ import FrontAPI from './front';
 import MediaAPI from './media';
 import ProjectsAPI from './projects';
 import ThirdPartiesAPI from './thirdparties';
+import ClubsAPI from './club';
 
 class API {
   constructor() {
@@ -17,6 +18,10 @@ class API {
 
   get projects() {
     return this.projectsAPI;
+  }
+
+  get clubs() {
+    return this.clubsAPI;
   }
 
   get media() {
@@ -42,6 +47,7 @@ class API {
       })
     );
     this.projectsAPI = new ProjectsAPI(_getServiceAPI('projects', this.axios));
+    this.clubsAPI = new ClubsAPI(_getServiceAPI('clubs', this.axios));
     this.mediaAPI = new MediaAPI(_getServiceAPI('media', this.axios));
     this.contributorsAPI = new ContributorsAPI(
       _getServiceAPI('contributors', this.axios)
