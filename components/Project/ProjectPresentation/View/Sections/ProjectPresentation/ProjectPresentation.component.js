@@ -6,7 +6,7 @@ import SectionPresentation from './SectionPresentation.component';
 import SectionPresentationHolder from './SectionPresentationHolder.component';
 import SectionTabs from './SectionTabs.component';
 
-const ProjectPresentation = ({ projectPresentation, isAdmin }) => {
+const ProjectPresentation = ({ projectPresentation, projectPresentationActions, isAdmin }) => {
   const [activeSectionindex, setActiveSectionIndex] = useState(0);
   const presentationRef = useRef();
 
@@ -34,6 +34,7 @@ const ProjectPresentation = ({ projectPresentation, isAdmin }) => {
           </Typography>
           <ProjectPresentationActions
             projectPresentation={projectPresentation}
+            projectPresentationActions={projectPresentationActions}
             isAdmin={isAdmin}
           />
         </Box>
@@ -71,6 +72,7 @@ ProjectPresentation.defaultProps = {
 ProjectPresentation.propTypes = {
   isAdmin: PropTypes.bool,
   projectPresentation: PropTypes.object.isRequired,
+  projectPresentationActions: PropTypes.object
 };
 
 export default ProjectPresentation;

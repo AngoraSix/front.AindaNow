@@ -68,3 +68,8 @@ export const MEDIA_INPUT_STRATEGIES = {
   LIST: 'media.list',
   SINGLE: 'media.single',
 };
+
+export const CLUB_MEMBERSHIP_OPERATIONS = {
+  JOIN: 'join',
+  WITHDRAW: 'withdraw',
+};

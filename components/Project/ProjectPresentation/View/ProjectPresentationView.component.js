@@ -3,7 +3,11 @@ import PropTypes from 'prop-types';
 import MediaHeader from './Sections/MediaHeader';
 import ProjectPresentation from './Sections/ProjectPresentation/ProjectPresentation.component';
 
-const ProjectPresentationView = ({ projectPresentation, isAdmin }) => {
+const ProjectPresentationView = ({
+  projectPresentation,
+  projectPresentationActions,
+  isAdmin,
+}) => {
   return (
     <Box className="ProjectPresentationView ProjectPresentationView__Container">
       <MediaHeader
@@ -12,15 +16,20 @@ const ProjectPresentationView = ({ projectPresentation, isAdmin }) => {
       <ProjectPresentation
         projectPresentation={projectPresentation}
         isAdmin={isAdmin}
+        projectPresentationActions={projectPresentationActions}
       />
     </Box>
   );
 };
 
-ProjectPresentationView.defaultProps = { isAdmin: false };
+ProjectPresentationView.defaultProps = {
+  isAdmin: false,
+  projectPresentationActions: {},
+};
 
 ProjectPresentationView.propTypes = {
   projectPresentation: PropTypes.object.isRequired,
+  projectPresentationActions: PropTypes.object,
   isAdmin: PropTypes.bool,
 };
 
