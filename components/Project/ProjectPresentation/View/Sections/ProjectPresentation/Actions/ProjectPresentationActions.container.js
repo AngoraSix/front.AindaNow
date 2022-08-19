@@ -8,8 +8,8 @@ import { hateoasFormToActions } from '../../../../../../../utils/rest/hateoas/ha
 import ProjectPresentationActions from './ProjectPresentationActions.component';
 import ProjectPresentationActionsReducer, {
   INITIAL_STATE,
-  UpdateClubActions,
-  updateFieldAction
+  updateClubActions,
+  updateFieldAction,
 } from './ProjectPresentationActions.reducer';
 
 const ProjectPresentationActionsContainer = ({
@@ -35,7 +35,7 @@ const ProjectPresentationActionsContainer = ({
         config.api.servicesAPIParams.clubsWellKnownContributorCandidatesType
       );
       const clubActions = hateoasFormToActions(clubResponse);
-      dispatch(UpdateClubActions(clubActions));
+      dispatch(updateClubActions(clubActions));
     } catch (ex) {
       onError(
         `Error retrieving supported actions - ${
@@ -68,11 +68,13 @@ const ProjectPresentationActionsContainer = ({
   const modifyInterest = async (operation) => {
     doLoad(true);
     try {
-      let { data: showInterestResponse } = await api.front.modifyClubMembership(
+      let clubResponse = await api.front.modifyClubMembership(
         projectPresentation.projectId,
         config.api.servicesAPIParams.clubsWellKnownContributorCandidatesType,
         operation
       );
+      const clubActions = hateoasFormToActions(clubResponse);
+      dispatch(updateClubActions(clubActions));
       onSuccess('Updated interest successfully');
     } catch (ex) {
       onError(

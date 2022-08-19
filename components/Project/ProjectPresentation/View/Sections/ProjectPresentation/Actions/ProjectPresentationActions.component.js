@@ -19,36 +19,38 @@ const ProjectPresentationActions = ({
   onActionDataChange,
   actionFormData,
   actions,
-  isAdmin,
 }) => {
   const router = useRouter();
   const { session } = useActiveSession();
   const activeSession = session && !session.error;
   const [selectedAction, setSelectedAction] = useState(null);
 
-  const onDialogSubmit =
-    (actionFn) =>
-    (...args) => {
-      setSelectedAction(null);
-      actionFn(...args);
-    };
+  const onDialogClose = () => {
+    setSelectedAction(null);
+  };
 
   const onActionSelected = (actionKey) => () => {
     if (actions[actionKey]?.template?.fields?.length) {
       setSelectedAction(actionKey);
     } else {
-      switch (actionKey) {
-        case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.SHOW_INTEREST:
-          onShowInterest();
-          break;
-        case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST:
-          onWithdrawInterest();
-        case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT:
-          router.push(
-            resolveRoute(ROUTES.projects.edit, projectPresentation.projectId)
-          );
-          break;
-      }
+      submitAction(actionKey)();
+    }
+  };
+
+  const submitAction = (actionKey) => () => {
+    setSelectedAction(null);
+    switch (actionKey) {
+      case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.SHOW_INTEREST:
+        onShowInterest();
+        break;
+      case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST:
+        onWithdrawInterest();
+        break;
+      case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT:
+        router.push(
+          resolveRoute(ROUTES.projects.edit, projectPresentation.projectId)
+        );
+        break;
     }
   };
 
@@ -144,9 +146,10 @@ const ProjectPresentationActions = ({
       <ProjectPresentationActionInputDialog
         open={!!selectedAction}
         actionInputs={actions[selectedAction]?.template?.fields}
-        handleDialogClose={onDialogSubmit}
+        handleDialogClose={onDialogClose}
         actionData={actionFormData}
         onActionInputChange={onActionDataChange}
+        onSubmit={selectedAction && submitAction(selectedAction)}
       />
     </React.Fragment>
   ) : (

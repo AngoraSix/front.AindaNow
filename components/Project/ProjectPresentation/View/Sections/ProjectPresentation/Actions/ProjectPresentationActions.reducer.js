@@ -7,12 +7,12 @@ export const updateFieldAction = (payload) => ({
   payload,
 });
 
-export const UpdateClubActions = (payload) => ({
+export const updateClubActions = (payload) => ({
   type: UPDATE_CLUB_ACTIONS,
   payload,
 });
 
-export const UpdateProjectPresentationActions = (payload) => ({
+export const updateProjectPresentationActions = (payload) => ({
   type: UPDATE_PROJECTPRESENTATION_ACTIONS,
   payload,
 });
