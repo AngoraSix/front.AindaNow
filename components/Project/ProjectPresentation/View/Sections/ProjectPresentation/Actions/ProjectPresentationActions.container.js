@@ -58,20 +58,21 @@ const ProjectPresentationActionsContainer = ({
   };
 
   const onShowInterest = async () => {
-    modifyInterest(CLUB_MEMBERSHIP_OPERATIONS.JOIN);
+    modifyInterest(CLUB_MEMBERSHIP_OPERATIONS.JOIN, projectPresentationActionData.actionData);
   };
 
   const onWithdrawInterest = async () => {
     modifyInterest(CLUB_MEMBERSHIP_OPERATIONS.WITHDRAW);
   };
 
-  const modifyInterest = async (operation) => {
+  const modifyInterest = async (operation, data = {} ) => {
     doLoad(true);
     try {
       let clubResponse = await api.front.modifyClubMembership(
         projectPresentation.projectId,
         config.api.servicesAPIParams.clubsWellKnownContributorCandidatesType,
-        operation
+        operation,
+        data
       );
       const clubActions = hateoasFormToActions(clubResponse);
       dispatch(updateClubActions(clubActions));

@@ -12,6 +12,7 @@ export default async (req, res) => {
         req.body.projectId,
         req.body.clubType,
         req.body.operation,
+        req.body.data,
         validatedToken
       );
       res.status(200).json(data);

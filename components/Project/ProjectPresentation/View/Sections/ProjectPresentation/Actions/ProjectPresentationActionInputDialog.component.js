@@ -2,6 +2,7 @@ import {
   Dialog,
   DialogContent,
   DialogActions,
+  DialogTitle,
   Button,
   Zoom,
 } from '@mui/material';
@@ -21,6 +22,7 @@ const ProjectPresentationActionInputDialog = ({
   handleDialogClose,
   actionData,
   onActionInputChange,
+  title,
   onSubmit,
 }) => {
   return (
@@ -31,6 +33,7 @@ const ProjectPresentationActionInputDialog = ({
       maxWidth="xl"
       TransitionComponent={Transition}
     >
+      <DialogTitle>{title}</DialogTitle>
       <DialogContent>
         {open &&
           actionInputs.map((action) => (
@@ -70,6 +73,7 @@ ProjectPresentationActionInputDialog.defaultProps = {
   open: false,
   actionInputs: [],
   actionData: {},
+  title: 'Required Data',
 };
 
 ProjectPresentationActionInputDialog.propTypes = {
@@ -79,6 +83,7 @@ ProjectPresentationActionInputDialog.propTypes = {
   actionInputs: PropTypes.array,
   actionData: PropTypes.object,
   onActionInputChange: PropTypes.func.isRequired,
+  title: PropTypes.string,
 };
 
 export default ProjectPresentationActionInputDialog;

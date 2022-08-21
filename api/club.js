@@ -13,14 +13,15 @@ class ClubsAPI {
     this.axios = axiosInstance;
   }
 
-  async handleWellKnownClubMembership(projectId, clubType, operation, token) {
+  async handleWellKnownClubMembership(projectId, clubType, operation, data, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
 
-    const { data } = await this.axios.patch(
+    const { data: patchResult } = await this.axios.patch(
       `/clubs/well-known/${projectId}/${clubType}`,
       createPatchBody(FRONT_TO_PATCH_OPERATIONS_MAPPING[operation], 'members', {
         contributorId: token.user.id,
+        data
       }),
       {
         headers: {
@@ -29,7 +30,7 @@ class ClubsAPI {
         },
       }
     );
-    return data;
+    return patchResult;
   }
 
   async getWellKnownClub(projectId, clubType, token) {
