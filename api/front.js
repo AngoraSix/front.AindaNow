@@ -64,11 +64,20 @@ class FrontAPI {
     return data;
   }
 
-  async addMemberToClub(projectId, clubType) {
-    const { data } = await this.axios.post(`api/clubs/well-known/add-member`, {
+  async modifyClubMembership(projectId, clubType, operation, data) {
+    const { data: modifyClubMembershipResult } = await this.axios.post(`api/clubs/well-known/members`, {
       projectId,
       clubType,
+      operation,
+      data,
     });
+    return modifyClubMembershipResult;
+  }
+
+  async getClub(projectId, clubType) {
+    const { data } = await this.axios.get(
+      `api/clubs/well-known/${projectId}/${clubType}`
+    );
     return data;
   }
 }

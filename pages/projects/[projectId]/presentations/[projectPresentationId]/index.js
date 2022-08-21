@@ -4,12 +4,14 @@ import api from '../../../../../api';
 import ProjectPresentationView from '../../../../../components/Project/ProjectPresentation/View';
 import ProjectPresentationViewLayout from '../../../../../layouts/ProjectPresentationViewLayout/ProjectPresentationViewLayout';
 import logger from '../../../../../utils/logger';
+import { hateoasFormToActions } from '../../../../../utils/rest/hateoas/hateoasResponseToActions';
 
-const ProjectPresentationViewPage = ({ projectPresentation, isAdmin }) => {
+const ProjectPresentationViewPage = ({ projectPresentation, projectPresentationActions, isAdmin }) => {
   return (
     <ProjectPresentationViewLayout>
       <ProjectPresentationView
         projectPresentation={projectPresentation}
+        projectPresentationActions={projectPresentationActions}
         isAdmin={isAdmin}
       />
     </ProjectPresentationViewLayout>
@@ -18,10 +20,12 @@ const ProjectPresentationViewPage = ({ projectPresentation, isAdmin }) => {
 
 ProjectPresentationViewPage.defaultProps = {
   isAdmin: false,
+  projectPresentationActions: {}
 };
 
 ProjectPresentationViewPage.propTypes = {
   projectPresentation: PropTypes.object.isRequired,
+  projectPresentationActions: PropTypes.object,
   isAdmin: PropTypes.bool,
 };
 
@@ -37,6 +41,7 @@ export const getServerSideProps = async (ctx) => {
       projectPresentationId,
       validatedToken
     );
+    const projectPresentationActions = hateoasFormToActions(projectPresentation);
     isAdmin =
       session?.user.id != null &&
       session?.user.id === projectPresentation.project.adminId &&
@@ -44,6 +49,7 @@ export const getServerSideProps = async (ctx) => {
     props = {
       ...props,
       projectPresentation,
+      projectPresentationActions,
       isAdmin,
     };
   } catch (err) {

@@ -8,7 +8,8 @@
     "other:debug": "NODE_OPTIONS='--inspect' next dev -p 8088",
     "build": "next build",
     "start": "next dev -p 9090",
-    "start:prod": "next start -p 80"
+    "start:prod": "next start -p 80",
+    "start:ger": "WEBPACK_CONFIG_FILE=all NODE_OPTIONS='--preserve-symlinks-main --preserve-symlinks'  && next dev -p 9090"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -35,6 +36,7 @@
     "react-dnd-html5-backend": "^14.1.0",
     "react-dnd-touch-backend": "^15.1.2",
     "react-dom": "17.0.2",
+    "react-mui-fieldmaker": "^1.1.21",
     "react-redux": "^7.2.8",
     "react-youtube": "^7.14.0",
     "redux": "^4.1.2",
