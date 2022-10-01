@@ -46,7 +46,9 @@ class ProjectsAPI {
             pr.projectId = savedProject.id;
             return pr;
           })
-          .map((pr) => this.saveProjectPresentation(pr, token))
+          .map((pr) =>
+            this.saveProjectPresentation(pr, null, savedProject.id, token)
+          )
       );
     }
     return { ...savedProject, presentations: createdPresentations };
@@ -54,14 +56,15 @@ class ProjectsAPI {
 
   async saveProjectPresentation(
     projectPresentation,
-    token,
-    projectPresentationId
+    projectPresentationId,
+    projectId,
+    token
   ) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
 
     const { data } = await this.axios[projectPresentationId ? 'put' : 'post'](
-      `/presentations/${projectPresentationId || ''}`,
+      `/${projectId}/presentations/${projectPresentationId || ''}`,
       projectPresentation,
       {
         headers: {
@@ -73,11 +76,11 @@ class ProjectsAPI {
     return data;
   }
 
-  async getProjectPresentation(projectPresentationId, token) {
+  async getProjectPresentation(projectPresentationId, projectId, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, false);
     const { data } = await this.axios.get(
-      `/presentations/${projectPresentationId}`,
+      `/${projectId}/presentations/${projectPresentationId}`,
       {
         headers: {
           ...headers,

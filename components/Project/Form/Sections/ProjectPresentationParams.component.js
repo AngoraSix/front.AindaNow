@@ -5,7 +5,7 @@ import TagsInput from '../../../common/TagsInput';
 import { PROJECT_PRESENTATION_PARAMS_FIELDS as PRESENTATION_PARAMS_FIELDS } from '../ProjectForm.properties';
 
 const MOBILE_DESCRIPTION =
-  'Make the project easily discoverable for thos in tune with your idea...';
+  'Make the project easily discoverable for those in tune with your idea...';
 
 const FULL_DESCRIPTION =
   'These will help make the project easily discoverable by those in tune with your idea...';

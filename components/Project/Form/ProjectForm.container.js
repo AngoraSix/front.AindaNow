@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
 import api from '../../../api';
+import { resolveRoute, ROUTES } from '../../../constants';
 import { useLoading, useNotifications } from '../../../hooks/app';
 import Project from '../../../models/Project';
 import { toType } from '../../../utils/helpers';
@@ -45,6 +46,15 @@ const ProjectFormContainer = ({ project, ...args }) => {
       );
 
       onSuccess('Project Saved Successfully');
+
+      if (!project?.id) {
+        const viewURL = resolveRoute(
+          ROUTES.projects.presentations.view,
+          projectResponse.id,
+          projectResponse.presentations[0].id
+        );
+        router.push(viewURL);
+      }
     } catch (err) {
       logger.error(err);
       onError('Error Saving Project');

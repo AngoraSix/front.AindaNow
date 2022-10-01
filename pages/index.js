@@ -39,7 +39,6 @@ export const getServerSideProps = async (ctx) => {
   try {
     const projectPresentationsList =
       await api.projects.fetchProjectPresentations(session?.user?.attributes);
-
     props = {
       ...props,
       projectPresentationsList,

@@ -36,12 +36,14 @@ const ProjectPresentationActionsContainer = ({
       );
       const clubActions = hateoasFormToActions(clubResponse);
       dispatch(updateClubActions(clubActions));
-    } catch (ex) {
-      onError(
-        `Error retrieving supported actions - ${
-          ex.response?.data?.message || ex.message
-        }`
-      );
+    } catch (err) {
+      if (err.response.status !== 404) {
+        onError(
+          `Error retrieving supported actions - ${
+            err.response?.data?.message || err.message
+          }`
+        );
+      }
     } finally {
       doLoad(false);
     }
@@ -58,14 +60,17 @@ const ProjectPresentationActionsContainer = ({
   };
 
   const onShowInterest = async () => {
-    modifyInterest(CLUB_MEMBERSHIP_OPERATIONS.JOIN, projectPresentationActionData.actionData);
+    modifyInterest(
+      CLUB_MEMBERSHIP_OPERATIONS.JOIN,
+      projectPresentationActionData.actionData
+    );
   };
 
   const onWithdrawInterest = async () => {
     modifyInterest(CLUB_MEMBERSHIP_OPERATIONS.WITHDRAW);
   };
 
-  const modifyInterest = async (operation, data = {} ) => {
+  const modifyInterest = async (operation, data = {}) => {
     doLoad(true);
     try {
       let clubResponse = await api.front.modifyClubMembership(
