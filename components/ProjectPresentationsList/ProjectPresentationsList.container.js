@@ -12,9 +12,9 @@ import ProjectPresentationsListReducer, {
 const ProjectPresentationsListContainer = ({
   projectPresentationsList: projectPresentationsListObj,
 }) => {
-  let projectPresentationsList = projectPresentationsListObj.map(
-    (pr) => new ProjectPresentation(pr)
-  );
+  let projectPresentationsList = projectPresentationsListObj
+    .filter((pr) => pr.project)
+    .map((pr) => new ProjectPresentation(pr));
   const { data: session, status } = useSession();
   const loading = status === 'loading';
 

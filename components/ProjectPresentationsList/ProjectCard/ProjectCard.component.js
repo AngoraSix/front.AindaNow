@@ -8,8 +8,8 @@ import YoutubePreview from '../../common/Media/Previews/YoutubePreview';
 
 const _allMedia = (projectPresentation) => {
   return [
-    ...projectPresentation.sections?.map((m) => m.mainMedia),
-    ...projectPresentation.sections?.flatMap((m) => m.media || []),
+    ...(projectPresentation.sections?.map((m) => m.mainMedia) || []),
+    ...(projectPresentation.sections?.flatMap((m) => m.media || []) || []),
   ];
 };
 

@@ -81,6 +81,7 @@ export const getServerSideProps = async (ctx) => {
   try {
     const projectPresentation = await api.projects.getProjectPresentation(
       projectPresentationId,
+      projectId,
       validatedToken
     );
     isAdmin =

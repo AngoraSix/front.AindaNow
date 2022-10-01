@@ -18,7 +18,6 @@ const CircleLoadingButton = ({
         backgroundColor: 'primary.main',
         color: 'primary.contrastText',
       }}
-    //   startIcon={children}
       onClick={onClick}
     >{children}</LoadingButton>
   );

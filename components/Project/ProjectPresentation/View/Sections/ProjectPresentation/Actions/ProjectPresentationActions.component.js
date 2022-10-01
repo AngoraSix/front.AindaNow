@@ -2,7 +2,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
 import { LoadingButton } from '@mui/lab';
-import { Box } from '@mui/material';
+import { Box, Tooltip } from '@mui/material';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -48,7 +48,11 @@ const ProjectPresentationActions = ({
         break;
       case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT:
         router.push(
-          resolveRoute(ROUTES.projects.edit, projectPresentation.projectId)
+          resolveRoute(
+            ROUTES.projects.presentations.edit,
+            projectPresentation.projectId,
+            projectPresentation.id
+          )
         );
         break;
     }
@@ -56,18 +60,19 @@ const ProjectPresentationActions = ({
 
   const showInterestButtons = (
     <React.Fragment key="showInterestButtons">
-      <LoadingButton
-        className="ProjectPresentation__Heading__Actions__ShowInterest"
-        variant="contained"
-        loading={!activeSession}
-        startIcon={<GroupAddIcon />}
-        sx={{ display: { xs: 'none', sm: 'flex' } }}
-        onClick={onActionSelected(
-          PROJECT_PRESENTATION_SUPPORTED_ACTIONS.SHOW_INTEREST
-        )}
-      >
-        I'm Interested!
-      </LoadingButton>
+      <Tooltip title="I'm Interested!">
+        <LoadingButton
+          className="ProjectPresentation__Heading__Actions__ShowInterest"
+          variant="contained"
+          loading={!activeSession}
+          sx={{ display: { xs: 'none', sm: 'flex' } }}
+          onClick={onActionSelected(
+            PROJECT_PRESENTATION_SUPPORTED_ACTIONS.SHOW_INTEREST
+          )}
+        >
+          <GroupAddIcon />
+        </LoadingButton>
+      </Tooltip>
       <CircleLoadingButton
         className="ProjectPresentation__Heading__Actions__ShowInterest"
         loading={!activeSession}
@@ -83,18 +88,19 @@ const ProjectPresentationActions = ({
 
   const withdrawInterestButtons = (
     <React.Fragment key="withdrawInterestButtons">
-      <LoadingButton
-        className="ProjectPresentation__Heading__Actions__WithdrawInterest"
-        variant="contained"
-        loading={!activeSession}
-        startIcon={<GroupRemoveIcon />}
-        sx={{ display: { xs: 'none', sm: 'flex' } }}
-        onClick={onActionSelected(
-          PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST
-        )}
-      >
-        Not Interested...
-      </LoadingButton>
+      <Tooltip title="Withdraw interest">
+        <LoadingButton
+          className="ProjectPresentation__Heading__Actions__WithdrawInterest"
+          variant="contained"
+          loading={!activeSession}
+          sx={{ display: { xs: 'none', sm: 'flex' } }}
+          onClick={onActionSelected(
+            PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST
+          )}
+        >
+          <GroupRemoveIcon />
+        </LoadingButton>
+      </Tooltip>
       <CircleLoadingButton
         className="ProjectPresentation__Heading__Actions__WithdrawInterest"
         loading={!activeSession}
@@ -110,16 +116,19 @@ const ProjectPresentationActions = ({
 
   const editButtons = (
     <React.Fragment key="editButtons">
-      <LoadingButton
-        className="ProjectPresentation__Heading__Actions__Edit"
-        variant="contained"
-        loading={!activeSession}
-        startIcon={<EditIcon />}
-        sx={{ display: { xs: 'none', sm: 'flex' } }}
-        onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT)}
-      >
-        Edit
-      </LoadingButton>
+      <Tooltip title="Edit">
+        <LoadingButton
+          className="ProjectPresentation__Heading__Actions__Edit"
+          variant="contained"
+          loading={!activeSession}
+          sx={{ display: { xs: 'none', sm: 'flex' } }}
+          onClick={onActionSelected(
+            PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT
+          )}
+        >
+          <EditIcon />
+        </LoadingButton>
+      </Tooltip>
       <CircleLoadingButton
         className="ProjectPresentation__Heading__Actions__Edit"
         loading={!activeSession}

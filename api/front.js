@@ -50,15 +50,16 @@ class FrontAPI {
 
   async saveProjectPresentation(
     projectPresentationBody,
-    projectPresentationId
+    projectPresentationId,
+    projectId
   ) {
     const { data } = projectPresentationId
       ? await this.axios.put(
-          `api/projects/presentations/${projectPresentationId}`,
+          `api/projects/${projectId}/presentations/${projectPresentationId}`,
           projectPresentationBody
         )
       : await this.axios.post(
-          `api/projects/presentations`,
+          `api/projects/${projectId}/presentations`,
           projectPresentationBody
         );
     return data;

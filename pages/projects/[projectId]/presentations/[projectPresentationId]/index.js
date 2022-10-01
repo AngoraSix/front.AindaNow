@@ -6,7 +6,11 @@ import ProjectPresentationViewLayout from '../../../../../layouts/ProjectPresent
 import logger from '../../../../../utils/logger';
 import { hateoasFormToActions } from '../../../../../utils/rest/hateoas/hateoasResponseToActions';
 
-const ProjectPresentationViewPage = ({ projectPresentation, projectPresentationActions, isAdmin }) => {
+const ProjectPresentationViewPage = ({
+  projectPresentation,
+  projectPresentationActions,
+  isAdmin,
+}) => {
   return (
     <ProjectPresentationViewLayout>
       <ProjectPresentationView
@@ -20,7 +24,7 @@ const ProjectPresentationViewPage = ({ projectPresentation, projectPresentationA
 
 ProjectPresentationViewPage.defaultProps = {
   isAdmin: false,
-  projectPresentationActions: {}
+  projectPresentationActions: {},
 };
 
 ProjectPresentationViewPage.propTypes = {
@@ -39,9 +43,11 @@ export const getServerSideProps = async (ctx) => {
   try {
     const projectPresentation = await api.projects.getProjectPresentation(
       projectPresentationId,
+      projectId,
       validatedToken
     );
-    const projectPresentationActions = hateoasFormToActions(projectPresentation);
+    const projectPresentationActions =
+      hateoasFormToActions(projectPresentation);
     isAdmin =
       session?.user.id != null &&
       session?.user.id === projectPresentation.project.adminId &&
