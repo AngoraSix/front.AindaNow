@@ -66,12 +66,15 @@ class FrontAPI {
   }
 
   async modifyClubMembership(projectId, clubType, operation, data) {
-    const { data: modifyClubMembershipResult } = await this.axios.post(`api/clubs/well-known/members`, {
-      projectId,
-      clubType,
-      operation,
-      data,
-    });
+    const { data: modifyClubMembershipResult } = await this.axios.post(
+      `api/clubs/well-known/members`,
+      {
+        projectId,
+        clubType,
+        operation,
+        data,
+      }
+    );
     return modifyClubMembershipResult;
   }
 
@@ -80,6 +83,23 @@ class FrontAPI {
       `api/clubs/well-known/${projectId}/${clubType}`
     );
     return data;
+  }
+
+  async getAdministeredProjectsClubs() {
+    const { data } = await this.axios.get(`api/clubs/well-known`);
+    return data;
+  }
+
+  async getAdministeredProjects() {
+    const { data } = await this.axios.get(`api/projects`);
+    return data;
+  }
+
+  async getContributors(contributorIds) {
+    const { data: membersData } = await this.axios.get(`/api/contributors`, {
+      params: { contributorIds },
+    });
+    return membersData;
   }
 }
 

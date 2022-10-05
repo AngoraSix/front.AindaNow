@@ -37,7 +37,7 @@ const ProjectPresentationActionsContainer = ({
       const clubActions = hateoasFormToActions(clubResponse);
       dispatch(updateClubActions(clubActions));
     } catch (err) {
-      if (err.response.status !== 404) {
+      if (err.response?.status !== 404) {
         onError(
           `Error retrieving supported actions - ${
             err.response?.data?.message || err.message

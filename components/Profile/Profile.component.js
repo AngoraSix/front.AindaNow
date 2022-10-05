@@ -9,7 +9,6 @@ const Profile = ({
   profileAttributes,
   isCurrentContributor,
   onEditField,
-  administeredProjects,
 }) => {
   return (
     <Box className="Profile Profile__Container">
@@ -19,10 +18,7 @@ const Profile = ({
         isCurrentContributor={isCurrentContributor}
         onEditField={onEditField}
       />
-      <AdministeredProjectsSection
-        administeredProjects={administeredProjects}
-        isCurrentContributor={isCurrentContributor}
-      />
+      <AdministeredProjectsSection />
     </Box>
   );
 };
