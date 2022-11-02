@@ -16,7 +16,7 @@ export default async (req, res) => {
       res.status(200).json(data);
     } catch (err) {
       const errorMessage = `Error retrieving Club information for Contributor [${req.method}]`;
-      const apiError = new APIError(
+      const apiError = err instanceof APIError ? err : new APIError(
         `${err.response?.data?.message || errorMessage}`,
         'CLUB_FETCH',
         err.response?.status || 500

@@ -55,11 +55,12 @@ class ClubsAPI {
     return data;
   }
 
-  async getAdministeredWellKnownClubs(token) {
+  async getAdministeredWellKnownClubs(adminId, token) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = this.axios.getAuthorizationHeaders(token);
+    const authHeaders = this.axios.getAuthorizationHeaders(token, false);
 
     const { data } = await this.axios.get('/clubs/well-known/', {
+      params: { adminId: adminId },
       headers: {
         ...headers,
         ...authHeaders,

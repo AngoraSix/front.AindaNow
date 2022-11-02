@@ -133,10 +133,6 @@
   margin-bottom: 10px;
 }
 
-.AdministeredProjects__Listing__Item .MuiListItemSecondaryAction-root {
-  margin-right: 5px;
-}
-
 .AdministeredProjects__Listing__Title .MuiListItemText-primary {
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -146,10 +142,7 @@
 @media (min-width: 600px) {
   .AdministeredProjects__Listing {
     max-width: 90%;
-  }
-
-  .AdministeredProjects__Listing__Item .MuiListItemSecondaryAction-root {
-    margin-right: 25px;
+    padding-right: 15px;
   }
 }
 

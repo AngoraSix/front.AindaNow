@@ -10,6 +10,7 @@ export default async (req, res) => {
     const validatedToken = await obtainValidatedToken(req);
     try {
       const data = await api.clubs.getAdministeredWellKnownClubs(
+        req.query.adminId,
         validatedToken
       );
       res.status(200).json(data);

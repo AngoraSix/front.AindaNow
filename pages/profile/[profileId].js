@@ -8,7 +8,7 @@ import ProfileLayout from '../../layouts/ProfileLayout';
 import logger from '../../utils/logger';
 
 const ContributorProfile = ({ profile, isCurrentContributor }) => {
-  isCurrentContributor && useActiveSession();
+  isCurrentContributor && useActiveSession(true);
 
   return (
     <ProfileLayout>
@@ -39,10 +39,12 @@ export const getServerSideProps = async (ctx) => {
       validatedToken
     );
 
-    props = {
-      ...props,
-      profile,
-      isCurrentContributor: userId === profileId,
+    return {
+      props: {
+        ...props,
+        profile,
+        isCurrentContributor: userId === profileId,
+      },
     };
   } catch (err) {
     logger.error('err', err);

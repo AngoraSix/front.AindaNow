@@ -19,13 +19,33 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import config from '../../../../config';
-import { resolveRoute, ROUTES } from '../../../../constants';
+import {
+  PROFILE_ATTRIBUTES,
+  resolveRoute,
+  ROUTES,
+} from '../../../../constants';
 import ListSkeleton from '../../../common/Skeletons/ListSkeleton.component';
 
-const AdministeredProjectsSection = ({ administeredProjects }) => {
+const AdministeredProjectsSection = ({
+  administeredProjects,
+  selectedClubMembersData,
+  loadMembers,
+  isCurrentContributor,
+}) => {
   const router = useRouter();
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedClub, setSelectedClub] = useState(null);
   const isLoading = administeredProjects == null;
+
+  const getAttributeValue = (member, fieldName) => {
+    const attributeValue = member.attributes[fieldName];
+    return Array.isArray(attributeValue) ? attributeValue[0] : attributeValue;
+  };
+
+  const onSelectedClub = (club) => {
+    setSelectedClub(club);
+    loadMembers(club?.members);
+  };
+
   return (
     <Paper className="AdministeredProjects Profile__Section">
       <Box className="AdministeredProjects__Heading">
@@ -59,7 +79,9 @@ const AdministeredProjectsSection = ({ administeredProjects }) => {
                         color="primary"
                       >
                         <IconButton
-                          onClick={() => setSelectedProject(project)}
+                          onClick={() =>
+                            onSelectedClub(contributorCandidatesClub)
+                          }
                           edge="end"
                           aria-label="candidates"
                         >
@@ -72,7 +94,12 @@ const AdministeredProjectsSection = ({ administeredProjects }) => {
                   <ListItemButton
                     onClick={() => {
                       router.push(
-                        resolveRoute(ROUTES.projects.edit, project.id)
+                        resolveRoute(
+                          isCurrentContributor
+                            ? ROUTES.projects.edit
+                            : ROUTES.projects.view,
+                          project.id
+                        )
                       );
                     }}
                   >
@@ -103,25 +130,62 @@ const AdministeredProjectsSection = ({ administeredProjects }) => {
       ) : (
         <Typography>Contributor has no visible administered project</Typography>
       )}
-      <Dialog onClose={() => setSelectedProject(null)} open={!!selectedProject}>
-        <DialogTitle>Contributor Candidates</DialogTitle>
+      <Dialog
+        onClose={() => onSelectedClub(null)}
+        open={!!selectedClub}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle color="primary.main">Contributor Candidates</DialogTitle>
         <Box>
           <List>
-            {selectedProject?.clubs?.[
-              config.api.servicesAPIParams
-                .clubsWellKnownContributorCandidatesType
-            ].members.map((member) => {
-              console.log(member);
-              return (
-                <ListItem key={member.contributorId}>
-                  <ListItemAvatar>
-                    <Avatar>
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary={member.name} />
-                </ListItem>
-              );
-            })}
+            {selectedClubMembersData?.length ? (
+              selectedClubMembersData.map((member) => {
+                return (
+                  <ListItem key={member.contributorId} alignItems="flex-start">
+                    <ListItemButton
+                      component="a"
+                      href={`/profile/${member.contributorId}`}
+                    >
+                      <ListItemAvatar>
+                        <Avatar
+                          alt="User Profile image"
+                          src={
+                            getAttributeValue(
+                              member,
+                              PROFILE_ATTRIBUTES.profilePictureThumbnail.key
+                            ) ||
+                            getAttributeValue(
+                              member,
+                              PROFILE_ATTRIBUTES.profilePicture.key
+                            )
+                          }
+                          sx={{ width: 50, height: 50 }}
+                        />
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={`${member.firstName} ${member.lastName}`}
+                        secondary={
+                          <React.Fragment>
+                            <Typography
+                              sx={{ display: 'inline' }}
+                              component="span"
+                              variant="body2"
+                              color="text.primary"
+                            >
+                              Contact
+                            </Typography>
+                            {` - ${member.data.contact}`}
+                          </React.Fragment>
+                        }
+                      />
+                    </ListItemButton>
+                  </ListItem>
+                );
+              })
+            ) : (
+              <ListSkeleton />
+            )}
           </List>
         </Box>
       </Dialog>
@@ -131,10 +195,14 @@ const AdministeredProjectsSection = ({ administeredProjects }) => {
 
 AdministeredProjectsSection.defaultProps = {
   administeredProjects: [],
+  isCurrentContributor: false,
 };
 
 AdministeredProjectsSection.propTypes = {
   administeredProjects: PropTypes.array,
+  loadMembers: PropTypes.func.isRequired,
+  selectedClubMembersData: PropTypes.array,
+  isCurrentContributor: PropTypes.bool,
 };
 
 export default AdministeredProjectsSection;

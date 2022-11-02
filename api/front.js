@@ -85,19 +85,26 @@ class FrontAPI {
     return data;
   }
 
-  async getAdministeredProjectsClubs() {
-    const { data } = await this.axios.get(`api/clubs/well-known`);
+  async getAdministeredProjectsClubs(contributorId) {
+    const { data } = await this.axios.get(`api/clubs/well-known`, {
+      params: { adminId: contributorId },
+    });
     return data;
   }
 
-  async getAdministeredProjects() {
-    const { data } = await this.axios.get(`api/projects`);
+  async getAdministeredProjects(contributorId) {
+    const { data } = await this.axios.get(`api/projects`, {
+      params: { adminId: contributorId },
+    });
     return data;
   }
 
   async getContributors(contributorIds) {
+    const contributorIdsArray = Array.isArray(contributorIds)
+      ? contributorIds
+      : [contributorIds];
     const { data: membersData } = await this.axios.get(`/api/contributors`, {
-      params: { contributorIds },
+      params: { contributorIds: contributorIdsArray.join() },
     });
     return membersData;
   }

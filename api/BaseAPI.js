@@ -1,4 +1,5 @@
 import axios from 'axios';
+import TokenRequiredError from '../utils/errors/TokenRequiredError';
 
 class BaseAPI {
   constructor({ browserBaseURL = null, serverBaseURL = null, baseURL = null }) {
@@ -44,7 +45,7 @@ class BaseAPI {
     if (token?.accessToken) {
       return { Authorization: `Bearer ${token.accessToken}` };
     } else if (isRequired) {
-      throw new Error(
+      throw new TokenRequiredError(
         'BaseAPI Error - Authorization header is required but user is not authenticated'
       );
     } else {

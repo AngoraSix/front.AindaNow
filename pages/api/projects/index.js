@@ -25,11 +25,12 @@ export default async (req, res) => {
       res.status(internalServerErr.status).json(internalServerErr.asObject());
     }
   } else if (req.method === 'GET') {
+    const adminId = req.query.adminId;
     // Get administered projects
     const validatedToken = await obtainValidatedToken(req);
     try {
       const data = await api.projects.fetchProjects(
-        { adminId: validatedToken?.user?.id },
+        { adminId: adminId || validatedToken?.user?.id },
         validatedToken
       );
       res.status(200).json(data);
