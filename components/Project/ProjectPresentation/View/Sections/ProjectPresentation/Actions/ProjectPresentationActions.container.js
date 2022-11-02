@@ -11,6 +11,8 @@ import ProjectPresentationActionsReducer, {
   updateClubActions,
   updateFieldAction,
 } from './ProjectPresentationActions.reducer';
+import logger from '../../../../../../../utils/logger';
+import { useActiveSession } from '../../../../../../../hooks/oauth';
 
 const ProjectPresentationActionsContainer = ({
   projectPresentation,
@@ -19,6 +21,8 @@ const ProjectPresentationActionsContainer = ({
 }) => {
   const { doLoad } = useLoading();
   const { onError, onSuccess } = useNotifications();
+  const { session } = useActiveSession(true);
+  const activeSession = session && !session.error;
   const [projectPresentationActionData, dispatch] = useReducer(
     ProjectPresentationActionsReducer,
     {
@@ -37,8 +41,8 @@ const ProjectPresentationActionsContainer = ({
       const clubActions = hateoasFormToActions(clubResponse);
       dispatch(updateClubActions(clubActions));
     } catch (err) {
-      if (err.response.status !== 404) {
-        onError(
+      if (err.response?.status !== 404 && activeSession) {
+        logger.error(
           `Error retrieving supported actions - ${
             err.response?.data?.message || err.message
           }`

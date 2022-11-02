@@ -11,11 +11,7 @@ import ProfileReducer, {
   updateAttributesAction,
 } from './Profile.reducer';
 
-const ProfileContainer = ({
-  profile,
-  isCurrentContributor,
-  administeredProjects,
-}) => {
+const ProfileContainer = ({ profile, isCurrentContributor }) => {
   const { doLoad } = useLoading();
   const { onSuccess, onError } = useNotifications();
   const [profileFields, dispatch] = useReducer(ProfileReducer, {
@@ -63,19 +59,15 @@ const ProfileContainer = ({
       profileAttributes={profileAttributes}
       isCurrentContributor={isCurrentContributor}
       onEditField={onEditAttributeField}
-      administeredProjects={administeredProjects}
     />
   );
 };
 
-ProfileContainer.defaultProps = {
-  administeredProjects: [],
-};
+ProfileContainer.defaultProps = {};
 
 ProfileContainer.propTypes = {
   profile: PropTypes.object.isRequired,
   isCurrentContributor: PropTypes.bool.isRequired,
-  administeredProjects: PropTypes.array,
 };
 
 export default ProfileContainer;

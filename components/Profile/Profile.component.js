@@ -9,7 +9,6 @@ const Profile = ({
   profileAttributes,
   isCurrentContributor,
   onEditField,
-  administeredProjects,
 }) => {
   return (
     <Box className="Profile Profile__Container">
@@ -20,7 +19,7 @@ const Profile = ({
         onEditField={onEditField}
       />
       <AdministeredProjectsSection
-        administeredProjects={administeredProjects}
+        contributorId={profile.id}
         isCurrentContributor={isCurrentContributor}
       />
     </Box>
@@ -29,7 +28,6 @@ const Profile = ({
 
 Profile.defaultProps = {
   profileAttributes: {},
-  administeredProjects: [],
 };
 
 Profile.propTypes = {
@@ -37,7 +35,6 @@ Profile.propTypes = {
   profileAttributes: PropTypes.object,
   isCurrentContributor: PropTypes.bool.isRequired,
   onEditField: PropTypes.func.isRequired,
-  administeredProjects: PropTypes.array,
 };
 
 export default Profile;

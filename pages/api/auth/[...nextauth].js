@@ -54,7 +54,6 @@ async function refreshAccessToken(token) {
     }
 
     let accessTokenBody = response.data;
-    console.log(accessTokenBody.access_token);
     return {
       accessToken: accessTokenBody.access_token,
       accessTokenExpires: moment().unix() + accessTokenBody.expires_in,

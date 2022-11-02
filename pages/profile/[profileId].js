@@ -7,33 +7,23 @@ import { useActiveSession } from '../../hooks/oauth';
 import ProfileLayout from '../../layouts/ProfileLayout';
 import logger from '../../utils/logger';
 
-const ContributorProfile = ({
-  profile,
-  isCurrentContributor,
-  administeredProjects,
-}) => {
-  isCurrentContributor && useActiveSession();
+const ContributorProfile = ({ profile, isCurrentContributor }) => {
+  isCurrentContributor && useActiveSession(true);
 
   return (
     <ProfileLayout>
-      <Profile
-        profile={profile}
-        isCurrentContributor={isCurrentContributor}
-        administeredProjects={administeredProjects}
-      />
+      <Profile profile={profile} isCurrentContributor={isCurrentContributor} />
     </ProfileLayout>
   );
 };
 
 ContributorProfile.defaultProps = {
   isCurrentContributor: false,
-  administeredProjects: [],
 };
 
 ContributorProfile.propTypes = {
   profile: PropTypes.object.isRequired,
   isCurrentContributor: PropTypes.bool,
-  administeredProjects: PropTypes.array,
 };
 
 export const getServerSideProps = async (ctx) => {
@@ -48,14 +38,13 @@ export const getServerSideProps = async (ctx) => {
       profileId,
       validatedToken
     );
-    const administeredProjects = await api.projects.fetchProjects({
-      adminId: userId,
-    });
-    props = {
-      ...props,
-      profile,
-      isCurrentContributor: userId === profileId,
-      administeredProjects,
+
+    return {
+      props: {
+        ...props,
+        profile,
+        isCurrentContributor: userId === profileId,
+      },
     };
   } catch (err) {
     logger.error('err', err);

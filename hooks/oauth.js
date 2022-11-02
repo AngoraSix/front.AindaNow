@@ -2,7 +2,7 @@ import { signIn, useSession } from 'next-auth/react';
 import { useEffect } from 'react';
 import { useLoading } from './app';
 
-export const useActiveSession = () => {
+export const useActiveSession = (allowsAnonymous = false) => {
   const { data: session, status } = useSession();
   const loading = status === 'loading';
   const { doLoad } = useLoading();
@@ -11,7 +11,7 @@ export const useActiveSession = () => {
     const shouldReauth = session?.error === 'RefreshAccessTokenError';
     doLoad(!session || loading || shouldReauth);
     const identityProvider = session?.user?.identityProvider;
-    if (!session || shouldReauth) {
+    if ((!session || shouldReauth) && !allowsAnonymous) {
       signIn(
         'angorasixkeycloak',
         null,

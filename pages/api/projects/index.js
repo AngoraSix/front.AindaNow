@@ -24,6 +24,30 @@ export default async (req, res) => {
       );
       res.status(internalServerErr.status).json(internalServerErr.asObject());
     }
+  } else if (req.method === 'GET') {
+    const adminId = req.query.adminId;
+    // Get administered projects
+    const validatedToken = await obtainValidatedToken(req);
+    try {
+      const data = await api.projects.fetchProjects(
+        { adminId: adminId || validatedToken?.user?.id },
+        validatedToken
+      );
+      res.status(200).json(data);
+    } catch (err) {
+      const errorMessage = `Error retriving administered Projects [${req.method}]`,
+        internalServerErr = new InternalServerError(
+          errorMessage,
+          'PROJECT_FETCH'
+        );
+      logger.error(
+        errorMessage,
+        typeof err === 'object' && !err instanceof Error
+          ? JSON.stringify(err)
+          : err
+      );
+      res.status(internalServerErr.status).json(internalServerErr.asObject());
+    }
   } else {
     const mnaError = new MethodNotAllowedError(
       `No API support for ${req.method} HTTP method`,

@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { resolveRoute, ROUTES } from '../../../../../../../constants';
-import { useActiveSession } from '../../../../../../../hooks/oauth';
 import CircleLoadingButton from '../../../../../../common/Skeletons/CircleLoadingButton.component';
 import ProjectPresentationActionInputDialog from './ProjectPresentationActionInputDialog.component';
 import { PROJECT_PRESENTATION_SUPPORTED_ACTIONS } from './ProjectPresentationActions.properties';
@@ -21,8 +20,6 @@ const ProjectPresentationActions = ({
   actions,
 }) => {
   const router = useRouter();
-  const { session } = useActiveSession();
-  const activeSession = session && !session.error;
   const [selectedAction, setSelectedAction] = useState(null);
 
   const onDialogClose = () => {
@@ -64,7 +61,6 @@ const ProjectPresentationActions = ({
         <LoadingButton
           className="ProjectPresentation__Heading__Actions__ShowInterest"
           variant="contained"
-          loading={!activeSession}
           sx={{ display: { xs: 'none', sm: 'flex' } }}
           onClick={onActionSelected(
             PROJECT_PRESENTATION_SUPPORTED_ACTIONS.SHOW_INTEREST
@@ -75,7 +71,6 @@ const ProjectPresentationActions = ({
       </Tooltip>
       <CircleLoadingButton
         className="ProjectPresentation__Heading__Actions__ShowInterest"
-        loading={!activeSession}
         sxDisplay={{ xs: 'flex', sm: 'none' }}
         onClick={onActionSelected(
           PROJECT_PRESENTATION_SUPPORTED_ACTIONS.SHOW_INTEREST
@@ -92,7 +87,6 @@ const ProjectPresentationActions = ({
         <LoadingButton
           className="ProjectPresentation__Heading__Actions__WithdrawInterest"
           variant="contained"
-          loading={!activeSession}
           sx={{ display: { xs: 'none', sm: 'flex' } }}
           onClick={onActionSelected(
             PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST
@@ -103,7 +97,6 @@ const ProjectPresentationActions = ({
       </Tooltip>
       <CircleLoadingButton
         className="ProjectPresentation__Heading__Actions__WithdrawInterest"
-        loading={!activeSession}
         sxDisplay={{ xs: 'flex', sm: 'none' }}
         onClick={onActionSelected(
           PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST
@@ -120,7 +113,6 @@ const ProjectPresentationActions = ({
         <LoadingButton
           className="ProjectPresentation__Heading__Actions__Edit"
           variant="contained"
-          loading={!activeSession}
           sx={{ display: { xs: 'none', sm: 'flex' } }}
           onClick={onActionSelected(
             PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT
@@ -131,7 +123,6 @@ const ProjectPresentationActions = ({
       </Tooltip>
       <CircleLoadingButton
         className="ProjectPresentation__Heading__Actions__Edit"
-        loading={!activeSession}
         sxDisplay={{ xs: 'flex', sm: 'none' }}
         onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT)}
       >
@@ -147,7 +138,7 @@ const ProjectPresentationActions = ({
       withdrawInterestButtons,
   };
 
-  return activeSession ? (
+  return Object.keys(actions).length ? (
     <React.Fragment>
       <Box className="ProjectPresentation__Heading__Actions">
         {Object.entries(actions).map(([key]) => ACTION_COMPONENTS[key])}

@@ -1,6 +1,6 @@
 import { CLUB_MEMBERSHIP_OPERATIONS } from '../constants';
 import createPatchBody, {
-  PATCH_SUPPORTED_OPERATIONS
+  PATCH_SUPPORTED_OPERATIONS,
 } from '../utils/rest/patch/patchOperations';
 
 const FRONT_TO_PATCH_OPERATIONS_MAPPING = {
@@ -13,7 +13,13 @@ class ClubsAPI {
     this.axios = axiosInstance;
   }
 
-  async handleWellKnownClubMembership(projectId, clubType, operation, data, token) {
+  async handleWellKnownClubMembership(
+    projectId,
+    clubType,
+    operation,
+    data,
+    token
+  ) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
 
@@ -21,7 +27,7 @@ class ClubsAPI {
       `/clubs/well-known/${projectId}/${clubType}`,
       createPatchBody(FRONT_TO_PATCH_OPERATIONS_MAPPING[operation], 'members', {
         contributorId: token.user.id,
-        data
+        data,
       }),
       {
         headers: {
@@ -46,6 +52,20 @@ class ClubsAPI {
         },
       }
     );
+    return data;
+  }
+
+  async getAdministeredWellKnownClubs(adminId, token) {
+    const headers = this.axios.getCommonHeaders();
+    const authHeaders = this.axios.getAuthorizationHeaders(token, false);
+
+    const { data } = await this.axios.get('/clubs/well-known/', {
+      params: { adminId: adminId },
+      headers: {
+        ...headers,
+        ...authHeaders,
+      },
+    });
     return data;
   }
 }
