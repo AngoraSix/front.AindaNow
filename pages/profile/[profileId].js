@@ -6,6 +6,7 @@ import Profile from '../../components/Profile';
 import { useActiveSession } from '../../hooks/oauth';
 import ProfileLayout from '../../layouts/ProfileLayout';
 import logger from '../../utils/logger';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const ContributorProfile = ({ profile, isCurrentContributor }) => {
   isCurrentContributor && useActiveSession(true);
@@ -39,9 +40,12 @@ export const getServerSideProps = async (ctx) => {
       validatedToken
     );
 
+    console.log(ctx.locale);
+
     return {
       props: {
         ...props,
+        ...(await serverSideTranslations(ctx.locale, ['common'])),
         profile,
         isCurrentContributor: userId === profileId,
       },
@@ -53,6 +57,7 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       ...props,
+      ...(await serverSideTranslations(ctx.locale, ['common'])),
       session,
     },
   };

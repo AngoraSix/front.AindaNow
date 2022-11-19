@@ -11,6 +11,7 @@ import { useNotifications } from '../../../../../hooks/app';
 import { useActiveSession } from '../../../../../hooks/oauth';
 import DefaultLayout from '../../../../../layouts/DefaultLayout';
 import logger from '../../../../../utils/logger';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const NOT_ADMIN_ERROR_MESSAGE =
   'You need admin privileges to edit this Project Presentation';
@@ -102,6 +103,7 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       ...props,
+      ...(await serverSideTranslations(ctx.locale, ['common'])),
       session,
     },
   };

@@ -4,6 +4,7 @@ import React from 'react';
 import { REQUIRED_SECTIONS } from './ProjectPresentationForm.properties';
 import ProjectPresentationCoreData from './Sections/ProjectPresentationCoreData.component';
 import ProjectPresentationsSectionsData from './Sections/ProjectPresentationsSectionsData.component';
+import { useTranslation } from 'next-i18next';
 
 const ProjectPresentationForm = ({
   formData,
@@ -12,6 +13,8 @@ const ProjectPresentationForm = ({
   wasSubmitted,
   setIsSectionCompleted,
 }) => {
+  const { t } = useTranslation('common');
+
   return (
     <Box
       className={`ProjectPresentationForm ProjectPresentationForm__Container`}
@@ -22,7 +25,9 @@ const ProjectPresentationForm = ({
           variant="subtitle1"
           color="primary"
         >
-          Presentation Reference Name
+          {t('projects.presentations.fields.referenceName')
+        }
+
         </Typography>
         <ProjectPresentationCoreData
           formData={formData}

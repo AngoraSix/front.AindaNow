@@ -1,0 +1,9 @@
+{
+    "navbar.menu.projects": "Proyectos",
+    "navbar.language.tooltip": "Seleccionar lenguaje",
+    "navbar.settings.tooltip": "Configuraciones",
+    "navbar.settings.avatar.alt": "Imagen de Perfil del Usuario",
+    "navbar.settings.menu.profile": "Perfil",
+    "navbar.settings.menu.logout": "Cerrar Sesión",
+    "navbar.settings.menu.login": "Iniciar Sesión"
+}

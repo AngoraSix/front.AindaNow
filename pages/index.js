@@ -1,4 +1,5 @@
 import { getSession } from 'next-auth/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -41,6 +42,7 @@ export const getServerSideProps = async (ctx) => {
       await api.projects.fetchProjectPresentations(session?.user?.attributes);
     props = {
       ...props,
+      ...(await serverSideTranslations(ctx.locale, ['common'])),
       projectPresentationsList,
     };
   } catch (err) {

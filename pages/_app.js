@@ -21,6 +21,7 @@ import '../styles/ProjectForm.css';
 import '../styles/ProjectPresentationsList.css';
 import '../styles/ProjectPresentationView.css';
 import { getEnv } from '../utils/env';
+import { appWithTranslation } from 'next-i18next';
 
 const A6WebApp = ({ Component, pageProps, preloadedState, env }) => {
   const store = createStore(reducers, preloadedState);
@@ -68,4 +69,4 @@ A6WebApp.getInitialProps = async ({ ctx }) => {
   };
 };
 
-export default A6WebApp;
+export default appWithTranslation(A6WebApp);

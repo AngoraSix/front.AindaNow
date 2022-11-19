@@ -25,6 +25,7 @@ import {
   ROUTES,
 } from '../../../../constants';
 import ListSkeleton from '../../../common/Skeletons/ListSkeleton.component';
+import { useTranslation } from 'next-i18next';
 
 const AdministeredProjectsSection = ({
   administeredProjects,
@@ -35,6 +36,7 @@ const AdministeredProjectsSection = ({
   const router = useRouter();
   const [selectedClub, setSelectedClub] = useState(null);
   const isLoading = administeredProjects == null;
+  const { t } = useTranslation('common');
 
   const getAttributeValue = (member, fieldName) => {
     const attributeValue = member.attributes[fieldName];
@@ -56,7 +58,7 @@ const AdministeredProjectsSection = ({
           component="h2"
           color="primary.main"
         >
-          Administered Projects
+          {t('profile.administered-projects')}
         </Typography>
       </Box>
       {administeredProjects?.length ? (
