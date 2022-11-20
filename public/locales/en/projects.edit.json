@@ -1,0 +1,13 @@
+{
+    "projects.edit.title.edit": "Edit Project",
+    "projects.edit.title.new": "New Project",
+    "projects.edit.form.steps.next": "Next",
+    "projects.edit.form.steps.back": "Back",
+    "projects.edit.form.steps.optional": "Optional",
+    "projects.edit.form.steps.finish": "Finish",
+    "projects.edit.form.steps.skip": "Skip",
+    "projects.edit.form.simple.field.project-name": "Project Name",
+    "projects.edit.form.simple.field.presentations": "Presentations",
+    "projects.edit.form.simple.commands.save": "Save",
+    "projects.edit.form.output.success.message": "Project Presentation Saved Successfully"
+}

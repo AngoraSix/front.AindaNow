@@ -1,0 +1,10 @@
+{
+    "projects.edit.title.edit": "Editar Projecto",
+    "projects.edit.title.new": "Nuevo Projecto",
+    "projects.edit.form.steps.next": "Próximo",
+    "projects.edit.form.steps.back": "Anterior",
+    "projects.edit.form.steps.optional": "Opcional",
+    "projects.edit.form.steps.finish": "Terminar",
+    "projects.edit.form.steps.skip": "Omitir",
+    "projects.edit.form.simple.field.project-name": ""
+}

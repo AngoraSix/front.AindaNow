@@ -6,6 +6,7 @@ import ManageProject from '../../components/Project/ManageProject';
 import { useActiveSession } from '../../hooks/oauth';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import logger from '../../utils/logger';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const NewProjectPage = ({ session }) => {
   useActiveSession();
@@ -35,6 +36,7 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       session: await getSession(ctx),
+      ...(await serverSideTranslations(ctx.locale, ['common', 'projects.edit'])),
     },
   };
 };

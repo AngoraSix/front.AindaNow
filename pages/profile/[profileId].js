@@ -1,4 +1,5 @@
 import { getSession } from 'next-auth/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PropTypes from 'prop-types';
 import React from 'react';
 import api from '../../api';
@@ -6,7 +7,6 @@ import Profile from '../../components/Profile';
 import { useActiveSession } from '../../hooks/oauth';
 import ProfileLayout from '../../layouts/ProfileLayout';
 import logger from '../../utils/logger';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const ContributorProfile = ({ profile, isCurrentContributor }) => {
   isCurrentContributor && useActiveSession(true);
@@ -45,7 +45,7 @@ export const getServerSideProps = async (ctx) => {
     return {
       props: {
         ...props,
-        ...(await serverSideTranslations(ctx.locale, ['common'])),
+        ...(await serverSideTranslations(ctx.locale, ['common', 'profile'])),
         profile,
         isCurrentContributor: userId === profileId,
       },
@@ -57,7 +57,7 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       ...props,
-      ...(await serverSideTranslations(ctx.locale, ['common'])),
+      ...(await serverSideTranslations(ctx.locale, ['common', 'profile'])),
       session,
     },
   };

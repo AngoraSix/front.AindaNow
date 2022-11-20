@@ -5,5 +5,8 @@
     "navbar.settings.avatar.alt": "Imagen de Perfil del Usuario",
     "navbar.settings.menu.profile": "Perfil",
     "navbar.settings.menu.logout": "Cerrar Sesión",
-    "navbar.settings.menu.login": "Iniciar Sesión"
+    "navbar.settings.menu.login": "Iniciar Sesión",
+    "common.editable.modify": "Modificar",
+    "common.commands.cancel": "Cancelar",
+    "common.commands.save": "Guardar"
 }

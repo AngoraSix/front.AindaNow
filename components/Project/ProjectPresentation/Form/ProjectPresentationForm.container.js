@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
@@ -22,6 +23,7 @@ const ProjectPresentationFormContainer = ({
   projectPresentation,
   isTriggeredAction,
 }) => {
+  const { t } = useTranslation('projects.edit');
   const { doLoad } = useLoading();
   const { onSuccess, onError } = useNotifications();
   const router = useRouter();
@@ -72,7 +74,7 @@ const ProjectPresentationFormContainer = ({
             projectId
           );
 
-        onSuccess('Project Presentation Saved Successfully');
+        onSuccess(t('projects.edit.form.output.success.message'));
 
         const viewURL = isTriggeredAction
           ? resolveRoute(ROUTES.projects.edit, project.id)

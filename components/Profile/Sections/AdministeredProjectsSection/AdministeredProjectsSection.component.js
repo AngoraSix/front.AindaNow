@@ -15,6 +15,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -25,7 +26,6 @@ import {
   ROUTES,
 } from '../../../../constants';
 import ListSkeleton from '../../../common/Skeletons/ListSkeleton.component';
-import { useTranslation } from 'next-i18next';
 
 const AdministeredProjectsSection = ({
   administeredProjects,
@@ -36,7 +36,7 @@ const AdministeredProjectsSection = ({
   const router = useRouter();
   const [selectedClub, setSelectedClub] = useState(null);
   const isLoading = administeredProjects == null;
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('profile');
 
   const getAttributeValue = (member, fieldName) => {
     const attributeValue = member.attributes[fieldName];
@@ -58,7 +58,7 @@ const AdministeredProjectsSection = ({
           component="h2"
           color="primary.main"
         >
-          {t('profile.administered-projects')}
+          {t('profile.administered-projects.title')}
         </Typography>
       </Box>
       {administeredProjects?.length ? (
@@ -130,7 +130,9 @@ const AdministeredProjectsSection = ({
           <ListSkeleton />
         </Box>
       ) : (
-        <Typography>Contributor has no visible administered project</Typography>
+        <Typography>
+          {t('profile.administered-projects.empty-message')}
+        </Typography>
       )}
       <Dialog
         onClose={() => onSelectedClub(null)}
@@ -138,7 +140,9 @@ const AdministeredProjectsSection = ({
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle color="primary.main">Contributor Candidates</DialogTitle>
+        <DialogTitle color="primary.main">
+          {t('profile.administered-projects.candidates.title')}
+        </DialogTitle>
         <Box>
           <List>
             {selectedClubMembersData?.length ? (
@@ -175,7 +179,9 @@ const AdministeredProjectsSection = ({
                               variant="body2"
                               color="text.primary"
                             >
-                              Contact
+                              {t(
+                                'profile.administered-projects.candidates.contact'
+                              )}
                             </Typography>
                             {` - ${member.data.contact}`}
                           </React.Fragment>

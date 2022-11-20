@@ -5,5 +5,8 @@
     "navbar.settings.avatar.alt": "User Profile image",
     "navbar.settings.menu.profile": "Profile",
     "navbar.settings.menu.logout": "Log out",
-    "navbar.settings.menu.login": "Log in"
+    "navbar.settings.menu.login": "Log in",
+    "common.editable.modify": "Modify",
+    "common.commands.cancel": "Cancel",
+    "common.commands.save": "Save"
 }
