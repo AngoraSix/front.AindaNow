@@ -13,8 +13,9 @@ import {
   MenuItem,
   Toolbar,
   Tooltip,
-  Typography,
+  Typography
 } from '@mui/material';
+import Cookies from 'js-cookie';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
@@ -35,8 +36,10 @@ const Navbar = () => {
 
   const handleChange = (selectedLocale) => {
     if (selectedLocale != locale) {
+      Cookies.set('NEXT_LOCALE', selectedLocale);
       router.push({ pathname, query }, asPath, { locale: selectedLocale });
     }
+    setAnchorElLanguage(null);
   };
 
   const handleOpenNavMenu = (event) => {
@@ -175,7 +178,7 @@ const Navbar = () => {
                 onClose={handleCloseLanguageMenu}
               >
                 {otherLocales.map((l) => (
-                  <MenuItem value={l} onClick={() => handleChange(l)}>
+                  <MenuItem key={l} value={l} onClick={() => handleChange(l)}>
                     {l.toUpperCase()}
                   </MenuItem>
                 ))}

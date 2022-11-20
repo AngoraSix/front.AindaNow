@@ -8,5 +8,8 @@
     "navbar.settings.menu.login": "Iniciar Sesión",
     "common.editable.modify": "Modificar",
     "common.commands.cancel": "Cancelar",
-    "common.commands.save": "Guardar"
+    "common.commands.save": "Guardar",
+    "common.input-dialog.text.new-value": "Nuevo Valor",
+    "common.input-dialog.youtube.video-id": "Video ID o URL",
+    "common.media.dnd.input.media": "Media"
 }

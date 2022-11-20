@@ -9,6 +9,7 @@ import DnDContainer from './DnDContainer.component';
 import MediaAddOptions from './MediaAddOptions';
 import MediaListDnD from './Strategies/MediaListDnD';
 import MediaSingleDnD from './Strategies/MediaSingleDnD';
+import { useTranslation } from 'next-i18next';
 
 const MediaDnD = ({
   strategy,
@@ -21,6 +22,7 @@ const MediaDnD = ({
   limit,
   error,
 }) => {
+  const { t } = useTranslation('common');
   const { onError } = useNotifications();
   const [openedInputDialogType, setOpenedInputDialogType] = useState(null);
 
@@ -78,7 +80,7 @@ const MediaDnD = ({
         inputType={openedInputDialogType}
         handleDialogClose={handleDialogClose}
         onInputSubmit={onAddMedia}
-        label="Media"
+        label={t('common.media.dnd.input.media')}
         allowsMultiple={allowsMultiple}
       />
     </Box>
