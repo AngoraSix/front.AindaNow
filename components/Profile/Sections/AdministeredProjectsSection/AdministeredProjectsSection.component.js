@@ -39,7 +39,7 @@ const AdministeredProjectsSection = ({
   const { t } = useTranslation('profile');
 
   const getAttributeValue = (member, fieldName) => {
-    const attributeValue = member.attributes[fieldName];
+    const attributeValue = member.attributes?.[fieldName];
     return Array.isArray(attributeValue) ? attributeValue[0] : attributeValue;
   };
 
@@ -150,8 +150,15 @@ const AdministeredProjectsSection = ({
                 return (
                   <ListItem key={member.contributorId} alignItems="flex-start">
                     <ListItemButton
-                      component="a"
-                      href={`/profile/${member.contributorId}`}
+                      component="span"
+                      onClick={() =>
+                        router.push(
+                          resolveRoute(
+                            ROUTES.profile.view,
+                            member.contributorId
+                          ),
+                        )
+                      }
                     >
                       <ListItemAvatar>
                         <Avatar

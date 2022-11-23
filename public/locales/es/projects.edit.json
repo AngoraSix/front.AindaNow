@@ -6,5 +6,21 @@
     "projects.edit.form.steps.optional": "Opcional",
     "projects.edit.form.steps.finish": "Terminar",
     "projects.edit.form.steps.skip": "Omitir",
-    "projects.edit.form.simple.field.project-name": ""
+    "projects.edit.form.fields.project-name": "Nombre del Projecto",
+    "projects.edit.form.fields.presentations": "Presentaciones",
+    "projects.edit.form.wizard-fields.project-name": "Tu gran proyecto nuevo",
+    "projects.edit.form.simple.commands.save": "Guardar",
+    "projects.edit.form.steps.step.core.title": "Nombre",
+    "projects.edit.form.steps.step.core.description.mobile": "Vamos a empezar por darle un nombre a esa idea que tenés...",
+    "projects.edit.form.steps.step.core.description.full": "Es hora de empezar a darle forma a tu idea. Empecemos por definir un nombre...",
+    "projects.edit.form.steps.step.presentation.title": "Presentación",
+    "projects.edit.form.steps.step.presentation.description.mobile": "Ahora expliquemos de que se trata esto...",
+    "projects.edit.form.steps.step.presentation.description.full": "La gente tiene que entender de que se trata esto, vamos a compartir toda la información que necesitan...",
+    "projects.edit.form.steps.step.media.description.mobile": "Hora de agregar ayuda visual...",
+    "projects.edit.form.steps.step.media.description.full": "La multimedia va a ayudar a explicar el propósito del proyecto de una forma mas atractiva...",
+    "projects.edit.form.steps.step.params.description.mobile": "Hacé que los interesados puedan encontrar tu proyecto fácilmente...",
+    "projects.edit.form.steps.step.params.descriptionØ.full": "Estos campos van a ayudar para que los interesados puedan encontrar el proyecto fácilmente...",
+    "projects.edit.form.steps.step.media.title": "Multimedia",
+    "projects.edit.form.steps.step.params.title": "Parámetros",
+    "projects.edit.form.notifications.success.saved": "Projecto guardado exitosamente"
 }

@@ -13,7 +13,7 @@ import {
   MenuItem,
   Toolbar,
   Tooltip,
-  Typography
+  Typography,
 } from '@mui/material';
 import Cookies from 'js-cookie';
 import { signIn, signOut, useSession } from 'next-auth/react';
@@ -111,16 +111,19 @@ const Navbar = () => {
                   display: { xs: 'block', md: 'none' },
                 }}
               >
-                <MenuItem key="projects">
-                  <Link href={ROUTES.projects.presentations.list}>
-                    <Typography
-                      textAlign="center"
-                      onClick={handleCloseNavMenu}
-                      sx={{ my: 2, display: 'block' }}
-                    >
-                      {t('navbar.menu.projects')}
-                    </Typography>
-                  </Link>
+                <MenuItem
+                  key="projects"
+                  onClick={() =>
+                    router.push(ROUTES.projects.presentations.list)
+                  }
+                >
+                  <Typography
+                    textAlign="center"
+                    onClick={handleCloseNavMenu}
+                    sx={{ my: 2, display: 'block' }}
+                  >
+                    {t('navbar.menu.projects')}
+                  </Typography>
                 </MenuItem>
               </Menu>
             </Box>

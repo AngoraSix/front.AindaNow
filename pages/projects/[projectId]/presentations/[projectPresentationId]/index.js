@@ -1,4 +1,5 @@
 import { getSession } from 'next-auth/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PropTypes from 'prop-types';
 import api from '../../../../../api';
 import ProjectPresentationView from '../../../../../components/Project/ProjectPresentation/View';
@@ -34,6 +35,8 @@ ProjectPresentationViewPage.propTypes = {
 };
 
 export const getServerSideProps = async (ctx) => {
+  console.log("PPPPPPPP");
+  console.log(ctx.locale);
   let props = {};
   const { projectId, projectPresentationId } = ctx.params;
   const session = await getSession(ctx);
@@ -66,6 +69,10 @@ export const getServerSideProps = async (ctx) => {
     props: {
       ...props,
       session,
+      ...(await serverSideTranslations(ctx.locale, [
+        'common',
+        'project-presentations.view',
+      ])),
     },
   };
 };

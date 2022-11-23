@@ -23,7 +23,7 @@ const ProjectPresentationFormContainer = ({
   projectPresentation,
   isTriggeredAction,
 }) => {
-  const { t } = useTranslation('projects.edit');
+  const { t } = useTranslation('project-presentations.edit');
   const { doLoad } = useLoading();
   const { onSuccess, onError } = useNotifications();
   const router = useRouter();
@@ -71,10 +71,10 @@ const ProjectPresentationFormContainer = ({
           await api.front.saveProjectPresentation(
             projectPresentationToSubmit,
             projectPresentation?.id,
-            projectId
+            project.id
           );
 
-        onSuccess(t('projects.edit.form.output.success.message'));
+        onSuccess(t('project-presentations.edit.form.notifications.success.saved'));
 
         const viewURL = isTriggeredAction
           ? resolveRoute(ROUTES.projects.edit, project.id)

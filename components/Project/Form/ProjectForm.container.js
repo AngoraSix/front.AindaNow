@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
@@ -11,10 +12,11 @@ import { uploadAllMedia } from '../../../utils/media/mediaProcessor';
 import ProjectForm from './ProjectForm.component';
 import ProjectFormReducer, {
   INITIAL_STATE,
-  updateFieldsAction
+  updateFieldsAction,
 } from './ProjectForm.reducer';
 
 const ProjectFormContainer = ({ project, ...args }) => {
+  const { t } = useTranslation('projects.edit');
   const { doLoad } = useLoading();
   const router = useRouter();
   const { onSuccess, onError } = useNotifications();
@@ -45,7 +47,7 @@ const ProjectFormContainer = ({ project, ...args }) => {
         project?.id
       );
 
-      onSuccess('Project Saved Successfully');
+      onSuccess(t('projects.edit.form.notifications.success.saved'));
 
       if (!project?.id) {
         const viewURL = resolveRoute(

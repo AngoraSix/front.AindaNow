@@ -39,7 +39,7 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
           variant="subtitle1"
           color="primary"
         >
-          {t('projects.edit.form.simple.field.project-name')}
+          {t('projects.edit.form.fields.project-name')}
         </Typography>
         <ProjectCoreData
           formData={formData}
@@ -55,7 +55,7 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
           variant="subtitle1"
           color="primary"
         >
-          {t('projects.edit.form.simple.field.presentations')}
+          {t('projects.edit.form.fields.presentations')}
         </Typography>
         <ProjectCorePresentationsHolder
           project={project}

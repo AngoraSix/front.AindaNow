@@ -42,7 +42,10 @@ export const getServerSideProps = async (ctx) => {
       await api.projects.fetchProjectPresentations(session?.user?.attributes);
     props = {
       ...props,
-      ...(await serverSideTranslations(ctx.locale, ['common', 'project-presentations.list'])),
+      ...(await serverSideTranslations(ctx.locale, [
+        'common',
+        'project-presentations.list',
+      ])),
       projectPresentationsList,
     };
   } catch (err) {

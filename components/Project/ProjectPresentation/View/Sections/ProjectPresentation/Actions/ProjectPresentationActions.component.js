@@ -10,6 +10,7 @@ import { resolveRoute, ROUTES } from '../../../../../../../constants';
 import CircleLoadingButton from '../../../../../../common/Skeletons/CircleLoadingButton.component';
 import ProjectPresentationActionInputDialog from './ProjectPresentationActionInputDialog.component';
 import { PROJECT_PRESENTATION_SUPPORTED_ACTIONS } from './ProjectPresentationActions.properties';
+import { useTranslation } from 'next-i18next';
 
 const ProjectPresentationActions = ({
   projectPresentation,
@@ -19,6 +20,7 @@ const ProjectPresentationActions = ({
   actionFormData,
   actions,
 }) => {
+  const { t } = useTranslation('project-presentations.view');
   const router = useRouter();
   const [selectedAction, setSelectedAction] = useState(null);
 
@@ -57,7 +59,9 @@ const ProjectPresentationActions = ({
 
   const showInterestButtons = (
     <React.Fragment key="showInterestButtons">
-      <Tooltip title="I'm Interested!">
+      <Tooltip
+        title={t('project-presentations.actions.show-interest.tooltip')}
+      >
         <LoadingButton
           className="ProjectPresentation__Heading__Actions__ShowInterest"
           variant="contained"
@@ -83,7 +87,9 @@ const ProjectPresentationActions = ({
 
   const withdrawInterestButtons = (
     <React.Fragment key="withdrawInterestButtons">
-      <Tooltip title="Withdraw interest">
+      <Tooltip
+        title={t('project-presentations.actions.withdraw-interest.tooltip')}
+      >
         <LoadingButton
           className="ProjectPresentation__Heading__Actions__WithdrawInterest"
           variant="contained"
@@ -109,7 +115,7 @@ const ProjectPresentationActions = ({
 
   const editButtons = (
     <React.Fragment key="editButtons">
-      <Tooltip title="Edit">
+      <Tooltip title={t('project-presentations.actions.edit.tooltip')}>
         <LoadingButton
           className="ProjectPresentation__Heading__Actions__Edit"
           variant="contained"

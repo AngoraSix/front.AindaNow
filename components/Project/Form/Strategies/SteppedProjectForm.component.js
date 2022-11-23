@@ -23,17 +23,25 @@ import ProjectPresentationParams from '../Sections/ProjectPresentationParams.com
 
 const steps = [
   {
-    label: 'Name',
+    label: 'projects.edit.form.steps.step.core.title',
     component: ProjectCoreData,
     optional: false,
   },
   {
-    label: 'Presentation',
+    label: 'projects.edit.form.steps.step.presentation.title',
     component: ProjectPresentationData,
     optional: true,
   },
-  { label: 'Media', component: ProjectPresentationMedia, optional: false },
-  { label: 'Parameters', component: ProjectPresentationParams, optional: true },
+  {
+    label: 'projects.edit.form.steps.step.media.title',
+    component: ProjectPresentationMedia,
+    optional: false,
+  },
+  {
+    label: 'projects.edit.form.steps.step.params.title',
+    component: ProjectPresentationParams,
+    optional: true,
+  },
 ];
 
 const SteppedProjectForm = ({ formData, onFormChange }) => {
@@ -174,7 +182,7 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
             }
             return (
               <Step key={step.label} {...stepProps}>
-                <StepLabel {...labelProps}>{step.label}</StepLabel>
+                <StepLabel {...labelProps}>{t(step.label)}</StepLabel>
               </Step>
             );
           })}

@@ -4,6 +4,7 @@ import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Box, Button, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
@@ -12,15 +13,15 @@ import { INPUT_FIELD_TYPES, MEDIA_TYPES } from '../../../../constants';
 const MEDIA_OPTIONS_MAP = {
   [MEDIA_TYPES.IMAGE]: {
     icon: ImageIcon,
-    label: 'Image',
-    dialogLabel: 'Upload new image',
+    label: 'common.media.options.image',
+    dialogLabel: 'common.media.options.image.dialog',
     inputType: INPUT_FIELD_TYPES.IMAGE,
     classModifier: 'Image',
   },
   [MEDIA_TYPES.VIDEO_YOUTUBE]: {
     icon: YouTubeIcon,
-    label: 'Video',
-    dialogLabel: 'Introduce the Youtube video ID or URL',
+    label: 'common.media.options.video',
+    dialogLabel: 'common.media.options.video.dialog',
     inputType: INPUT_FIELD_TYPES.YOUTUBEVIDEO,
     classModifier: 'Youtube',
   },
@@ -31,6 +32,7 @@ const MediaAddOptions = ({
   onAddMediaOptionClick,
   disabled,
 }) => {
+  const { t } = useTranslation('common');
   const router = useRouter();
   const [newOptionsVisible, setNewOptionsVisible] = useState(false);
   const theme = useTheme();
@@ -111,7 +113,7 @@ const MediaAddOptions = ({
             onClick={handleInputDialogClickOpen(option)}
             disabled={disabled}
           >
-            {MEDIA_OPTIONS_MAP[option].label}
+            {t(MEDIA_OPTIONS_MAP[option].label)}
           </Button>
         );
       })}

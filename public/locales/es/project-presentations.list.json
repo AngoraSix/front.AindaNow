@@ -1,4 +1,5 @@
 {
-    "projects-presentations.list.commands.create": "Crear",
-    "projects-presentations.list.commands.show-more": "Ver Más"
+    "project-presentations.list.commands.create": "Crear",
+    "project-presentations.list.commands.show-more": "Ver Más",
+    "project-presentations.list.search": "Buscar"
 }

@@ -1,12 +1,12 @@
 import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import FormSkeleton from '../../components/common/Skeletons/FormSkeleton.component';
 import ManageProject from '../../components/Project/ManageProject';
 import { useActiveSession } from '../../hooks/oauth';
 import DefaultLayout from '../../layouts/DefaultLayout';
 import logger from '../../utils/logger';
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const NewProjectPage = ({ session }) => {
   useActiveSession();
@@ -36,7 +36,12 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       session: await getSession(ctx),
-      ...(await serverSideTranslations(ctx.locale, ['common', 'projects.edit'])),
+      ...(await serverSideTranslations(ctx.locale, [
+        'common',
+        'projects.edit',
+        'project-presentations.edit',
+        'common.languages'
+      ])),
     },
   };
 };

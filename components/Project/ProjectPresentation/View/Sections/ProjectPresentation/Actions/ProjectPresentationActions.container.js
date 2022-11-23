@@ -1,9 +1,12 @@
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import { useEffect, useReducer } from 'react';
 import api from '../../../../../../../api';
 import config from '../../../../../../../config';
 import { CLUB_MEMBERSHIP_OPERATIONS } from '../../../../../../../constants';
 import { useLoading, useNotifications } from '../../../../../../../hooks/app';
+import { useActiveSession } from '../../../../../../../hooks/oauth';
+import logger from '../../../../../../../utils/logger';
 import { hateoasFormToActions } from '../../../../../../../utils/rest/hateoas/hateoasResponseToActions';
 import ProjectPresentationActions from './ProjectPresentationActions.component';
 import ProjectPresentationActionsReducer, {
@@ -11,14 +14,13 @@ import ProjectPresentationActionsReducer, {
   updateClubActions,
   updateFieldAction,
 } from './ProjectPresentationActions.reducer';
-import logger from '../../../../../../../utils/logger';
-import { useActiveSession } from '../../../../../../../hooks/oauth';
 
 const ProjectPresentationActionsContainer = ({
   projectPresentation,
   projectPresentationActions,
   isAdmin,
 }) => {
+  const { t } = useTranslation('project-presentations.view');
   const { doLoad } = useLoading();
   const { onError, onSuccess } = useNotifications();
   const { session } = useActiveSession(true);
@@ -85,7 +87,11 @@ const ProjectPresentationActionsContainer = ({
       );
       const clubActions = hateoasFormToActions(clubResponse);
       dispatch(updateClubActions(clubActions));
-      onSuccess('Updated interest successfully');
+      onSuccess(
+        t(
+          'project-presentations.actions.show-interest.notifications.success.registered'
+        )
+      );
     } catch (ex) {
       onError(
         `Error updating interest in Project - ${

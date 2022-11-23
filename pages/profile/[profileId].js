@@ -40,8 +40,6 @@ export const getServerSideProps = async (ctx) => {
       validatedToken
     );
 
-    console.log(ctx.locale);
-
     return {
       props: {
         ...props,

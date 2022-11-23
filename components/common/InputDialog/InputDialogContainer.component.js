@@ -57,7 +57,7 @@ const InputDialogContainer = ({
       maxWidth="sm"
       fullWidth
     >
-      <DialogTitle>{title}</DialogTitle>
+      <DialogTitle>{t(title)}</DialogTitle>
       <DialogContent>
         <InputDialogComponent
           currentFieldValue={currentFieldValue}
@@ -91,7 +91,7 @@ const InputDialogContainer = ({
 InputDialogContainer.defaultProps = {
   open: false,
   inputType: INPUT_FIELD_TYPES.TEXT,
-  title: 'Fill in',
+  title: 'common.input-dialog.title',
   allowsMultiple: false,
 };
 

@@ -12,6 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 import classnames from 'classnames';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { createObjectFromFlatParams } from '../../../../../utils/helpers';
@@ -66,6 +67,7 @@ const ProjectPresentationsSectionsData = ({
   wasSubmitted,
   setIsCompleted,
 }) => {
+  const { t } = useTranslation('project-presentations.edit');
   const [expanded, setExpanded] = useState(false);
 
   useEffect(() => {
@@ -220,6 +222,13 @@ const ProjectPresentationsSectionsData = ({
               <Box className="ProjectPresentationsSectionsData__Field">
                 <TextField
                   {...PRESENTATION_SECTION_FIELDS.title}
+                  label={
+                    formData.title
+                      ? t(
+                          'project-presentations.edit.form.fields.section.title'
+                        )
+                      : t(PRESENTATION_SECTION_FIELDS.title.label)
+                  }
                   value={
                     formData[
                       `${SECTIONS_PARENT_FORM_DATA_PATH}[${i}].${PRESENTATION_SECTION_FIELDS.title.key}`
@@ -236,6 +245,13 @@ const ProjectPresentationsSectionsData = ({
               <Box className="ProjectPresentationsSectionsData__Field">
                 <TextField
                   {...PRESENTATION_SECTION_FIELDS.description}
+                  label={
+                    formData.description
+                      ? t(
+                          'project-presentations.edit.form.fields.section.description'
+                        )
+                      : t(PRESENTATION_SECTION_FIELDS.description.label)
+                  }
                   value={
                     formData[
                       `${SECTIONS_PARENT_FORM_DATA_PATH}[${i}].${PRESENTATION_SECTION_FIELDS.description.key}`
@@ -268,7 +284,7 @@ const ProjectPresentationsSectionsData = ({
           startIcon={<NewIcon />}
           sx={{ display: { xs: 'none', sm: 'flex' } }}
         >
-          Add Section
+          {t('project-presentations.edit.form.commands.add-section')}
         </Button>
         <IconButton
           onClick={onAddNewSection(sections.length)}

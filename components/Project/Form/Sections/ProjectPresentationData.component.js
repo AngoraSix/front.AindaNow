@@ -1,21 +1,24 @@
 import { Box, Grid, TextField, Typography } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS as PRESENTATION_BASE_FIELDS } from '../ProjectForm.properties';
 
-const MOBILE_DESCRIPTION = "Now let's show what this is all about...";
+const MOBILE_DESCRIPTION =
+  'projects.edit.form.steps.step.presentation.description.mobile';
 
 const FULL_DESCRIPTION =
-  "We need people to understand what this is all about, let's share all the information they need to know...";
+  'projects.edit.form.steps.step.presentation.description.full';
 
 const ProjectPresentationData = ({
   formData,
   onFormChange,
   withDescription,
-  isNotMobile,
+  isMobile,
   setIsCompleted,
   wasSubmitted,
 }) => {
+  const { t } = useTranslation(['projects.edit', 'project-presentations.edit']);
   const onFieldChange = (property) => (event) => {
     let {
       target: { value },
@@ -31,7 +34,7 @@ const ProjectPresentationData = ({
       {withDescription && (
         <Box className="ProjectForm__Description ProjectPresentationData__Description">
           <Typography>
-            {isNotMobile ? FULL_DESCRIPTION : MOBILE_DESCRIPTION}
+            {t(isMobile ? FULL_DESCRIPTION : MOBILE_DESCRIPTION)}
           </Typography>
         </Box>
       )}
@@ -44,6 +47,15 @@ const ProjectPresentationData = ({
         <Grid item xs={10}>
           <TextField
             {...PRESENTATION_BASE_FIELDS.description}
+            label={
+              formData.description
+                ? t('project-presentations.edit.form.fields.description', {
+                    ns: 'project-presentations.edit',
+                  })
+                : t(PRESENTATION_BASE_FIELDS.description.label, {
+                    ns: 'project-presentations.edit',
+                  })
+            }
             value={formData['presentations[0].sections[0].description'] || ''}
             onChange={onFieldChange('presentations[0].sections[0].description')}
             error={

@@ -23,7 +23,7 @@ const ProjectPresentationsList = ({
         <Box className="ProjectPresentationsList__Toolbar__Column Column__Large">
           <TextField
             className="ProjectPresentationsList__Toolbar__Input"
-            label="Search"
+            label={t('project-presentations.list.search')}
             value={search}
             onChange={({ target: value }) => onSearchChange(value)}
             fullWidth
@@ -37,7 +37,7 @@ const ProjectPresentationsList = ({
               startIcon={<NewIcon />}
               sx={{ display: { xs: 'none', sm: 'flex' } }}
             >
-              {t('projects-presentations.list.commands.create')}
+              {t('project-presentations.list.commands.create')}
             </Button>
           </Link>
           <Link href={ROUTES.projects.new}>
@@ -75,7 +75,7 @@ const ProjectPresentationsList = ({
               color="primary"
               onClick={onNextPageClick}
             >
-              {t('projects-presentations.list.commands.show-more')}
+              {t('project-presentations.list.commands.show-more')}
             </Button>
           </Box>
         )}

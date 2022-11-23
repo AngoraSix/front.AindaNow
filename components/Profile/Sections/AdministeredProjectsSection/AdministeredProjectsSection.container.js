@@ -28,10 +28,17 @@ const AdministeredProjectsSectionContainer = ({
       const administeredProjectsInfo = await api.front.getAdministeredProjects(
         contributorId
       );
+      console.log(isCurrentContributor);
+      const filteredAdministeredProjectsInfo = isCurrentContributor
+        ? administeredProjectsInfo
+        : administeredProjectsInfo.filter((ap) => ap.presentations);
       const clubsInfo =
         (await api.front.getAdministeredProjectsClubs(contributorId)) || [];
       dispatch(
-        initAdministeredProjectsInfo({ administeredProjectsInfo, clubsInfo })
+        initAdministeredProjectsInfo({
+          administeredProjectsInfo: filteredAdministeredProjectsInfo,
+          clubsInfo,
+        })
       );
     } catch (err) {
       if (err.response?.status !== 404) {
