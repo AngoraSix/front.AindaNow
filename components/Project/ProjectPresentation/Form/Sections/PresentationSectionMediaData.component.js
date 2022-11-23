@@ -1,4 +1,5 @@
 import { Box, Grid, Typography } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { MEDIA_INPUT_STRATEGIES } from '../../../../../constants';
@@ -12,6 +13,7 @@ const PresentationSectionMediaData = ({
   setIsCompleted,
   wasSubmitted,
 }) => {
+  const { t } = useTranslation('projects.edit', 'project-presentations.edit');
   const onMediaChange =
     (innerField, isRequired = false) =>
     (mediaData) => {
@@ -31,7 +33,11 @@ const PresentationSectionMediaData = ({
         justifyContent="center"
       >
         <Grid item xs={11} sm={6}>
-          <Typography>{PRESENTATION_SECTION_FIELDS.mainMedia.label}</Typography>
+          <Typography>
+            {t(PRESENTATION_SECTION_FIELDS.mainMedia.label, {
+              ns: 'project-presentations.edit',
+            })}
+          </Typography>
           <Media
             allowsMultiple={false}
             strategy={MEDIA_INPUT_STRATEGIES.SINGLE}
@@ -58,7 +64,11 @@ const PresentationSectionMediaData = ({
         justifyContent="center"
       >
         <Grid item xs={12}>
-          <Typography>{PRESENTATION_SECTION_FIELDS.media.label}</Typography>
+          <Typography>
+            {t(PRESENTATION_SECTION_FIELDS.media.label, {
+              ns: 'project-presentations.edit',
+            })}
+          </Typography>
           <Media
             allowsMultiple={true}
             strategy={MEDIA_INPUT_STRATEGIES.LIST}

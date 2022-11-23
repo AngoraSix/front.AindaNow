@@ -1,4 +1,5 @@
 import { getSession } from 'next-auth/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PropTypes from 'prop-types';
 import React from 'react';
 import api from '../../api';
@@ -42,6 +43,7 @@ export const getServerSideProps = async (ctx) => {
     return {
       props: {
         ...props,
+        ...(await serverSideTranslations(ctx.locale, ['common', 'profile'])),
         profile,
         isCurrentContributor: userId === profileId,
       },
@@ -53,6 +55,7 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       ...props,
+      ...(await serverSideTranslations(ctx.locale, ['common', 'profile'])),
       session,
     },
   };

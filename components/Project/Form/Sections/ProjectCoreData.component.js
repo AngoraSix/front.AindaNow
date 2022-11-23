@@ -1,13 +1,13 @@
 import { Box, Grid, TextField, Typography } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { PROJECT_CORE_FORM_FIELDS as CORE_FIELDS } from '../ProjectForm.properties';
 
 const MOBILE_DESCRIPTION =
-  "Let's start by giving a name to that idea you have...";
+  'projects.edit.form.steps.step.core.description.mobile';
 
-const FULL_DESCRIPTION =
-  "It's time to start giving shape to that idea you have. Let's first define a name for it...";
+const FULL_DESCRIPTION = 'projects.edit.form.steps.step.core.description.full';
 
 const ProjectCoreData = ({
   formData,
@@ -18,6 +18,7 @@ const ProjectCoreData = ({
   wasSubmitted,
   onInputKeyPressed,
 }) => {
+  const { t } = useTranslation('projects.edit');
   const onFieldChange = (property) => (event) => {
     let {
       target: { value },
@@ -33,7 +34,7 @@ const ProjectCoreData = ({
       {withDescription && (
         <Box className="ProjectForm__Description ProjectCoreData__Description">
           <Typography>
-            {isMobile ? FULL_DESCRIPTION : MOBILE_DESCRIPTION}
+            {t(isMobile ? FULL_DESCRIPTION : MOBILE_DESCRIPTION)}
           </Typography>
         </Box>
       )}
@@ -46,7 +47,11 @@ const ProjectCoreData = ({
         <Grid item xs={10}>
           <TextField
             {...CORE_FIELDS.name}
-            label={formData.name ? 'Project Name' : CORE_FIELDS.name.label}
+            label={
+              formData.name
+                ? t('projects.edit.form.fields.project-name')
+                : t(CORE_FIELDS.name.label)
+            }
             value={formData.name || ''}
             onChange={onFieldChange('name')}
             fullWidth

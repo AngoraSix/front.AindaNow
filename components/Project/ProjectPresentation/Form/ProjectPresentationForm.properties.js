@@ -1,7 +1,7 @@
 export const PROJECT_PRESENTATION_CORE_FORM_FIELDS = {
   referenceName: {
     key: 'referenceName',
-    label: 'Reference Name',
+    label: 'project-presentations.edit.form.wizard-fields.reference-name',
     required: true,
   },
 };
@@ -9,12 +9,12 @@ export const PROJECT_PRESENTATION_CORE_FORM_FIELDS = {
 export const PROJECT_PRESENTATION_SECTION_FORM_FIELDS = {
   title: {
     key: 'title',
-    label: 'Presentation Section Title',
+    label: 'project-presentations.edit.form.wizard-fields.section.title',
     required: true,
   },
   description: {
     key: 'description',
-    label: 'Presentation Section Description',
+    label: 'project-presentations.edit.form.wizard-fields.section.description',
     multiline: true,
     minRows: 3,
     maxRows: 8,
@@ -22,12 +22,12 @@ export const PROJECT_PRESENTATION_SECTION_FORM_FIELDS = {
   },
   mainMedia: {
     key: 'mainMedia',
-    label: 'Set Main Media',
+    label: 'project-presentations.edit.form.wizard-fields.section.mainMedia',
     required: true,
   },
   media: {
     key: 'media',
-    label: 'Add Media',
+    label: 'project-presentations.edit.form.wizard-fields.section.media',
   },
 };
 

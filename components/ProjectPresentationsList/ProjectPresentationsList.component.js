@@ -1,6 +1,7 @@
 import NewIconContained from '@mui/icons-material/AddCircle';
 import NewIcon from '@mui/icons-material/AddCircleOutline';
 import { Box, Button, Grid, IconButton, TextField } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -13,6 +14,7 @@ const ProjectPresentationsList = ({
   onNextPageClick,
   onSearch,
 }) => {
+  const { t } = useTranslation('project-presentations.list');
   const [search, setSearch] = useState('');
 
   return (
@@ -21,7 +23,7 @@ const ProjectPresentationsList = ({
         <Box className="ProjectPresentationsList__Toolbar__Column Column__Large">
           <TextField
             className="ProjectPresentationsList__Toolbar__Input"
-            label="Search"
+            label={t('project-presentations.list.search')}
             value={search}
             onChange={({ target: value }) => onSearchChange(value)}
             fullWidth
@@ -35,7 +37,7 @@ const ProjectPresentationsList = ({
               startIcon={<NewIcon />}
               sx={{ display: { xs: 'none', sm: 'flex' } }}
             >
-              Create
+              {t('project-presentations.list.commands.create')}
             </Button>
           </Link>
           <Link href={ROUTES.projects.new}>
@@ -73,7 +75,7 @@ const ProjectPresentationsList = ({
               color="primary"
               onClick={onNextPageClick}
             >
-              Mostrar más
+              {t('project-presentations.list.commands.show-more')}
             </Button>
           </Box>
         )}

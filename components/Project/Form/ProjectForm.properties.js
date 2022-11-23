@@ -1,7 +1,7 @@
 export const PROJECT_CORE_FORM_FIELDS = {
   name: {
     key: 'name',
-    label: 'A great new Project',
+    label: 'projects.edit.form.wizard-fields.project-name',
     required: true,
   },
 };
@@ -9,30 +9,30 @@ export const PROJECT_CORE_FORM_FIELDS = {
 export const PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS = {
   description: {
     key: 'description',
-    label: 'Project description',
+    label: 'project-presentations.edit.form.wizard-fields.description',
     multiline: true,
     minRows: 3,
     required: false,
   },
   mainMedia: {
     key: 'mainMedia',
-    label: 'Set Main Media',
+    label: 'project-presentations.edit.form.wizard-fields.mainMedia',
     required: true,
   },
   media: {
     key: 'media',
-    label: 'Add Media',
+    label: 'project-presentations.edit.form.wizard-fields.media',
   },
 };
 
 export const PROJECT_PRESENTATION_PARAMS_FIELDS = {
-  location: {
-    key: 'location',
-    label: 'Location',
+  language: {
+    key: 'language',
+    label: 'project-presentations.edit.form.wizard-fields.language',
   },
-  technologies: {
+  skills: {
     key: 'skills',
-    label: 'Skills',
+    label: 'project-presentations.edit.form.wizard-fields.skills',
   },
 };
 

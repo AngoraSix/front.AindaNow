@@ -11,6 +11,7 @@ import {
 } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { useNotifications } from '../../../../hooks/app';
@@ -22,20 +23,29 @@ import ProjectPresentationParams from '../Sections/ProjectPresentationParams.com
 
 const steps = [
   {
-    label: 'Name',
+    label: 'projects.edit.form.steps.step.core.title',
     component: ProjectCoreData,
     optional: false,
   },
   {
-    label: 'Presentation',
+    label: 'projects.edit.form.steps.step.presentation.title',
     component: ProjectPresentationData,
     optional: true,
   },
-  { label: 'Media', component: ProjectPresentationMedia, optional: false },
-  { label: 'Parameters', component: ProjectPresentationParams, optional: true },
+  {
+    label: 'projects.edit.form.steps.step.media.title',
+    component: ProjectPresentationMedia,
+    optional: false,
+  },
+  {
+    label: 'projects.edit.form.steps.step.params.title',
+    component: ProjectPresentationParams,
+    optional: true,
+  },
 ];
 
 const SteppedProjectForm = ({ formData, onFormChange }) => {
+  const { t } = useTranslation('projects.edit');
   const { onError } = useNotifications();
   const [activeStep, setActiveStep] = useState(0);
   const [skipped, setSkipped] = useState(new Set());
@@ -132,7 +142,7 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
               onClick={handleNext}
               disabled={activeStep >= steps.length - 1}
             >
-              Next
+              {t('projects.edit.form.steps.next')}
               {theme.direction === 'rtl' ? (
                 <KeyboardArrowLeft />
               ) : (
@@ -151,7 +161,7 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
               ) : (
                 <KeyboardArrowLeft />
               )}
-              Back
+              {t('projects.edit.form.steps.back')}
             </Button>
           }
         />
@@ -163,7 +173,7 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
             if (isStepOptional(index)) {
               labelProps.optional = (
                 <Typography fontSize="0.9rem" variant="caption">
-                  Optional
+                  {t('projects.edit.form.steps.optional')}
                 </Typography>
               );
             }
@@ -172,7 +182,7 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
             }
             return (
               <Step key={step.label} {...stepProps}>
-                <StepLabel {...labelProps}>{step.label}</StepLabel>
+                <StepLabel {...labelProps}>{t(step.label)}</StepLabel>
               </Step>
             );
           })}
@@ -204,7 +214,7 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
                   variant="contained"
                   ref={submitInputRef}
                 >
-                  Finish
+                  {t('projects.edit.form.steps.finish')}
                 </Button>
               )}
             </Box>
@@ -216,12 +226,12 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
                 onClick={handleBack}
                 sx={{ mr: 1 }}
               >
-                Back
+                {t('projects.edit.form.steps.back')}
               </Button>
               <Box sx={{ flex: '1 1 auto' }} />
               {isStepOptional(activeStep) && !isLastStep && (
                 <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                  Skip
+                  {t('projects.edit.form.steps.skip')}
                 </Button>
               )}
 
@@ -232,10 +242,12 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
                   variant="contained"
                   ref={submitInputRef}
                 >
-                  Finish
+                  {t('projects.edit.form.steps.finish')}
                 </Button>
               ) : (
-                <Button onClick={handleNext}>Next</Button>
+                <Button onClick={handleNext}>
+                  {t('projects.edit.form.steps.next')}
+                </Button>
               )}
             </Box>
           )}

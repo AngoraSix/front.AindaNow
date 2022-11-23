@@ -1,6 +1,7 @@
 import { Box, ImageList, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { MEDIA_TYPES } from '../../../../../constants';
@@ -16,6 +17,7 @@ const _getQuantityOfColumns = (isMedium, isLarge) =>
   isLarge ? 6 : isMedium ? 4 : 2;
 
 const MediaListDnD = ({ media, onModifyMediaOrder, onRemoveMediaItem }) => {
+  const { t } = useTranslation('common');
   const [openedPreviewDialogMedia, setOpenedPreviewDialogMedia] =
     useState(null);
   const [tempOrderChangeKeys, setTempOrderChangeKeys] = useState({
@@ -89,7 +91,7 @@ const MediaListDnD = ({ media, onModifyMediaOrder, onRemoveMediaItem }) => {
         </ImageList>
       ) : (
         <Typography className="MediaList__EmptyMessage" align="center">
-          Click above or drop image file or Youtube link
+          {t('common.media.dnd.input.empty-message')}
         </Typography>
       )}
       <MediaPreviewDialog

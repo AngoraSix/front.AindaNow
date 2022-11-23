@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useEffect } from 'react';
@@ -102,6 +103,10 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       ...props,
+      ...(await serverSideTranslations(ctx.locale, [
+        'common',
+        'project-presentations.edit',
+      ])),
       session,
     },
   };

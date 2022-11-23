@@ -1,4 +1,5 @@
 import { Box, Grid, TextField } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { PROJECT_PRESENTATION_CORE_FORM_FIELDS as PRESENTATION_CORE_FIELDS } from '../ProjectPresentationForm.properties';
@@ -9,6 +10,7 @@ const ProjectPresentationCoreData = ({
   wasSubmitted,
   setIsCompleted,
 }) => {
+  const { t } = useTranslation('project-presentations.edit');
   useEffect(() => {
     setIsCompleted(!!formData[PRESENTATION_CORE_FIELDS.referenceName.key]);
   }, []);
@@ -33,6 +35,11 @@ const ProjectPresentationCoreData = ({
         <Grid item xs={10}>
           <TextField
             {...PRESENTATION_CORE_FIELDS.referenceName}
+            label={
+              formData.referenceName
+                ? t('project-presentations.edit.form.fields.referenceName')
+                : t(PRESENTATION_CORE_FIELDS.referenceName.label)
+            }
             value={formData[PRESENTATION_CORE_FIELDS.referenceName.key] || ''}
             onChange={onFieldChange(PRESENTATION_CORE_FIELDS.referenceName.key)}
             error={

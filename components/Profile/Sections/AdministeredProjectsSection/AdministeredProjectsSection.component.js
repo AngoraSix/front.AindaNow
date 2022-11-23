@@ -15,6 +15,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -35,9 +36,10 @@ const AdministeredProjectsSection = ({
   const router = useRouter();
   const [selectedClub, setSelectedClub] = useState(null);
   const isLoading = administeredProjects == null;
+  const { t } = useTranslation('profile');
 
   const getAttributeValue = (member, fieldName) => {
-    const attributeValue = member.attributes[fieldName];
+    const attributeValue = member.attributes?.[fieldName];
     return Array.isArray(attributeValue) ? attributeValue[0] : attributeValue;
   };
 
@@ -56,7 +58,7 @@ const AdministeredProjectsSection = ({
           component="h2"
           color="primary.main"
         >
-          Administered Projects
+          {t('profile.administered-projects.title')}
         </Typography>
       </Box>
       {administeredProjects?.length ? (
@@ -128,7 +130,9 @@ const AdministeredProjectsSection = ({
           <ListSkeleton />
         </Box>
       ) : (
-        <Typography>Contributor has no visible administered project</Typography>
+        <Typography>
+          {t('profile.administered-projects.empty-message')}
+        </Typography>
       )}
       <Dialog
         onClose={() => onSelectedClub(null)}
@@ -136,7 +140,9 @@ const AdministeredProjectsSection = ({
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle color="primary.main">Contributor Candidates</DialogTitle>
+        <DialogTitle color="primary.main">
+          {t('profile.administered-projects.candidates.title')}
+        </DialogTitle>
         <Box>
           <List>
             {selectedClubMembersData?.length ? (
@@ -144,8 +150,15 @@ const AdministeredProjectsSection = ({
                 return (
                   <ListItem key={member.contributorId} alignItems="flex-start">
                     <ListItemButton
-                      component="a"
-                      href={`/profile/${member.contributorId}`}
+                      component="span"
+                      onClick={() =>
+                        router.push(
+                          resolveRoute(
+                            ROUTES.profile.view,
+                            member.contributorId
+                          ),
+                        )
+                      }
                     >
                       <ListItemAvatar>
                         <Avatar
@@ -173,7 +186,9 @@ const AdministeredProjectsSection = ({
                               variant="body2"
                               color="text.primary"
                             >
-                              Contact
+                              {t(
+                                'profile.administered-projects.candidates.contact'
+                              )}
                             </Typography>
                             {` - ${member.data.contact}`}
                           </React.Fragment>

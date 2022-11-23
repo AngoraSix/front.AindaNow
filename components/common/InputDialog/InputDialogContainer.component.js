@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { INPUT_FIELD_TYPES } from '../../../constants';
@@ -28,6 +29,7 @@ const InputDialogContainer = ({
   allowsMultiple,
   ...args
 }) => {
+  const { t } = useTranslation('common');
   const [currentFieldValue, setCurrentFieldValue] = useState(fieldValue);
   const [isValid, setIsValid] = useState(true);
 
@@ -55,7 +57,7 @@ const InputDialogContainer = ({
       maxWidth="sm"
       fullWidth
     >
-      <DialogTitle>{title}</DialogTitle>
+      <DialogTitle>{t(title)}</DialogTitle>
       <DialogContent>
         <InputDialogComponent
           currentFieldValue={currentFieldValue}
@@ -71,7 +73,7 @@ const InputDialogContainer = ({
           onClick={handleDialogClose}
           sx={{ color: 'primary.light' }}
         >
-          Cancel
+          {t('common.commands.cancel')}
         </Button>
         <Button
           className="Dialog__Button__Save"
@@ -79,7 +81,7 @@ const InputDialogContainer = ({
           sx={{ color: 'primary.dark' }}
           disabled={!isValid}
         >
-          Save
+          {t('common.commands.save')}
         </Button>
       </DialogActions>
     </Dialog>
@@ -89,7 +91,7 @@ const InputDialogContainer = ({
 InputDialogContainer.defaultProps = {
   open: false,
   inputType: INPUT_FIELD_TYPES.TEXT,
-  title: 'Fill in',
+  title: 'common.input-dialog.title',
   allowsMultiple: false,
 };
 

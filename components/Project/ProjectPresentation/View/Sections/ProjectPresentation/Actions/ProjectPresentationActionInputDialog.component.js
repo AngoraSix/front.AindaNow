@@ -1,16 +1,19 @@
 import {
-  Dialog,
-  DialogContent,
-  DialogActions,
-  DialogTitle,
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
   Zoom,
 } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React from 'react';
 import FieldMaker from 'react-mui-fieldmaker';
 
-const I18N_VALUES = null;
+const I18N_VALUES = {
+  contact: 'project-presentations.actions.dialog.inputs.contact',
+};
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Zoom in={true} ref={ref} {...props} />;
@@ -25,6 +28,8 @@ const ProjectPresentationActionInputDialog = ({
   title,
   onSubmit,
 }) => {
+  const { t } = useTranslation('project-presentations.view');
+
   return (
     <Dialog
       className="ProjectPresentation__Actions__Dialog__Container"
@@ -39,7 +44,11 @@ const ProjectPresentationActionInputDialog = ({
           actionInputs.map((action) => (
             <FieldMaker
               key={action.key}
-              label={I18N_VALUES?.[action.key] || action.key}
+              label={
+                I18N_VALUES?.[action.key]
+                  ? t(I18N_VALUES[action.key])
+                  : action.key
+              }
               type={action.type}
               required={action.required}
               value={actionData[action.key]}
@@ -54,7 +63,7 @@ const ProjectPresentationActionInputDialog = ({
           onClick={handleDialogClose}
           sx={{ color: 'primary.light' }}
         >
-          Cancel
+          {t('project-presentations.actions.dialog.commands.cancel')}
         </Button>
         <Button
           className="Dialog__Button__Save"
@@ -62,7 +71,7 @@ const ProjectPresentationActionInputDialog = ({
           sx={{ color: 'primary.dark' }}
           disabled={!onSubmit}
         >
-          Done
+          {t('project-presentations.actions.dialog.commands.done')}
         </Button>
       </DialogActions>
     </Dialog>

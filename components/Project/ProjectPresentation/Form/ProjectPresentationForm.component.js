@@ -1,4 +1,5 @@
 import { Box, Button, Typography } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { REQUIRED_SECTIONS } from './ProjectPresentationForm.properties';
@@ -12,6 +13,8 @@ const ProjectPresentationForm = ({
   wasSubmitted,
   setIsSectionCompleted,
 }) => {
+  const { t } = useTranslation('project-presentations.edit');
+
   return (
     <Box
       className={`ProjectPresentationForm ProjectPresentationForm__Container`}
@@ -22,7 +25,7 @@ const ProjectPresentationForm = ({
           variant="subtitle1"
           color="primary"
         >
-          Presentation Reference Name
+          {t('project-presentations.edit.form.fields.referenceName')}
         </Typography>
         <ProjectPresentationCoreData
           formData={formData}
@@ -37,7 +40,7 @@ const ProjectPresentationForm = ({
           variant="subtitle1"
           color="primary"
         >
-          Presentation Sections
+          {t('project-presentations.edit.form.presentation-sections')}
         </Typography>
         <ProjectPresentationsSectionsData
           formData={formData}
@@ -57,7 +60,7 @@ const ProjectPresentationForm = ({
           variant="contained"
           fullWidth
         >
-          Save
+          {t('project-presentations.edit.form.commands.save')}
         </Button>
       </Box>
     </Box>

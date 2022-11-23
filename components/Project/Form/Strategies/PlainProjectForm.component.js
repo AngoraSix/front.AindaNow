@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -13,6 +14,7 @@ const REQUIRED_SECTIONS = {
 };
 
 const PlainProjectForm = ({ formData, onFormChange, project }) => {
+  const { t } = useTranslation('projects.edit');
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const router = useRouter();
@@ -37,7 +39,7 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
           variant="subtitle1"
           color="primary"
         >
-          Project Name
+          {t('projects.edit.form.fields.project-name')}
         </Typography>
         <ProjectCoreData
           formData={formData}
@@ -53,7 +55,7 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
           variant="subtitle1"
           color="primary"
         >
-          Presentations
+          {t('projects.edit.form.fields.presentations')}
         </Typography>
         <ProjectCorePresentationsHolder
           project={project}
@@ -74,7 +76,7 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
           variant="contained"
           fullWidth
         >
-          Save
+          {t('projects.edit.form.simple.commands.save')}
         </Button>
       </Box>
       {(editingPresentationObject || editingPresentationId != null) && (

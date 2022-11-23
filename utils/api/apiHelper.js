@@ -16,3 +16,7 @@ export const obtainValidatedToken = async (req) => {
     token?.error !== 'RefreshAccessTokenError' ? token : null;
   return validatedToken;
 };
+
+export const resolveLocale = (destination, { locale, defaultLocale }) => {
+  return locale != defaultLocale ? `/${locale}${destination}` : destination;
+};

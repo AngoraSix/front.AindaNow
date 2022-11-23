@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import FormSkeleton from '../../components/common/Skeletons/FormSkeleton.component';
 import ManageProject from '../../components/Project/ManageProject';
@@ -35,6 +36,12 @@ export const getServerSideProps = async (ctx) => {
   return {
     props: {
       session: await getSession(ctx),
+      ...(await serverSideTranslations(ctx.locale, [
+        'common',
+        'projects.edit',
+        'project-presentations.edit',
+        'common.languages'
+      ])),
     },
   };
 };

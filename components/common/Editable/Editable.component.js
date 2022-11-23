@@ -1,4 +1,5 @@
 import { Popover, Typography } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import InputDialog from '../InputDialog';
@@ -11,6 +12,8 @@ const Editable = ({
   fieldValue,
   onEdit,
 }) => {
+  const { t } = useTranslation('common');
+
   // Popover modal
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -66,7 +69,7 @@ const Editable = ({
         transitionDuration={{ appear: 1000, enter: 500, exit: 650 }}
       >
         <Typography className="Editable__Popover" variant="caption">
-          Change {fieldName}
+          {t('common.editable.modify')}
         </Typography>
       </Popover>
       <InputDialog

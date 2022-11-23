@@ -15,6 +15,10 @@
   z-index: 1101;
 }
 
+.Navbar__Language {
+  color: #fafafa;
+}
+
 .Navbar__Login__Icon {
   color: #fafafa;
 }

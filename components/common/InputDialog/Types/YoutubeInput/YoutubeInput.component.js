@@ -7,6 +7,7 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React from 'react';
 import config from '../../../../../config';
@@ -15,6 +16,7 @@ import { useNotifications } from '../../../../../hooks/app';
 import DnDContainer from '../../../Media/DnDContainer.component';
 
 const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
+  const { t } = useTranslation('common');
   const { onError } = useNotifications();
 
   const thumbnailUrl = videoMedia?.thumbnailUrl,
@@ -72,7 +74,7 @@ const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
           )}
         </DnDContainer>
         <TextField
-          label="Video ID or URL"
+          label={t('common.input-dialog.youtube.video-id')}
           value={fieldValue}
           onChange={handleChange}
           fullWidth

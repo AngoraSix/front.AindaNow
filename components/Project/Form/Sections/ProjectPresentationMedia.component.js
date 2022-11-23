@@ -1,28 +1,30 @@
 import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React from 'react';
 import PresentationSectionMediaData from '../../ProjectPresentation/Form/Sections/PresentationSectionMediaData.component';
 
-const MOBILE_DESCRIPTION = 'Time to add some visual aids...';
+const MOBILE_DESCRIPTION =
+  'projects.edit.form.steps.step.media.description.mobile';
 
-const FULL_DESCRIPTION =
-  'Media will help explain the purpose of the project in an appealing manner...';
+const FULL_DESCRIPTION = 'projects.edit.form.steps.step.media.description.full';
 
 const ProjectPresentationMedia = ({
   formData,
   onFormChange,
   withDescription,
-  isNotMobile,
+  isMobile,
   setIsCompleted,
   wasSubmitted,
 }) => {
+  const { t } = useTranslation('projects.edit');
   const onNestedFormChange = (parentField) => (nestedField, value) => {
     onFormChange(`${parentField}.${nestedField}`)(value);
   };
 
   const filterParentFormDataPath = (formDataObj, parentFormDataPath) => {
     parentFormDataPath = `${parentFormDataPath}.`;
-    let asd = Object.entries(formDataObj).reduce(
+    return Object.entries(formDataObj).reduce(
       (filteredFormData, [formDataField, formDataValue]) => {
         if (formDataField.startsWith(parentFormDataPath)) {
           return Object.assign(filteredFormData, {
@@ -33,7 +35,6 @@ const ProjectPresentationMedia = ({
       },
       {}
     );
-    return asd;
   };
 
   return (
@@ -41,7 +42,7 @@ const ProjectPresentationMedia = ({
       {withDescription && (
         <Box className="ProjectForm__Description ProjectPresentationMedia__Description">
           <Typography>
-            {isNotMobile ? FULL_DESCRIPTION : MOBILE_DESCRIPTION}
+            {t(isMobile ? FULL_DESCRIPTION : MOBILE_DESCRIPTION)}
           </Typography>
         </Box>
       )}

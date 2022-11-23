@@ -1,10 +1,12 @@
 import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import api from '../../../api';
 import FormSkeleton from '../../../components/common/Skeletons/FormSkeleton.component';
 import { resolveRoute, ROUTES } from '../../../constants';
 import DefaultLayout from '../../../layouts/DefaultLayout';
+import { resolveLocale } from '../../../utils/api/apiHelper';
 import logger from '../../../utils/logger';
 
 const ProjectViewPage = ({}) => {
@@ -30,14 +32,21 @@ export const getServerSideProps = async (ctx) => {
   try {
     const project = await api.projects.getProject(projectId, validatedToken);
 
+    const projectPresentationId = project.presentations?.[0]?.id;
+    const destination = projectPresentationId
+      ? resolveRoute(
+          ROUTES.projects.presentations.view,
+          project.id,
+          projectPresentationId
+        )
+      : resolveRoute(ROUTES.projects.presentations.list);
+
+    const i18nDestination = resolveLocale(destination, ctx);
+
     return {
       redirect: {
         permanent: false,
-        destination: resolveRoute(
-          ROUTES.projects.presentations.view,
-          project.id,
-          project.presentations?.[0]?.id
-        ),
+        destination: i18nDestination,
       },
     };
   } catch (err) {
@@ -48,6 +57,10 @@ export const getServerSideProps = async (ctx) => {
     props: {
       ...props,
       session,
+      ...(await serverSideTranslations(ctx.locale, [
+        'common',
+        'projects.view',
+      ])),
     },
   };
 };

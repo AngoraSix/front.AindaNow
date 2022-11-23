@@ -1,6 +1,7 @@
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { Badge, Box, Button, Paper } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { MEDIA_TYPES } from '../../../../../constants';
@@ -13,6 +14,7 @@ const Input = styled('input')({
 const ACTIVE_MEDIA_INIT_STATE = { index: 0, upwards: true };
 
 const ImageUploadInput = ({ handleMediaInput, media, allowsMultiple }) => {
+  const { t } = useTranslation('common');
   const [activeMedia, setActiveMedia] = useState(ACTIVE_MEDIA_INIT_STATE);
 
   const onFileInputChange = ({ target: { files } }) => {
@@ -86,7 +88,7 @@ const ImageUploadInput = ({ handleMediaInput, media, allowsMultiple }) => {
             className="ImageUploadInput__DropZone__Button"
             sx={{ color: 'primary.dark' }}
           >
-            Browse
+            {t('common.input-dialog.browse')}
           </Button>
         </label>
       </DnDContainer>
