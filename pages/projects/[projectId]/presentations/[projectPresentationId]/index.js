@@ -35,8 +35,6 @@ ProjectPresentationViewPage.propTypes = {
 };
 
 export const getServerSideProps = async (ctx) => {
-  console.log("PPPPPPPP");
-  console.log(ctx.locale);
   let props = {};
   const { projectId, projectPresentationId } = ctx.params;
   const session = await getSession(ctx);

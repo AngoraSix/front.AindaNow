@@ -11,6 +11,7 @@ import {
   IconButton,
   Typography,
 } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -18,6 +19,7 @@ import { resolveRoute, ROUTES } from '../../../../../constants';
 import PresentationSectionPreview from './PresentationSectionPreview.component';
 
 const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
+  const { t } = useTranslation(['project-presentations.edit', 'common']);
   const [expanded, setExpanded] = useState(false);
   const router = useRouter();
 
@@ -49,8 +51,8 @@ const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
               [{p.sections?.length}
               {!isMobile
                 ? p.sections?.length > 1
-                  ? ' Sections'
-                  : ' Section'
+                  ? ' ' + `${t('common.domain.sections', { ns: 'common' })}`
+                  : ' ' + `${t('common.domain.section', { ns: 'common' })}`
                 : ''}
               ]
             </Typography>
@@ -120,7 +122,7 @@ const ProjectCorePresentationsHolder = ({ project, isMobile }) => {
             )
           }
         >
-          Add Presentation
+          {t('project-presentations.edit.form.commands.add-section')}
         </Button>
         <IconButton
           aria-label="create"
