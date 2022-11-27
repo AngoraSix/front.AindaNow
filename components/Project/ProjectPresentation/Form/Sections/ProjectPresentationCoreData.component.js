@@ -37,7 +37,7 @@ const ProjectPresentationCoreData = ({
             {...PRESENTATION_CORE_FIELDS.referenceName}
             label={
               formData.referenceName
-                ? t('project-presentations.edit.form.fields.referenceName')
+                ? t('project-presentations.edit.form.fields.reference-name')
                 : t(PRESENTATION_CORE_FIELDS.referenceName.label)
             }
             value={formData[PRESENTATION_CORE_FIELDS.referenceName.key] || ''}

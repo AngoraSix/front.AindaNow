@@ -25,7 +25,7 @@ const ProjectPresentationForm = ({
           variant="subtitle1"
           color="primary"
         >
-          {t('project-presentations.edit.form.fields.referenceName')}
+          {t('project-presentations.edit.form.fields.reference-name')}
         </Typography>
         <ProjectPresentationCoreData
           formData={formData}

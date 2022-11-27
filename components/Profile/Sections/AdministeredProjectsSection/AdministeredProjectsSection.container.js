@@ -28,7 +28,6 @@ const AdministeredProjectsSectionContainer = ({
       const administeredProjectsInfo = await api.front.getAdministeredProjects(
         contributorId
       );
-      console.log(isCurrentContributor);
       const filteredAdministeredProjectsInfo = isCurrentContributor
         ? administeredProjectsInfo
         : administeredProjectsInfo.filter((ap) => ap.presentations);

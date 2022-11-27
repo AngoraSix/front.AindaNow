@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from 'redux';
 import api from '../api';
-import App from '../components/App';
+import A6App from '../components/App';
 import config from '../config';
 import reducers from '../store/reducers';
 import '../styles/App.css';
@@ -22,6 +22,7 @@ import '../styles/ProjectPresentationsList.css';
 import '../styles/ProjectPresentationView.css';
 import { getEnv } from '../utils/env';
 import { appWithTranslation } from 'next-i18next';
+import App from "next/app"
 
 const A6WebApp = ({ Component, pageProps, preloadedState, env }) => {
   const store = createStore(reducers, preloadedState);
@@ -32,9 +33,9 @@ const A6WebApp = ({ Component, pageProps, preloadedState, env }) => {
   return (
     <ReduxProvider store={store}>
       <NextAuthProvider session={pageProps.session} refetchInterval={1 * 30}>
-        <App>
+        <A6App>
           <Component {...pageProps} />
-        </App>
+        </A6App>
       </NextAuthProvider>
     </ReduxProvider>
   );
@@ -54,6 +55,7 @@ A6WebApp.propTypes = {
 };
 
 A6WebApp.getInitialProps = async ({ ctx }) => {
+  const nextProps = App.getInitialProps(ctx);
   const env = getEnv();
 
   config.applyEnvConfig(env);
@@ -64,6 +66,7 @@ A6WebApp.getInitialProps = async ({ ctx }) => {
   const preloadedState = store.getState();
 
   return {
+    ...nextProps,
     preloadedState,
     env,
   };

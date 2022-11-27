@@ -18,5 +18,7 @@
     "common.media.options.image": "Imagen",
     "common.media.options.image.dialog": "Cargar nueva imagen",
     "common.media.options.video": "Video",
-    "common.media.options.video.dialog": "Ingresa el ID o URL del video de Youtube"
+    "common.media.options.video.dialog": "Ingresa el ID o URL del video de Youtube",
+    "common.domain.section": "Sección",
+    "common.domain.sections": "Secciones"
 }
