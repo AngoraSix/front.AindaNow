@@ -1,4 +1,6 @@
 {
+    "profile.page.title.template": ":profile",
+    "profile.page.description.template": "Perfil de :profile",
     "profile.administered-projects.title": "Proyectos Administrados",
     "profile.administered-projects.empty-message": "El/la Colaborador/a no tiene proyectos visibles",
     "profile.administered-projects.candidates.title": "Candidatos para Colaboracion",

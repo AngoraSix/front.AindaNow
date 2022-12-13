@@ -1,4 +1,5 @@
 import { getSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PropTypes from 'prop-types';
 import api from '../../../../../api';
@@ -12,8 +13,23 @@ const ProjectPresentationViewPage = ({
   projectPresentationActions,
   isAdmin,
 }) => {
+  const { t } = useTranslation('project-presentations.view');
+
   return (
-    <ProjectPresentationViewLayout>
+    <ProjectPresentationViewLayout
+      headData={{
+        title: t('project-presentations.view.page.title.template').replace(
+          ':projectPresentation',
+          projectPresentation.project?.name || projectPresentation.referenceName
+        ),
+        description: t(
+          'project-presentations.view.page.description.template'
+        ).replace(
+          ':projectPresentation',
+          projectPresentation.project?.name || projectPresentation.referenceName
+        ),
+      }}
+    >
       <ProjectPresentationView
         projectPresentation={projectPresentation}
         projectPresentationActions={projectPresentationActions}

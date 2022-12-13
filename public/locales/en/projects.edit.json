@@ -1,4 +1,8 @@
 {
+    "projects.edit.page.title.template": ":project - Edit",
+    "projects.edit.page.description.template": "Editing Project :project",
+    "projects.new.page.title": "New Project",
+    "projects.new.page.description": "Creating new project",
     "projects.edit.title.edit": "Edit Project",
     "projects.edit.title.new": "New Project",
     "projects.edit.form.steps.next": "Next",

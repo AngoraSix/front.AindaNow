@@ -1,7 +1,8 @@
 {
-    "project-presentations.actions.show-interest.tooltip": "I'm Interested!",
-    "project-presentations.actions.withdraw-interest.tooltip": "Quitar interés",
-    "project-presentations.actions.edit.tooltip": "Editar",
+    "project-presentations.edit.page.title.template": ":projectPresentation - Edición",
+    "project-presentations.edit.page.description.template": "Editando presentación de proyecto :projectPresentation",
+    "project-presentations.new.page.title.template": ":project - Nueva Presentación de Proyecto",
+    "project-presentations.new.page.description.template": "Creando nueva presentación para proyecto :project",
     "project-presentations.actions.dialog.inputs.contact": "Contacto",
     "project-presentations.actions.dialog.commands.cancel": "Cancelar",
     "project-presentations.actions.dialog.commands.done": "Finalizar",

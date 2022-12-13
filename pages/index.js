@@ -1,27 +1,27 @@
 import { getSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
-import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React from 'react';
 import api from '../api';
 import ProjectPresentationsList from '../components/ProjectPresentationsList';
-import config from '../config';
 import ProjectsLayout from '../layouts/ProjectsLayout/ProjectsLayout';
 import logger from '../utils/logger';
 
 const HomePage = ({ projectPresentationsList }) => {
-  return (
-    <React.Fragment>
-      <Head>
-        <title>{config.site.head.title}</title>
-      </Head>
+  const { t } = useTranslation('project-presentations.list');
 
-      <ProjectsLayout>
-        <ProjectPresentationsList
-          projectPresentationsList={projectPresentationsList}
-        />
-      </ProjectsLayout>
-    </React.Fragment>
+  return (
+    <ProjectsLayout
+      headData={{
+        title: t('project-presentations.list.page.title'),
+        description: t('project-presentations.list.page.description'),
+      }}
+    >
+      <ProjectPresentationsList
+        projectPresentationsList={projectPresentationsList}
+      />
+    </ProjectsLayout>
   );
 };
 

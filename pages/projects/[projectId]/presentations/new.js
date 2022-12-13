@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
@@ -17,6 +18,7 @@ const NOT_ADMIN_ERROR_MESSAGE =
   'You need admin privileges to edit this Project';
 
 const NewProjectPresentationPage = ({ session, project, isAdmin }) => {
+  const { t } = useTranslation('project-presentations.edit');
   useActiveSession();
   const { onError } = useNotifications();
   const router = useRouter();
@@ -41,7 +43,17 @@ const NewProjectPresentationPage = ({ session, project, isAdmin }) => {
     );
   }
   return (
-    <DefaultLayout>
+    <DefaultLayout
+      headData={{
+        title: t('project-presentations.new.page.title.template').replace(
+          ':project',
+          project.name
+        ),
+        description: t(
+          'project-presentations.new.page.description.template'
+        ).replace(':project', project.name),
+      }}
+    >
       <ProjectPresentationForm project={project} />
     </DefaultLayout>
   );

@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import DefaultLayout from '../DefaultLayout';
 
-const ProjectsLayout = ({ children }) => {
-  let headData = {};
-
+const ProjectsLayout = ({ children, headData }) => {
   return (
     <DefaultLayout
       className="ProjectsLayout__Page"
@@ -16,7 +14,9 @@ const ProjectsLayout = ({ children }) => {
   );
 };
 
-ProjectsLayout.defaultProps = {};
+ProjectsLayout.defaultProps = {
+  headData: {},
+};
 
 ProjectsLayout.propTypes = {
   children: PropTypes.oneOfType([

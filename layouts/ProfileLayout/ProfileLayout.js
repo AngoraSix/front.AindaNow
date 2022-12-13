@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import DefaultLayout from '../DefaultLayout';
 
-const ProfileLayout = ({ children }) => {
-  let headData = {};
-
+const ProfileLayout = ({ children, headData }) => {
   return (
     <DefaultLayout
       headData={headData}
@@ -16,7 +14,9 @@ const ProfileLayout = ({ children }) => {
   );
 };
 
-ProfileLayout.defaultProps = {};
+ProfileLayout.defaultProps = {
+  headData: {},
+};
 
 ProfileLayout.propTypes = {
   children: PropTypes.oneOfType([
