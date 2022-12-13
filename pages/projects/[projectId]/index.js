@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import api from '../../../api';
@@ -10,6 +11,7 @@ import { resolveLocale } from '../../../utils/api/apiHelper';
 import logger from '../../../utils/logger';
 
 const ProjectViewPage = ({}) => {
+  const { t } = useTranslation('projects.view');
   return (
     <DefaultLayout>
       <Box>

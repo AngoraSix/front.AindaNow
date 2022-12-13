@@ -1,4 +1,5 @@
 import { getSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -9,10 +10,14 @@ import ProfileLayout from '../../layouts/ProfileLayout';
 import logger from '../../utils/logger';
 
 const ContributorProfile = ({ profile, isCurrentContributor }) => {
+  const { t } = useTranslation('profile');
   isCurrentContributor && useActiveSession(true);
 
   return (
-    <ProfileLayout>
+    <ProfileLayout headData={{
+      title: t('profile.page.title.template').replace(":profile", `${profile.firstName} ${profile.lastName}`),
+      description: t('profile.page.description.template').replace(":profile", `${profile.firstName} ${profile.lastName}`),
+    }}>
       <Profile profile={profile} isCurrentContributor={isCurrentContributor} />
     </ProfileLayout>
   );

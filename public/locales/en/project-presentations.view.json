@@ -1,4 +1,6 @@
 {
+    "project-presentations.view.page.title.template": ":projectPresentation",
+    "project-presentations.view.page.description.template": "Viewing Project Presentation data: :projectPresentation",
     "project-presentations.actions.show-interest.tooltip": "I'm Interested!",
     "project-presentations.actions.withdraw-interest.tooltip": "Withdraw interest",
     "project-presentations.actions.edit.tooltip": "Edit",

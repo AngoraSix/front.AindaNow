@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { getSession } from 'next-auth/react';
+import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
@@ -23,6 +24,7 @@ const EditProjectPresentationPage = ({
   projectPresentationId,
   isAdmin,
 }) => {
+  const { t } = useTranslation('project-presentations.edit');
   useActiveSession();
   const { onError } = useNotifications();
   const router = useRouter();
@@ -51,7 +53,17 @@ const EditProjectPresentationPage = ({
     );
   }
   return (
-    <DefaultLayout>
+    <DefaultLayout
+      headData={{
+        title: t('project-presentations.edit.page.title.template').replace(
+          ':projectPresentation',
+          projectPresentation.referenceName
+        ),
+        description: t(
+          'project-presentations.edit.page.description.template'
+        ).replace(':projectPresentation', projectPresentation.referenceName),
+      }}
+    >
       <ProjectPresentationForm
         projectPresentation={projectPresentation}
         project={projectPresentation.project}

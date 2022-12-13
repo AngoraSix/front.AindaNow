@@ -2,9 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import DefaultLayout from '../DefaultLayout';
 
-const ProjectPresentationViewLayout = ({ children }) => {
-  let headData = {};
-
+const ProjectPresentationViewLayout = ({ children, headData }) => {
   return (
     <DefaultLayout
       className="ProjectPresentationViewLayout__Page"
@@ -16,7 +14,9 @@ const ProjectPresentationViewLayout = ({ children }) => {
   );
 };
 
-ProjectPresentationViewLayout.defaultProps = {};
+ProjectPresentationViewLayout.defaultProps = {
+  headData: {},
+};
 
 ProjectPresentationViewLayout.propTypes = {
   children: PropTypes.oneOfType([
