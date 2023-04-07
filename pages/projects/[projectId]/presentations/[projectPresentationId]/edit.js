@@ -40,7 +40,7 @@ const EditProjectPresentationPage = ({
       router.push(viewURL);
     }
     return () => {};
-  }, []);
+  }, [isAdmin, onError, projectId, projectPresentationId, router, session]);
 
   if (!session || session.error || !projectPresentation || !isAdmin) {
     logger.error('Log in to modify new Project');

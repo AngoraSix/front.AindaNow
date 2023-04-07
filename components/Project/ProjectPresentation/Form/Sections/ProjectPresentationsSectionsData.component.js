@@ -72,7 +72,7 @@ const ProjectPresentationsSectionsData = ({
 
   useEffect(() => {
     setIsCompleted(_determineIfIsComplete({ ...formData }));
-  }, []);
+  }, [formData, setIsCompleted]);
 
   const handleFocusChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);

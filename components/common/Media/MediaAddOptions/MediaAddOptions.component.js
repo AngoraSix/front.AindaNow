@@ -40,6 +40,9 @@ const MediaAddOptions = ({
 
   useEffect(() => {
     const handleRouteChange = (url, { shallow }) => {
+      const handleDialogClose = () => {
+        onAddMediaOptionClick(null);
+      };
       if (!shallow && url[url.length - 1] !== '#') {
         handleDialogClose();
       }
@@ -49,7 +52,7 @@ const MediaAddOptions = ({
     return () => {
       router.events.off('hashChangeStart', handleRouteChange);
     };
-  }, []);
+  }, [onAddMediaOptionClick, router.events]);
 
   const handleShowNewOptions = () => {
     setNewOptionsVisible(!newOptionsVisible);
@@ -60,9 +63,6 @@ const MediaAddOptions = ({
     router.push('#', undefined, { shallow: true });
   };
 
-  const handleDialogClose = () => {
-    onAddMediaOptionClick(null);
-  };
   return (
     <Box className="MediaList__Add__Options">
       {isMobile && (

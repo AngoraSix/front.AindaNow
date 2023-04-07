@@ -30,7 +30,7 @@ const EditProjectPage = ({ session, project, isAdmin }) => {
       router.push(viewURL);
     }
     return () => {};
-  }, []);
+  }, [isAdmin, onError, router, session]);
 
   if (!session || session.error || !project || !isAdmin) {
     logger.error('Log in to modify new Project');

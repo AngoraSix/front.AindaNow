@@ -13,7 +13,7 @@ const ProjectPresentationCoreData = ({
   const { t } = useTranslation('project-presentations.edit');
   useEffect(() => {
     setIsCompleted(!!formData[PRESENTATION_CORE_FIELDS.referenceName.key]);
-  }, []);
+  }, [formData, setIsCompleted]);
 
   const onFieldChange = (property) => (event) => {
     let {

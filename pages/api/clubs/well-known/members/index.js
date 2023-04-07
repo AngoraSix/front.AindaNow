@@ -4,7 +4,7 @@ import APIError from '../../../../../utils/errors/APIError';
 import MethodNotAllowedError from '../../../../../utils/errors/MethodNotAllowedError';
 import logger from '../../../../../utils/logger';
 
-export default async (req, res) => {
+const page = async (req, res) => {
   if (req.method === 'POST') {
     const validatedToken = await obtainValidatedToken(req);
     try {
@@ -39,3 +39,5 @@ export default async (req, res) => {
     res.status(mnaError.status).json(mnaError.asObject());
   }
 };
+
+export default page;

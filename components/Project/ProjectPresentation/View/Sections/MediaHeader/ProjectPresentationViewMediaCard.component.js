@@ -1,4 +1,5 @@
 import { Box, Paper } from '@mui/material';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
@@ -26,7 +27,7 @@ const ProjectPresentationViewMediaCard = ({ imagesList, interval }) => {
     return () => {
       clearInterval(intervalObject);
     };
-  }, []);
+  }, [imagesList, interval]);
 
   return (
     <Paper
@@ -43,7 +44,11 @@ const ProjectPresentationViewMediaCard = ({ imagesList, interval }) => {
           animationDuration: `${cardInterval}ms`,
         }}
       ></Box>
-      <img className={'MediaCard__Image'} src={imagesList[activeMediaIndex]} />
+      <Image
+        className={'MediaCard__Image'}
+        alt={'Project Media Image'}
+        src={imagesList[activeMediaIndex]}
+      />
     </Paper>
   );
 };

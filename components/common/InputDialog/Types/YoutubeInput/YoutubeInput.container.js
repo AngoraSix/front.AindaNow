@@ -15,7 +15,7 @@ const YoutubeInputContainer = ({ onChange, setIsValid, ...args }) => {
 
   useEffect(() => {
     setIsValid(false);
-  }, []);
+  }, [setIsValid]);
 
   const handleChange = async (value, videoMedia) => {
     if (Media.isMedia(videoMedia)) {

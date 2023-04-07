@@ -11,13 +11,21 @@ import logger from '../../utils/logger';
 
 const ContributorProfile = ({ profile, isCurrentContributor }) => {
   const { t } = useTranslation('profile');
-  isCurrentContributor && useActiveSession(true);
+  useActiveSession(true, isCurrentContributor);
 
   return (
-    <ProfileLayout headData={{
-      title: t('profile.page.title.template').replace(":profile", `${profile.firstName} ${profile.lastName}`),
-      description: t('profile.page.description.template').replace(":profile", `${profile.firstName} ${profile.lastName}`),
-    }}>
+    <ProfileLayout
+      headData={{
+        title: t('profile.page.title.template').replace(
+          ':profile',
+          `${profile.firstName} ${profile.lastName}`
+        ),
+        description: t('profile.page.description.template').replace(
+          ':profile',
+          `${profile.firstName} ${profile.lastName}`
+        ),
+      }}
+    >
       <Profile profile={profile} isCurrentContributor={isCurrentContributor} />
     </ProfileLayout>
   );

@@ -191,7 +191,7 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
       {activeStep === steps.length ? (
         <React.Fragment>
           <Typography sx={{ mt: 2, mb: 1 }}>
-            All steps completed - shouldn't reach this point
+            All steps completed - shouldn&apos;t reach this point
           </Typography>
         </React.Fragment>
       ) : (

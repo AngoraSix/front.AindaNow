@@ -1,9 +1,10 @@
 import { Box, Paper, Typography } from '@mui/material';
 import classnames from 'classnames';
+import Image from 'next/image';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
-import { MEDIA_TYPES, resolveRoute, ROUTES } from '../../../constants';
+import { MEDIA_TYPES, ROUTES, resolveRoute } from '../../../constants';
 import YoutubePreview from '../../common/Media/Previews/YoutubePreview';
 
 const _allMedia = (projectPresentation) => {
@@ -104,8 +105,9 @@ const ProjectCard = ({ projectPresentation }) => {
             {projectPresentation.sections[0].description}
           </Typography>
         </Box>
-        <img
+        <Image
           src={mainImage}
+          alt={`Main image for project ${projectPresentation.project.name}`}
           className={classnames('ProjectCard__Image', {
             'ProjectCard__Image--hidden': !!isVideoPlaying,
           })}

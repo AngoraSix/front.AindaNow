@@ -5,7 +5,7 @@ import { getEnv } from '../../utils/env';
 import api from '../../api';
 import config from '../../config';
 
-export default async (req, res) => {
+const page = async (req, res) => {
   if (req.method === 'POST') {
     const env = getEnv();
     config.applyEnvConfig(env);
@@ -31,3 +31,5 @@ export default async (req, res) => {
     res.status(mnaError.status).json(mnaError.asObject());
   }
 };
+
+export default page;

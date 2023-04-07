@@ -36,7 +36,7 @@ const MediaDnDContainer = ({
   });
   useEffect(() => {
     onChange(mediaDataState.mediaList);
-  }, [mediaDataState.mediaList]);
+  }, [mediaDataState.mediaList, onChange]);
 
   const { onError } = useNotifications();
 

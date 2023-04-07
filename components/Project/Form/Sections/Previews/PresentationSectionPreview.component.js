@@ -1,4 +1,5 @@
 import { Box, Divider, Typography } from '@mui/material';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -15,7 +16,8 @@ const PresentationSectionPreview = ({ presentationSection }) => {
       </Divider>
       <Box className="PresentationSectionPreview__Data">
         <Box className="PresentationSectionPreview__Media__Container">
-          <img
+          <Image
+            alt={presentationSection.mainMedia.key}
             className="PresentationSectionPreview__Media__Image"
             src={presentationSection.mainMedia.thumbnailUrl}
             loading="lazy"

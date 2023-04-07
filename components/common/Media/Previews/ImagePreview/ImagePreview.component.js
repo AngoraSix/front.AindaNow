@@ -3,6 +3,7 @@ import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 import { Box, Grid, IconButton, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -19,11 +20,12 @@ const ImagePreview = ({ media, allowsZoomingIn }) => {
 
   return media ? (
     <React.Fragment>
-      <img
+      <Image
         onClick={isMobile ? onZoomIn : undefined}
         className={`MediaPreview__Image ${
           isZoomed ? 'MediaPreview__Image__Zoomed' : ''
         }`}
+        alt={media?.key}
         src={media?.thumbnailUrl}
       />
       {allowsZoomingIn && isMobile && (
