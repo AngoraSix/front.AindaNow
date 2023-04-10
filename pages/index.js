@@ -51,7 +51,6 @@ export const getServerSideProps = async (ctx) => {
   } catch (err) {
     logger.error('err', err);
   }
-
   return {
     props,
   };

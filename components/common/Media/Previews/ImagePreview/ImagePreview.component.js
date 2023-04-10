@@ -20,14 +20,19 @@ const ImagePreview = ({ media, allowsZoomingIn }) => {
 
   return media ? (
     <React.Fragment>
-      <Image
-        onClick={isMobile ? onZoomIn : undefined}
-        className={`MediaPreview__Image ${
-          isZoomed ? 'MediaPreview__Image__Zoomed' : ''
-        }`}
-        alt={media?.key}
-        src={media?.thumbnailUrl}
-      />
+      <Box className="Commons__NextImageContainer">
+        <Image
+          onClick={isMobile ? onZoomIn : undefined}
+          className={`MediaPreview__Image ${
+            isZoomed ? 'MediaPreview__Image__Zoomed' : ''
+          }`}
+          alt={media?.key}
+          src={media?.thumbnailUrl}
+          layout="fill"
+          placeholder="blur"
+          blurDataURL={media?.thumbnailUrl}
+        />
+      </Box>
       {allowsZoomingIn && isMobile && (
         <IconButton
           className={`MediaPreview__Image__ZoomIcon ${

@@ -60,11 +60,16 @@ const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
           allowedMediaTypes={[MEDIA_TYPES.VIDEO_YOUTUBE]}
         >
           {!!thumbnailUrl ? (
-            <Image
-              alt={label}
-              className="YoutubeDialog__Thumbnail__Preview"
-              src={thumbnailUrl}
-            />
+            <Box className="Commons__NextImageContainer">
+              <Image
+                alt={label}
+                className="YoutubeDialog__Thumbnail__Preview"
+                src={thumbnailUrl}
+                layout="fill"
+                placeholder="blur"
+                blurDataURL={thumbnailUrl}
+              />
+            </Box>
           ) : (
             <div className="YoutubeDialog__Thumbnail__PreviewPlaceholder">
               <YouTubeIcon

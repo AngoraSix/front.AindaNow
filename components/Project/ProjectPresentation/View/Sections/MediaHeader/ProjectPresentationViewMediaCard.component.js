@@ -44,11 +44,16 @@ const ProjectPresentationViewMediaCard = ({ imagesList, interval }) => {
           animationDuration: `${cardInterval}ms`,
         }}
       ></Box>
-      <Image
-        className={'MediaCard__Image'}
-        alt={'Project Media Image'}
-        src={imagesList[activeMediaIndex]}
-      />
+      <Box className="Commons__NextImageContainer">
+        <Image
+          className={'MediaCard__Image'}
+          alt={'Project Media Image'}
+          src={imagesList[activeMediaIndex]}
+          layout="fill"
+          placeholder="blur"
+          blurDataURL={imagesList[activeMediaIndex]}
+        />
+      </Box>
     </Paper>
   );
 };

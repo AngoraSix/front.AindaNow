@@ -16,12 +16,15 @@ const PresentationSectionPreview = ({ presentationSection }) => {
       </Divider>
       <Box className="PresentationSectionPreview__Data">
         <Box className="PresentationSectionPreview__Media__Container">
-          <Image
-            alt={presentationSection.mainMedia.key}
-            className="PresentationSectionPreview__Media__Image"
-            src={presentationSection.mainMedia.thumbnailUrl}
-            loading="lazy"
-          />
+          <Box className="Commons__NextImageContainer">
+            <Image
+              alt={presentationSection.mainMedia.key}
+              className="PresentationSectionPreview__Media__Image"
+              src={presentationSection.mainMedia.thumbnailUrl}
+              loading="lazy"
+              layout="fill"
+            />
+          </Box>
         </Box>
         {presentationSection.description && (
           <Box className="PresentationSectionPreview__Description__Container">

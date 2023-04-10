@@ -105,13 +105,19 @@ const ProjectCard = ({ projectPresentation }) => {
             {projectPresentation.sections[0].description}
           </Typography>
         </Box>
-        <Image
-          src={mainImage}
-          alt={`Main image for project ${projectPresentation.project.name}`}
-          className={classnames('ProjectCard__Image', {
-            'ProjectCard__Image--hidden': !!isVideoPlaying,
-          })}
-        />
+
+        <Box className="Commons__NextImageContainer">
+          <Image
+            src={mainImage}
+            alt={`Main image for project ${projectPresentation.project.name}`}
+            className={classnames('ProjectCard__Image', {
+              'ProjectCard__Image--hidden': !!isVideoPlaying,
+            })}
+            layout="fill"
+            placeholder="blur"
+            blurDataURL={mainImage}
+          />
+        </Box>
         {currentActiveVideo && (
           <YoutubePreview
             media={currentActiveVideo}
