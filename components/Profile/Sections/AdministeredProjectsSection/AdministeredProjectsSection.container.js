@@ -52,7 +52,8 @@ const AdministeredProjectsSectionContainer = ({
       }
     };
     fetchData();
-  }, [contributorId, doLoad, isCurrentContributor, onError]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contributorId, isCurrentContributor]);
 
   const loadMembers = async (members) => {
     // ACA cambiar por members y merge data con nuevos attributes!

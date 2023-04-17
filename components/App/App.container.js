@@ -33,7 +33,8 @@ const AppContainer = (props) => {
       router.events.off('routeChangeComplete', finishLoading);
       router.events.off('routeChangeError', finishLoading);
     };
-  }, [doLoad, router.events]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.events]);
 
   return <App isLoading={isLoading} {...props} />;
 };

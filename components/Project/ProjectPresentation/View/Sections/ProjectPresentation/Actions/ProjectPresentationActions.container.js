@@ -56,7 +56,8 @@ const ProjectPresentationActionsContainer = ({
       }
     };
     fetchData();
-  }, [activeSession, doLoad, projectPresentation.projectId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSession, projectPresentation.projectId]);
 
   const onFormChange = (property) => (eventOrValue) => {
     const partialFormData = {

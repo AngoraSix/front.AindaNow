@@ -29,6 +29,7 @@ const ImagePreview = ({ media, allowsZoomingIn }) => {
           alt={media?.key}
           src={media?.thumbnailUrl}
           layout="fill"
+          fill={true}
           placeholder="blur"
           blurDataURL={media?.thumbnailUrl}
         />

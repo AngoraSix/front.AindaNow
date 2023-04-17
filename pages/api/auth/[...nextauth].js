@@ -72,6 +72,7 @@ const oauthConfig = {
   providers: [oauthProviderConfig],
   callbacks: oauthCallbacksConfig,
   ...oauthFrameworkConfig,
+  debug: true,
 };
 
 export default NextAuth(oauthConfig);

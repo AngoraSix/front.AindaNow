@@ -66,6 +66,7 @@ const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
                 className="YoutubeDialog__Thumbnail__Preview"
                 src={thumbnailUrl}
                 layout="fill"
+                fill={true}
                 placeholder="blur"
                 blurDataURL={thumbnailUrl}
               />

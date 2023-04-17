@@ -7,7 +7,7 @@ import {
   Box,
   IconButton,
   ImageListItem,
-  ImageListItemBar
+  ImageListItemBar,
 } from '@mui/material';
 import Image from 'next/image';
 import PropTypes from 'prop-types';
@@ -91,7 +91,13 @@ const MediaListCard = ({
           MEDIA_TYPE_MAP[media.mediaType]?.classModifier || 'Default'
         }`}
       />
-      <Image ref={preview} alt={media.key} src={media.thumbnailUrl} loading="lazy" />
+      <Image
+        ref={preview}
+        alt={media.key}
+        src={media.thumbnailUrl}
+        loading="lazy"
+        fill={true}
+      />
       <ImageListItemBar
         actionPosition="left"
         actionIcon={

@@ -83,6 +83,7 @@ const Navbar = () => {
                   alt="AngoraSix"
                   title="AngoraSix"
                   layout="fill"
+                  fill={true}
                   placeholder="blur"
                   blurDataURL={config.site.head.image.logo}
                   priority={true}
@@ -142,6 +143,7 @@ const Navbar = () => {
                   alt="AngoraSix"
                   title="AngoraSix"
                   layout="fill"
+                  fill={true}
                   placeholder="blur"
                   blurDataURL={config.site.head.image.logo}
                   priority={true}

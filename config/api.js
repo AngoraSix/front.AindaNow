@@ -19,6 +19,7 @@ class Api {
         env.APIPARAMS_CLUBS_WELLKNOWN_CONTRIBUTORCANDIDATES ||
         'contributor-candidates',
     };
+    this.mediaOverrideBaseURL = env.AN_FRONT_PUBLIC_MEDIA_SERVER_BASE_URL;
   }
 }
 

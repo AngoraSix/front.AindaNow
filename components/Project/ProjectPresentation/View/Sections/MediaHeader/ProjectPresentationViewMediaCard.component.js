@@ -50,6 +50,7 @@ const ProjectPresentationViewMediaCard = ({ imagesList, interval }) => {
           alt={'Project Media Image'}
           src={imagesList[activeMediaIndex]}
           layout="fill"
+          fill={true}
           placeholder="blur"
           blurDataURL={imagesList[activeMediaIndex]}
         />

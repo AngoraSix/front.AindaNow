@@ -23,6 +23,7 @@ const PresentationSectionPreview = ({ presentationSection }) => {
               src={presentationSection.mainMedia.thumbnailUrl}
               loading="lazy"
               layout="fill"
+              fill={true}
             />
           </Box>
         </Box>

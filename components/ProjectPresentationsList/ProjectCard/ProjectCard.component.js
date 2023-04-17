@@ -114,6 +114,7 @@ const ProjectCard = ({ projectPresentation }) => {
               'ProjectCard__Image--hidden': !!isVideoPlaying,
             })}
             layout="fill"
+            fill={true}
             placeholder="blur"
             blurDataURL={mainImage}
           />
