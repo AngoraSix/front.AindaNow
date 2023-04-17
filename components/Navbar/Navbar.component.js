@@ -18,7 +18,7 @@ import {
 import Cookies from 'js-cookie';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -82,12 +82,12 @@ const Navbar = () => {
                   src={config.site.head.image.logo}
                   alt="AngoraSix"
                   title="AngoraSix"
-                  layout="fill"
                   fill={true}
                   placeholder="blur"
                   blurDataURL={config.site.head.image.logo}
                   priority={true}
-                />
+                  fill
+                  sizes="100vw" />
               </Box>
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -142,12 +142,12 @@ const Navbar = () => {
                   src={config.site.head.image.logo}
                   alt="AngoraSix"
                   title="AngoraSix"
-                  layout="fill"
                   fill={true}
                   placeholder="blur"
                   blurDataURL={config.site.head.image.logo}
                   priority={true}
-                />
+                  fill
+                  sizes="100vw" />
               </Box>
             </Box>
 

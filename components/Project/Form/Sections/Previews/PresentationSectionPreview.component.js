@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from '@mui/material';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -22,9 +22,9 @@ const PresentationSectionPreview = ({ presentationSection }) => {
               className="PresentationSectionPreview__Media__Image"
               src={presentationSection.mainMedia.thumbnailUrl}
               loading="lazy"
-              layout="fill"
               fill={true}
-            />
+              fill
+              sizes="100vw" />
           </Box>
         </Box>
         {presentationSection.description && (

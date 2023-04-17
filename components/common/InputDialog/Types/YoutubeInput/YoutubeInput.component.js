@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useTranslation } from 'next-i18next';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import PropTypes from 'prop-types';
 import React from 'react';
 import config from '../../../../../config';
@@ -65,11 +65,11 @@ const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
                 alt={label}
                 className="YoutubeDialog__Thumbnail__Preview"
                 src={thumbnailUrl}
-                layout="fill"
                 fill={true}
                 placeholder="blur"
                 blurDataURL={thumbnailUrl}
-              />
+                fill
+                sizes="100vw" />
             </Box>
           ) : (
             <div className="YoutubeDialog__Thumbnail__PreviewPlaceholder">

@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from '@mui/material';
 import classnames from 'classnames';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
@@ -113,11 +113,11 @@ const ProjectCard = ({ projectPresentation }) => {
             className={classnames('ProjectCard__Image', {
               'ProjectCard__Image--hidden': !!isVideoPlaying,
             })}
-            layout="fill"
             fill={true}
             placeholder="blur"
             blurDataURL={mainImage}
-          />
+            fill
+            sizes="100vw" />
         </Box>
         {currentActiveVideo && (
           <YoutubePreview

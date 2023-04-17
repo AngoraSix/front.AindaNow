@@ -9,7 +9,7 @@ import {
   ImageListItem,
   ImageListItemBar,
 } from '@mui/material';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
@@ -97,7 +97,10 @@ const MediaListCard = ({
         src={media.thumbnailUrl}
         loading="lazy"
         fill={true}
-      />
+        style={{
+          maxWidth: "100%",
+          height: "auto"
+        }} />
       <ImageListItemBar
         actionPosition="left"
         actionIcon={

@@ -1,5 +1,5 @@
 import { Box, Paper } from '@mui/material';
-import Image from "next/legacy/image";
+import Image from "next/image";
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
@@ -49,11 +49,11 @@ const ProjectPresentationViewMediaCard = ({ imagesList, interval }) => {
           className={'MediaCard__Image'}
           alt={'Project Media Image'}
           src={imagesList[activeMediaIndex]}
-          layout="fill"
           fill={true}
           placeholder="blur"
           blurDataURL={imagesList[activeMediaIndex]}
-        />
+          fill
+          sizes="100vw" />
       </Box>
     </Paper>
   );
