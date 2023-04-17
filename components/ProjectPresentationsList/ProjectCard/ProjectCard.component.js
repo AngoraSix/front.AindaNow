@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from '@mui/material';
 import classnames from 'classnames';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';

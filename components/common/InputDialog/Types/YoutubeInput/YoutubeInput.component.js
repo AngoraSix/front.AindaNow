@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useTranslation } from 'next-i18next';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import PropTypes from 'prop-types';
 import React from 'react';
 import config from '../../../../../config';

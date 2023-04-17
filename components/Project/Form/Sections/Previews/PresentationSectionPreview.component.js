@@ -1,5 +1,5 @@
 import { Box, Divider, Typography } from '@mui/material';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import PropTypes from 'prop-types';
 import React from 'react';
 
