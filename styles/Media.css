@@ -200,6 +200,8 @@
 
 .MediaListCard {
   transition: transform 0.5s ease-in;
+  width: 150px;
+  position: relative;
 }
 
 .MediaListCard__MediaIcon {
@@ -220,6 +222,10 @@
 
 .MediaListCard__MediaIcon__Default {
   box-shadow: 0 0 5px 15px #000000 inset, 0 0 10px 5px #000000;
+}
+
+.MediaListCard__Image{
+  object-fit: cover;
 }
 
 .MediaListCard__Placement__Dragging {
@@ -306,7 +312,7 @@
   max-width: 100%;
 }
 
-.Youtube__Container{
+.Youtube__Container {
   display: flex;
 }
 

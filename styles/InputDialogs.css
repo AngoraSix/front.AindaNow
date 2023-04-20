@@ -25,8 +25,19 @@
 }
 
 .YoutubeDialog__Thumbnail__Preview {
-  max-width: 60vw;
-  max-height: 25vh;
+  object-fit: contain;
+  margin: auto;
+}
+
+.YoutubeDialog__Thumbnail__PreviewHolder {
+  width: 60vw;
+  height: 25vh;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  border-radius: 5px;
+  background-color: #e5e5e5;
 }
 
 .YoutubeDialog__Thumbnail__PreviewPlaceholder {

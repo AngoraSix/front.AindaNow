@@ -36,7 +36,8 @@ const MediaDnDContainer = ({
   });
   useEffect(() => {
     onChange(mediaDataState.mediaList);
-  }, [mediaDataState.mediaList, onChange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mediaDataState.mediaList]);
 
   const { onError } = useNotifications();
 

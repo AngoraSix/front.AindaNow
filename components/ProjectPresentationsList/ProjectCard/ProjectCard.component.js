@@ -1,6 +1,6 @@
 import { Box, Paper, Typography } from '@mui/material';
 import classnames from 'classnames';
-import Image from "next/image";
+import Image from 'next/image';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
@@ -83,7 +83,7 @@ const ProjectCard = ({ projectPresentation }) => {
           'ProjectCard__Container--no-images': !mainImage,
           'ProjectCard__Container--active': isActive,
         })}
-        component="a"
+        // component="a"
         onMouseEnter={handleCardHover(true)}
         onMouseLeave={handleCardHover(false)}
       >
@@ -105,20 +105,19 @@ const ProjectCard = ({ projectPresentation }) => {
             {projectPresentation.sections[0].description}
           </Typography>
         </Box>
-
-        <Box className="Commons__NextImageContainer">
-          <Image
-            src={mainImage}
-            alt={`Main image for project ${projectPresentation.project.name}`}
-            className={classnames('ProjectCard__Image', {
-              'ProjectCard__Image--hidden': !!isVideoPlaying,
-            })}
-            fill={true}
-            placeholder="blur"
-            blurDataURL={mainImage}
-            fill
-            sizes="100vw" />
-        </Box>
+        <Image
+          src={mainImage}
+          alt={`Main image for project ${projectPresentation.project.name}`}
+          className={classnames('ProjectCard__Image', {
+            'ProjectCard__Image--hidden': !!isVideoPlaying,
+          })}
+          fill
+          placeholder="blur"
+          blurDataURL={mainImage}
+          sizes="(max-width: 768px) 100vw,
+                  (max-width: 1200px) 50vw,
+                  25vw"
+        />
         {currentActiveVideo && (
           <YoutubePreview
             media={currentActiveVideo}

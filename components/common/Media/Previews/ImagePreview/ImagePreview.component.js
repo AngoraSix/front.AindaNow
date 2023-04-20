@@ -7,7 +7,7 @@ import Image from "next/image";
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-const ImagePreview = ({ media, allowsZoomingIn }) => {
+const ImagePreview = ({ media, allowsZoomingIn, imageProps }) => {
   const [isZoomed, setIsZoomed] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -16,24 +16,23 @@ const ImagePreview = ({ media, allowsZoomingIn }) => {
     if (allowsZoomingIn) {
       setIsZoomed(!isZoomed);
     }
-  };
+  };  
 
   return media ? (
     <React.Fragment>
-      <Box className="Commons__NextImageContainer">
-        <Image
-          onClick={isMobile ? onZoomIn : undefined}
-          className={`MediaPreview__Image ${
-            isZoomed ? 'MediaPreview__Image__Zoomed' : ''
-          }`}
-          alt={media?.key}
-          src={media?.thumbnailUrl}
-          fill={true}
-          placeholder="blur"
-          blurDataURL={media?.thumbnailUrl}
-          fill
-          sizes="100vw" />
-      </Box>
+      <Image
+        onClick={isMobile ? onZoomIn : undefined}
+        className={`MediaPreview__Image ${
+          isZoomed ? 'MediaPreview__Image__Zoomed' : ''
+        }`}
+        alt={media?.key || 'Image Preview'}
+        src={media?.thumbnailUrl}
+        placeholder="blur"
+        blurDataURL={media?.thumbnailUrl}
+        fill
+        sizes="100vw"
+        {...imageProps}
+      />
       {allowsZoomingIn && isMobile && (
         <IconButton
           className={`MediaPreview__Image__ZoomIcon ${
@@ -64,11 +63,13 @@ const ImagePreview = ({ media, allowsZoomingIn }) => {
 
 ImagePreview.defaultProps = {
   allowsZoomingIn: false,
+  imageProps: {}
 };
 
 ImagePreview.propTypes = {
   media: PropTypes.object.isRequired,
   allowsZoomingIn: PropTypes.bool,
+  imageProps: PropTypes.object
 };
 
 export default ImagePreview;

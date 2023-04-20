@@ -15,7 +15,11 @@ const SectionPresentation = ({ sectionTitle, description, mainMedia }) => {
         {sectionTitle}
       </Typography>
       <Box className="SectionPresentation__MainMedia">
-        <MediaPreview mediaType={mainMedia.mediaType} media={mainMedia} />
+        <MediaPreview mediaType={mainMedia.mediaType} media={mainMedia} imageProps={{
+          sizes: `(max-width: 768px) 100vw,
+          (max-width: 1200px) 70vw,
+          70vw`
+        }} />
       </Box>
       {description && (
         <Typography
