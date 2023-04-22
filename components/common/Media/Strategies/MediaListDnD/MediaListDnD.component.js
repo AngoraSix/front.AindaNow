@@ -13,8 +13,8 @@ const MEDIA_OPTIONS_GRID_SIZE = {
   [MEDIA_TYPES.VIDEO_YOUTUBE]: 1,
 };
 
-const _getQuantityOfColumns = (isMedium, isLarge) =>
-  isLarge ? 6 : isMedium ? 4 : 2;
+const _getQuantityOfColumns = (isSmall, isMedium, isLarge) =>
+  isLarge ? 6 : isMedium ? 4 : isSmall ? 2 : 1;
 
 const MediaListDnD = ({ media, onModifyMediaOrder, onRemoveMediaItem }) => {
   const { t } = useTranslation('common');
@@ -25,6 +25,7 @@ const MediaListDnD = ({ media, onModifyMediaOrder, onRemoveMediaItem }) => {
     originKey: null,
   });
   const theme = useTheme();
+  const isSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const isMedium = useMediaQuery(theme.breakpoints.up('md'));
   const isLarge = useMediaQuery(theme.breakpoints.up('lg'));
 
@@ -52,7 +53,7 @@ const MediaListDnD = ({ media, onModifyMediaOrder, onRemoveMediaItem }) => {
     tempOrderChangeKeys.originKey != null
       ? media.findIndex((m) => m.key === tempOrderChangeKeys.originKey)
       : null;
-  const quantityOfColumns = _getQuantityOfColumns(isMedium, isLarge);
+  const quantityOfColumns = _getQuantityOfColumns(isSmall, isMedium, isLarge);
 
   return (
     <Box className="MediaList__Container">

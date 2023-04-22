@@ -52,7 +52,9 @@ const ProjectPresentationViewMediaCard = ({ imagesList, interval }) => {
           placeholder="blur"
           blurDataURL={imagesList[activeMediaIndex]}
           fill
-          sizes="100vw"
+          sizes="(max-width: 768px) 33vw,
+                  (max-width: 1200px) 25vw,
+                  15vw"
         />
       )}
     </Paper>

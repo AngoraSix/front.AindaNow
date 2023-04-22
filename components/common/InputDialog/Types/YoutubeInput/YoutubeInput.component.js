@@ -68,7 +68,7 @@ const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
                 placeholder="blur"
                 blurDataURL={thumbnailUrl}
                 fill
-                sizes="100vw"
+                sizes="60vw"
               />
             </Box>
           ) : (

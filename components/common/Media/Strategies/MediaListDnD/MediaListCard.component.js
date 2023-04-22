@@ -98,6 +98,7 @@ const MediaListCard = ({
         src={media.thumbnailUrl}
         loading="lazy"
         fill
+        sizes="150px"
       />
       <ImageListItemBar
         actionPosition="left"

@@ -15,7 +15,8 @@ const YoutubeInputContainer = ({ onChange, setIsValid, ...args }) => {
 
   useEffect(() => {
     setIsValid(false);
-  }, [setIsValid]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleChange = async (value, videoMedia) => {
     if (Media.isMedia(videoMedia)) {

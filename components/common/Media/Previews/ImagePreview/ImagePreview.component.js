@@ -3,7 +3,7 @@ import ZoomOutIcon from '@mui/icons-material/ZoomOut';
 import { Box, Grid, IconButton, Skeleton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Image from "next/image";
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
@@ -16,21 +16,21 @@ const ImagePreview = ({ media, allowsZoomingIn, imageProps }) => {
     if (allowsZoomingIn) {
       setIsZoomed(!isZoomed);
     }
-  };  
+  };
 
   return media ? (
-    <React.Fragment>
+    <Box
+      className={`MediaPreview__Image__Container ${isZoomed ? 'Zoomed' : ''}`}
+    >
       <Image
         onClick={isMobile ? onZoomIn : undefined}
-        className={`MediaPreview__Image ${
-          isZoomed ? 'MediaPreview__Image__Zoomed' : ''
-        }`}
+        className="MediaPreview__Image"
         alt={media?.key || 'Image Preview'}
         src={media?.thumbnailUrl}
         placeholder="blur"
         blurDataURL={media?.thumbnailUrl}
         fill
-        sizes="100vw"
+        sizes="90vw"
         {...imageProps}
       />
       {allowsZoomingIn && isMobile && (
@@ -47,7 +47,7 @@ const ImagePreview = ({ media, allowsZoomingIn, imageProps }) => {
           )}
         </IconButton>
       )}
-    </React.Fragment>
+    </Box>
   ) : (
     <Box className="MediaPreview__Image__Loading">
       <Grid container>
@@ -63,13 +63,13 @@ const ImagePreview = ({ media, allowsZoomingIn, imageProps }) => {
 
 ImagePreview.defaultProps = {
   allowsZoomingIn: false,
-  imageProps: {}
+  imageProps: {},
 };
 
 ImagePreview.propTypes = {
   media: PropTypes.object.isRequired,
   allowsZoomingIn: PropTypes.bool,
-  imageProps: PropTypes.object
+  imageProps: PropTypes.object,
 };
 
 export default ImagePreview;
