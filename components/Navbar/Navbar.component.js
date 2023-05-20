@@ -18,11 +18,12 @@ import {
 import Cookies from 'js-cookie';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
 import config from '../../config';
-import { resolveRoute, ROUTES } from '../../constants';
+import { ROUTES, resolveRoute } from '../../constants';
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -34,10 +35,10 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [anchorElLanguage, setAnchorElLanguage] = React.useState(null);
 
-  const handleChange = (selectedLocale) => {
+  const handleChange = async (selectedLocale) => {
     if (selectedLocale != locale) {
       Cookies.set('NEXT_LOCALE', selectedLocale);
-      router.push({ pathname, query }, asPath, { locale: selectedLocale });
+      await router.push({ pathname, query }, asPath, { locale: selectedLocale });
     }
     setAnchorElLanguage(null);
   };
@@ -74,12 +75,25 @@ const Navbar = () => {
       <AppBar className="Navbar Navbar__Container" position="fixed">
         <Container maxWidth="xl">
           <Toolbar>
-            <Box sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}>
-              <img
+            <Box
+              className="Navbar__Logo__Container"
+              sx={{
+                mr: 2,
+                display: { xs: 'none', md: 'flex' },
+              }}
+            >
+              <Image
                 className="Navbar__Logo"
                 src={config.site.head.image.logo}
                 alt="AngoraSix"
                 title="AngoraSix"
+                placeholder="blur"
+                blurDataURL={config.site.head.image.logo}
+                sx={{ priority: { xs: false, md: true } }}
+                fill
+                sizes="(max-width: 768px) 2.5em,
+                  (max-width: 1200px) 2.5em,
+                  2.5em"
               />
             </Box>
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -127,12 +141,26 @@ const Navbar = () => {
                 </MenuItem>
               </Menu>
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
-              <img
+            <Box
+              className="Navbar__Logo__Container"
+              sx={{
+                flexGrow: 1,
+                display: { xs: 'flex', md: 'none' },
+              }}
+            >
+              <Image
                 className="Navbar__Logo"
                 src={config.site.head.image.logo}
                 alt="AngoraSix"
                 title="AngoraSix"
+                placeholder="blur"
+                blurDataURL={config.site.head.image.logo}
+                sx={{ priority: { xs: true, md: false } }}
+                fill
+                object-fit="contain"
+                sizes="(max-width: 768px) 2.5em,
+                  (max-width: 1200px) 2.5em,
+                  2.5em"
               />
             </Box>
 
@@ -153,12 +181,9 @@ const Navbar = () => {
               <Tooltip title={t('navbar.language.tooltip')}>
                 <Button
                   onClick={handleOpenLanguageMenu}
-                  sx={{ p: 0 }}
+                  sx={{ p: 0, color: 'primary.contrastText' }}
                   size="large"
                   variant="text"
-                  sx={{
-                    color: 'primary.contrastText',
-                  }}
                   startIcon={<LanguageIcon />}
                 >
                   {locale.toUpperCase()}
@@ -181,7 +206,7 @@ const Navbar = () => {
                 onClose={handleCloseLanguageMenu}
               >
                 {otherLocales.map((l) => (
-                  <MenuItem key={l} value={l} onClick={() => handleChange(l)}>
+                  <MenuItem key={l} value={l} onClick={async () => await handleChange(l)}>
                     {l.toUpperCase()}
                   </MenuItem>
                 ))}
@@ -240,10 +265,12 @@ const Navbar = () => {
                 <Button
                   onClick={() => signIn('angorasixkeycloak')}
                   variant="contained"
-                  sx={{ backgroundColor: 'primary.dark' }}
+                  sx={{
+                    backgroundColor: 'primary.dark',
+                    display: { xs: 'none', sm: 'flex' },
+                  }}
                   startIcon={<LoginIcon />}
                   alt="login"
-                  sx={{ display: { xs: 'none', sm: 'flex' } }}
                 >
                   {t('navbar.settings.menu.login')}
                 </Button>

@@ -6,4 +6,8 @@ module.exports = {
     return config;
   },
   i18n,
+  images: {
+    domains: process.env.AN_FRONT_CONFIG_IMAGES_ALLOWEDDOMAINS.split(','),
+  },
+  output: 'standalone',
 };

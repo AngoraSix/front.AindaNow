@@ -8,6 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
 import config from '../../../../../config';
@@ -59,18 +60,25 @@ const YoutubeInput = ({ isValid, videoMedia, fieldValue, onChange, label }) => {
           allowedMediaTypes={[MEDIA_TYPES.VIDEO_YOUTUBE]}
         >
           {!!thumbnailUrl ? (
-            <img
-              className="YoutubeDialog__Thumbnail__Preview"
-              src={thumbnailUrl}
-            />
+            <Box className="YoutubeDialog__Thumbnail__PreviewHolder">
+              <Image
+                alt={label}
+                className="YoutubeDialog__Thumbnail__Preview"
+                src={thumbnailUrl}
+                placeholder="blur"
+                blurDataURL={thumbnailUrl}
+                fill
+                sizes="60vw"
+              />
+            </Box>
           ) : (
-            <div className="YoutubeDialog__Thumbnail__PreviewPlaceholder">
+            <Box className="YoutubeDialog__Thumbnail__PreviewPlaceholder">
               <YouTubeIcon
                 className="YoutubeDialog__Thumbnail__PreviewPlaceholder__Icon"
                 sx={{ fontSize: 75 }}
                 color="disabled"
               />
-            </div>
+            </Box>
           )}
         </DnDContainer>
         <TextField

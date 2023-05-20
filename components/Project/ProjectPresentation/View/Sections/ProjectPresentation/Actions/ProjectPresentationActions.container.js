@@ -33,27 +33,31 @@ const ProjectPresentationActionsContainer = ({
     }
   );
 
-  useEffect(async () => {
-    doLoad(true);
-    try {
-      let clubResponse = await api.front.getClub(
-        projectPresentation.projectId,
-        config.api.servicesAPIParams.clubsWellKnownContributorCandidatesType
-      );
-      const clubActions = hateoasFormToActions(clubResponse);
-      dispatch(updateClubActions(clubActions));
-    } catch (err) {
-      if (err.response?.status !== 404 && activeSession) {
-        logger.error(
-          `Error retrieving supported actions - ${
-            err.response?.data?.message || err.message
-          }`
+  useEffect(() => {
+    const fetchData = async () => {
+      doLoad(true);
+      try {
+        let clubResponse = await api.front.getClub(
+          projectPresentation.projectId,
+          config.api.servicesAPIParams.clubsWellKnownContributorCandidatesType
         );
+        const clubActions = hateoasFormToActions(clubResponse);
+        dispatch(updateClubActions(clubActions));
+      } catch (err) {
+        if (err.response?.status !== 404 && activeSession) {
+          logger.error(
+            `Error retrieving supported actions - ${
+              err.response?.data?.message || err.message
+            }`
+          );
+        }
+      } finally {
+        doLoad(false);
       }
-    } finally {
-      doLoad(false);
-    }
-  }, []);
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeSession, projectPresentation.projectId]);
 
   const onFormChange = (property) => (eventOrValue) => {
     const partialFormData = {

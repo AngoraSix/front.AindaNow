@@ -200,6 +200,8 @@
 
 .MediaListCard {
   transition: transform 0.5s ease-in;
+  width: 150px;
+  position: relative;
 }
 
 .MediaListCard__MediaIcon {
@@ -220,6 +222,10 @@
 
 .MediaListCard__MediaIcon__Default {
   box-shadow: 0 0 5px 15px #000000 inset, 0 0 10px 5px #000000;
+}
+
+.MediaListCard__Image {
+  object-fit: cover;
 }
 
 .MediaListCard__Placement__Dragging {
@@ -280,14 +286,27 @@
 
 /* MediaPreview */
 
-.MediaPreview__Image {
-  max-height: 80vh;
-  max-width: 100%;
+.MediaPreview__Image__Container {
+  height: 60vh;
+  width: 67vw;
+  position: relative;
 }
 
-.MediaPreview__Image.MediaPreview__Image__Zoomed {
-  max-width: none;
+.MediaPreview__Image {
+  /* max-height: 80vh;
+  max-width: 100%; */
+  object-fit: contain;
 }
+
+.MediaPreview__Image__Container.Zoomed {
+  height: 80vh;
+  width: 160vw;
+  position: relative;
+}
+
+/* .MediaPreview__Image.MediaPreview__Image__Zoomed {
+  max-width: none;
+} */
 
 .MediaPreview__Image__ZoomIcon {
   position: absolute;
@@ -306,7 +325,7 @@
   max-width: 100%;
 }
 
-.Youtube__Container{
+.Youtube__Container {
   display: flex;
 }
 
@@ -314,8 +333,16 @@
   max-width: 100%;
 }
 
+@media (min-width: 600px) {
+  .MediaPreview__Image__Container {
+    height: 60vh;
+    width: 80vw;
+  }
+}
+
 @media (min-width: 900px) {
-  .MediaPreview__Image {
-    max-width: 100%;
+  .MediaPreview__Image__Container {
+    height: 60vh;
+    width: 80vw;
   }
 }

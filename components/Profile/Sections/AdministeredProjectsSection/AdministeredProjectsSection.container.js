@@ -4,8 +4,8 @@ import api from '../../../../api/';
 import { useLoading, useNotifications } from '../../../../hooks/app';
 import AdministeredProjectsSection from './AdministeredProjectsSection.component';
 import AdministeredProjectsSectionsReducer, {
-  initAdministeredProjectsInfo,
   INITIAL_STATE,
+  initAdministeredProjectsInfo,
   updateMembersData,
 } from './AdministeredProjectsSections.reducer';
 
@@ -22,35 +22,38 @@ const AdministeredProjectsSectionContainer = ({
     }
   );
 
-  useEffect(async () => {
-    doLoad(true);
-    try {
-      const administeredProjectsInfo = await api.front.getAdministeredProjects(
-        contributorId
-      );
-      const filteredAdministeredProjectsInfo = isCurrentContributor
-        ? administeredProjectsInfo
-        : administeredProjectsInfo.filter((ap) => ap.presentations);
-      const clubsInfo =
-        (await api.front.getAdministeredProjectsClubs(contributorId)) || [];
-      dispatch(
-        initAdministeredProjectsInfo({
-          administeredProjectsInfo: filteredAdministeredProjectsInfo,
-          clubsInfo,
-        })
-      );
-    } catch (err) {
-      if (err.response?.status !== 404) {
-        onError(
-          `Error retrieving administered projects info - ${
-            err.response?.data?.message || err.message
-          }`
+  useEffect(() => {
+    const fetchData = async () => {
+      doLoad(true);
+      try {
+        const administeredProjectsInfo =
+          await api.front.getAdministeredProjects(contributorId);
+        const filteredAdministeredProjectsInfo = isCurrentContributor
+          ? administeredProjectsInfo
+          : administeredProjectsInfo.filter((ap) => ap.presentations);
+        const clubsInfo =
+          (await api.front.getAdministeredProjectsClubs(contributorId)) || [];
+        dispatch(
+          initAdministeredProjectsInfo({
+            administeredProjectsInfo: filteredAdministeredProjectsInfo,
+            clubsInfo,
+          })
         );
+      } catch (err) {
+        if (err.response?.status !== 404) {
+          onError(
+            `Error retrieving administered projects info - ${
+              err.response?.data?.message || err.message
+            }`
+          );
+        }
+      } finally {
+        doLoad(false);
       }
-    } finally {
-      doLoad(false);
-    }
-  }, []);
+    };
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [contributorId, isCurrentContributor]);
 
   const loadMembers = async (members) => {
     // ACA cambiar por members y merge data con nuevos attributes!

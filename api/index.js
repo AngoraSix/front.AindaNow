@@ -48,7 +48,7 @@ class API {
     );
     this.projectsAPI = new ProjectsAPI(_getServiceAPI('projects', this.axios));
     this.clubsAPI = new ClubsAPI(_getServiceAPI('clubs', this.axios));
-    this.mediaAPI = new MediaAPI(_getServiceAPI('media', this.axios));
+    this.mediaAPI = new MediaAPI(_getServiceAPI('media', this.axios), config.api.mediaOverrideBaseURL);
     this.contributorsAPI = new ContributorsAPI(
       _getServiceAPI('contributors', this.axios)
     );

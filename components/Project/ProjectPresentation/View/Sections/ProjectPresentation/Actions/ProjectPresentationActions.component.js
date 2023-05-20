@@ -1,7 +1,7 @@
 import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
-import { LoadingButton } from '@mui/lab';
+import LoadingButton from '@mui/lab/LoadingButton'
 import { Box, Tooltip } from '@mui/material';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';

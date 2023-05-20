@@ -36,8 +36,10 @@ export const PROJECT_PRESENTATION_PARAMS_FIELDS = {
   },
 };
 
-export default {
+const projectFormProperties = {
   core: PROJECT_CORE_FORM_FIELDS,
   section: PROJECT_PRESENTATION_SECTION_BASE_FORM_FIELDS,
   presentationParams: PROJECT_PRESENTATION_PARAMS_FIELDS,
 };
+
+export default  projectFormProperties;

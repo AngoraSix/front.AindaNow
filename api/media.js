@@ -3,8 +3,9 @@ import NodeFormData from 'form-data';
 const IS_ABSOLUTE_URL_REGEX = new RegExp('^(?:[a-z]+:)?//', 'i');
 
 class MediaAPI {
-  constructor(axiosInstance) {
+  constructor(axiosInstance, overrideBaseURL) {
     this.axios = axiosInstance;
+    this.mediaOverrideBaseURL = overrideBaseURL;
   }
 
   async uploadImages(files, token) {
@@ -26,10 +27,10 @@ class MediaAPI {
       },
     });
     const urls = data.images.map((im) =>
-      isAbsoluteURL(im) ? im : `${this.axios.getBaseURL()}${im}`
+      isAbsoluteURL(im) ? im : `${this.mediaOverrideBaseURL || this.axios.getBaseURL()}${im}`
     );
     const thumbnails = data.thumbnailImages.map((im) =>
-      isAbsoluteURL(im) ? im : `${this.axios.getBaseURL()}${im}`
+      isAbsoluteURL(im) ? im : `${this.mediaOverrideBaseURL || this.axios.getBaseURL()}${im}`
     );
 
     return { urls, thumbnails };

@@ -11,7 +11,7 @@ const TagsInput = ({ selectedTags, placeholder, tags, ...other }) => {
   }, [tags]);
   useEffect(() => {
     selectedTags({ target: { value: selectedItem } });
-  }, [selectedItem]);
+  }, [selectedItem, selectedTags]);
 
   function handleKeyDown(event) {
     if (event.key === 'Enter') {

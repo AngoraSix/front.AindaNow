@@ -8,8 +8,8 @@ import {
   IconButton,
   ImageListItem,
   ImageListItemBar,
-  Zoom,
 } from '@mui/material';
+import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useDrag, useDrop } from 'react-dnd';
@@ -91,7 +91,15 @@ const MediaListCard = ({
           MEDIA_TYPE_MAP[media.mediaType]?.classModifier || 'Default'
         }`}
       />
-      <img ref={preview} src={media.thumbnailUrl} loading="lazy" />
+      <Image
+        className="MediaListCard__Image"
+        ref={preview}
+        alt={media.key}
+        src={media.thumbnailUrl}
+        loading="lazy"
+        fill
+        sizes="150px"
+      />
       <ImageListItemBar
         actionPosition="left"
         actionIcon={

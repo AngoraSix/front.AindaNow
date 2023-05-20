@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoading } from '../../hooks/app';
-import App from './App.component';
 import { checkActiveToken } from '../../hooks/oauth';
+import App from './App.component';
 
 const AppContainer = (props) => {
   const reduxDispatch = useDispatch();
@@ -12,14 +12,14 @@ const AppContainer = (props) => {
 
   checkActiveToken();
 
-  const startLoading = () => {
-    doLoad(true);
-  };
-  const finishLoading = () => {
-    doLoad(false);
-  };
-
   useEffect(() => {
+    const startLoading = () => {
+      doLoad(true);
+    };
+    const finishLoading = () => {
+      doLoad(false);
+    };
+
     router.events.on('beforeHistoryChange', startLoading);
     router.events.on('routeChangeStart', startLoading);
 
@@ -33,7 +33,8 @@ const AppContainer = (props) => {
       router.events.off('routeChangeComplete', finishLoading);
       router.events.off('routeChangeError', finishLoading);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [router.events]);
 
   return <App isLoading={isLoading} {...props} />;
 };

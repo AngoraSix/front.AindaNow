@@ -15,11 +15,7 @@ const DefaultLayout = ({ children, className, headData, contained = true }) => {
   return (
     <div className={`DefaultLayout DefaultLayout__Container ${className}`}>
       <Head>
-        <meta charSet="utf-8" />
         <title>{head.title}</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="/fonts/Ruluko.css" />
-        <link rel="stylesheet" href="/fonts/ZCool.css" />
         <meta property="og:title" key="og.title" content={head.title} />
         <meta
           property="og:description"
@@ -32,10 +28,11 @@ const DefaultLayout = ({ children, className, headData, contained = true }) => {
           key="og.image"
           content={head.image.logo}
         />
-        <meta property="fb:app_id" key="fb.id" content={head.facebookAppId} />
       </Head>
       <Navbar />
-      <ChildrenContainer className={`${className}__Body`}>{children}</ChildrenContainer>
+      <ChildrenContainer className={`${className}__Body`}>
+        {children}
+      </ChildrenContainer>
     </div>
   );
 };
