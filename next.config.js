@@ -9,4 +9,5 @@ module.exports = {
   images: {
     domains: process.env.AN_FRONT_CONFIG_IMAGES_ALLOWEDDOMAINS.split(','),
   },
+  output: 'standalone',
 };

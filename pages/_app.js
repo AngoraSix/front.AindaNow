@@ -55,7 +55,7 @@ A6WebApp.propTypes = {
 };
 
 A6WebApp.getInitialProps = async ({ ctx }) => {
-  const nextProps = App.getInitialProps(ctx);
+  // const nextProps = App.getInitialProps(ctx);
   const env = getEnv();
 
   config.applyEnvConfig(env);
@@ -66,7 +66,7 @@ A6WebApp.getInitialProps = async ({ ctx }) => {
   const preloadedState = store.getState();
 
   return {
-    ...nextProps,
+    // ...nextProps,
     preloadedState,
     env,
   };

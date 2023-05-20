@@ -1,7 +1,7 @@
 import { Box, SwipeableDrawer, Tab, Tabs } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/styles';
+import { useTheme } from '@mui/material/styles';
 import { styled } from '@mui/system';
 import React, { useState } from 'react';
 
