@@ -7,7 +7,6 @@ import Editable from '../../../common/Editable';
 
 const ContributorPresentationSection = ({
   profile,
-  profileAttributes,
   isCurrentContributor,
   onEditField,
 }) => {
@@ -18,8 +17,22 @@ const ContributorPresentationSection = ({
   };
 
   const getAttributeValue = (fieldName) => {
-    const attributeValue = profileAttributes[fieldName];
+    const attributeValue = profile[fieldName];
     return Array.isArray(attributeValue) ? attributeValue[0] : attributeValue;
+  };
+
+  const generateHeadImageStyle = () => {
+    const style = { backgroundColor: theme.palette.primary.main };
+    const media = getAttributeValue(PROFILE_ATTRIBUTES.headImage.key);
+    if (media) {
+      style.backgroundImage = `url(${media.url}), url(${media.thumbnailUrl})`;
+    }
+    return style;
+  };
+
+  const getMediaUrl = (fieldName) => {
+    const media = getAttributeValue(fieldName);
+    return media?.thumbnailUrl || media?.url;
   };
 
   const theme = useTheme();
@@ -35,14 +48,7 @@ const ContributorPresentationSection = ({
         >
           <Box
             className="Presentation__HeadImage"
-            style={{
-              backgroundImage: `url(${getAttributeValue(
-                PROFILE_ATTRIBUTES.headImage.key
-              )}), url(${getAttributeValue(
-                PROFILE_ATTRIBUTES.headImageThumbnail.key
-              )}) `,
-              backgroundColor: theme.palette.primary.main,
-            }}
+            style={generateHeadImageStyle()}
           ></Box>
         </Editable>
       </Box>
@@ -55,11 +61,7 @@ const ContributorPresentationSection = ({
         >
           <Box className={'Presentation__ProfileImage'}>
             <Avatar
-              src={
-                getAttributeValue(
-                  PROFILE_ATTRIBUTES.profilePictureThumbnail.key
-                ) || getAttributeValue(PROFILE_ATTRIBUTES.profilePicture.key)
-              }
+              src={getMediaUrl(PROFILE_ATTRIBUTES.profilePicture.key)}
               sx={{ width: '100%', height: '100%' }}
             ></Avatar>
           </Box>

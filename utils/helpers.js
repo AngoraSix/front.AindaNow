@@ -163,8 +163,10 @@ export const asArray = (potentialObject, ifNull = potentialObject) => {
   }
 };
 
-const _createIfNotOfType = (input, Type) =>
-  input instanceof Type ? input : new Type(input);
+const _createIfNotOfType = (input, Type) => {
+  return input instanceof Type ? input : new Type(input);
+}
+  
 
 export const toType = (input, Type, toSingleElement = false) => {
   if (input == null) return input;

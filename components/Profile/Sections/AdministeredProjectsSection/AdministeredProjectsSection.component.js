@@ -39,8 +39,13 @@ const AdministeredProjectsSection = ({
   const { t } = useTranslation('profile');
 
   const getAttributeValue = (member, fieldName) => {
-    const attributeValue = member.attributes?.[fieldName];
+    const attributeValue = member[fieldName];
     return Array.isArray(attributeValue) ? attributeValue[0] : attributeValue;
+  };
+
+  const getMediaUrl = (member, fieldName) => {
+    const media = getAttributeValue(member, fieldName);
+    return media?.thumbnailUrl || media?.url;
   };
 
   const onSelectedClub = (club) => {
@@ -156,23 +161,17 @@ const AdministeredProjectsSection = ({
                           resolveRoute(
                             ROUTES.profile.view,
                             member.contributorId
-                          ),
+                          )
                         )
                       }
                     >
                       <ListItemAvatar>
                         <Avatar
                           alt="User Profile image"
-                          src={
-                            getAttributeValue(
-                              member,
-                              PROFILE_ATTRIBUTES.profilePictureThumbnail.key
-                            ) ||
-                            getAttributeValue(
-                              member,
-                              PROFILE_ATTRIBUTES.profilePicture.key
-                            )
-                          }
+                          src={getMediaUrl(
+                            member,
+                            PROFILE_ATTRIBUTES.profilePicture.key
+                          )}
                           sx={{ width: 50, height: 50 }}
                         />
                       </ListItemAvatar>

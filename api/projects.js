@@ -3,9 +3,18 @@ class ProjectsAPI {
     this.axios = axiosInstance;
   }
 
-  async fetchProjectPresentations(attributes) {
+  async fetchProjectPresentations(attributes, token) {
+    const headers = this.axios.getCommonHeaders();
+    const authHeaders = this.axios.getAuthorizationHeaders(token, false);
     const { data: projectPresentationdata } = await this.axios.get(
-      `/presentations?${attributes}`
+      `/presentations?${attributes}`,
+      {
+        params: attributes,
+        headers: {
+          ...headers,
+          ...authHeaders,
+        }
+      }
     );
     return projectPresentationdata;
   }

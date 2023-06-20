@@ -1,10 +1,25 @@
+import createPatchBody, {
+  PATCH_SUPPORTED_OPERATIONS,
+} from '../utils/rest/patch/patchOperations';
+
 class FrontAPI {
   constructor(axiosInstance) {
     this.axios = axiosInstance;
   }
 
-  async setProfileAttributes(attributes) {
-    const { data } = await this.axios.post(`api/profile`, attributes);
+  async updateProfileField(
+    profileId,
+    updatedProfileFieldKey,
+    updatedProfileFieldValue
+  ) {
+    const { data } = await this.axios.patch(
+      `api/profiles/${profileId}`,
+      createPatchBody(
+        PATCH_SUPPORTED_OPERATIONS.REPLACE,
+        updatedProfileFieldKey,
+        updatedProfileFieldValue
+      )
+    );
     return data;
   }
 

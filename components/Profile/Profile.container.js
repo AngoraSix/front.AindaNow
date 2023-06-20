@@ -4,30 +4,34 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useEffect, useReducer } from 'react';
 import api from '../../api';
-import { PROFILE_ATTRIBUTES } from '../../constants';
+import {
+  PROFILE_ATTRIBUTES,
+  PROFILE_ATTRIBUTE_THUMBNAIL_MAP,
+} from '../../constants';
 import { useLoading, useNotifications } from '../../hooks/app';
 import logger from '../../utils/logger';
 import Profile from './Profile.component';
+import Contributor from '../../models/Contributor';
+import Media from '../../models/Media';
 import ProfileReducer, {
   INITIAL_STATE,
-  updateAttributesAction
+  updateProfileField,
 } from './Profile.reducer';
+import { INPUT_FIELD_TYPES } from '../../constants';
 
 const ProfileContainer = ({ profile, isCurrentContributor }) => {
-  const {t} = useTranslation('profile');
+  const { t } = useTranslation('profile');
   const router = useRouter();
   const { doLoad } = useLoading();
   const { onSuccess, onError } = useNotifications();
-  const [profileFields, dispatch] = useReducer(ProfileReducer, {
+  const [contributorData, dispatch] = useReducer(ProfileReducer, {
     ...INITIAL_STATE,
-    attributes: profile.attributes || {},
+    contributorProfile: new Contributor(profile),
   });
 
   useEffect(() => {
-    dispatch(updateAttributesAction(profile.attributes || {}));
-  }, [profile]);
-
-  const profileAttributes = profileFields.attributes;
+    // dispatch(updateAttributesAction(profile || {}));
+  }, [contributorData.contributorProfile]);
 
   const onEditAttributeField = async (
     fieldName,
@@ -35,23 +39,16 @@ const ProfileContainer = ({ profile, isCurrentContributor }) => {
     isMedia = false
   ) => {
     doLoad(true);
-    let updatedAttributes = { ...profileAttributes };
     try {
-      if (isMedia) {
-        let imageFile = fieldValue[0]?.file;
-        fieldValue = fieldValue[0]?.thumbnailURL;
-        if (imageFile instanceof File || typeof imageFile === 'object') {
-          let [imageURL, thumbnailURL] = await api.front.uploadFile(imageFile);
-          updatedAttributes[`${fieldName}.thumbnail`] = thumbnailURL;
-          fieldValue = imageURL;
-        }
-      }
-      updatedAttributes[fieldName] = fieldValue;
-      await api.front.setProfileAttributes(updatedAttributes);
+      const updatedField = isMedia ? await uploadMedia(fieldValue) : fieldValue;
+
+      contributorData.contributorProfile[fieldName] = fieldValue;
+      await api.front.updateProfileField(contributorData.contributorProfile.id, fieldName, updatedField);
+      // await api.front.setProfileAttributes({...contributorData.profile, ...updatedProfileField});
       onSuccess(t('profile.edit.form.notifications.success.updated'));
-      dispatch(updateAttributesAction(updatedAttributes));
+      dispatch(updateProfileField({ [fieldValue]: updatedField }));
       if (fieldName === PROFILE_ATTRIBUTES.profilePicture.key) {
-        signIn('angorasixkeycloak');
+        signIn('angorasixspring');
       }
     } catch (err) {
       const errorMessage = 'There was an error updating the Profile field';
@@ -62,11 +59,25 @@ const ProfileContainer = ({ profile, isCurrentContributor }) => {
     return;
   };
 
+  const uploadMedia = async (fieldValue) => {
+    const imageFile = fieldValue[0]?.file;
+    // fieldValue = fieldValue[0]?.thumbnailURL;
+    if (imageFile instanceof File || typeof imageFile === 'object') {
+      let [imageURL, thumbnailURL] = await api.front.uploadFile(imageFile);
+      return new Media({
+        mediaType: INPUT_FIELD_TYPES.IMAGE,
+        url: imageURL,
+        thumbnailUrl: thumbnailURL,
+        resourceId: fieldValue[0]?.key,
+      });
+    }
+    throw new Error(`Cannot upload media. File: ${fieldValue}`);
+  };
+
   return (
     <Profile
       key={router.asPath} // Since this page can direct to to same page (to different user), we want to re-render if URL changes
-      profile={profile}
-      profileAttributes={profileAttributes}
+      profile={contributorData.contributorProfile}
       isCurrentContributor={isCurrentContributor}
       onEditField={onEditAttributeField}
     />

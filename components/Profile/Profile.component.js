@@ -6,7 +6,6 @@ import ContributorPresentationSection from './Sections/ContributorPresentationSe
 
 const Profile = ({
   profile,
-  profileAttributes,
   isCurrentContributor,
   onEditField,
 }) => {
@@ -14,25 +13,22 @@ const Profile = ({
     <Box className="Profile Profile__Container">
       <ContributorPresentationSection
         profile={profile}
-        profileAttributes={profileAttributes}
         isCurrentContributor={isCurrentContributor}
         onEditField={onEditField}
       />
-      <AdministeredProjectsSection
+      {/* <AdministeredProjectsSection
         contributorId={profile.id}
         isCurrentContributor={isCurrentContributor}
-      />
+      /> */}
     </Box>
   );
 };
 
 Profile.defaultProps = {
-  profileAttributes: {},
 };
 
 Profile.propTypes = {
   profile: PropTypes.object.isRequired,
-  profileAttributes: PropTypes.object,
   isCurrentContributor: PropTypes.bool.isRequired,
   onEditField: PropTypes.func.isRequired,
 };
