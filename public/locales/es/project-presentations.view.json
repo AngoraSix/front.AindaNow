@@ -3,6 +3,7 @@
     "project-presentations.view.page.description.template": "Vista de Presentación de Proyecto: :projectPresentation",
     "project-presentations.actions.show-interest.tooltip": "Estoy interesado!",
     "project-presentations.actions.withdraw-interest.tooltip": "Quitar interés",
+    "project-presentations.actions.register-all-clubs.tooltip": "Registrar todos los clubes conocidos",
     "project-presentations.actions.edit.tooltip": "Editar",
     "project-presentations.actions.dialog.inputs.contact": "Contacto",
     "project-presentations.actions.dialog.commands.cancel": "Cancelar",

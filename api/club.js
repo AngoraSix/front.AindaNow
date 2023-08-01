@@ -55,6 +55,36 @@ class ClubsAPI {
     return data;
   }
 
+  async getAllWellKnownClubs(projectId, token) {
+    const headers = this.axios.getCommonHeaders();
+    const authHeaders = this.axios.getAuthorizationHeaders(token);
+
+    const { data } = await this.axios.get(`/clubs/well-known/${projectId}`, {
+      headers: {
+        ...headers,
+        ...authHeaders,
+      },
+    });
+    return data;
+  }
+
+  async registerAllWellKnownClubs(projectId, token) {
+    const headers = this.axios.getCommonHeaders();
+    const authHeaders = this.axios.getAuthorizationHeaders(token);
+
+    const { data } = await this.axios.post(
+      `/clubs/well-known/${projectId}`,
+      {},
+      {
+        headers: {
+          ...headers,
+          ...authHeaders,
+        },
+      }
+    );
+    return data;
+  }
+
   async getAdministeredWellKnownClubs(adminId, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, false);

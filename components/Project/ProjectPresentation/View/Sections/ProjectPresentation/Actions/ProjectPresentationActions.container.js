@@ -6,9 +6,14 @@ import config from '../../../../../../../config';
 import { CLUB_MEMBERSHIP_OPERATIONS } from '../../../../../../../constants';
 import { useLoading, useNotifications } from '../../../../../../../hooks/app';
 import { useActiveSession } from '../../../../../../../hooks/oauth';
+import Club from '../../../../../../../models/Club';
 import logger from '../../../../../../../utils/logger';
-import { hateoasFormToActions } from '../../../../../../../utils/rest/hateoas/hateoasResponseToActions';
+import {
+  processHateoasActions,
+  processHateoasCollection,
+} from '../../../../../../../utils/rest/hateoas/hateoasUtils';
 import ProjectPresentationActions from './ProjectPresentationActions.component';
+import { GENERAL_CLUBS_ACTIONS_KEY } from './ProjectPresentationActions.properties';
 import ProjectPresentationActionsReducer, {
   INITIAL_STATE,
   updateClubActions,
@@ -37,12 +42,11 @@ const ProjectPresentationActionsContainer = ({
     const fetchData = async () => {
       doLoad(true);
       try {
-        let clubResponse = await api.front.getClub(
-          projectPresentation.projectId,
-          config.api.servicesAPIParams.clubsWellKnownContributorCandidatesType
+        const allClubsResponse = await api.front.getAllProjectClubs(
+          projectPresentation.projectId
         );
-        const clubActions = hateoasFormToActions(clubResponse);
-        dispatch(updateClubActions(clubActions));
+
+        _processAllClubsResponse(allClubsResponse);
       } catch (err) {
         if (err.response?.status !== 404 && activeSession) {
           logger.error(
@@ -69,6 +73,24 @@ const ProjectPresentationActionsContainer = ({
     dispatch(updateFieldAction(partialFormData));
   };
 
+  const _processAllClubsResponse = (allClubsResponse) => {
+    const generalActions = processHateoasActions(allClubsResponse);
+    const clubs = processHateoasCollection(allClubsResponse, Club);
+    const clubActions = clubs.reduce((combinedActions, club) => {
+      Object.assign(combinedActions, {
+        [club.type]: club.actions,
+      });
+      return combinedActions;
+    }, {});
+
+    dispatch(
+      updateClubActions({
+        [GENERAL_CLUBS_ACTIONS_KEY]: generalActions,
+        ...clubActions,
+      })
+    );
+  };
+
   const onShowInterest = async () => {
     modifyInterest(
       CLUB_MEMBERSHIP_OPERATIONS.JOIN,
@@ -83,14 +105,14 @@ const ProjectPresentationActionsContainer = ({
   const modifyInterest = async (operation, data = {}) => {
     doLoad(true);
     try {
-      let clubResponse = await api.front.modifyClubMembership(
+      const clubResponse = await api.front.modifyClubMembership(
         projectPresentation.projectId,
         config.api.servicesAPIParams.clubsWellKnownContributorCandidatesType,
         operation,
         data
       );
-      const clubActions = hateoasFormToActions(clubResponse);
-      dispatch(updateClubActions(clubActions));
+      const club = new Club(clubResponse);
+      dispatch(updateClubActions({ [club.type]: club.actions }));
       onSuccess(
         t(
           'project-presentations.actions.show-interest.notifications.success.registered'
@@ -107,21 +129,59 @@ const ProjectPresentationActionsContainer = ({
     }
   };
 
+  const onRegisterAllClubs = async () => {
+    doLoad(true);
+    try {
+      const allClubsResponse = await api.front.registerAllProjectClubs(
+        projectPresentation.projectId
+      );
+      _processAllClubsResponse(allClubsResponse);
+      onSuccess(
+        t(
+          'project-presentations.actions.register-all-clubs.notifications.success.registered'
+        )
+      );
+    } catch (ex) {
+      onError(
+        `Error registering all well-known clubs - ${
+          ex.response?.data?.message || ex.message
+        }`
+      );
+    } finally {
+      doLoad(false);
+    }
+  };
+
   return (
     <ProjectPresentationActions
       projectPresentation={projectPresentation}
       actions={{
         ...projectPresentationActionData.projectPresentationActions,
-        ...projectPresentationActionData.clubActions,
+        ..._flattenActions(projectPresentationActionData.clubActions),
       }}
       onShowInterest={onShowInterest}
       onWithdrawInterest={onWithdrawInterest}
       onActionDataChange={onFormChange}
+      onRegisterAllClubs={onRegisterAllClubs}
       actionFormData={projectPresentationActionData.actionData}
       isAdmin={isAdmin}
     />
   );
 };
+
+const _flattenActions = (groupedActions) =>
+  Object.entries(groupedActions).reduce(
+    (combinedActions, [clubType, clubActions]) => {
+      Object.assign(
+        combinedActions,
+        ...Object.entries(clubActions).map(([actionKey, action]) => ({
+          [`${clubType}.${actionKey}`]: action,
+        }))
+      );
+      return combinedActions;
+    },
+    {}
+  );
 
 ProjectPresentationActionsContainer.defaultProps = {
   isAdmin: false,

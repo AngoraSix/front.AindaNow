@@ -100,6 +100,20 @@ class FrontAPI {
     return data;
   }
 
+  async getAllProjectClubs(projectId) {
+    const { data } = await this.axios.get(
+      `api/clubs/well-known/${projectId}`
+    );
+    return data;
+  }
+
+  async registerAllProjectClubs(projectId) {
+    const { data } = await this.axios.post(
+      `api/clubs/well-known/${projectId}`
+    );
+    return data;
+  }
+
   async getAdministeredProjectsClubs(contributorId) {
     const { data } = await this.axios.get(`api/clubs/well-known`, {
       params: { adminId: contributorId },
