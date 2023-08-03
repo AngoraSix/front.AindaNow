@@ -169,7 +169,7 @@
 
 .ProjectPresentation__Container {
   position: relative;
-  min-width: 100%;
+  width: 100%;
   z-index: 2;
 }
 
@@ -202,6 +202,11 @@
 
 .ProjectPresentation__Heading__Actions {
   margin-top: 20px;
+  display: flex;
+}
+
+.ProjectPresentation__Heading__Actions > button {
+  margin-left: 10px;
 }
 
 .ProjectPresentation__SectionsPresentation {
@@ -224,12 +229,12 @@
   position: relative;
   width: 95%;
   height: 40vh;
+  align-items: center;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   backface-visibility: hidden;
-  border-radius: 10px;
   margin-bottom: 2em;
 }
 
@@ -281,6 +286,7 @@
 
   .ProjectPresentation__SectionsPresentation {
     display: flex;
+    justify-content: space-between;
     flex-direction: row;
   }
 
@@ -298,7 +304,8 @@
   }
 
   .SectionPresentation__MainMedia {
-    width: 70%;
+    width: 90%;
+    align-items: flex-end;
   }
 
   .SectionPresentation__Description {

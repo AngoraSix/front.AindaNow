@@ -16,6 +16,7 @@ const MediaPreviewDialog = ({ mediaType, open, handleDialogClose, media }) => {
       onClose={handleDialogClose}
       maxWidth="xl"
       TransitionComponent={Transition}
+      fullWidthAvailable
     >
       <DialogContent>
         {open && media && (
