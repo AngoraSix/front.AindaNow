@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import api from '../../../../../../../api';
 import config from '../../../../../../../config';
 import { CLUB_MEMBERSHIP_OPERATIONS } from '../../../../../../../constants';
@@ -29,6 +29,7 @@ const ProjectPresentationActionsContainer = ({
   const { doLoad } = useLoading();
   const { onError, onSuccess } = useNotifications();
   const { session } = useActiveSession(true);
+  const [isLoading, setIsLoading] = useState(true);
   const activeSession = session && !session.error;
   const [projectPresentationActionData, dispatch] = useReducer(
     ProjectPresentationActionsReducer,
@@ -41,6 +42,7 @@ const ProjectPresentationActionsContainer = ({
   useEffect(() => {
     const fetchData = async () => {
       doLoad(true);
+      setIsLoading(true);
       try {
         const allClubsResponse = await api.front.getAllProjectClubs(
           projectPresentation.projectId
@@ -57,6 +59,7 @@ const ProjectPresentationActionsContainer = ({
         }
       } finally {
         doLoad(false);
+        setIsLoading(false);
       }
     };
     fetchData();
@@ -104,6 +107,7 @@ const ProjectPresentationActionsContainer = ({
 
   const modifyInterest = async (operation, data = {}) => {
     doLoad(true);
+    setIsLoading(true);
     try {
       const clubResponse = await api.front.modifyClubMembership(
         projectPresentation.projectId,
@@ -126,11 +130,13 @@ const ProjectPresentationActionsContainer = ({
       );
     } finally {
       doLoad(false);
+      setIsLoading(false);
     }
   };
 
   const onRegisterAllClubs = async () => {
     doLoad(true);
+    setIsLoading(true);
     try {
       const allClubsResponse = await api.front.registerAllProjectClubs(
         projectPresentation.projectId
@@ -149,6 +155,7 @@ const ProjectPresentationActionsContainer = ({
       );
     } finally {
       doLoad(false);
+      setIsLoading(false);
     }
   };
 
@@ -165,6 +172,7 @@ const ProjectPresentationActionsContainer = ({
       onRegisterAllClubs={onRegisterAllClubs}
       actionFormData={projectPresentationActionData.actionData}
       isAdmin={isAdmin}
+      isLoading={isLoading}
     />
   );
 };

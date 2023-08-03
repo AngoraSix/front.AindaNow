@@ -200,6 +200,10 @@
   margin: 0 10px;
 }
 
+.ProjectPresentation__Heading__Actions__Container .AreaSkeleton {
+  height: 100%;
+}
+
 .ProjectPresentation__Heading__Actions {
   margin-top: 20px;
   display: flex;
@@ -207,6 +211,16 @@
 
 .ProjectPresentation__Heading__Actions > button {
   margin-left: 10px;
+}
+
+.ProjectPresentation__Heading__Actions__LoadingContainer {
+  margin-top: 20px;
+  display: flex;
+}
+
+.ProjectPresentation__Heading__Actions__LoadingContainer .ButtonsSkeleton__Button {
+  height: 3.1em;
+  width: 3.1em;
 }
 
 .ProjectPresentation__SectionsPresentation {

@@ -1,14 +1,16 @@
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
+import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
 import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Box, Tooltip } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { ROUTES, resolveRoute } from '../../../../../../../constants';
+import ButtonsSkeleton from '../../../../../../common/Skeletons/ButtonsSkeleton.component';
 import CircleLoadingButton from '../../../../../../common/Skeletons/CircleLoadingButton.component';
 import ProjectPresentationActionInputDialog from './ProjectPresentationActionInputDialog.component';
 import { PROJECT_PRESENTATION_SUPPORTED_ACTIONS } from './ProjectPresentationActions.properties';
@@ -21,6 +23,7 @@ const ProjectPresentationActions = ({
   onRegisterAllClubs,
   actionFormData,
   actions,
+  isLoading,
 }) => {
   const { t } = useTranslation('project-presentations.view');
   const router = useRouter();
@@ -64,6 +67,7 @@ const ProjectPresentationActions = ({
 
   const showInterestButtons = (
     <React.Fragment key="showInterestButtons">
+      {/* @TODO HERE LEAVE ONLY ONE BUTTON , NO LOADING */}
       <Tooltip title={t('project-presentations.actions.show-interest.tooltip')}>
         <LoadingButton
           className="ProjectPresentation__Heading__Actions__ShowInterest"
@@ -177,32 +181,55 @@ const ProjectPresentationActions = ({
       withdrawInterestButtons,
   };
 
-  return Object.keys(actions).length ? (
-    <React.Fragment>
-      <Box className="ProjectPresentation__Heading__Actions">
-        {Object.entries(actions).map(([key]) => ACTION_COMPONENTS[key])}
-      </Box>
-      <ProjectPresentationActionInputDialog
-        open={!!selectedAction}
-        actionInputs={actions[selectedAction]?.template?.fields}
-        handleDialogClose={onDialogClose}
-        actionData={actionFormData}
-        onActionInputChange={onActionDataChange}
-        onSubmit={selectedAction && submitAction(selectedAction)}
-      />
-    </React.Fragment>
+  return !isLoading ? (
+    Object.keys(actions).filter((text) => !text.includes('self')).length ? (
+      <React.Fragment>
+        <Box className="ProjectPresentation__Heading__Actions">
+          {Object.entries(actions).map(([key]) => ACTION_COMPONENTS[key])}
+        </Box>
+        <ProjectPresentationActionInputDialog
+          open={!!selectedAction}
+          actionInputs={actions[selectedAction]?.template?.fields}
+          handleDialogClose={onDialogClose}
+          actionData={actionFormData}
+          onActionInputChange={onActionDataChange}
+          onSubmit={selectedAction && submitAction(selectedAction)}
+        />
+      </React.Fragment>
+    ) : (
+      <Tooltip
+        key="noactions"
+        title={t('project-presentations.actions.noactions.tooltip')}
+      >
+        <Box className="ProjectPresentation__Heading__Actions">
+          <LoadingButton
+            className="ProjectPresentation__Heading__NoActions"
+            variant="contained"
+            disabled
+            sx={{ display: { xs: 'none', sm: 'flex' } }}
+          >
+            <DoNotTouchIcon />
+          </LoadingButton>
+        </Box>
+      </Tooltip>
+    )
   ) : (
-    <Box></Box>
+    <Box className="ProjectPresentation__Heading__Actions__LoadingContainer">
+      <ButtonsSkeleton />
+    </Box>
   );
+  // </Box>
 };
 
 ProjectPresentationActions.defaultProps = {
   isAdmin: false,
+  isLoading: false,
   actionFormData: {},
 };
 
 ProjectPresentationActions.propTypes = {
   isAdmin: PropTypes.bool,
+  isLoading: PropTypes.bool,
   projectPresentation: PropTypes.object.isRequired,
   onActionDataChange: PropTypes.func.isRequired,
   onShowInterest: PropTypes.func.isRequired,
