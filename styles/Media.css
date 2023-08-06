@@ -288,7 +288,7 @@
 
 .MediaPreview__Image__Container {
   height: 60%;
-  width: 80%;
+  width: 100%;
   position: relative;
   flex-grow: 1;
 }
@@ -339,25 +339,7 @@
 }
 
 @media (min-width: 600px) {
-  .MediaPreview__Image__Container {
-    height: 60%;
-    width: 100%;
-  }
-
   .MediaPreview__Image__Container.FullWidthAvailable {
-    height: 60vh;
-    width: 80vw;
-  }
-}
-
-@media (min-width: 900px) {
-  .MediaPreview__Image__Container {
-    height: 60%;
-    width: 100%;
-  }
-
-  .MediaPreview__Image__Container.FullWidthAvailable {
-    height: 60vh;
     width: 80vw;
   }
 }

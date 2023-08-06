@@ -4,14 +4,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
 import LoadingButton from '@mui/lab/LoadingButton';
-import { Box, IconButton, Tooltip } from '@mui/material';
+import { Box, Tooltip } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { ROUTES, resolveRoute } from '../../../../../../../constants';
 import ButtonsSkeleton from '../../../../../../common/Skeletons/ButtonsSkeleton.component';
-import CircleLoadingButton from '../../../../../../common/Skeletons/CircleLoadingButton.component';
 import ProjectPresentationActionInputDialog from './ProjectPresentationActionInputDialog.component';
 import { PROJECT_PRESENTATION_SUPPORTED_ACTIONS } from './ProjectPresentationActions.properties';
 
@@ -66,110 +65,69 @@ const ProjectPresentationActions = ({
   };
 
   const showInterestButtons = (
-    <React.Fragment key="showInterestButtons">
-      {/* @TODO HERE LEAVE ONLY ONE BUTTON , NO LOADING */}
-      <Tooltip title={t('project-presentations.actions.show-interest.tooltip')}>
-        <LoadingButton
-          className="ProjectPresentation__Heading__Actions__ShowInterest"
-          variant="contained"
-          sx={{ display: { xs: 'none', sm: 'flex' } }}
-          onClick={onActionSelected(
-            PROJECT_PRESENTATION_SUPPORTED_ACTIONS.SHOW_INTEREST
-          )}
-        >
-          <GroupAddIcon />
-        </LoadingButton>
-      </Tooltip>
-      <CircleLoadingButton
+    <Tooltip
+      key="showInterestButtons"
+      title={t('project-presentations.actions.show-interest.tooltip')}
+    >
+      <LoadingButton
         className="ProjectPresentation__Heading__Actions__ShowInterest"
-        sxDisplay={{ xs: 'flex', sm: 'none' }}
+        variant="contained"
         onClick={onActionSelected(
           PROJECT_PRESENTATION_SUPPORTED_ACTIONS.SHOW_INTEREST
         )}
       >
-        <GroupAddIcon fontSize="small" />
-      </CircleLoadingButton>
-    </React.Fragment>
+        <GroupAddIcon />
+      </LoadingButton>
+    </Tooltip>
   );
 
   const withdrawInterestButtons = (
-    <React.Fragment key="withdrawInterestButtons">
-      <Tooltip
-        title={t('project-presentations.actions.withdraw-interest.tooltip')}
-      >
-        <LoadingButton
-          className="ProjectPresentation__Heading__Actions__WithdrawInterest"
-          variant="contained"
-          sx={{ display: { xs: 'none', sm: 'flex' } }}
-          onClick={onActionSelected(
-            PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST
-          )}
-        >
-          <GroupRemoveIcon />
-        </LoadingButton>
-      </Tooltip>
-      <CircleLoadingButton
+    <Tooltip
+      key="withdrawInterestButtons"
+      title={t('project-presentations.actions.withdraw-interest.tooltip')}
+    >
+      <LoadingButton
         className="ProjectPresentation__Heading__Actions__WithdrawInterest"
-        sxDisplay={{ xs: 'flex', sm: 'none' }}
+        variant="contained"
         onClick={onActionSelected(
           PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST
         )}
       >
-        <GroupRemoveIcon fontSize="small" />
-      </CircleLoadingButton>
-    </React.Fragment>
+        <GroupRemoveIcon />
+      </LoadingButton>
+    </Tooltip>
   );
 
   const registerAllClubsButtons = (
-    <React.Fragment key="registerAllClubsButtons">
-      <Tooltip
-        title={t('project-presentations.actions.register-all-clubs.tooltip')}
-      >
-        <LoadingButton
-          className="ProjectPresentation__Heading__Actions__RegisterAllClubs"
-          variant="contained"
-          sx={{ display: { xs: 'none', sm: 'flex' } }}
-          onClick={onActionSelected(
-            PROJECT_PRESENTATION_SUPPORTED_ACTIONS.REGISTER_ALL_CLUBS
-          )}
-        >
-          <ConfirmationNumberIcon />
-        </LoadingButton>
-      </Tooltip>
-      <CircleLoadingButton
+    <Tooltip
+      key="registerAllClubsButtons"
+      title={t('project-presentations.actions.register-all-clubs.tooltip')}
+    >
+      <LoadingButton
         className="ProjectPresentation__Heading__Actions__RegisterAllClubs"
-        sxDisplay={{ xs: 'flex', sm: 'none' }}
+        variant="contained"
         onClick={onActionSelected(
           PROJECT_PRESENTATION_SUPPORTED_ACTIONS.REGISTER_ALL_CLUBS
         )}
       >
-        <ConfirmationNumberIcon fontSize="small" />
-      </CircleLoadingButton>
-    </React.Fragment>
+        <ConfirmationNumberIcon />
+      </LoadingButton>
+    </Tooltip>
   );
 
   const editButtons = (
-    <React.Fragment key="editButtons">
-      <Tooltip title={t('project-presentations.actions.edit.tooltip')}>
-        <LoadingButton
-          className="ProjectPresentation__Heading__Actions__Edit"
-          variant="contained"
-          sx={{ display: { xs: 'none', sm: 'flex' } }}
-          onClick={onActionSelected(
-            PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT
-          )}
-        >
-          <EditIcon />
-        </LoadingButton>
-      </Tooltip>
-      <CircleLoadingButton
+    <Tooltip
+      key="editButtons"
+      title={t('project-presentations.actions.edit.tooltip')}
+    >
+      <LoadingButton
         className="ProjectPresentation__Heading__Actions__Edit"
-        sxDisplay={{ xs: 'flex', sm: 'none' }}
+        variant="contained"
         onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT)}
       >
-        <EditIcon fontSize="small" />
-      </CircleLoadingButton>
-    </React.Fragment>
+        <EditIcon />
+      </LoadingButton>
+    </Tooltip>
   );
 
   const ACTION_COMPONENTS = {
@@ -206,7 +164,6 @@ const ProjectPresentationActions = ({
             className="ProjectPresentation__Heading__NoActions"
             variant="contained"
             disabled
-            sx={{ display: { xs: 'none', sm: 'flex' } }}
           >
             <DoNotTouchIcon />
           </LoadingButton>
