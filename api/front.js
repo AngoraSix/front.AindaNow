@@ -57,10 +57,17 @@ class FrontAPI {
   }
 
   async saveProject(projectBody, projectId) {
-    const { data } = projectId
-      ? await this.axios.put(`api/projects/${projectId}`, projectBody)
-      : await this.axios.post(`api/projects`, projectBody);
-    return data;
+    if (projectId) {
+      const { data } = await this.axios.put(
+        `api/projects/${projectId}`,
+        projectBody
+      );
+      return data;
+    } else {
+      const { data } = await this.axios.post(`api/projects`, projectBody);
+      await this.axios.post(`api/clubs/well-known/${data.id}`);
+      return data;
+    }
   }
 
   async saveProjectPresentation(
@@ -101,16 +108,12 @@ class FrontAPI {
   }
 
   async getAllProjectClubs(projectId) {
-    const { data } = await this.axios.get(
-      `api/clubs/well-known/${projectId}`
-    );
+    const { data } = await this.axios.get(`api/clubs/well-known/${projectId}`);
     return data;
   }
 
   async registerAllProjectClubs(projectId) {
-    const { data } = await this.axios.post(
-      `api/clubs/well-known/${projectId}`
-    );
+    const { data } = await this.axios.post(`api/clubs/well-known/${projectId}`);
     return data;
   }
 
