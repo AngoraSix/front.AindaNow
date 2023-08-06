@@ -1,6 +1,7 @@
 const UPDATE_FIELD = 'ProjectPresentationActions/UPDATE_FIELD';
 const UPDATE_CLUB_ACTIONS = 'ProjectPresentationActions/UPDATE_CLUB_ACTIONS';
-const UPDATE_PROJECTPRESENTATION_ACTIONS = 'ProjectPresentationActions/UPDATE_PROJECTPRESENTATION_ACTIONS';
+const UPDATE_PROJECTPRESENTATION_ACTIONS =
+  'ProjectPresentationActions/UPDATE_PROJECTPRESENTATION_ACTIONS';
 
 export const updateFieldAction = (payload) => ({
   type: UPDATE_FIELD,
@@ -20,7 +21,7 @@ export const updateProjectPresentationActions = (payload) => ({
 export const INITIAL_STATE = {
   actionData: {},
   projectPresentationActions: {},
-  clubActions: {}
+  clubActions: {},
 };
 
 const ProjectPresentationActionsReducer = (state = INITIAL_STATE, action) => {
@@ -33,12 +34,15 @@ const ProjectPresentationActionsReducer = (state = INITIAL_STATE, action) => {
     case UPDATE_CLUB_ACTIONS:
       return {
         ...state,
-        clubActions:  action.payload,
+        clubActions: {
+          ...state.clubActions,
+          ...action.payload,
+        },
       };
     case UPDATE_PROJECTPRESENTATION_ACTIONS:
       return {
         ...state,
-        projectPresentationActions:  action.payload,
+        projectPresentationActions: action.payload,
       };
     default:
       return state;

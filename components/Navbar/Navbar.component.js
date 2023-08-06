@@ -21,7 +21,7 @@ import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import config from '../../config';
 import { ROUTES, resolveRoute } from '../../constants';
 
@@ -31,14 +31,16 @@ const Navbar = () => {
   const router = useRouter();
   const { pathname, asPath, query, locale, locales } = router;
   const loading = status === 'loading';
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [anchorElLanguage, setAnchorElLanguage] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [anchorElLanguage, setAnchorElLanguage] = useState(null);
 
   const handleChange = async (selectedLocale) => {
     if (selectedLocale != locale) {
       Cookies.set('NEXT_LOCALE', selectedLocale);
-      await router.push({ pathname, query }, asPath, { locale: selectedLocale });
+      await router.push({ pathname, query }, asPath, {
+        locale: selectedLocale,
+      });
     }
     setAnchorElLanguage(null);
   };
@@ -96,7 +98,7 @@ const Navbar = () => {
                   2.5em"
               />
             </Box>
-            <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -206,7 +208,11 @@ const Navbar = () => {
                 onClose={handleCloseLanguageMenu}
               >
                 {otherLocales.map((l) => (
-                  <MenuItem key={l} value={l} onClick={async () => await handleChange(l)}>
+                  <MenuItem
+                    key={l}
+                    value={l}
+                    onClick={async () => await handleChange(l)}
+                  >
                     {l.toUpperCase()}
                   </MenuItem>
                 ))}
@@ -223,7 +229,7 @@ const Navbar = () => {
                   >
                     <Avatar
                       alt={t('navbar.settings.avatar.alt')}
-                      src={session.user?.image}
+                      src={session.user?.imageThumbnail || session.user?.image}
                       sx={{ width: 50, height: 50 }}
                     />
                   </IconButton>
@@ -263,7 +269,7 @@ const Navbar = () => {
             ) : (
               <Box sx={{ flexGrow: 0 }}>
                 <Button
-                  onClick={() => signIn('angorasixkeycloak')}
+                  onClick={() => signIn('angorasixspring')}
                   variant="contained"
                   sx={{
                     backgroundColor: 'primary.dark',
@@ -276,7 +282,7 @@ const Navbar = () => {
                 </Button>
                 <IconButton
                   className="Navbar__Login__Icon"
-                  onClick={() => signIn('angorasixkeycloak')}
+                  onClick={() => signIn('angorasixspring')}
                   aria-label="login"
                   sx={{ display: { xs: 'flex', sm: 'none' } }}
                 >

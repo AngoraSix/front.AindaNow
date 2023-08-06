@@ -6,7 +6,7 @@ import api from '../../../../../api';
 import ProjectPresentationView from '../../../../../components/Project/ProjectPresentation/View';
 import ProjectPresentationViewLayout from '../../../../../layouts/ProjectPresentationViewLayout/ProjectPresentationViewLayout';
 import logger from '../../../../../utils/logger';
-import { hateoasFormToActions } from '../../../../../utils/rest/hateoas/hateoasResponseToActions';
+import { processHateoasActions } from '../../../../../utils/rest/hateoas/hateoasUtils';
 
 const ProjectPresentationViewPage = ({
   projectPresentation,
@@ -64,7 +64,7 @@ export const getServerSideProps = async (ctx) => {
       validatedToken
     );
     const projectPresentationActions =
-      hateoasFormToActions(projectPresentation);
+      processHateoasActions(projectPresentation);
     isAdmin =
       session?.user.id != null &&
       session?.user.id === projectPresentation.project.adminId &&

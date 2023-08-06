@@ -15,19 +15,16 @@ class ContributorsAPI {
     return data;
   }
 
-  async setAttributes(attributes, token) {
+  async patchContributor(contributorId, patchBody, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, false);
-    const response = await this.axios.post(
-      `/attributes`,
-      { attributes },
-      {
-        headers: {
-          ...headers,
-          ...authHeaders,
-        },
-      }
-    );
+
+    const response = await this.axios.patch(`/${contributorId}`, patchBody, {
+      headers: {
+        ...headers,
+        ...authHeaders,
+      },
+    });
     return response;
   }
 }

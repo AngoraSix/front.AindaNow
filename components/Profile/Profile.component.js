@@ -4,17 +4,11 @@ import React from 'react';
 import AdministeredProjectsSection from './Sections/AdministeredProjectsSection';
 import ContributorPresentationSection from './Sections/ContributorPresentationSection';
 
-const Profile = ({
-  profile,
-  profileAttributes,
-  isCurrentContributor,
-  onEditField,
-}) => {
+const Profile = ({ profile, isCurrentContributor, onEditField }) => {
   return (
     <Box className="Profile Profile__Container">
       <ContributorPresentationSection
         profile={profile}
-        profileAttributes={profileAttributes}
         isCurrentContributor={isCurrentContributor}
         onEditField={onEditField}
       />
@@ -26,13 +20,10 @@ const Profile = ({
   );
 };
 
-Profile.defaultProps = {
-  profileAttributes: {},
-};
+Profile.defaultProps = {};
 
 Profile.propTypes = {
   profile: PropTypes.object.isRequired,
-  profileAttributes: PropTypes.object,
   isCurrentContributor: PropTypes.bool.isRequired,
   onEditField: PropTypes.func.isRequired,
 };

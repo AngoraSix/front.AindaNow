@@ -1,12 +1,14 @@
 import { getToken } from 'next-auth/jwt';
-import { oauthFrameworkConfig } from '../../config/oauth';
-import MethodNotAllowedError from '../../utils/errors/MethodNotAllowedError';
-import { getEnv } from '../../utils/env';
-import api from '../../api';
-import config from '../../config';
+import { oauthFrameworkConfig } from '../../../../config/oauth';
+import MethodNotAllowedError from '../../../../utils/errors/MethodNotAllowedError';
+import { getEnv } from '../../../../utils/env';
+import api from '../../../../api';
+import config from '../../../../config';
+import JSONPatch from '../../../../utils/rest/patch/JSONPatch';
+import createPatchBody from '../../../../utils/rest/patch/patchOperations';
 
 const page = async (req, res) => {
-  if (req.method === 'POST') {
+  if (req.method === 'PATCH') {
     const env = getEnv();
     config.applyEnvConfig(env);
     api.applyEnvConfig(env);
@@ -17,7 +19,8 @@ const page = async (req, res) => {
     const validatedToken =
       token?.error !== 'RefreshAccessTokenError' ? token : null;
     try {
-      const { data } = await api.contributors.setAttributes(
+      const { data } = await api.contributors.patchContributor(
+        req.query.profileId,
         req.body,
         validatedToken
       );

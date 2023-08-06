@@ -7,7 +7,12 @@ import Image from 'next/image';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
-const ImagePreview = ({ media, allowsZoomingIn, imageProps }) => {
+const ImagePreview = ({
+  media,
+  allowsZoomingIn,
+  imageProps,
+  fullWidthAvailable,
+}) => {
   const [isZoomed, setIsZoomed] = useState(false);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -20,7 +25,9 @@ const ImagePreview = ({ media, allowsZoomingIn, imageProps }) => {
 
   return media ? (
     <Box
-      className={`MediaPreview__Image__Container ${isZoomed ? 'Zoomed' : ''}`}
+      className={`MediaPreview__Image__Container ${
+        fullWidthAvailable ? 'FullWidthAvailable' : ''
+      } ${isZoomed ? 'Zoomed' : ''}`}
     >
       <Image
         onClick={isMobile ? onZoomIn : undefined}
@@ -63,12 +70,14 @@ const ImagePreview = ({ media, allowsZoomingIn, imageProps }) => {
 
 ImagePreview.defaultProps = {
   allowsZoomingIn: false,
+  fullWidthAvailable: false,
   imageProps: {},
 };
 
 ImagePreview.propTypes = {
   media: PropTypes.object.isRequired,
   allowsZoomingIn: PropTypes.bool,
+  fullWidthAvailable: PropTypes.bool,
   imageProps: PropTypes.object,
 };
 

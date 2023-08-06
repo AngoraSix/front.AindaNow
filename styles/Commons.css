@@ -3,6 +3,6 @@
   min-height: 3.1em;
 }
 
-.LoadingButton--circle {
-  border-radius: 3.1em;
+.ButtonsSkeleton__Button {
+  height: 2em;
 }

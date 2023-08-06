@@ -1,22 +1,20 @@
-const UPDATE_ATTRIBUTES = 'Profile/UPDATE_ATTRIBUTES';
+const UPDATE_PROFILE_FIELD = 'Profile/UPDATE_PROFILE_FIELD';
 
-export const updateAttributesAction = (payload) => ({
-  type: UPDATE_ATTRIBUTES,
+export const updateProfileField = (payload) => ({
+  type: UPDATE_PROFILE_FIELD,
   payload,
 });
 
 export const INITIAL_STATE = {
-  attributes: {},
+  contributorProfile: {},
 };
 
 const ProfileReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case UPDATE_ATTRIBUTES:
+    case UPDATE_PROFILE_FIELD:
       return {
-        ...state,
-        attributes: action.payload,
+        contributorProfile: { ...state.contributorProfile, ...action.payload },
       };
-
     default:
       return state;
   }

@@ -38,8 +38,9 @@ export const getServerSideProps = async (ctx) => {
   let props = {};
 
   try {
+    const validatedToken = session?.error !== 'RefreshAccessTokenError' ? session : null;
     const projectPresentationsList =
-      await api.projects.fetchProjectPresentations(session?.user?.attributes);
+      await api.projects.fetchProjectPresentations(session?.user?.attributes, validatedToken);
     props = {
       ...props,
       ...(await serverSideTranslations(ctx.locale, [

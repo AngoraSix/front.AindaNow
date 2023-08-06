@@ -1,19 +1,11 @@
 export const PROFILE_ATTRIBUTES = {
-  headImage: {
-    key: 'headImage',
-    label: 'head image',
-  },
-  headImageThumbnail: {
-    key: 'headImage.thumbnail',
-    label: 'head image',
-  },
   profilePicture: {
-    key: 'picture',
+    key: 'profileMedia',
     label: 'profile picture',
   },
-  profilePictureThumbnail: {
-    key: 'picture.thumbnail',
-    label: 'profile picture',
+  headImage: {
+    key: 'headMedia',
+    label: 'head image',
   },
 };
 
