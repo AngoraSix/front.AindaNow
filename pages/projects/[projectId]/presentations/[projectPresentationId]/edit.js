@@ -100,7 +100,7 @@ export const getServerSideProps = async (ctx) => {
     );
     isAdmin =
       session?.user.id != null &&
-      session?.user.id === projectPresentation.project.adminId &&
+      projectPresentation.project.admins?.some(a => a.contributorId) &&
       projectPresentation?.projectId === projectId;
     props = {
       ...props,
