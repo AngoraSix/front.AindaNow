@@ -210,6 +210,7 @@
   top: 5%;
   right: 5%;
   color: #dbdbdb;
+  z-index: 2;
 }
 
 .MediaListCard__MediaIcon__Youtube {

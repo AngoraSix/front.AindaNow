@@ -80,7 +80,10 @@ export const getServerSideProps = async (ctx) => {
   let isAdmin = false;
   try {
     const project = await api.projects.getProject(projectId, validatedToken);
-    isAdmin = session?.user.id != null && session?.user.id === project.adminId;
+
+    isAdmin =
+      session?.user.id != null &&
+      project.admins?.some((a) => a.contributorId == session.user.id);
     props = {
       ...props,
       project,

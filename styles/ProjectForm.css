@@ -170,6 +170,8 @@
   display: flex;
   justify-content: center;
   margin: 1em 5% auto;
+  position: relative;
+  min-width: 30%;
 }
 
 .PresentationSectionPreview__Media__Image {

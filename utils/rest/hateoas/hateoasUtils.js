@@ -9,7 +9,7 @@ export const processHateoasActions = (hateoasResponse = {}) => {
           ...actions[key],
           template: {
             fields: template.properties
-              ?.filter((p) => _isAdminProperty(p))
+              ?.filter((p) => !_isAdminProperty(p))
               .map((p) => hateoasPropertyToFieldMakerField(p)),
             ...template,
           },
@@ -27,8 +27,9 @@ const hateoasPropertyToFieldMakerField = (hateoasProperty) => ({
   type: hateoasProperty.type,
 });
 
-const _isAdminProperty = (property) =>
-  property.name != ADMIN_REQUIRED_KEY && property.type == null;
+const _isAdminProperty = (property) => {
+  return property.name != ADMIN_REQUIRED_KEY && property.type == null;
+};
 
 export const processHateoasCollection = (
   hateoasResponse = {},
