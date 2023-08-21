@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useReducer } from 'react';
 import api from '../../../../api/';
 import { useLoading, useNotifications } from '../../../../hooks/app';
+import Club from '../../../../models/Club';
+import { processHateoasCollection } from '../../../../utils/rest/hateoas/hateoasUtils';
 import AdministeredProjectsSection from './AdministeredProjectsSection.component';
 import AdministeredProjectsSectionsReducer, {
   INITIAL_STATE,
@@ -31,8 +33,15 @@ const AdministeredProjectsSectionContainer = ({
         const filteredAdministeredProjectsInfo = isCurrentContributor
           ? administeredProjectsInfo
           : administeredProjectsInfo.filter((ap) => ap.presentations);
-        const clubsInfo =
-          (await api.front.getAdministeredProjectsClubs(contributorId)) || [];
+
+        const administeredClubsResponse =
+          await api.front.getAdministeredProjectsClubs(contributorId);
+
+        const clubsInfo = processHateoasCollection(
+          administeredClubsResponse,
+          Club
+        );
+
         dispatch(
           initAdministeredProjectsInfo({
             administeredProjectsInfo: filteredAdministeredProjectsInfo,
@@ -59,7 +68,7 @@ const AdministeredProjectsSectionContainer = ({
     // ACA cambiar por members y merge data con nuevos attributes!
     doLoad(true);
     try {
-      if (members) {
+      if (members?.length) {
         const memberIds = members.map((m) => m.contributorId);
         const membersResponse = await api.front.getContributors(memberIds);
         const membersData = membersResponse.map((member) => ({
@@ -68,7 +77,7 @@ const AdministeredProjectsSectionContainer = ({
         }));
         dispatch(updateMembersData({ membersData }));
       } else {
-        dispatch(updateMembersData({ membersData: null }));
+        dispatch(updateMembersData({ membersData: [] }));
       }
     } catch (err) {
       if (err.response?.status !== 404) {

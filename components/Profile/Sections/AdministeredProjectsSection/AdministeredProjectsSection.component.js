@@ -22,8 +22,8 @@ import React, { useState } from 'react';
 import config from '../../../../config';
 import {
   PROFILE_ATTRIBUTES,
-  resolveRoute,
   ROUTES,
+  resolveRoute,
 } from '../../../../constants';
 import ListSkeleton from '../../../common/Skeletons/ListSkeleton.component';
 
@@ -140,6 +140,7 @@ const AdministeredProjectsSection = ({
         </Typography>
       )}
       <Dialog
+        className="AdministeredProjects__Listing__MembersListing__Dialog"
         onClose={() => onSelectedClub(null)}
         open={!!selectedClub}
         maxWidth="sm"
@@ -148,55 +149,72 @@ const AdministeredProjectsSection = ({
         <DialogTitle color="primary.main">
           {t('profile.administered-projects.candidates.title')}
         </DialogTitle>
-        <Box>
-          <List>
-            {selectedClubMembersData?.length ? (
-              selectedClubMembersData.map((member) => {
-                return (
-                  <ListItem key={member.contributorId} alignItems="flex-start">
-                    <ListItemButton
-                      component="span"
-                      onClick={() =>
-                        router.push(
-                          resolveRoute(
-                            ROUTES.profile.view,
-                            member.contributorId
-                          )
-                        )
-                      }
+        <Box className="AdministeredProjects__Listing__MembersListing__Container">
+          <List className="AdministeredProjects__Listing__MembersListing__List">
+            {selectedClubMembersData ? (
+              selectedClubMembersData.length ? (
+                selectedClubMembersData.map((member) => {
+                  return (
+                    <ListItem
+                      className="AdministeredProjects__Listing__MembersListing__List__Item"
+                      key={member.contributorId}
+                      alignItems="flex-start"
                     >
-                      <ListItemAvatar>
-                        <Avatar
-                          alt="User Profile image"
-                          src={getMediaUrl(
-                            member,
-                            PROFILE_ATTRIBUTES.profilePicture.key
-                          )}
-                          sx={{ width: 50, height: 50 }}
-                        />
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={`${member.firstName} ${member.lastName}`}
-                        secondary={
-                          <React.Fragment>
-                            <Typography
-                              sx={{ display: 'inline' }}
-                              component="span"
-                              variant="body2"
-                              color="text.primary"
-                            >
-                              {t(
-                                'profile.administered-projects.candidates.contact'
-                              )}
-                            </Typography>
-                            {` - ${member.data.contact}`}
-                          </React.Fragment>
+                      <ListItemButton
+                        component="span"
+                        onClick={() =>
+                          router.push(
+                            resolveRoute(
+                              ROUTES.profile.view,
+                              member.contributorId
+                            )
+                          )
                         }
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                );
-              })
+                      >
+                        <ListItemAvatar>
+                          <Avatar
+                            alt="User Profile image"
+                            src={getMediaUrl(
+                              member,
+                              PROFILE_ATTRIBUTES.profilePicture.key
+                            )}
+                            sx={{ width: 50, height: 50 }}
+                          />
+                        </ListItemAvatar>
+                        <ListItemText
+                          primary={`${member.firstName} ${member.lastName}`}
+                          secondary={
+                            <React.Fragment>
+                              <Typography
+                                sx={{ display: 'inline' }}
+                                component="span"
+                                variant="body2"
+                                color="text.primary"
+                              >
+                                {t(
+                                  'profile.administered-projects.candidates.contact'
+                                )}
+                              </Typography>
+                              {`: ${member.data.contact}`}
+                            </React.Fragment>
+                          }
+                        />
+                      </ListItemButton>
+                    </ListItem>
+                  );
+                })
+              ) : (
+                <Box className="AdministeredProjects__Listing__MembersListing__EmptyMessage__Container">
+                  <Typography
+                    className="AdministeredProjects__Listing__MembersListing__EmptyMessage"
+                    align="center"
+                  >
+                    {t(
+                      'profile.administered-projects.candidates.empty-message'
+                    )}
+                  </Typography>
+                </Box>
+              )
             ) : (
               <ListSkeleton />
             )}

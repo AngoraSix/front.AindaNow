@@ -128,6 +128,10 @@
   width: 100%;
 }
 
+.AdministeredProjects__Listing__MembersListing__EmptyMessage__Container {
+  margin: 1em auto;
+}
+
 .AdministeredProjects__Listing__Item {
   margin-top: 10px;
   margin-bottom: 10px;
