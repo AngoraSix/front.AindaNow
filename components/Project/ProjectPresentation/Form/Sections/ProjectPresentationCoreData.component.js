@@ -13,7 +13,8 @@ const ProjectPresentationCoreData = ({
   const { t } = useTranslation('project-presentations.edit');
   useEffect(() => {
     setIsCompleted(!!formData[PRESENTATION_CORE_FIELDS.referenceName.key]);
-  }, [formData, setIsCompleted]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formData]);
 
   const onFieldChange = (property) => (event) => {
     let {

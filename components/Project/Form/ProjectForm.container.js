@@ -55,7 +55,7 @@ const ProjectFormContainer = ({ project, ...args }) => {
           projectResponse.id,
           projectResponse.presentations[0].id
         );
-        router.push(viewURL);
+        await router.push(viewURL);
       }
     } catch (err) {
       logger.error(err);

@@ -69,7 +69,7 @@ const AdministeredProjectsSection = ({
       {administeredProjects?.length ? (
         <List className="AdministeredProjects__Listing" dense>
           {administeredProjects.map((project) => {
-            const contributorCandidatesClub =
+            const contributorCandidatesClub = isCurrentContributor &&
               project.clubs?.[
                 config.api.servicesAPIParams
                   .clubsWellKnownContributorCandidatesType
@@ -99,7 +99,8 @@ const AdministeredProjectsSection = ({
                   }
                 >
                   <ListItemButton
-                    onClick={() => {
+                    onClick={(e) => {
+                      e.preventDefault();
                       router.push(
                         resolveRoute(
                           isCurrentContributor
@@ -162,14 +163,15 @@ const AdministeredProjectsSection = ({
                     >
                       <ListItemButton
                         component="span"
-                        onClick={() =>
+                        onClick={(e) => {
+                          e.preventDefault();
                           router.push(
                             resolveRoute(
                               ROUTES.profile.view,
                               member.contributorId
                             )
-                          )
-                        }
+                          );
+                        }}
                       >
                         <ListItemAvatar>
                           <Avatar

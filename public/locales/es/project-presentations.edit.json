@@ -29,5 +29,6 @@
     "project-presentations.edit.form.wizard-fields.section.media": "Agregar Multimedia",
     "project-presentations.edit.form.presentation-sections": "Secciones de la Presentación",
     "project-presentations.edit.form.commands.add-section": "Agregar Sección",
-    "project-presentations.edit.form.commands.save": "Guardar"
+    "project-presentations.edit.form.commands.save": "Guardar",
+    "project-presentations.edit.form.navigation.go-to-project": "Ir al Proyecto"
 }

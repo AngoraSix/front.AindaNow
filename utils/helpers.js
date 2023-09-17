@@ -180,3 +180,11 @@ export const toType = (input, Type, toSingleElement = false) => {
     return input instanceof Type ? input : _createIfNotOfType(input, Type);
   }
 };
+
+export const getParamsFromRelativeUri = ( uri ) => {
+  // Get everything after the `?`
+  const [ , paramString ] = uri.split( '?' );
+
+  // Return parameters
+  return new URLSearchParams( paramString );
+};

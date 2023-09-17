@@ -15,6 +15,7 @@ const ContributorProfile = ({ profile, isCurrentContributor }) => {
 
   return (
     <ProfileLayout
+      key={profile.id}
       headData={{
         title: t('profile.page.title.template').replace(
           ':profile',
@@ -63,7 +64,6 @@ export const getServerSideProps = async (ctx) => {
     };
   } catch (err) {
     logger.error('err', err);
-    throw err;
   }
 
   return {

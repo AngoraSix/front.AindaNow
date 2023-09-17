@@ -94,7 +94,7 @@ const MediaListCard = ({
       <Image
         className="MediaListCard__Image"
         ref={preview}
-        alt={media.key}
+        alt={media.key || 'Image Preview'}
         src={media.thumbnailUrl}
         loading="lazy"
         fill

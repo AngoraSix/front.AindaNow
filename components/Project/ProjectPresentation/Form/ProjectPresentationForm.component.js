@@ -14,7 +14,6 @@ const ProjectPresentationForm = ({
   setIsSectionCompleted,
 }) => {
   const { t } = useTranslation('project-presentations.edit');
-
   return (
     <Box
       className={`ProjectPresentationForm ProjectPresentationForm__Container`}
@@ -42,12 +41,12 @@ const ProjectPresentationForm = ({
         >
           {t('project-presentations.edit.form.presentation-sections')}
         </Typography>
-        <ProjectPresentationsSectionsData
-          formData={formData}
-          onFormChange={onFormChange}
-          setIsCompleted={setIsSectionCompleted(REQUIRED_SECTIONS.SECTIONS)}
-          wasSubmitted={wasSubmitted}
-        />
+          <ProjectPresentationsSectionsData
+            formData={formData}
+            onFormChange={onFormChange}
+            setIsCompleted={setIsSectionCompleted(REQUIRED_SECTIONS.SECTIONS)}
+            wasSubmitted={wasSubmitted}
+          />
       </Box>
       <Box className="ProjectPresentationForm__Section">
         <Button

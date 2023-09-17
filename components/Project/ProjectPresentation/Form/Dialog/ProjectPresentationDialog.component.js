@@ -32,7 +32,10 @@ const ProjectPresentationDialog = ({ projectId, children }) => {
       fullScreen={isMobile}
       fullWidth
     >
-      <ProjectPresentationDialogNavbar projectId={projectId} />
+      <ProjectPresentationDialogNavbar
+        projectId={projectId}
+        isEmbeddedDialog={true}
+      />
       {children}
     </Dialog>
   );

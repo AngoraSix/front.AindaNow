@@ -90,7 +90,7 @@ const ProjectPresentationParams = ({
           </FormControl>
         </Grid>
         <Grid item xs={5}>
-          <TagsInput
+          {/* <TagsInput
             {...PRESENTATION_PARAMS_FIELDS.skills}
             label={
               formData.skills
@@ -105,7 +105,7 @@ const ProjectPresentationParams = ({
             id="tags"
             name="tags"
             fullWidth
-          />
+          /> */}
         </Grid>
       </Grid>
     </div>
