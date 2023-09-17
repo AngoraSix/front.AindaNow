@@ -72,7 +72,8 @@ const ProjectPresentationsSectionsData = ({
 
   useEffect(() => {
     setIsCompleted(_determineIfIsComplete({ ...formData }));
-  }, [formData, setIsCompleted]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formData]);
 
   const handleFocusChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);

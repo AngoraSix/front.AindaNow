@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useLoading } from '../../hooks/app';
-import { checkActiveToken } from '../../hooks/oauth';
+import { useAndCheckActiveToken } from '../../hooks/oauth';
 import App from './App.component';
 
 const AppContainer = (props) => {
@@ -10,7 +10,7 @@ const AppContainer = (props) => {
   const router = useRouter();
   const { isLoading, doLoad } = useLoading();
 
-  checkActiveToken();
+  useAndCheckActiveToken();
 
   useEffect(() => {
     const startLoading = () => {

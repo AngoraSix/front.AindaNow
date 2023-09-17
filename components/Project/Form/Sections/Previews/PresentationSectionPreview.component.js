@@ -17,7 +17,7 @@ const PresentationSectionPreview = ({ presentationSection }) => {
       <Box className="PresentationSectionPreview__Data">
         <Box className="PresentationSectionPreview__Media__Container">
           <Image
-            alt={presentationSection.mainMedia.key}
+            alt={presentationSection.mainMedia.key || 'Image Preview'}
             className="PresentationSectionPreview__Media__Image"
             src={presentationSection.mainMedia.thumbnailUrl}
             loading="lazy"

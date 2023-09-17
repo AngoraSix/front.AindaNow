@@ -2,7 +2,7 @@
   "profile.page.title.template": ":profile",
   "profile.page.description.template": "Profile of :profile",
   "profile.administered-projects.title": "Administered Projects",
-  "profile.administered-projects.empty-message": "Contributor has no visible administered project",
+  "profile.administered-projects.empty-message": "Contributor has no visible administered projects",
   "profile.administered-projects.candidates.title": "Contributor Candidates",
   "profile.administered-projects.candidates.contact": "Contact",
   "profile.administered-projects.candidates.empty-message": "There are no canidates for this project",

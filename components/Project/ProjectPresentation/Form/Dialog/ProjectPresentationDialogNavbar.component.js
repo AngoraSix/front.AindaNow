@@ -2,12 +2,14 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Box, Button, IconButton } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { resolveRoute, ROUTES } from '../../../../../constants';
+import { ROUTES, resolveRoute } from '../../../../../constants';
 
 const ProjectPresentationDialogNavbar = ({ projectId, isEmbeddedDialog }) => {
+  const { t } = useTranslation('project-presentations.edit');
   const theme = useTheme();
   const router = useRouter();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
@@ -20,26 +22,28 @@ const ProjectPresentationDialogNavbar = ({ projectId, isEmbeddedDialog }) => {
       {!isMobile ? (
         <Button
           className="ProjectPresentationDialogNavbar__Button"
-          onClick={() =>
+          onClick={(e) => {
+            e.preventDefault();
             router.push(resolveRoute(ROUTES.projects.edit, projectId), null, {
               shallow: isEmbeddedDialog,
-            })
-          }
+            });
+          }}
           variant="text"
           startIcon={
             <ArrowBackIcon className="ProjectPresentationDialogNavbar__Button" />
           }
         >
-          Go to Project
+          {t('project-presentations.edit.form.navigation.go-to-project')}
         </Button>
       ) : (
         <IconButton
           className="ProjectPresentationDialogNavbar__Button"
-          onClick={() =>
+          onClick={() => {
+            e.preventDefault();
             router.push(resolveRoute(ROUTES.projects.edit, projectId), null, {
               shallow: isEmbeddedDialog,
-            })
-          }
+            });
+          }}
           variant="text"
         >
           <ArrowBackIcon className="ProjectPresentationDialogNavbar__Button" />

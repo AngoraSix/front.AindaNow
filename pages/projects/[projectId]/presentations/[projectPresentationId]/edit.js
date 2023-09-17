@@ -52,7 +52,8 @@ const EditProjectPresentationPage = ({
         </Box>
       </DefaultLayout>
     );
-  }
+  };
+  
   return (
     <DefaultLayout
       headData={{

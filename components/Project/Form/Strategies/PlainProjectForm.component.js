@@ -4,10 +4,11 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ProjectPresentationForm from '../../ProjectPresentation/Form';
 import ProjectCorePresentationsHolder from '../Sections/Previews/ProjectPresentationsHolder.component';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
+import { getParamsFromRelativeUri } from '../../../../utils/helpers';
 
 const REQUIRED_SECTIONS = {
   CORE: 'CORE',
@@ -22,10 +23,31 @@ const PlainProjectForm = ({ formData, onFormChange, project }) => {
   const [completedSections, setCompletedSections] = useState({
     [REQUIRED_SECTIONS.CORE]: false,
   });
-  const editingPresentationId = router.query.editingPresentationId;
-  const editingPresentationObject = project.presentations?.find(
-    (pr) => pr.id === editingPresentationId
+  const [editingPresentationId, setEditingPresentationId] = useState(
+    router.query.editingPresentationId
   );
+  const [editingPresentationObject, setEditingPresentationObject] = useState(
+    project.presentations?.find((pr) => pr.id === editingPresentationId)
+  );
+
+  useEffect(() => {
+    const handleRouteChange = (url, { shallow }) => {
+      if (shallow) {
+        const newUrlParams = getParamsFromRelativeUri(url);
+        const editingPresentationId = newUrlParams.get('editingPresentationId');
+
+        setEditingPresentationId(editingPresentationId);
+        setEditingPresentationObject(
+          project.presentations?.find((pr) => pr.id === editingPresentationId)
+        );
+      }
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router, project.presentations]);
 
   const updateCompletedStatus = (section) => (isCompleted) => {
     setCompletedSections({ ...completedSections, [section]: isCompleted });
