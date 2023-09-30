@@ -24,28 +24,28 @@ const ProjectPresentationsListContainer = ({
   });
 
   const onNextPageClick = async () => {
-    const {
-      total,
-      page,
-      limit,
-      search,
-      data: fetchedPresentationsListObj,
-    } = await api.projects.fetchProjects(session.user.attributes, {
-      page: state.data.page + 1,
-      search: state.data.search,
-    });
+    // const {
+    //   total,
+    //   page,
+    //   limit,
+    //   search,
+    //   data: fetchedPresentationsListObj,
+    // } = await api.projects.fetchProjects(session.user.attributes, {
+    //   page: state.data.page + 1,
+    //   search: state.data.search,
+    // });
 
-    fetchedPresentationsList = fetchedPresentationsListObj.map(
-      (pr) => new ProjectPresentation(pr)
-    );
+    // fetchedPresentationsList = fetchedPresentationsListObj.map(
+    //   (pr) => new ProjectPresentation(pr)
+    // );
 
-    const projectPresentationsList = state.data.projectPresentationsList.concat(
-      fetchedPresentationsList
-    );
+    // const projectPresentationsList = state.data.projectPresentationsList.concat(
+    //   fetchedPresentationsList
+    // );
 
-    dispatch(
-      updateDataAction({ total, page, limit, search, projectPresentationsList })
-    );
+    // dispatch(
+    //   updateDataAction({ total, page, limit, search, projectPresentationsList })
+    // );
   };
 
   const onSearch = async (value) => {
@@ -58,22 +58,23 @@ const ProjectPresentationsListContainer = ({
     //   search,
     //   data: projects,
     // } =
-    const projectPresentationsListObj =
-      await api.projects.fetchProjectPresentations(session.user.attributes, {
-        search: value,
-      });
+    
+    // const projectPresentationsListObj =
+    //   await api.projects.fetchProjectPresentations(session.user.attributes, {
+    //     search: value,
+    //   });
 
-    const total = projectPresentationsListObj.length,
-      page = 1,
-      limit = 5,
-      search = value;
+    // const total = projectPresentationsListObj.length,
+    //   page = 1,
+    //   limit = 5,
+    //   search = value;
 
-    const projectPresentationsList = projectPresentationsListObj.map(
-      (pr) => new ProjectPresentation(pr)
-    );
-    dispatch(
-      updateDataAction({ total, page, limit, search, projectPresentationsList })
-    );
+    // const projectPresentationsList = projectPresentationsListObj.map(
+    //   (pr) => new ProjectPresentation(pr)
+    // );
+    // dispatch(
+    //   updateDataAction({ total, page, limit, search, projectPresentationsList })
+    // );
   };
   return (
     <ProjectPresentationsList
