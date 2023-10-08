@@ -96,7 +96,7 @@ env:
   APP: front.aindanow
 
 jobs:
-  deploy:
+  push:
     # Add 'id-token' with the intended permissions for workload identity federation
     permissions:
       contents: 'read'
