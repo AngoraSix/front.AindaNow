@@ -16,7 +16,7 @@ RUN npm ci;
 FROM base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=base /app/next.config.js ./
+COPY --from=base next.config.js ./
 COPY . .
 
 # Next.js collects completely anonymous telemetry data about general usage.
