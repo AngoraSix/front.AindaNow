@@ -8,7 +8,9 @@ WORKDIR /app
 
 # Install dependencies based on the preferred package manager
 COPY package.json package-lock.json ./
-RUN npm install --omit=dev
+COPY next.config.js ./
+RUN npm ci;
+# RUN npm install --omit=dev
 
 
 # Rebuild the source code only when needed
