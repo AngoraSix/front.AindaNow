@@ -21,13 +21,13 @@ const ProjectPresentationsList = ({
     <Box className="ProjectPresentationsList ProjectPresentationsList__Container">
       <Box className="ProjectPresentationsList__Toolbar">
         <Box className="ProjectPresentationsList__Toolbar__Column Column__Large">
-          <TextField
+          {/* <TextField
             className="ProjectPresentationsList__Toolbar__Input"
             label={t('project-presentations.list.search')}
             value={search}
             onChange={({ target: value }) => onSearchChange(value)}
             fullWidth
-          />
+          /> */}
         </Box>
         <Box className="ProjectPresentationsList__Toolbar__Column">
           <Link href={ROUTES.projects.new}>
@@ -68,7 +68,7 @@ const ProjectPresentationsList = ({
           ))}
         </Grid>
 
-        {total > projectPresentationsList.length && (
+        {/* {total > projectPresentationsList.length && (
           <Box className="ProjectPresentationsList__LoadMore">
             <Button
               variant="outlined"
@@ -78,7 +78,7 @@ const ProjectPresentationsList = ({
               {t('project-presentations.list.commands.show-more')}
             </Button>
           </Box>
-        )}
+        )} */}
       </Box>
     </Box>
   );

@@ -35,18 +35,23 @@ HomePage.propTypes = {
 
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
-  let props = {};
+  let props = {
+    ...(await serverSideTranslations(ctx.locale, [
+      'common',
+      'project-presentations.list',
+    ])),
+  };
 
   try {
-    const validatedToken = session?.error !== 'RefreshAccessTokenError' ? session : null;
+    const validatedToken =
+      session?.error !== 'RefreshAccessTokenError' ? session : null;
     const projectPresentationsList =
-      await api.projects.fetchProjectPresentations(session?.user?.attributes, validatedToken);
+      await api.projects.fetchProjectPresentations(
+        session?.user?.attributes,
+        validatedToken
+      );
     props = {
       ...props,
-      ...(await serverSideTranslations(ctx.locale, [
-        'common',
-        'project-presentations.list',
-      ])),
       projectPresentationsList,
     };
   } catch (err) {
