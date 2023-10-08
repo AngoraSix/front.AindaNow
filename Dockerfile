@@ -49,6 +49,9 @@ EXPOSE 80
 
 ENV PORT 80
 
+#Just for health check local?
+RUN apk --no-cache add curl
+
 CMD ["node", "server.js"]
 
 
