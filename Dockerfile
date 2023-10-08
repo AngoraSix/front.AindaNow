@@ -29,6 +29,9 @@ RUN npm run build
 FROM base AS runner
 WORKDIR /app
 
+#Just for health check local?
+RUN apk --no-cache add curl
+
 ENV NODE_ENV production
 # Uncomment the following line in case you want to disable telemetry during runtime.
 # ENV NEXT_TELEMETRY_DISABLED 1
@@ -48,9 +51,6 @@ USER nextjs
 EXPOSE 80
 
 ENV PORT 80
-
-#Just for health check local?
-RUN apk --no-cache add curl
 
 CMD ["node", "server.js"]
 
