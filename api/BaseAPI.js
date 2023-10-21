@@ -16,7 +16,6 @@ class BaseAPI {
     this.axiosServer = axios.create({
       baseURL: serverBaseURL || baseURL,
     });
-
     this.serverBaseURL = serverBaseURL;
   }
 
