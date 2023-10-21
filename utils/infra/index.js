@@ -1,10 +1,10 @@
 import { obtainGoogleHeaders } from './googleInfra';
 
-export const obtainInfraHeaders = async (infraConfigs, axiosInstance) => {
+export const obtainInfraHeaders = async (infraConfigs, baseUrl) => {
   console.log("GERGER 0 - INFRA");
   console.log(infraConfigs);
   if (infraConfigs.isGoogleCloudRun) {
-    return obtainGoogleHeaders(axiosInstance);
+    return obtainGoogleHeaders(baseUrl);
   }
   return {};
 };
