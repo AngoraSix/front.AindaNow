@@ -7,6 +7,7 @@ export const obtainGoogleHeaders = async (baseUrl) => {
   const client = await auth.getIdTokenClient(baseUrl);
   console.log('GERGER 2');
   const idToken = await client.idTokenProvider?.fetchIdToken();
+  console.log("GERGER3");
   console.log(idToken);
   return {
     'X-Serverless-Authorization': idToken,
