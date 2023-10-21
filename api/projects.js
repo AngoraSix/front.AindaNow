@@ -11,12 +11,12 @@ class ProjectsAPI {
     const authHeaders = this.axios.getAuthorizationHeaders(token, false);
 
     console.log('GERGERGER 99 - FETCHPROJECTS');
-    console.log(this.axios.getBaseURL());
-    console.log(config.api);
+    // console.log(this.axios.getBaseURL().);
+    console.log(config.api.serverBaseURL);
     console.log(this.axios.serverBaseURL);
     console.log('GERGERGER 99 - FETCHPROJECTS FINISH LOGS');
 
-    const infraHeaders = obtainInfraHeaders(config.infra, this.axios.serverBaseURL);
+    const infraHeaders = obtainInfraHeaders(config.infra, config.api.serverBaseURL);
 
     const { data: projectPresentationdata } = await this.axios.get(
       `/presentations?${attributes}`,
