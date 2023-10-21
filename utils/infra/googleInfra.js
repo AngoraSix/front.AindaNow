@@ -1,6 +1,6 @@
 import { GoogleAuth } from 'google-auth-library';
 
-export const obtainGoogleHeaders = async (baseUrl) => {
+export const obtainGoogleHeaders = async (baseUrl, headers) => {
   console.log("GERGER 1 - It's GCP");
   console.log(baseUrl);
   console.log(baseUrl + '/');
@@ -13,6 +13,7 @@ export const obtainGoogleHeaders = async (baseUrl) => {
   try {
     const res = await client.request({
       url: `${baseUrl}/projects/presentations`,
+      headers
     });
     console.log(res.data);
     console.log('GERGER 2.3');
