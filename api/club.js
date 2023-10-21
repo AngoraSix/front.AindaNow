@@ -2,6 +2,8 @@ import { CLUB_MEMBERSHIP_OPERATIONS } from '../constants';
 import createPatchBody, {
   PATCH_SUPPORTED_OPERATIONS,
 } from '../utils/rest/patch/patchOperations';
+import { obtainInfraHeaders } from '../utils/infra';
+import config from '../config';
 
 const FRONT_TO_PATCH_OPERATIONS_MAPPING = {
   [CLUB_MEMBERSHIP_OPERATIONS.JOIN]: PATCH_SUPPORTED_OPERATIONS.ADD,
@@ -21,7 +23,8 @@ class ClubsAPI {
     token
   ) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = await this.axios.getAuthorizationHeaders(token, true);
+    const authHeaders = this.axios.getAuthorizationHeaders(token, true);
+    const infraHeaders = obtainInfraHeaders(config.infra, this.axios);
 
     const { data: patchResult } = await this.axios.patch(
       `/clubs/well-known/${projectId}/${clubType}`,
@@ -33,6 +36,7 @@ class ClubsAPI {
         headers: {
           ...headers,
           ...authHeaders,
+          ...infraHeaders
         },
       }
     );
@@ -41,7 +45,7 @@ class ClubsAPI {
 
   async getWellKnownClub(projectId, clubType, token) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = await this.axios.getAuthorizationHeaders(token);
+    const authHeaders = this.axios.getAuthorizationHeaders(token);
 
     const { data } = await this.axios.get(
       `/clubs/well-known/${projectId}/${clubType}`,
@@ -57,7 +61,7 @@ class ClubsAPI {
 
   async getAllWellKnownClubs(projectId, token) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = await this.axios.getAuthorizationHeaders(token);
+    const authHeaders = this.axios.getAuthorizationHeaders(token);
 
     const { data } = await this.axios.get(`/clubs/well-known/${projectId}`, {
       headers: {
@@ -70,7 +74,7 @@ class ClubsAPI {
 
   async registerAllWellKnownClubs(projectId, token) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = await this.axios.getAuthorizationHeaders(token);
+    const authHeaders = this.axios.getAuthorizationHeaders(token);
 
     const { data } = await this.axios.post(
       `/clubs/well-known/${projectId}`,
@@ -87,7 +91,7 @@ class ClubsAPI {
 
   async getAdministeredWellKnownClubs(adminId, token) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = await this.axios.getAuthorizationHeaders(token, false);
+    const authHeaders = this.axios.getAuthorizationHeaders(token, false);
 
     const { data } = await this.axios.get('/clubs/well-known/', {
       params: { adminId: adminId },
