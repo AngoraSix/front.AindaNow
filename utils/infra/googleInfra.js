@@ -10,6 +10,6 @@ export const obtainGoogleHeaders = async (baseUrl) => {
   console.log("GERGER3");
   console.log(idToken);
   return {
-    'X-Serverless-Authorization': idToken,
+    'X-Serverless-Authorization': `Bearer ${idToken}`,
   };
 };
