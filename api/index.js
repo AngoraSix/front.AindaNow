@@ -40,6 +40,7 @@ class API {
     this.axios = new BaseAPI({
       serverBaseURL: config.api.serverBaseURL,
       browserBaseURL: config.api.browserBaseURL,
+      infraConfigs: config.infra
     });
     this.frontAPI = new FrontAPI(
       new BaseAPI({

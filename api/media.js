@@ -10,7 +10,7 @@ class MediaAPI {
 
   async uploadImages(files, token) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = this.axios.getAuthorizationHeaders(token, true);
+    const authHeaders = await this.axios.getAuthorizationHeaders(token, true);
 
     const formData =
       typeof window !== 'undefined' ? new FormData() : new NodeFormData();

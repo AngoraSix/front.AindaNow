@@ -5,7 +5,7 @@ class ProjectsAPI {
 
   async fetchProjectPresentations(attributes, token) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = this.axios.getAuthorizationHeaders(token, false);
+    const authHeaders = await this.axios.getAuthorizationHeaders(token, false);
     const { data: projectPresentationdata } = await this.axios.get(
       `/presentations?${attributes}`,
       {
@@ -21,7 +21,7 @@ class ProjectsAPI {
 
   async fetchProjects(attributes = {}, token) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = this.axios.getAuthorizationHeaders(token, false);
+    const authHeaders = await this.axios.getAuthorizationHeaders(token, false);
     const { data: projectData } = await this.axios.get(`/core`, {
       params: attributes,
       headers: {
@@ -34,7 +34,7 @@ class ProjectsAPI {
 
   async saveProject(project, token, projectId) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = this.axios.getAuthorizationHeaders(token, true);
+    const authHeaders = await this.axios.getAuthorizationHeaders(token, true);
 
     let projectPresentations = project.presentations;
     delete project.presentations;
@@ -74,7 +74,7 @@ class ProjectsAPI {
     token
   ) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = this.axios.getAuthorizationHeaders(token, true);
+    const authHeaders = await this.axios.getAuthorizationHeaders(token, true);
 
     const { data } = await this.axios[projectPresentationId ? 'put' : 'post'](
       `/${projectId}/presentations/${projectPresentationId || ''}`,
@@ -92,7 +92,7 @@ class ProjectsAPI {
 
   async getProjectPresentation(projectPresentationId, projectId, token) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = this.axios.getAuthorizationHeaders(token, false);
+    const authHeaders = await this.axios.getAuthorizationHeaders(token, false);
     const { data } = await this.axios.get(
       `/${projectId}/presentations/${projectPresentationId}`,
       {
@@ -107,7 +107,7 @@ class ProjectsAPI {
 
   async getProject(projectId, token) {
     const headers = this.axios.getCommonHeaders();
-    const authHeaders = this.axios.getAuthorizationHeaders(token, false);
+    const authHeaders = await this.axios.getAuthorizationHeaders(token, false);
     const { data } = await this.axios.get(`/core/${projectId}`, {
       headers: {
         ...headers,
