@@ -16,8 +16,17 @@ class ProjectsAPI {
     console.log(this.axios.serverBaseURL);
     console.log('GERGERGER 99 - FETCHPROJECTS FINISH LOGS');
 
-    const infraHeaders = obtainInfraHeaders(config.infra, config.api.serverBaseURL);
+    const infraHeaders = await obtainInfraHeaders(config.infra, config.api.serverBaseURL);
 
+    console.log('GERGERGER 88 - A VERGER');
+    console.log(infraHeaders)
+
+    console.log('GERGERGER 77 - A VERGER');
+    console.log({
+      ...headers,
+      ...authHeaders,
+      ...infraHeaders,
+    })
     const { data: projectPresentationdata } = await this.axios.get(
       `/presentations?${attributes}`,
       {
@@ -35,7 +44,7 @@ class ProjectsAPI {
   async fetchProjects(attributes = {}, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, false);
-    const infraHeaders = obtainInfraHeaders(config.infra, this.axios.getBaseURL());
+    const infraHeaders = await obtainInfraHeaders(config.infra, this.axios.getBaseURL());
 
     const { data: projectData } = await this.axios.get(`/core`, {
       params: attributes,
@@ -51,7 +60,7 @@ class ProjectsAPI {
   async saveProject(project, token, projectId) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
-    const infraHeaders = obtainInfraHeaders(config.infra, this.axios.getBaseURL());
+    const infraHeaders = await obtainInfraHeaders(config.infra, this.axios.getBaseURL());
 
     let projectPresentations = project.presentations;
     delete project.presentations;
@@ -93,7 +102,7 @@ class ProjectsAPI {
   ) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
-    const infraHeaders = obtainInfraHeaders(config.infra, this.axios.getBaseURL());
+    const infraHeaders = await obtainInfraHeaders(config.infra, this.axios.getBaseURL());
 
     const { data } = await this.axios[projectPresentationId ? 'put' : 'post'](
       `/${projectId}/presentations/${projectPresentationId || ''}`,
@@ -113,7 +122,7 @@ class ProjectsAPI {
   async getProjectPresentation(projectPresentationId, projectId, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, false);
-    const infraHeaders = obtainInfraHeaders(config.infra, this.axios.getBaseURL());
+    const infraHeaders = await obtainInfraHeaders(config.infra, this.axios.getBaseURL());
 
     const { data } = await this.axios.get(
       `/${projectId}/presentations/${projectPresentationId}`,
@@ -131,7 +140,7 @@ class ProjectsAPI {
   async getProject(projectId, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, false);
-    const infraHeaders = obtainInfraHeaders(config.infra, this.axios.getBaseURL());
+    const infraHeaders = await obtainInfraHeaders(config.infra, this.axios.getBaseURL());
 
     const { data } = await this.axios.get(`/core/${projectId}`, {
       headers: {

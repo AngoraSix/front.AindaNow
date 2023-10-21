@@ -24,7 +24,7 @@ class ClubsAPI {
   ) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
-    const infraHeaders = obtainInfraHeaders(config.infra, this.axios);
+    const infraHeaders = await obtainInfraHeaders(config.infra, this.axios);
 
     const { data: patchResult } = await this.axios.patch(
       `/clubs/well-known/${projectId}/${clubType}`,
