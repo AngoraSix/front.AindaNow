@@ -69,9 +69,13 @@ class ProjectsAPI {
           ...headers,
           ...authHeaders,
           ...infraHeaders,
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
       }
     );
+    console.log("SESESES");
+    console.log(projectPresentationdata);
     return projectPresentationdata;
   }
 
