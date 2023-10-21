@@ -12,7 +12,7 @@ export const obtainGoogleHeaders = async (baseUrl) => {
         },
       }
     );
-    headers['X-Serverless-Authorization'] = idToken;
+    headers['X-Serverless-Authorization'] = `Bearer ${idToken}`;
   } catch (err) {
     logger.error('Error obtaining GCP Id Token', err);
   }

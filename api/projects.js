@@ -45,6 +45,22 @@ class ProjectsAPI {
     // );
     // console.log(data2);
     // console.log(data2?.data);
+    console.log("WHATAGERGERGER");
+    console.log({
+      ...headers,
+      ...authHeaders,
+      ...infraHeaders,
+    });
+    console.log({
+      ...headers,
+      ...authHeaders,
+      ...infraHeaders,
+    }['Authorization'])
+    console.log({
+      ...headers,
+      ...authHeaders,
+      ...infraHeaders,
+    }['X-Serverless-Authorization'])
     const { data: projectPresentationdata } = await this.axios.get(
       `/presentations?${attributes}`,
       {
