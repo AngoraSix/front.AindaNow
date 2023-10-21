@@ -1,6 +1,5 @@
-
-import { obtainInfraHeaders } from '../utils/infra';
 import config from '../config';
+import { obtainInfraHeaders } from '../utils/infra';
 
 class ProjectsAPI {
   constructor(axiosInstance) {
@@ -11,6 +10,9 @@ class ProjectsAPI {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, false);
 
+    console.log('GERGERGER 99 - FETCHPROJECTS');
+    console.log(config);
+
     const infraHeaders = obtainInfraHeaders(config.infra, this.axios);
 
     const { data: projectPresentationdata } = await this.axios.get(
@@ -20,8 +22,8 @@ class ProjectsAPI {
         headers: {
           ...headers,
           ...authHeaders,
-          ...infraHeaders
-        }
+          ...infraHeaders,
+        },
       }
     );
     return projectPresentationdata;
@@ -37,7 +39,7 @@ class ProjectsAPI {
       headers: {
         ...headers,
         ...authHeaders,
-        ...infraHeaders
+        ...infraHeaders,
       },
     });
     return projectData;
@@ -58,7 +60,7 @@ class ProjectsAPI {
         headers: {
           ...headers,
           ...authHeaders,
-          ...infraHeaders
+          ...infraHeaders,
         },
       }
     );
@@ -97,11 +99,11 @@ class ProjectsAPI {
         headers: {
           ...headers,
           ...authHeaders,
-          ...infraHeaders
+          ...infraHeaders,
         },
       }
     );
-    
+
     return data;
   }
 
@@ -116,7 +118,7 @@ class ProjectsAPI {
         headers: {
           ...headers,
           ...authHeaders,
-          ...infraHeaders
+          ...infraHeaders,
         },
       }
     );
@@ -132,7 +134,7 @@ class ProjectsAPI {
       headers: {
         ...headers,
         ...authHeaders,
-        ...infraHeaders
+        ...infraHeaders,
       },
     });
     return data;

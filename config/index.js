@@ -21,7 +21,7 @@ class A6Config {
   }
 
   get infra() {
-    return this.infra;
+    return this.infraConfig;
   }
 
   applyEnvConfig(env = {}) {
@@ -29,7 +29,7 @@ class A6Config {
     this.siteConfig = new Site(env);
     this.apiConfig = new Api(env);
     this.thirdPartiesConfig = new ThirdParties(env);
-    this.infra = new Infra(env);
+    this.infraConfig = new Infra(env);
   }
 }
 
