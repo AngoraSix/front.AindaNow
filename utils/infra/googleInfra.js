@@ -10,8 +10,8 @@ export const obtainGoogleHeaders = async (baseUrl) => {
   console.log(client.idTokenProvider?.constructor?.name);
   console.log('GERGER 2.2');
 
-  // const res = await client.request({url: `${baseUrl} + "/projects/presentations"`});
-  // console.log(res.data);
+  const res = await client.request({url: `${baseUrl} + "/projects/presentations"`});
+  console.log(res.data);
   console.log('GERGER 2.3');
   
   const idToken = await client.idTokenProvider.fetchIdToken();
