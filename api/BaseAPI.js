@@ -3,7 +3,7 @@ import TokenRequiredError from '../utils/errors/TokenRequiredError';
 import { GoogleAuth } from 'google-auth-library';
 
 class BaseAPI {
-  constructor({ browserBaseURL = null, serverBaseURL = null, baseURL = null, infraConfigs }) {
+  constructor({ browserBaseURL = null, serverBaseURL = null, baseURL = null, infraConfigs = null }) {
     if (!browserBaseURL && !serverBaseURL && !baseURL) {
       throw new Error(
         'BaseAPI Error - You should set at least baseURL (or browserBaseURL and serverBaseURL)'
@@ -17,7 +17,7 @@ class BaseAPI {
     this.axiosServer = axios.create({
       baseURL: serverBaseURL || baseURL,
     });
-    this.isGoogleCloudRun = infraConfigs.isGoogleCloudRun;
+    this.isGoogleCloudRun = infraConfigs?.isGoogleCloudRun;
     this.serverBaseURL = serverBaseURL;
   }
 
