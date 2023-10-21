@@ -1,8 +1,9 @@
 import axios from 'axios';
 import TokenRequiredError from '../utils/errors/TokenRequiredError';
+import { GoogleAuth } from 'google-auth-library';
 
 class BaseAPI {
-  constructor({ browserBaseURL = null, serverBaseURL = null, baseURL = null }) {
+  constructor({ browserBaseURL = null, serverBaseURL = null, baseURL = null, infraConfigs }) {
     if (!browserBaseURL && !serverBaseURL && !baseURL) {
       throw new Error(
         'BaseAPI Error - You should set at least baseURL (or browserBaseURL and serverBaseURL)'
@@ -16,6 +17,8 @@ class BaseAPI {
     this.axiosServer = axios.create({
       baseURL: serverBaseURL || baseURL,
     });
+    this.isGoogleCloudRun = infraConfigs.isGoogleCloudRun;
+    this.serverBaseURL = serverBaseURL;
   }
 
   setCommonHeaders(headers) {
@@ -41,16 +44,29 @@ class BaseAPI {
     return this.getCurrentAxiosInstance().defaults;
   }
 
-  getAuthorizationHeaders = (token, isRequired = true) => {
+  getAuthorizationHeaders = async (token, isRequired = true) => {
+    const authHeaders = {};
     if (token?.accessToken) {
-      return { Authorization: `Bearer ${token.accessToken}` };
+      authHeaders.Authorization= `Bearer ${token.accessToken}`;
     } else if (isRequired) {
       throw new TokenRequiredError(
         'BaseAPI Error - Authorization header is required but user is not authenticated'
       );
-    } else {
-      return {};
     }
+
+    console.log("GER 0");
+    
+    if(this.isGoogleCloudRun){
+      console.log("GER 1 - It's GCP");
+      console.log(this.serverBaseURL);
+      const auth = new GoogleAuth();
+      const client = await auth.getIdTokenClient(this.serverBaseURL);
+      console.log("GER 2");
+      console.log(client.idTokenProvider?.fetchIdToken);
+      authHeaders['X-Serverless-Authorization'] = client.idTokenProvider?.fetchIdToken;
+    }
+    
+    return authHeaders;
   };
 
   getCurrentAxiosInstance() {
