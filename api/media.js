@@ -1,6 +1,6 @@
 import NodeFormData from 'form-data';
-import { obtainInfraHeaders } from '../utils/infra';
 import config from '../config';
+import { obtainInfraHeaders } from '../utils/infra';
 
 const IS_ABSOLUTE_URL_REGEX = new RegExp('^(?:[a-z]+:)?//', 'i');
 
@@ -30,13 +30,18 @@ class MediaAPI {
         ...formData.getHeaders(),
         ...headers,
         ...authHeaders,
+        ...infraHeaders,
       },
     });
     const urls = data.images.map((im) =>
-      isAbsoluteURL(im) ? im : `${this.mediaOverrideBaseURL || this.axios.getBaseURL()}${im}`
+      isAbsoluteURL(im)
+        ? im
+        : `${this.mediaOverrideBaseURL || this.axios.getBaseURL()}${im}`
     );
     const thumbnails = data.thumbnailImages.map((im) =>
-      isAbsoluteURL(im) ? im : `${this.mediaOverrideBaseURL || this.axios.getBaseURL()}${im}`
+      isAbsoluteURL(im)
+        ? im
+        : `${this.mediaOverrideBaseURL || this.axios.getBaseURL()}${im}`
     );
 
     return { urls, thumbnails };

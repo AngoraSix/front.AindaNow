@@ -1,9 +1,9 @@
+import config from '../config';
 import { CLUB_MEMBERSHIP_OPERATIONS } from '../constants';
+import { obtainInfraHeaders } from '../utils/infra';
 import createPatchBody, {
   PATCH_SUPPORTED_OPERATIONS,
 } from '../utils/rest/patch/patchOperations';
-import { obtainInfraHeaders } from '../utils/infra';
-import config from '../config';
 
 const FRONT_TO_PATCH_OPERATIONS_MAPPING = {
   [CLUB_MEMBERSHIP_OPERATIONS.JOIN]: PATCH_SUPPORTED_OPERATIONS.ADD,
@@ -39,7 +39,7 @@ class ClubsAPI {
         headers: {
           ...headers,
           ...authHeaders,
-          ...infraHeaders
+          ...infraHeaders,
         },
       }
     );
@@ -60,6 +60,7 @@ class ClubsAPI {
         headers: {
           ...headers,
           ...authHeaders,
+          ...infraHeaders,
         },
       }
     );
@@ -78,6 +79,7 @@ class ClubsAPI {
       headers: {
         ...headers,
         ...authHeaders,
+        ...infraHeaders,
       },
     });
     return data;
@@ -98,6 +100,7 @@ class ClubsAPI {
         headers: {
           ...headers,
           ...authHeaders,
+          ...infraHeaders,
         },
       }
     );
@@ -117,6 +120,7 @@ class ClubsAPI {
       headers: {
         ...headers,
         ...authHeaders,
+        ...infraHeaders,
       },
     });
     return data;
