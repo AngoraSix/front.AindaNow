@@ -15,8 +15,13 @@ module.exports = {
 
   i18n,
   images: {
-    domains: process.env.AN_FRONT_CONFIG_IMAGES_ALLOWEDDOMAINS
-      ? process.env.AN_FRONT_CONFIG_IMAGES_ALLOWEDDOMAINS.split(',')
+    domains: process.env.AN_APP_CONFIG_IMAGES_ALLOWEDDOMAINS
+      ? process.env.AN_APP_CONFIG_IMAGES_ALLOWEDDOMAINS.split(',').map(p => {
+        console.log("NUEVOOGER");
+        console.log(p);
+        console.log(process.env);
+        return p;
+      })
       : [],
   },
   output: 'standalone',
