@@ -18,6 +18,7 @@ class ContributorsAPI {
       headers: {
         ...headers,
         ...authHeaders,
+        ...infraHeaders,
       },
     });
     return data;
@@ -35,6 +36,7 @@ class ContributorsAPI {
       headers: {
         ...headers,
         ...authHeaders,
+        ...infraHeaders,
       },
     });
     return response;
