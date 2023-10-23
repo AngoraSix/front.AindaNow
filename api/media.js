@@ -1,4 +1,6 @@
 import NodeFormData from 'form-data';
+import { obtainInfraHeaders } from '../utils/infra';
+import config from '../config';
 
 const IS_ABSOLUTE_URL_REGEX = new RegExp('^(?:[a-z]+:)?//', 'i');
 
@@ -11,6 +13,10 @@ class MediaAPI {
   async uploadImages(files, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
+    const infraHeaders = await obtainInfraHeaders(
+      config.infra,
+      config.api.serverBaseURL
+    );
 
     const formData =
       typeof window !== 'undefined' ? new FormData() : new NodeFormData();

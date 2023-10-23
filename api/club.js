@@ -24,7 +24,10 @@ class ClubsAPI {
   ) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, true);
-    const infraHeaders = await obtainInfraHeaders(config.infra, this.axios);
+    const infraHeaders = await obtainInfraHeaders(
+      config.infra,
+      config.api.serverBaseURL
+    );
 
     const { data: patchResult } = await this.axios.patch(
       `/clubs/well-known/${projectId}/${clubType}`,
@@ -46,6 +49,10 @@ class ClubsAPI {
   async getWellKnownClub(projectId, clubType, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token);
+    const infraHeaders = await obtainInfraHeaders(
+      config.infra,
+      config.api.serverBaseURL
+    );
 
     const { data } = await this.axios.get(
       `/clubs/well-known/${projectId}/${clubType}`,
@@ -62,6 +69,10 @@ class ClubsAPI {
   async getAllWellKnownClubs(projectId, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token);
+    const infraHeaders = await obtainInfraHeaders(
+      config.infra,
+      config.api.serverBaseURL
+    );
 
     const { data } = await this.axios.get(`/clubs/well-known/${projectId}`, {
       headers: {
@@ -75,6 +86,10 @@ class ClubsAPI {
   async registerAllWellKnownClubs(projectId, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token);
+    const infraHeaders = await obtainInfraHeaders(
+      config.infra,
+      config.api.serverBaseURL
+    );
 
     const { data } = await this.axios.post(
       `/clubs/well-known/${projectId}`,
@@ -92,6 +107,10 @@ class ClubsAPI {
   async getAdministeredWellKnownClubs(adminId, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token, false);
+    const infraHeaders = await obtainInfraHeaders(
+      config.infra,
+      config.api.serverBaseURL
+    );
 
     const { data } = await this.axios.get('/clubs/well-known/', {
       params: { adminId: adminId },
