@@ -5,7 +5,7 @@ export const obtainGoogleHeaders = async (baseUrl) => {
   const headers = {};
   try {
     const { data: idToken } = await axios.get(
-      `https://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=${baseUrl}`,
+      `http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=${baseUrl}`,
       {
         headers: {
           'Metadata-Flavor': 'Google',
