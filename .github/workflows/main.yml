@@ -95,6 +95,7 @@ env:
   REGION: us-central1
   APP: front.aindanow
   ARTIFACT_REPOSITORY: gcr.io
+  AN_APP_CONFIG_IMAGES_ALLOWEDDOMAINS: ytimg.com,storage.googleapis.com,i.ytimg.com,googleusercontent.com
 
 jobs:
   push:

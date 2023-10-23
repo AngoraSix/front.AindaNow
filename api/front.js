@@ -57,17 +57,10 @@ class FrontAPI {
   }
 
   async saveProject(projectBody, projectId) {
-    if (projectId) {
-      const { data } = await this.axios.put(
-        `api/projects/${projectId}`,
-        projectBody
-      );
-      return data;
-    } else {
-      const { data } = await this.axios.post(`api/projects`, projectBody);
-      await this.axios.post(`api/clubs/well-known/${data.id}`);
-      return data;
-    }
+    const { data } = projectId
+      ? await this.axios.put(`api/projects/${projectId}`, projectBody)
+      : await this.axios.post(`api/projects`, projectBody);
+    return data;
   }
 
   async saveProjectPresentation(

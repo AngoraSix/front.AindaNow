@@ -47,7 +47,16 @@ const ProjectFormContainer = ({ project, ...args }) => {
         project?.id
       );
 
-      onSuccess(t('projects.edit.form.notifications.success.saved'));
+      try {
+        if (!project?.id) {
+          await api.front.registerAllProjectClubs(projectResponse.id);
+        }
+        onSuccess(t('projects.edit.form.notifications.success.saved'));
+      } catch (clubsErr) {
+        onSuccess(
+          t('projects.edit.form.notifications.success.saved-with-clubs-error')
+        );
+      }
 
       if (!project?.id) {
         const viewURL = resolveRoute(
