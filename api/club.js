@@ -75,6 +75,12 @@ class ClubsAPI {
       config.api.serverBaseURL
     );
 
+    console.log('GETTING GERGERGER');
+    console.log(`/clubs/well-known/${projectId}`);
+    console.log(headers);
+    console.log(authHeaders);
+    console.log(infraHeaders);
+
     const { data } = await this.axios.get(`/clubs/well-known/${projectId}`, {
       headers: {
         ...headers,
@@ -92,6 +98,12 @@ class ClubsAPI {
       config.infra,
       config.api.serverBaseURL
     );
+
+    console.log('POSTING GERGERGER');
+    console.log(`/clubs/well-known/${projectId}`);
+    console.log(headers);
+    console.log(authHeaders);
+    console.log(infraHeaders);
 
     const { data } = await this.axios.post(
       `/clubs/well-known/${projectId}`,

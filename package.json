@@ -8,9 +8,8 @@
     "debug": "cross-env NODE_OPTIONS='--inspect' next dev -p 9090",
     "other:debug": "NODE_OPTIONS='--inspect' next dev -p 8088",
     "build": "next build",
-    "start:local": "next dev -p 9090",
     "start": "next start -p 80",
-    "start:ger": "WEBPACK_CONFIG_FILE=all NODE_OPTIONS='--preserve-symlinks-main --preserve-symlinks'  && next dev -p 9090"
+    "start:local": "WEBPACK_CONFIG_FILE=all NODE_OPTIONS='--preserve-symlinks-main --preserve-symlinks'  && next dev -p 9090"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
