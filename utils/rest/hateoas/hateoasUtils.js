@@ -28,7 +28,7 @@ const hateoasPropertyToFieldMakerField = (hateoasProperty) => ({
 });
 
 const _isAdminProperty = (property) => {
-  return property.name != ADMIN_REQUIRED_KEY && property.type == null;
+  return property.name === ADMIN_REQUIRED_KEY && property.type == null;
 };
 
 export const processHateoasCollection = (

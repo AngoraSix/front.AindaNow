@@ -24,7 +24,7 @@ import { getEnv } from '../utils/env';
 import { appWithTranslation } from 'next-i18next';
 import App from "next/app"
 
-const A6WebApp = ({ Component, pageProps, preloadedState, env }) => {
+const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
   const store = createStore(reducers, preloadedState);
 
   config.applyEnvConfig(env);
@@ -41,20 +41,20 @@ const A6WebApp = ({ Component, pageProps, preloadedState, env }) => {
   );
 };
 
-A6WebApp.defaultProps = {
+AindaNowWebApp.defaultProps = {
   pageProps: {},
   preloadedState: {},
   env: {},
 };
 
-A6WebApp.propTypes = {
+AindaNowWebApp.propTypes = {
   Component: PropTypes.any.isRequired,
   pageProps: PropTypes.object,
   preloadedState: PropTypes.object,
   env: PropTypes.object,
 };
 
-A6WebApp.getInitialProps = async ({ ctx }) => {
+AindaNowWebApp.getInitialProps = async ({ ctx }) => {
   // const nextProps = App.getInitialProps(ctx);
   const env = getEnv();
 
@@ -72,4 +72,4 @@ A6WebApp.getInitialProps = async ({ ctx }) => {
   };
 };
 
-export default appWithTranslation(A6WebApp);
+export default appWithTranslation(AindaNowWebApp);

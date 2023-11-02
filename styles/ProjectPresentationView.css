@@ -254,6 +254,7 @@
 
 .SectionPresentation__Description {
   text-align: center;
+  white-space: pre-line;
 }
 
 .SectionTabs__Container {
