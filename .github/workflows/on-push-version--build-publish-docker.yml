@@ -7,7 +7,6 @@ on:
 
 jobs:
   publish-docker-image:
-    needs: build-test-artifact
     permissions:
       contents: 'read'
       id-token: 'write'
