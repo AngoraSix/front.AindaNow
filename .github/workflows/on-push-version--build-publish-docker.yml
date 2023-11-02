@@ -13,6 +13,7 @@ jobs:
     uses: AngoraSix/infra/.github/workflows/action-push-gcp.yml@main
     with:
       app: front.aindanow
+      cloud-service: front-aindanow
     secrets:
       wif-provider: ${{ secrets.WIF_PROVIDER }}
       wif-service-account: ${{ secrets.WIF_SERVICE_ACCOUNT }}
