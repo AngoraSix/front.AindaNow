@@ -59,6 +59,10 @@
     max-width: 30vw;
   }
 
+  .YoutubeDialog__Thumbnail__PreviewHolder{
+    width: 30vw;
+  }
+
   .YoutubeDialog__Thumbnail__PreviewPlaceholder {
     width: 30vw;
   }
