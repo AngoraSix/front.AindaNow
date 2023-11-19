@@ -22,7 +22,7 @@
     "projects.edit.form.steps.step.media.description.mobile": "Time to add some visual aids...",
     "projects.edit.form.steps.step.media.description.full": "Media will help explain the purpose of the project in an appealing manner...",
     "projects.edit.form.steps.step.params.description.mobile": "Make the project easily discoverable for those in tune with your idea...",
-    "projects.edit.form.steps.step.params.descriptionØ.full": "These will help make the project easily discoverable by those in tune with your idea...",
+    "projects.edit.form.steps.step.params.description.full": "These will help make the project easily discoverable by those in tune with your idea...",
     "projects.edit.form.steps.step.media.title": "Media",
     "projects.edit.form.steps.step.params.title": "Parameters",
     "projects.edit.form.notifications.success.saved": "Project saved successfully",
