@@ -15,7 +15,6 @@ import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { useNotifications } from '../../../../hooks/app';
-import logger from '../../../../utils/logger';
 import ProjectCoreData from '../Sections/ProjectCoreData.component';
 import ProjectPresentationData from '../Sections/ProjectPresentationData.component';
 import ProjectPresentationMedia from '../Sections/ProjectPresentationMedia.component';
@@ -48,7 +47,6 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
   const { t } = useTranslation('projects.edit');
   const { onError } = useNotifications();
   const [activeStep, setActiveStep] = useState(0);
-  const [skipped, setSkipped] = useState(new Set());
   const [completed, setCompleted] = useState(new Set());
   const [stepWasSubmitted, setStepWasSubmitted] = useState(false);
   const submitInputRef = useRef();
@@ -71,47 +69,20 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
     return steps[step].optional;
   };
 
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
-
   const handleNext = (e) => {
     e?.preventDefault();
     if (!isStepCompleted() && !isStepOptional(activeStep)) {
       setStepWasSubmitted(true);
       return;
     }
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
 
     setStepWasSubmitted(false);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
   };
 
   const handleBack = (e) => {
     e.preventDefault();
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = (e) => {
-    e.preventDefault();
-    if (!isStepOptional(activeStep)) {
-      const errorMessage = "You can't skip a step that isn't optional.";
-      onError(message);
-      logger.error(errorMessage, `Active step: ${activeStep}`);
-    }
-
-    setStepWasSubmitted(false);
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
   };
 
   const ActiveComponent = steps[activeStep].component;
@@ -177,9 +148,6 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
                 </Typography>
               );
             }
-            if (isStepSkipped(index)) {
-              stepProps.completed = false;
-            }
             return (
               <Step key={step.label} {...stepProps}>
                 <StepLabel {...labelProps}>{t(step.label)}</StepLabel>
@@ -229,12 +197,6 @@ const SteppedProjectForm = ({ formData, onFormChange }) => {
                 {t('projects.edit.form.steps.back')}
               </Button>
               <Box sx={{ flex: '1 1 auto' }} />
-              {isStepOptional(activeStep) && !isLastStep && (
-                <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
-                  {t('projects.edit.form.steps.skip')}
-                </Button>
-              )}
-
               {isLastStep ? (
                 <Button
                   type="submit"
