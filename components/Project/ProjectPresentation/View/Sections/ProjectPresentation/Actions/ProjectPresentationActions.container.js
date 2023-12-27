@@ -18,6 +18,7 @@ import ProjectPresentationActionsReducer, {
   INITIAL_STATE,
   updateClubActions,
   updateFieldAction,
+  updateManagementActions,
 } from './ProjectPresentationActions.reducer';
 
 const ProjectPresentationActionsContainer = ({
@@ -43,12 +44,9 @@ const ProjectPresentationActionsContainer = ({
     const fetchData = async () => {
       doLoad(true);
       setIsLoading(true);
-      try {
-        const allClubsResponse = await api.front.getAllProjectClubs(
-          projectPresentation.projectId
-        );
-
-        _processAllClubsResponse(allClubsResponse);
+      try {    
+        await Promise.all([_processAllClubsResponse(), _processManagementResponse()])  
+          
       } catch (err) {
         if (err.response?.status !== 404 && activeSession) {
           logger.error(
@@ -76,7 +74,22 @@ const ProjectPresentationActionsContainer = ({
     dispatch(updateFieldAction(partialFormData));
   };
 
-  const _processAllClubsResponse = (allClubsResponse) => {
+  const _processManagementResponse = async () => {
+    const managementResponse = await api.front.getProjectManagement(
+      projectPresentation.projectId
+    );
+    console.log(managementResponse)
+    const managementActions = processHateoasActions(managementResponse);
+    console.log(managementActions)
+    dispatch(
+      updateManagementActions(managementActions)
+    );
+  };
+
+  const _processAllClubsResponse = async () => {
+    const allClubsResponse = await api.front.getAllProjectClubs(
+      projectPresentation.projectId
+    );
     const generalActions = processHateoasActions(allClubsResponse);
     const clubs = processHateoasCollection(allClubsResponse, Club);
     const clubActions = clubs.reduce((combinedActions, club) => {
@@ -164,6 +177,7 @@ const ProjectPresentationActionsContainer = ({
       projectPresentation={projectPresentation}
       actions={{
         ...projectPresentationActionData.projectPresentationActions,
+        ...projectPresentationActionData.managementActions,
         ..._flattenActions(projectPresentationActionData.clubActions),
       }}
       onShowInterest={onShowInterest}

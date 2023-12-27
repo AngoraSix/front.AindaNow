@@ -2,6 +2,7 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
 import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Box, Tooltip } from '@mui/material';
@@ -115,6 +116,21 @@ const ProjectPresentationActions = ({
     </Tooltip>
   );
 
+  const createProjectManagementButtons = (
+    <Tooltip
+      key="createProjectManagementButtons"
+      title={t('project-presentations.actions.create-project-management.tooltip')}
+    >
+      <LoadingButton
+        className="ProjectPresentation__Heading__Actions__CreateProjectManagement"
+        variant="contained"
+        onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT)}
+      >
+        <AutoGraphIcon />
+      </LoadingButton>
+    </Tooltip>
+  );
+
   const editButtons = (
     <Tooltip
       key="editButtons"
@@ -137,6 +153,7 @@ const ProjectPresentationActions = ({
       registerAllClubsButtons,
     [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST]:
       withdrawInterestButtons,
+    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT]: createProjectManagementButtons,
   };
 
   return !isLoading ? (

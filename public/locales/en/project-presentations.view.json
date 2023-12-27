@@ -7,6 +7,7 @@
     "project-presentations.actions.register-all-clubs.tooltip": "Register all well-known clubs",
     "project-presentations.actions.register-all-clubs.notifications.success.registered": "Registered Clubs successfully",
     "project-presentations.actions.edit.tooltip": "Edit",
+    "project-presentations.actions.create-project-management.tooltip": "Create Project Management",
     "project-presentations.actions.dialog.inputs.contact": "Contact",
     "project-presentations.actions.dialog.commands.cancel": "Cancel",
     "project-presentations.actions.dialog.commands.done": "Done",

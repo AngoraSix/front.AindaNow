@@ -105,6 +105,11 @@ class FrontAPI {
     return data;
   }
 
+  async getProjectManagement(projectId) {
+    const { data } = await this.axios.get(`api/projects/${projectId}/management`);
+    return data;
+  }
+
   async registerAllProjectClubs(projectId) {
     const { data } = await this.axios.post(`api/clubs/well-known/${projectId}`);
     return data;
