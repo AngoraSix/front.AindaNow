@@ -86,6 +86,41 @@ const ProjectPresentationActionsContainer = ({
     );
   };
 
+  const onCreateManagement = async () => {
+    doLoad(true);
+    setIsLoading(true);
+
+    try {
+      const managementResponse = await api.front.createProjectManagementById(
+        projectPresentation.projectId
+      );
+      console.log(managementResponse)
+      const managementActions = processHateoasActions(managementResponse);
+      console.log(managementActions)
+      // const club = new Club(clubResponse);
+      dispatch(updateManagementActions(managementActions));
+      onSuccess(
+        t(
+          'project-presentations.actions.create-project-management.notifications.success.created'
+        )
+      );
+    } catch (ex) {
+      onError(
+        `Error creating management project for Prbject - ${
+          ex.response?.data?.message || ex.message
+        }`
+      );
+    } finally {
+      doLoad(false);
+      setIsLoading(false);
+    }
+  }
+
+  const onGetManagement = async () => {
+    // todo: GOTO ANGORASIX MANAGEMENT
+    console.log("goto angorasix management")
+  }
+
   const _processAllClubsResponse = async () => {
     const allClubsResponse = await api.front.getAllProjectClubs(
       projectPresentation.projectId
@@ -184,7 +219,9 @@ const ProjectPresentationActionsContainer = ({
       onWithdrawInterest={onWithdrawInterest}
       onActionDataChange={onFormChange}
       onRegisterAllClubs={onRegisterAllClubs}
-      actionFormData={projectPresentationActionData.actionData}
+      onCreateManagement={onCreateManagement}
+      onGetManagement={onGetManagement}
+        actionFormData={projectPresentationActionData.actionData}
       isAdmin={isAdmin}
       isLoading={isLoading}
     />

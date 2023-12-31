@@ -3,6 +3,7 @@ import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
 import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
 import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Box, Tooltip } from '@mui/material';
@@ -21,6 +22,8 @@ const ProjectPresentationActions = ({
   onWithdrawInterest,
   onActionDataChange,
   onRegisterAllClubs,
+  onCreateManagement,
+  onGetManagement,
   actionFormData,
   actions,
   isLoading,
@@ -52,6 +55,12 @@ const ProjectPresentationActions = ({
         break;
       case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.REGISTER_ALL_CLUBS:
         onRegisterAllClubs();
+        break;
+      case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT:
+        onCreateManagement();
+        break;
+      case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT:
+        onGetManagement();
         break;
       case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT:
         router.push(
@@ -131,6 +140,21 @@ const ProjectPresentationActions = ({
     </Tooltip>
   );
 
+  const goToProjectManagementButtons = (
+    <Tooltip
+      key="goToProjectManagementButtons"
+      title={t('project-presentations.actions.get-project-management.tooltip')}
+    >
+      <LoadingButton
+        className="ProjectPresentation__Heading__Actions__CreateProjectManagement"
+        variant="contained"
+        onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT)}
+      >
+        <ShowChartIcon />
+      </LoadingButton>
+    </Tooltip>
+  );
+
   const editButtons = (
     <Tooltip
       key="editButtons"
@@ -154,6 +178,7 @@ const ProjectPresentationActions = ({
     [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST]:
       withdrawInterestButtons,
     [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT]: createProjectManagementButtons,
+    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT]: goToProjectManagementButtons,
   };
 
   return !isLoading ? (

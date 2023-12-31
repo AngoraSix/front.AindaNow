@@ -8,5 +8,6 @@ export const PROJECT_PRESENTATION_SUPPORTED_ACTIONS = {
   WITHDRAW_INTEREST: `${CONTRIBUTOR_CANDIDATES_TYPE_KEY}.removeMember`,
   REGISTER_ALL_CLUBS: `${GENERAL_CLUBS_ACTIONS_KEY}.registerAll`,
   EDIT: 'updateProjectPresentation',
-  CREATE_MANAGEMENT: `createProjectManagementByProjectId`
+  CREATE_MANAGEMENT: `createProjectManagementByProjectId`,
+  GET_MANAGEMENT: `getProjectManagementByProjectId`
 };

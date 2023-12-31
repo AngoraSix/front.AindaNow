@@ -27,6 +27,38 @@ class ManagementAPI {
     return data;
   }
 
+  async createProjectManagementById(projectId, token) {
+    const headers = this.axios.getCommonHeaders();
+    const authHeaders = this.axios.getAuthorizationHeaders(token);
+    const infraHeaders = await obtainInfraHeaders(
+      config.infra,
+      config.api.serverBaseURL
+    );
+
+    let toSend = JSON.stringify({
+      "constitution": {
+        "bylaws": [
+          {
+            "scope": "ANY",
+            "definition": "Any rule"
+          }
+        ]
+      },
+      "status": "STARTUP"
+    });
+
+    let axiosConfig = {
+      headers: {
+        ...headers,
+        ...authHeaders,
+        ...infraHeaders,
+      },
+    };
+
+    const { data } = await this.axios.post(`/projects/${projectId}/management`, toSend, axiosConfig);
+    console.log("API ",data)
+    return data;
+  }
 }
 
 export default ManagementAPI;

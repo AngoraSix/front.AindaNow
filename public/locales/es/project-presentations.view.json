@@ -8,6 +8,8 @@
     "project-presentations.actions.register-all-clubs.notifications.success.registered": "Registro de clubes exitoso",
     "project-presentations.actions.edit.tooltip": "Editar",
     "project-presentations.actions.create-project-management.tooltip": "Crear Gestion de Proyecto",
+    "project-presentations.actions.get-project-management.tooltip": "Ir a Gestion de Proyecto",
+    "project-presentations.actions.create-project-management.notifications.success.created": "Gestion de Proyecto creada exitosamente",
     "project-presentations.actions.dialog.inputs.contact": "Contacto",
     "project-presentations.actions.dialog.commands.cancel": "Cancelar",
     "project-presentations.actions.dialog.commands.done": "Listo",
