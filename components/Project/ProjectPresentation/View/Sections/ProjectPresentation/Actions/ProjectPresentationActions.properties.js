@@ -9,5 +9,6 @@ export const PROJECT_PRESENTATION_SUPPORTED_ACTIONS = {
   REGISTER_ALL_CLUBS: `${GENERAL_CLUBS_ACTIONS_KEY}.registerAll`,
   EDIT: 'updateProjectPresentation',
   CREATE_MANAGEMENT: `createProjectManagementByProjectId`,
-  GET_MANAGEMENT: `getProjectManagementByProjectId`
+  GET_MANAGEMENT: `getProjectManagementByProjectId`,
+  UPDATE_MANAGEMENT: `updateProjectManagement`
 };

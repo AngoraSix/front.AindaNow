@@ -2,6 +2,7 @@ import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
 import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import SettingsIcon from '@mui/icons-material/Settings';
 import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
 import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
@@ -23,6 +24,7 @@ const ProjectPresentationActions = ({
   onActionDataChange,
   onRegisterAllClubs,
   onCreateManagement,
+  onUpdateManagement,
   onGetManagement,
   actionFormData,
   actions,
@@ -61,6 +63,9 @@ const ProjectPresentationActions = ({
         break;
       case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT:
         onGetManagement();
+        break;
+      case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT:
+        onUpdateManagement();
         break;
       case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT:
         router.push(
@@ -140,17 +145,32 @@ const ProjectPresentationActions = ({
     </Tooltip>
   );
 
-  const goToProjectManagementButtons = (
+  const getProjectManagementButtons = (
     <Tooltip
-      key="goToProjectManagementButtons"
+      key="getProjectManagementButtons"
       title={t('project-presentations.actions.get-project-management.tooltip')}
     >
       <LoadingButton
-        className="ProjectPresentation__Heading__Actions__CreateProjectManagement"
+        className="ProjectPresentation__Heading__Actions__GetProjectManagement"
         variant="contained"
         onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT)}
       >
         <ShowChartIcon />
+      </LoadingButton>
+    </Tooltip>
+  );
+
+  const updateProjectManagementButtons = (
+    <Tooltip
+      key="updateProjectManagementButtons"
+      title={t('project-presentations.actions.update-project-management.tooltip')}
+    >
+      <LoadingButton
+        className="ProjectPresentation__Heading__Actions__UpdateProjectManagement"
+        variant="contained"
+        onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT)}
+      >
+        <SettingsIcon />
       </LoadingButton>
     </Tooltip>
   );
@@ -178,7 +198,8 @@ const ProjectPresentationActions = ({
     [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST]:
       withdrawInterestButtons,
     [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT]: createProjectManagementButtons,
-    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT]: goToProjectManagementButtons,
+    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT]: getProjectManagementButtons,
+    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT]: updateProjectManagementButtons,
   };
 
   return !isLoading ? (
@@ -232,6 +253,12 @@ ProjectPresentationActions.propTypes = {
   projectPresentation: PropTypes.object.isRequired,
   onActionDataChange: PropTypes.func.isRequired,
   onShowInterest: PropTypes.func.isRequired,
+  onWithdrawInterest: PropTypes.func.isRequired,
+  onRegisterAllClubs: PropTypes.func.isRequired,
+  onCreateManagement: PropTypes.func.isRequired,
+  onUpdateManagement: PropTypes.func.isRequired,
+  onGetManagement: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
   actionFormData: PropTypes.object,
 };
 

@@ -35,17 +35,17 @@ class ManagementAPI {
       config.api.serverBaseURL
     );
 
-    let toSend = JSON.stringify({
-      "constitution": {
-        "bylaws": [
+    let toSend = {
+      constitution: {
+        bylaws: [
           {
-            "scope": "ANY",
-            "definition": "Any rule"
+            scope: "ANY",
+            definition: "Any rule"
           }
         ]
       },
-      "status": "STARTUP"
-    });
+      status: "STARTUP"
+    }
 
     let axiosConfig = {
       headers: {

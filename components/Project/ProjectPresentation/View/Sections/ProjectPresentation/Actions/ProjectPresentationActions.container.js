@@ -78,9 +78,7 @@ const ProjectPresentationActionsContainer = ({
     const managementResponse = await api.front.getProjectManagement(
       projectPresentation.projectId
     );
-    console.log(managementResponse)
     const managementActions = processHateoasActions(managementResponse);
-    console.log(managementActions)
     dispatch(
       updateManagementActions(managementActions)
     );
@@ -94,10 +92,7 @@ const ProjectPresentationActionsContainer = ({
       const managementResponse = await api.front.createProjectManagementById(
         projectPresentation.projectId
       );
-      console.log(managementResponse)
       const managementActions = processHateoasActions(managementResponse);
-      console.log(managementActions)
-      // const club = new Club(clubResponse);
       dispatch(updateManagementActions(managementActions));
       onSuccess(
         t(
@@ -117,8 +112,13 @@ const ProjectPresentationActionsContainer = ({
   }
 
   const onGetManagement = async () => {
-    // todo: GOTO ANGORASIX MANAGEMENT
-    console.log("goto angorasix management")
+    // todo: get project management
+    console.log("get project management")
+  }
+
+  const onUpdateManagement = async () => {
+    // todo: update project management
+    console.log("update project management")
   }
 
   const _processAllClubsResponse = async () => {
@@ -220,6 +220,7 @@ const ProjectPresentationActionsContainer = ({
       onActionDataChange={onFormChange}
       onRegisterAllClubs={onRegisterAllClubs}
       onCreateManagement={onCreateManagement}
+      onUpdateManagement={onUpdateManagement}
       onGetManagement={onGetManagement}
         actionFormData={projectPresentationActionData.actionData}
       isAdmin={isAdmin}
