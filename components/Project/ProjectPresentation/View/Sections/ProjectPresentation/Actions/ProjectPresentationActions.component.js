@@ -154,6 +154,7 @@ const ProjectPresentationActions = ({
         className="ProjectPresentation__Heading__Actions__GetProjectManagement"
         variant="contained"
         onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT)}
+        disabled
       >
         <ShowChartIcon />
       </LoadingButton>
@@ -169,6 +170,7 @@ const ProjectPresentationActions = ({
         className="ProjectPresentation__Heading__Actions__UpdateProjectManagement"
         variant="contained"
         onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT)}
+        disabled
       >
         <SettingsIcon />
       </LoadingButton>
