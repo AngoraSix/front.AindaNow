@@ -21,8 +21,8 @@ class ManagementAPI {
         ...infraHeaders,
       },
       validateStatus: (status) => {
-        return status < 400 || status == 404 // 404 is valid for non admin contributors
-      }
+        return status < 400 || status == 404; // 404 is valid for project admin contributors (creation actions)
+      },
     });
     return data;
   }
@@ -35,17 +35,12 @@ class ManagementAPI {
       config.api.serverBaseURL
     );
 
-    let toSend = {
+    let initialMgmt = {
       constitution: {
-        bylaws: [
-          {
-            scope: "ANY",
-            definition: "Any rule"
-          }
-        ]
+        bylaws: [],
       },
-      status: "STARTUP"
-    }
+      status: config.servicesDefaults.mgmt.mgmtInitialStatus,
+    };
 
     let axiosConfig = {
       headers: {
@@ -55,8 +50,11 @@ class ManagementAPI {
       },
     };
 
-    const { data } = await this.axios.post(`/projects/${projectId}/management`, toSend, axiosConfig);
-    console.log("API ",data)
+    const { data } = await this.axios.post(
+      `/projects/${projectId}/management`,
+      initialMgmt,
+      axiosConfig
+    );
     return data;
   }
 }
