@@ -44,9 +44,11 @@ const ProjectPresentationActionsContainer = ({
     const fetchData = async () => {
       doLoad(true);
       setIsLoading(true);
-      try {    
-        await Promise.all([_processAllClubsResponse(), _processManagementResponse()])  
-          
+      try {
+        await Promise.all([
+          _processAllClubsResponse(),
+          _processManagementResponse(),
+        ]);
       } catch (err) {
         if (err.response?.status !== 404 && activeSession) {
           logger.error(
@@ -79,9 +81,7 @@ const ProjectPresentationActionsContainer = ({
       projectPresentation.projectId
     );
     const managementActions = processHateoasActions(managementResponse);
-    dispatch(
-      updateManagementActions(managementActions)
-    );
+    dispatch(updateManagementActions(managementActions));
   };
 
   const onCreateManagement = async () => {
@@ -109,17 +109,17 @@ const ProjectPresentationActionsContainer = ({
       doLoad(false);
       setIsLoading(false);
     }
-  }
+  };
 
   const onGetManagement = async () => {
     // todo: get project management
-    console.log("get project management")
-  }
+    console.log('get project management');
+  };
 
   const onUpdateManagement = async () => {
     // todo: update project management
-    console.log("update project management")
-  }
+    console.log('update project management');
+  };
 
   const _processAllClubsResponse = async () => {
     const allClubsResponse = await api.front.getAllProjectClubs(
@@ -222,7 +222,7 @@ const ProjectPresentationActionsContainer = ({
       onCreateManagement={onCreateManagement}
       onUpdateManagement={onUpdateManagement}
       onGetManagement={onGetManagement}
-        actionFormData={projectPresentationActionData.actionData}
+      actionFormData={projectPresentationActionData.actionData}
       isAdmin={isAdmin}
       isLoading={isLoading}
     />
