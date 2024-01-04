@@ -2,6 +2,7 @@ import Api from './api';
 import Site from './site';
 import ThirdParties from './thirdparties';
 import Infra from './infra';
+import ServicesDefaults from './servicesdefaults';
 
 class A6Config {
   constructor(env = {}) {
@@ -24,12 +25,17 @@ class A6Config {
     return this.infraConfig;
   }
 
+  get servicesDefaults() {
+    return this.servicesDefaultsConfig;
+  }
+
   applyEnvConfig(env = {}) {
     this.buildNo = env.BUILD || 'dev';
     this.siteConfig = new Site(env);
     this.apiConfig = new Api(env);
     this.thirdPartiesConfig = new ThirdParties(env);
     this.infraConfig = new Infra(env);
+    this.servicesDefaultsConfig = new ServicesDefaults(env);
   }
 }
 
