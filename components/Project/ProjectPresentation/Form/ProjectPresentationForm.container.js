@@ -87,9 +87,9 @@ const ProjectPresentationFormContainer = ({
       } catch (err) {
         logger.error(err);
         onError('Error Saving Project Presentation');
+        doLoad(false);
       }
     }
-    doLoad(false);
   };
 
   return isTriggeredAction ? (
