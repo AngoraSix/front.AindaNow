@@ -15,7 +15,7 @@ module.exports = {
 
   i18n,
   images: {
-    domains: ['storage.googleapis.com', 'i.ytimg.com', 'googleusercontent.com', 'localhost'],
+    domains: ['storage.googleapis.com', 'i.ytimg.com', 'googleusercontent.com', 'localhost', 'gateway'],
   },
   output: 'standalone',
 };
