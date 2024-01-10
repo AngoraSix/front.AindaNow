@@ -40,7 +40,7 @@ export const useNotifications = () => {
   };
 };
 
-export const useDebounce = (callback) => {
+export const useDebounce = (callback, time_ms) => {
   // https://www.developerway.com/posts/debouncing-in-react
   const ref = useRef();
 
@@ -53,7 +53,7 @@ export const useDebounce = (callback) => {
       ref.current?.();
     };
 
-    return debounce(func, 500);
+    return debounce(func, time_ms);
   }, []);
 
   return debouncedCallback;

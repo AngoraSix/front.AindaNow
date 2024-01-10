@@ -1,12 +1,12 @@
 import SearchIcon from '@mui/icons-material/Search';
 import NewIconContained from '@mui/icons-material/AddCircle';
 import NewIcon from '@mui/icons-material/AddCircleOutline';
+import DebouncedTextField from '../common/DebouncedTextField/DebouncedTextField';
 import {
   Box,
   Button,
   Grid,
   IconButton,
-  TextField,
   InputAdornment,
 } from '@mui/material';
 import { useTranslation } from 'next-i18next';
@@ -19,7 +19,6 @@ const ProjectPresentationsList = ({
   total,
   projectPresentationsList,
   onNextPageClick,
-  search,
   onSearch,
 }) => {
   const { t } = useTranslation('project-presentations.list');
@@ -28,23 +27,15 @@ const ProjectPresentationsList = ({
     <Box className="ProjectPresentationsList ProjectPresentationsList__Container">
       <Box className="ProjectPresentationsList__Toolbar">
         <Box className="ProjectPresentationsList__Toolbar__Column Column__Large">
-          <TextField
-            className="ProjectPresentationsList__Toolbar__Input"
+          <DebouncedTextField
+            onChange={onSearch}
             label={t('project-presentations.list.search')}
-            value={search}
-            onChange={(e) => onSearch(e.target.value)}
             size="small"
             fullWidth
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={() => onSearch(search)}
-                    edge="end"
-                  >
-                    <SearchIcon />
-                  </IconButton>
+                  <SearchIcon />
                 </InputAdornment>
               ),
             }}
