@@ -1,8 +1,8 @@
 import { useSession } from 'next-auth/react';
 import PropTypes from 'prop-types';
-import React, { useReducer } from 'react';
+import React, { useReducer, useState } from 'react';
 import api from '../../api';
-import { useNotifications, useLoading } from '../../hooks/app';
+import { useNotifications, useLoading, useDebounce } from '../../hooks/app';
 import ProjectPresentation from '../../models/ProjectPresentation';
 import ProjectPresentationsList from './ProjectPresentationsList.component';
 import ProjectPresentationsListReducer, {
@@ -35,11 +35,13 @@ const ProjectPresentationsListContainer = ({
 
   const loading = status === 'loading';
 
-  const onSearch = async (value) => {
+  const [search, setSearch] = useState('');
+
+  const debouncedSearchRequest = useDebounce(async () => {
     try {
       doLoad(true);
       const presentationsResponse = await api.front.searchProjectPresentations(
-        value
+        search
       );
 
       const projectPresentationsList = _processPresentationListObj(
@@ -56,6 +58,11 @@ const ProjectPresentationsListContainer = ({
     } finally {
       doLoad(false);
     }
+  });
+
+  const onSearch = (value) => {
+    debouncedSearchRequest();
+    setSearch(value);
   };
 
   const onNextPageClick = async () => {
@@ -85,6 +92,7 @@ const ProjectPresentationsListContainer = ({
       {...state}
       onNextPageClick={onNextPageClick}
       onSearch={onSearch}
+      search={search}
     />
   );
 };

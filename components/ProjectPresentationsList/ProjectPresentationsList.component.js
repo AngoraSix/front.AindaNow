@@ -2,7 +2,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import NewIconContained from '@mui/icons-material/AddCircle';
 import NewIcon from '@mui/icons-material/AddCircleOutline';
 import {
-  FormControl,
   Box,
   Button,
   Grid,
@@ -13,7 +12,6 @@ import {
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
 import { ROUTES } from '../../constants';
 import ProjectCard from './ProjectCard';
 
@@ -21,43 +19,36 @@ const ProjectPresentationsList = ({
   total,
   projectPresentationsList,
   onNextPageClick,
+  search,
   onSearch,
 }) => {
   const { t } = useTranslation('project-presentations.list');
-  const [search, setSearch] = useState('');
 
   return (
     <Box className="ProjectPresentationsList ProjectPresentationsList__Container">
       <Box className="ProjectPresentationsList__Toolbar">
         <Box className="ProjectPresentationsList__Toolbar__Column Column__Large">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              onSearch(search);
+          <TextField
+            className="ProjectPresentationsList__Toolbar__Input"
+            label={t('project-presentations.list.search')}
+            value={search}
+            onChange={(e) => onSearch(e.target.value)}
+            size="small"
+            fullWidth
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={() => onSearch(search)}
+                    edge="end"
+                  >
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
             }}
-          >
-            <TextField
-              className="ProjectPresentationsList__Toolbar__Input"
-              label={t('project-presentations.list.search')}
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              size="small"
-              fullWidth
-              InputProps={{
-                endAdornment: (
-                  <InputAdornment position="end">
-                    <IconButton
-                      aria-label="toggle password visibility"
-                      onClick={() => onSearch(search)}
-                      edge="end"
-                    >
-                      <SearchIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </form>
+          />
         </Box>
         <Box className="ProjectPresentationsList__Toolbar__Column">
           <Link href={ROUTES.projects.new}>
