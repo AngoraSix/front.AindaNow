@@ -5,15 +5,15 @@ import { TextField } from '@mui/material';
 const DebouncedTextField = ({ onChange, ...props }) => {
   const [value, setValue] = useState('');
 
-  const debouncedOnChange = useDebounce(() => onChange(value), 500);
+  const { debounce } = useDebounce();
 
   return (
     <TextField
       {...props}
       value={value}
       onChange={(e) => {
-        debouncedOnChange();
         setValue(e.target.value);
+        debounce(() => onChange(e.target.value), 500);
       }}
     />
   );

@@ -1,8 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { appIsLoading } from '../store/app';
 import { useSnackbar } from 'notistack';
-import { useRef, useEffect, useMemo } from 'react';
-import debounce from 'lodash/debounce';
+import { useRef, useEffect, useState, useMemo } from 'react';
 
 export const useLoading = () => {
   const reduxDispath = useDispatch();
@@ -40,21 +39,32 @@ export const useNotifications = () => {
   };
 };
 
-export const useDebounce = (callback, time_ms) => {
-  // https://www.developerway.com/posts/debouncing-in-react
-  const ref = useRef();
+
+export const useDebounce = () => {
+  const [debouncedId, setDebouncedId] = useState(null);
+
+  const debounce = (callback, timeout = 400) => {
+    if (debouncedId) {
+      clearTimeout(debouncedId);
+    }
+
+    const newDebouncedId = setTimeout(callback, timeout);
+
+    setDebouncedId(newDebouncedId);
+
+    return newDebouncedId;
+  };
 
   useEffect(() => {
-    ref.current = callback;
-  }, [callback]);
-
-  const debouncedCallback = useMemo(() => {
-    const func = () => {
-      ref.current?.();
+    return () => {
+      if (debouncedId) {
+        clearTimeout(debouncedId);
+      }
     };
-
-    return debounce(func, time_ms);
   }, []);
 
-  return debouncedCallback;
+  return {
+    debouncedId,
+    debounce,
+  };
 };
