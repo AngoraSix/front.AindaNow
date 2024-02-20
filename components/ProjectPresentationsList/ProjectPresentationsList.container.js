@@ -2,6 +2,7 @@ import { useSession } from 'next-auth/react';
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
 import api from '../../api';
+import { useNotifications, useLoading } from '../../hooks/app';
 import ProjectPresentation from '../../models/ProjectPresentation';
 import ProjectPresentationsList from './ProjectPresentationsList.component';
 import ProjectPresentationsListReducer, {
@@ -12,16 +13,50 @@ import ProjectPresentationsListReducer, {
 const ProjectPresentationsListContainer = ({
   projectPresentationsList: projectPresentationsListObj,
 }) => {
-  let projectPresentationsList = projectPresentationsListObj
-    .filter((pr) => pr.project)
-    .map((pr) => new ProjectPresentation(pr));
-  const { data: session, status } = useSession();
-  const loading = status === 'loading';
+  const _processPresentationListObj = (projectPresentationsListObj) => {
+    return projectPresentationsListObj
+      .filter((pr) => pr.project)
+      .map((pr) => new ProjectPresentation(pr));
+  };
+
+  const projectPresentationsList = _processPresentationListObj(
+    projectPresentationsListObj
+  );
 
   const [state, dispatch] = useReducer(ProjectPresentationsListReducer, {
     ...INITIAL_STATE,
     projectPresentationsList,
   });
+
+  const { onError } = useNotifications();
+  const { doLoad } = useLoading();
+
+  const { data: session, status } = useSession();
+
+  const loading = status === 'loading';
+
+  const onSearch = async (value) => {
+    try {
+      doLoad(true);
+      const presentationsResponse = await api.front.searchProjectPresentations(
+        value
+      );
+
+      const projectPresentationsList = _processPresentationListObj(
+        presentationsResponse
+      );
+
+      dispatch(updateDataAction({ projectPresentationsList }));
+    } catch (ex) {
+      onError(
+        `Error searching for project presentations - ${
+          ex.response?.data?.message || ex.message
+        }`
+      );
+    } finally {
+      doLoad(false);
+    }
+  };
 
   const onNextPageClick = async () => {
     // const {
@@ -34,48 +69,17 @@ const ProjectPresentationsListContainer = ({
     //   page: state.data.page + 1,
     //   search: state.data.search,
     // });
-
     // fetchedPresentationsList = fetchedPresentationsListObj.map(
     //   (pr) => new ProjectPresentation(pr)
     // );
-
     // const projectPresentationsList = state.data.projectPresentationsList.concat(
     //   fetchedPresentationsList
     // );
-
     // dispatch(
     //   updateDataAction({ total, page, limit, search, projectPresentationsList })
     // );
   };
 
-  const onSearch = async (value) => {
-    // @TODO: impelement search (https://trello.com/c/Bfhf1cQu/32-implement-basic-search-functionality)
-
-    // const {
-    //   total,
-    //   page,
-    //   limit,
-    //   search,
-    //   data: projects,
-    // } =
-    
-    // const projectPresentationsListObj =
-    //   await api.projects.fetchProjectPresentations(session.user.attributes, {
-    //     search: value,
-    //   });
-
-    // const total = projectPresentationsListObj.length,
-    //   page = 1,
-    //   limit = 5,
-    //   search = value;
-
-    // const projectPresentationsList = projectPresentationsListObj.map(
-    //   (pr) => new ProjectPresentation(pr)
-    // );
-    // dispatch(
-    //   updateDataAction({ total, page, limit, search, projectPresentationsList })
-    // );
-  };
   return (
     <ProjectPresentationsList
       {...state}

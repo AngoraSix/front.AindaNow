@@ -1,10 +1,17 @@
+import SearchIcon from '@mui/icons-material/Search';
 import NewIconContained from '@mui/icons-material/AddCircle';
 import NewIcon from '@mui/icons-material/AddCircleOutline';
-import { Box, Button, Grid, IconButton, TextField } from '@mui/material';
+import DebouncedTextField from '../common/DebouncedTextField/DebouncedTextField';
+import {
+  Box,
+  Button,
+  Grid,
+  IconButton,
+  InputAdornment,
+} from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
 import { ROUTES } from '../../constants';
 import ProjectCard from './ProjectCard';
 
@@ -15,19 +22,24 @@ const ProjectPresentationsList = ({
   onSearch,
 }) => {
   const { t } = useTranslation('project-presentations.list');
-  const [search, setSearch] = useState('');
 
   return (
     <Box className="ProjectPresentationsList ProjectPresentationsList__Container">
       <Box className="ProjectPresentationsList__Toolbar">
         <Box className="ProjectPresentationsList__Toolbar__Column Column__Large">
-          {/* <TextField
-            className="ProjectPresentationsList__Toolbar__Input"
+          <DebouncedTextField
+            onChange={onSearch}
             label={t('project-presentations.list.search')}
-            value={search}
-            onChange={({ target: value }) => onSearchChange(value)}
+            size="small"
             fullWidth
-          /> */}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+            }}
+          />
         </Box>
         <Box className="ProjectPresentationsList__Toolbar__Column">
           <Link href={ROUTES.projects.new}>

@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { appIsLoading } from '../store/app';
 import { useSnackbar } from 'notistack';
+import { useRef, useEffect, useState, useMemo } from 'react';
 
 export const useLoading = () => {
   const reduxDispath = useDispatch();
@@ -35,5 +36,35 @@ export const useNotifications = () => {
     notify,
     onSuccess,
     onError,
+  };
+};
+
+
+export const useDebounce = () => {
+  const [debouncedId, setDebouncedId] = useState(null);
+
+  const debounce = (callback, timeout = 400) => {
+    if (debouncedId) {
+      clearTimeout(debouncedId);
+    }
+
+    const newDebouncedId = setTimeout(callback, timeout);
+
+    setDebouncedId(newDebouncedId);
+
+    return newDebouncedId;
+  };
+
+  useEffect(() => {
+    return () => {
+      if (debouncedId) {
+        clearTimeout(debouncedId);
+      }
+    };
+  }, []);
+
+  return {
+    debouncedId,
+    debounce,
   };
 };

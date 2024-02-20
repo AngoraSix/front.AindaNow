@@ -80,6 +80,13 @@ class FrontAPI {
     return data;
   }
 
+  async searchProjectPresentations(search) {
+    const { data } = await this.axios.get(`api/projects/presentations`, {
+      params: { text: search },
+    });
+    return data;
+  }
+
   async modifyClubMembership(projectId, clubType, operation, data) {
     const { data: modifyClubMembershipResult } = await this.axios.post(
       `api/clubs/well-known/members`,
