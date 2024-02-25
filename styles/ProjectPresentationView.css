@@ -179,8 +179,14 @@
 }
 
 .ProjectPlugins__Body {
+  width: 100%;
   margin: 10px;
   min-height: 50vh;
+}
+
+.ProjectPlugins__Heading__Name {
+  text-align: center;
+  width: 100%;
 }
 
 /* Sections Presentation */

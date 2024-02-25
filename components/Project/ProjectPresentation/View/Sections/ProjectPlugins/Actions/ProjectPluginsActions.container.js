@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import { useEffect, useReducer, useState } from 'react';
 import api from '../../../../../../../api';
 import { useLoading, useNotifications } from '../../../../../../../hooks/app';
-import { useActiveSession } from '../../../../../../../hooks/oauth';
-import logger from '../../../../../../../utils/logger';
 import { processHateoasActions } from '../../../../../../../utils/rest/hateoas/hateoasUtils';
 import ProjectPluginsActions from './ProjectPluginsActions.component';
 import ProjectPluginsActionsReducer, {
@@ -13,13 +11,15 @@ import ProjectPluginsActionsReducer, {
   updateManagementActions,
 } from './ProjectPluginsActions.reducer';
 
-const ProjectPluginsActionsContainer = ({ projectPresentation, isAdmin }) => {
+const ProjectPluginsActionsContainer = ({
+  projectPresentation,
+  isAdmin,
+  managementActions,
+}) => {
   const { t } = useTranslation('project-presentations.view');
   const { doLoad } = useLoading();
   const { onError, onSuccess } = useNotifications();
-  const { session } = useActiveSession(true);
   const [isLoading, setIsLoading] = useState(true);
-  const activeSession = session && !session.error;
   const [projectPluginsActionData, dispatch] = useReducer(
     ProjectPluginsActionsReducer,
     {
@@ -28,27 +28,12 @@ const ProjectPluginsActionsContainer = ({ projectPresentation, isAdmin }) => {
   );
 
   useEffect(() => {
-    const fetchData = async () => {
-      doLoad(true);
-      setIsLoading(true);
-      try {
-        await Promise.all([_processManagementResponse()]);
-      } catch (err) {
-        if (err.response?.status !== 404 && activeSession) {
-          logger.error(
-            `Error retrieving supported actions - ${
-              err.response?.data?.message || err.message
-            }`
-          );
-        }
-      } finally {
-        doLoad(false);
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeSession, projectPresentation.projectId]);
+    doLoad(true);
+    setIsLoading(true);
+    dispatch(updateManagementActions(managementActions));
+    doLoad(false);
+    setIsLoading(false);
+  }, [managementActions]);
 
   const onFormChange = (property) => (eventOrValue) => {
     const partialFormData = {
@@ -58,14 +43,6 @@ const ProjectPluginsActionsContainer = ({ projectPresentation, isAdmin }) => {
     };
 
     dispatch(updateFieldAction(partialFormData));
-  };
-
-  const _processManagementResponse = async () => {
-    const managementResponse = await api.front.getProjectManagement(
-      projectPresentation.projectId
-    );
-    const managementActions = processHateoasActions(managementResponse);
-    dispatch(updateManagementActions(managementActions));
   };
 
   const onCreateManagement = async () => {

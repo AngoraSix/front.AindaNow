@@ -2,7 +2,7 @@ import { Box, Paper } from '@mui/material';
 import PropTypes from 'prop-types';
 import MediaHeader from './Sections/MediaHeader';
 import ProjectPresentation from './Sections/ProjectPresentation/ProjectPresentation.component';
-import ProjectPlugins from './Sections/ProjectPlugins/ProjectPlugins.component';
+import ProjectPlugins from './Sections/ProjectPlugins/ProjectPlugins.container';
 
 import { useEffect, useRef } from 'react';
 
