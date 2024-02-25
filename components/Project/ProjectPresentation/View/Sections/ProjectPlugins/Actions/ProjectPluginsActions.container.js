@@ -73,7 +73,6 @@ const ProjectPluginsActionsContainer = ({ projectPresentation, isAdmin }) => {
     const managementResponse = await api.front.getProjectManagement(
       projectPresentation.projectId
     );
-    console.log(managementResponse);
     const managementData = processManagementData(managementResponse);
     console.log(managementData);
     const managementActions = processHateoasActions(managementResponse);

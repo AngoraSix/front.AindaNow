@@ -18,7 +18,6 @@ import ProjectPresentationActionsReducer, {
   INITIAL_STATE,
   updateClubActions,
   updateFieldAction,
-  updateManagementActions,
 } from './ProjectPresentationActions.reducer';
 
 const ProjectPresentationActionsContainer = ({
@@ -45,10 +44,7 @@ const ProjectPresentationActionsContainer = ({
       doLoad(true);
       setIsLoading(true);
       try {
-        await Promise.all([
-          _processAllClubsResponse(),
-          _processManagementResponse(),
-        ]);
+        await Promise.all([_processAllClubsResponse()]);
       } catch (err) {
         if (err.response?.status !== 404 && activeSession) {
           logger.error(
@@ -74,51 +70,6 @@ const ProjectPresentationActionsContainer = ({
     };
 
     dispatch(updateFieldAction(partialFormData));
-  };
-
-  const _processManagementResponse = async () => {
-    const managementResponse = await api.front.getProjectManagement(
-      projectPresentation.projectId
-    );
-    const managementActions = processHateoasActions(managementResponse);
-    dispatch(updateManagementActions(managementActions));
-  };
-
-  const onCreateManagement = async () => {
-    doLoad(true);
-    setIsLoading(true);
-
-    try {
-      const managementResponse = await api.front.createProjectManagementById(
-        projectPresentation.projectId
-      );
-      const managementActions = processHateoasActions(managementResponse);
-      dispatch(updateManagementActions(managementActions));
-      onSuccess(
-        t(
-          'project-presentations.actions.create-project-management.notifications.success.created'
-        )
-      );
-    } catch (ex) {
-      onError(
-        `Error creating management project for Prbject - ${
-          ex.response?.data?.message || ex.message
-        }`
-      );
-    } finally {
-      doLoad(false);
-      setIsLoading(false);
-    }
-  };
-
-  const onGetManagement = async () => {
-    // todo: get project management
-    console.log('get project management');
-  };
-
-  const onUpdateManagement = async () => {
-    // todo: update project management
-    console.log('update project management');
   };
 
   const _processAllClubsResponse = async () => {
@@ -212,16 +163,12 @@ const ProjectPresentationActionsContainer = ({
       projectPresentation={projectPresentation}
       actions={{
         ...projectPresentationActionData.projectPresentationActions,
-        ...projectPresentationActionData.managementActions,
         ..._flattenActions(projectPresentationActionData.clubActions),
       }}
       onShowInterest={onShowInterest}
       onWithdrawInterest={onWithdrawInterest}
       onActionDataChange={onFormChange}
       onRegisterAllClubs={onRegisterAllClubs}
-      onCreateManagement={onCreateManagement}
-      onUpdateManagement={onUpdateManagement}
-      onGetManagement={onGetManagement}
       actionFormData={projectPresentationActionData.actionData}
       isAdmin={isAdmin}
       isLoading={isLoading}
