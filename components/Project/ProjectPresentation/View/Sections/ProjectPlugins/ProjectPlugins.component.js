@@ -1,15 +1,17 @@
 import { Box, Paper } from '@mui/material';
+import ProjectPluginsActions from './Actions';
 
-/*
-    Show plugin/management data, show possible actions.
-    Different for project admin and normal user
-    Different if project has management 
-*/
-
-const ProjectPlugins = ({ projectPresentation, isAdmin }) => {
+const ProjectPlugins = ({
+  projectPresentation,
+  isAdmin,
+}) => {
   return (
     <Box className="ProjectPlugins__Container">
       <Paper>Plugins</Paper>
+      <ProjectPluginsActions
+        projectPresentation={projectPresentation}
+        isAdmin={isAdmin}
+      />
     </Box>
   );
 };
