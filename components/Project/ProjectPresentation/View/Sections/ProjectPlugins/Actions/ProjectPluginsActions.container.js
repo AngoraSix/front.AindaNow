@@ -60,21 +60,10 @@ const ProjectPluginsActionsContainer = ({ projectPresentation, isAdmin }) => {
     dispatch(updateFieldAction(partialFormData));
   };
 
-  const processManagementData = (managementResponse) => {
-    return {
-      constitution: managementResponse.constitution,
-      id: managementResponse.id,
-      projectId: managementResponse.projectId,
-      status: managementResponse.status,
-    };
-  };
-
   const _processManagementResponse = async () => {
     const managementResponse = await api.front.getProjectManagement(
       projectPresentation.projectId
     );
-    const managementData = processManagementData(managementResponse);
-    console.log(managementData);
     const managementActions = processHateoasActions(managementResponse);
     dispatch(updateManagementActions(managementActions));
   };

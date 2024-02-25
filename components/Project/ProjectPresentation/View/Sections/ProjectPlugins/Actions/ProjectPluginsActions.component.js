@@ -16,6 +16,7 @@ const ProjectPluginsActions = ({
   onCreateManagement,
   onUpdateManagement,
   onGetManagement,
+  managementData,
   actionFormData,
   actions,
   isLoading,
