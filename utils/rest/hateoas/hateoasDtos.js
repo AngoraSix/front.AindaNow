@@ -7,9 +7,6 @@ export default class HateoasCollectionDto {
       Type,
       embeddedField
     );
-    console.log('HATHATHAT');
-    console.log(hateoasResponse);
-    console.log(hateoasResponse.page);
     this.actions = processHateoasActions(hateoasResponse);
     this.metadata = new HateoasCollectionMetadata(hateoasResponse.page);
   }
@@ -22,6 +19,7 @@ export class HateoasCollectionMetadata {
     this.totalElements = metadata.totalElements;
     this.totalPages = metadata.totalPages;
     this.number = metadata.number;
+    this.extraSkip = metadata.extraSkip;
   }
 }
 

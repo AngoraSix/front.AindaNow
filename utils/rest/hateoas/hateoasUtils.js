@@ -38,7 +38,5 @@ export const mapToHateoasCollectionDto = (
   Type,
   embeddedField
 ) => {
-  console.log('222222');
-  console.log(hateoasResponse);
   return new HateoasCollectionDto(hateoasResponse, Type, embeddedField);
 };

@@ -1,11 +1,11 @@
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
 import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
-import SettingsIcon from '@mui/icons-material/Settings';
-import AutoGraphIcon from '@mui/icons-material/AutoGraph';
-import ShowChartIcon from '@mui/icons-material/ShowChart';
 import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
+import SettingsIcon from '@mui/icons-material/Settings';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Box, Tooltip } from '@mui/material';
 import { useTranslation } from 'next-i18next';
@@ -133,12 +133,16 @@ const ProjectPresentationActions = ({
   const createProjectManagementButtons = (
     <Tooltip
       key="createProjectManagementButtons"
-      title={t('project-presentations.actions.create-project-management.tooltip')}
+      title={t(
+        'project-presentations.actions.create-project-management.tooltip'
+      )}
     >
       <LoadingButton
         className="ProjectPresentation__Heading__Actions__CreateProjectManagement"
         variant="contained"
-        onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT)}
+        onClick={onActionSelected(
+          PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT
+        )}
       >
         <AutoGraphIcon />
       </LoadingButton>
@@ -153,7 +157,9 @@ const ProjectPresentationActions = ({
       <LoadingButton
         className="ProjectPresentation__Heading__Actions__GetProjectManagement"
         variant="contained"
-        onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT)}
+        onClick={onActionSelected(
+          PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT
+        )}
         disabled
       >
         <ShowChartIcon />
@@ -164,12 +170,16 @@ const ProjectPresentationActions = ({
   const updateProjectManagementButtons = (
     <Tooltip
       key="updateProjectManagementButtons"
-      title={t('project-presentations.actions.update-project-management.tooltip')}
+      title={t(
+        'project-presentations.actions.update-project-management.tooltip'
+      )}
     >
       <LoadingButton
         className="ProjectPresentation__Heading__Actions__UpdateProjectManagement"
         variant="contained"
-        onClick={onActionSelected(PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT)}
+        onClick={onActionSelected(
+          PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT
+        )}
         disabled
       >
         <SettingsIcon />
@@ -199,9 +209,12 @@ const ProjectPresentationActions = ({
       registerAllClubsButtons,
     [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST]:
       withdrawInterestButtons,
-    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT]: createProjectManagementButtons,
-    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT]: getProjectManagementButtons,
-    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT]: updateProjectManagementButtons,
+    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT]:
+      createProjectManagementButtons,
+    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT]:
+      getProjectManagementButtons,
+    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT]:
+      updateProjectManagementButtons,
   };
 
   return !isLoading ? (
@@ -240,7 +253,6 @@ const ProjectPresentationActions = ({
       <ButtonsSkeleton />
     </Box>
   );
-  // </Box>
 };
 
 ProjectPresentationActions.defaultProps = {

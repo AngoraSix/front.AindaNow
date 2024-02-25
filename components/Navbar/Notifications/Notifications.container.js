@@ -1,7 +1,9 @@
 import { useSession } from 'next-auth/react';
 import React, { useEffect, useReducer } from 'react';
 import api from '../../../api';
+import { useNotifications } from '../../../hooks/app';
 import Notification from '../../../models/Notification';
+import logger from '../../../utils/logger';
 import { mapToHateoasCollectionDto } from '../../../utils/rest/hateoas/hateoasUtils';
 import Notifications from './Notifications.component';
 import NotificationsReducer, {
@@ -17,45 +19,45 @@ export const ACTION_IDS = {
 };
 
 const NotificationsContainer = ({}) => {
-  console.log('GGGGGGGG0');
+  const { onError } = useNotifications();
   const [state, dispatch] = useReducer(NotificationsReducer, INITIAL_STATE);
   const { data: session } = useSession();
 
   useEffect(() => {
     const initializeNotifications = async () => {
-      console.log('INITIALIZEDDDDD?');
-      console.log(state);
       if (session && !session.error && !state?.initialized) {
-        // let { streamToken } = await fetchNotifications();
-        await fetchNotifications();
-        let eventSource = api.front.streamContributorNotifications();
-        // streamToken
-        // ();
-        eventSource.onmessage = (e) => {
-          console.log('EVEVEVEVEVEVE1111111');
-          console.log(e);
-          console.log('EVEVEVEVEVEVE1111111====');
-          dispatch(newNotificationAction(JSON.parse(e.data)));
-        };
+        try {
+          await fetchNotifications();
+          let eventSource = api.front.streamContributorNotifications();
+          eventSource.onmessage = (m) => {
+            dispatch(newNotificationAction(JSON.parse(m.data)));
+          };
 
-        eventSource.onerror = (e) => eventSource.close();
-        return () => {
-          eventSource.close();
-        };
+          eventSource.onerror = (e) => {
+            logger.error(`Error on EvenSource: ${e}`);
+            eventSource.close();
+          };
+          return () => {
+            eventSource.close();
+          };
+        } catch (e) {
+          onError(`Error retrieving contributor notifications: ${e}`);
+        }
       }
     };
 
     initializeNotifications();
   }, [session]);
 
-  const fetchNotifications = async ({ number = state.number } = {}) => {
-    console.log('GERB1111111');
+  const fetchNotifications = async ({
+    number = state.number,
+    extraSkip = state.extraSkip,
+  } = {}) => {
     dispatch(startLoadingAction());
-    let notificationsResponse = await api.front.getContributorNotifications(
-      number
-    );
-    console.log('GERBYYYY');
-    console.log(notificationsResponse);
+    let notificationsResponse = await api.front.getContributorNotifications({
+      number,
+      extraSkip,
+    });
     const hateoasCollectionDto = mapToHateoasCollectionDto(
       notificationsResponse,
       Notification
@@ -66,27 +68,22 @@ const NotificationsContainer = ({}) => {
       actions: notificationsActions,
     } = hateoasCollectionDto;
     let notificationsList = state.notifications;
-    console.log('GERCHHHH');
-    console.log(notificationsMetadata);
-    console.log(notificationsActions);
 
     notificationsData.forEach((notification) => {
       notification.dismissed
         ? notificationsList.dismissed.push(notification)
         : notificationsList.toRead.push(notification);
     });
-    console.log("LA METAAAAAA");
-    console.log(notificationsMetadata);
     dispatch(
       updateAllAction({
         isLoading: false,
         notifications: notificationsList,
         initialized: true,
-        actions: notificationsActions, 
+        actions: notificationsActions,
         ...notificationsMetadata,
       })
     );
-    return { notificationsList }; //, streamToken };
+    return { notificationsList };
   };
 
   const dismissAllUserNotifications = async () => {
@@ -95,7 +92,10 @@ const NotificationsContainer = ({}) => {
   };
 
   const loadMoreNotifications = async () => {
-    fetchNotifications({ number: state.number + 1 });
+    fetchNotifications({
+      number: state.number + 1,
+      extraSkip: state.extraSkip,
+    });
   };
 
   return (

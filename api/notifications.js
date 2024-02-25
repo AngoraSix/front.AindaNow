@@ -8,7 +8,12 @@ class NotificationsAPI {
 
   async getNotifications(
     token,
-    { number = 0, size = 20, sort = '-dismissed,-instantOfCreation' }
+    {
+      number = 0,
+      size = 20,
+      sort = '<dismissed,>instantOfCreation',
+      extraSkip = 0,
+    }
   ) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token);
@@ -18,7 +23,7 @@ class NotificationsAPI {
     );
 
     const { data } = await this.axios.get(
-      `/notifications?pageSize=${size}&page=${number}&sort=${sort}`,
+      `/notifications?pageSize=${size}&page=${number}&sort=${sort}&extraSkip=${extraSkip}`,
       {
         headers: {
           ...headers,
@@ -43,12 +48,13 @@ class NotificationsAPI {
         ...headers,
         ...authHeaders,
         ...infraHeaders,
+        Accept: 'text/event-stream',
       },
     };
 
     const baseUrl = this.axios.getCurrentAxiosInstance().defaults.baseURL;
     let eventSource = new EventSource(
-      `${baseUrl}/notifications`,
+      `${baseUrl}/notifications?resliten=true`,
       eventSourceConfig
     );
     return eventSource;

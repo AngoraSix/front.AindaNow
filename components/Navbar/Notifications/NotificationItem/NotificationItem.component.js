@@ -48,8 +48,15 @@ const NotificationItem = ({ notification, onNotificationAction }) => {
   const notificationTitle =
     notification.title?.i18n?.[locale] ||
     notification.title?.i18n?.[en] ||
+    notification.title?.i18n?.[0] ||
     'Error reading title';
-    const imageUrl = notification?.media?.thumbnailUrl || notification?.media?.url;
+  const notificationMessage =
+    notification.message?.i18n?.[locale] ||
+    notification.message?.i18n?.[en] ||
+    notification.message?.i18n?.[0] ||
+    'Error reading message';
+  const imageUrl =
+    notification?.media?.thumbnailUrl || notification?.media?.url;
   return (
     <React.Fragment>
       <ListItem
@@ -111,12 +118,7 @@ const NotificationItem = ({ notification, onNotificationAction }) => {
               }`}
               color="textPrimary"
             >
-              {/* console.log translate this */}
-              {console.log('GYGYUUUUUUUUUUUU')}
-              {console.log(notification.message?.i18n?.[locale])}
-              {notification.message?.i18n?.[locale] ||
-                notification.message?.i18n?.[en] ||
-                'Error reading message'}
+              {notificationMessage}
             </Typography>
           }
         />

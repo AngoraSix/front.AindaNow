@@ -5,10 +5,7 @@ import MethodNotAllowedError from '../../../utils/errors/MethodNotAllowedError';
 import logger from '../../../utils/logger';
 
 const page = async (req, res) => {
-  console.log('API PAGEE');
-  console.log(req.headers);
   if (req.method === 'GET' && req.headers?.['accept'] === 'text/event-stream') {
-    console.log('API PAGEE1111');
     const validatedToken = await obtainValidatedToken(req);
     try {
       res.writeHead(200, {
@@ -19,28 +16,24 @@ const page = async (req, res) => {
       });
 
       const downstreamEvSource =
-        api.notifications.listenContributorNotifications(validatedToken);
+        await api.notifications.listenContributorNotifications(validatedToken);
       downstreamEvSource.onmessage = (m) => {
-        console.log('EVEVEVEVEVEVE2222222');
-        console.log(m);
-        console.log('EVEVEVEVEVEVE222222====');
         res.write(`event: message\ndata: ${m.data}\n\n`);
       };
 
       downstreamEvSource.onerror = (e) => {
         console.error(e);
-        evtSource.close();
+        downstreamEvSource.close();
       };
 
       req.socket.on('close', () => {
-        evtSource.close();
+        downstreamEvSource.close();
         res.end();
       });
     } catch (e) {
       res.end();
     }
   } else if (req.method === 'GET') {
-    console.log('API PAGEE22222');
     // Get notifications for contributor
     const validatedToken = await obtainValidatedToken(req);
     try {

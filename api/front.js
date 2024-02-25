@@ -3,8 +3,9 @@ import createPatchBody, {
 } from '../utils/rest/patch/patchOperations';
 
 class FrontAPI {
-  constructor(axiosInstance) {
+  constructor(axiosInstance, localhost = 'https://localhost/') {
     this.axios = axiosInstance;
+    this.localhost = localhost;
   }
 
   async updateProfileField(
@@ -148,23 +149,21 @@ class FrontAPI {
     return membersData;
   }
 
-  async getContributorNotifications(
+  async getContributorNotifications({
     number = 0,
-    size = 2, // console.log
-    sort = '-dismissed,-instantOfCreation'
-  ) {
-    console.log('FRONT-01');
+    extraSkip = 0,
+    size = 20,
+    sort = '<dismissed,>instantOfCreation',
+  }) {
     const { data } = await this.axios.get(
-      `api/notifications?size=${size}&number=${number}&sort=${sort}`
+      `api/notifications?size=${size}&number=${number}&sort=${sort}&extraSkip=${extraSkip}`
     );
-    console.log('FRONT-01');
-    console.log(data);
     return data;
   }
 
-  async streamContributorNotifications() {
-    // const baseUrl = this.axios.getCurrentAxiosInstance().defaults.baseURL;
-    let eventSource = new EventSource(`/api/notifications`);
+  streamContributorNotifications() {
+    const baseUrl = this.localhost;
+    let eventSource = new EventSource(`${baseUrl}api/notifications`);
     return eventSource;
   }
 }

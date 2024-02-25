@@ -55,7 +55,8 @@ class API {
     this.frontAPI = new FrontAPI(
       new BaseAPI({
         baseURL: '/',
-      })
+      }),
+      config.api.frontLocalhost
     );
     this.projectsAPI = new ProjectsAPI(_getServiceAPI('projects', this.axios));
     this.clubsAPI = new ClubsAPI(_getServiceAPI('clubs', this.axios));

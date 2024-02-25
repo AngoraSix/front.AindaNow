@@ -43,9 +43,10 @@ export const INITIAL_STATE = {
   totalToRead: 0,
   total: 0,
   totalPages: 0,
+  extraSkip: 0,
   hasImportantNotification: false,
   initialized: false,
-  actions: {}
+  actions: {},
 };
 
 const NotificationsReducer = (state = INITIAL_STATE, action) => {
@@ -66,16 +67,10 @@ const NotificationsReducer = (state = INITIAL_STATE, action) => {
         companies: action.payload,
       };
     case NEW_NOTIFICATION:
-      const { notification, operationType, updatedFields } = action.payload;
-      if (updatedFields.length === 1 && updatedFields[0] === 'dismissed') {
-        return {
-          ...state,
-        };
-      }
+      const notification = action.payload;
       const updatedNotifications = _obtainUpdatedNotifications(
           notification,
-          state.notifications,
-          operationType
+          state.notifications
         ),
         totalDiff =
           updatedNotifications.toRead.length +
@@ -87,16 +82,15 @@ const NotificationsReducer = (state = INITIAL_STATE, action) => {
           state.notifications.toRead.length,
         updatedTotalToRead = state.totalToRead + totalToReadDiff,
         updatedTotal = state.total + totalDiff,
-        updatedSkip = state.skip + 1;
+        updatedSkip = state.extraSkip + 1;
       return {
         ...state,
         notifications: updatedNotifications,
         totalToRead: updatedTotalToRead,
-        skip: updatedSkip,
+        extraSkip: updatedSkip,
         total: updatedTotal,
-        hasImportantNotification: _checkImportantNotifications(
-          updatedNotifications
-        ),
+        hasImportantNotification:
+          _checkImportantNotifications(updatedNotifications),
       };
     case DISMISS_NOTIFICATIONS:
       const dismissedNotifications = {
@@ -148,13 +142,14 @@ const NotificationsReducer = (state = INITIAL_STATE, action) => {
 const _obtainUpdatedNotifications = (
   notification,
   notifications,
-  operationType
+  operationType = 'console.log'
 ) => {
   let updatedNotifications = {
     toRead: [...notifications.toRead],
     dismissed: [...notifications.dismissed],
   };
-  if (operationType === NEW_NOTIFICATION_OPERATION_TYPES.ADD) {
+  if (true) {
+    // operationType === NEW_NOTIFICATION_OPERATION_TYPES.ADD) { //console.log
     updatedNotifications.toRead.unshift(notification);
     return updatedNotifications;
   } else if (operationType === NEW_NOTIFICATION_OPERATION_TYPES.UPDATE) {
