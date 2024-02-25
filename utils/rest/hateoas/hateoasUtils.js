@@ -1,3 +1,5 @@
+import HateoasCollectionDto from './hateoasDtos';
+
 const ADMIN_REQUIRED_KEY = 'admin';
 
 export const processHateoasActions = (hateoasResponse = {}) => {
@@ -31,14 +33,12 @@ const _isAdminProperty = (property) => {
   return property.name === ADMIN_REQUIRED_KEY && property.type == null;
 };
 
-export const processHateoasCollection = (
+export const mapToHateoasCollectionDto = (
   hateoasResponse = {},
   Type,
   embeddedField
 ) => {
-  const embedded = hateoasResponse._embedded;
-  const collection = embeddedField
-    ? embedded[embeddedField]
-    : embedded[Object.keys(embedded)[0]];
-  return Type ? collection.map((value) => new Type(value)) : collection;
+  console.log('222222');
+  console.log(hateoasResponse);
+  return new HateoasCollectionDto(hateoasResponse, Type, embeddedField);
 };

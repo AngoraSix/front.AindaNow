@@ -106,12 +106,16 @@ class FrontAPI {
   }
 
   async getProjectManagement(projectId) {
-    const { data } = await this.axios.get(`api/projects/${projectId}/management`);
+    const { data } = await this.axios.get(
+      `api/projects/${projectId}/management`
+    );
     return data;
   }
 
   async createProjectManagementById(projectId) {
-    const { data } = await this.axios.post(`api/projects/${projectId}/management`);
+    const { data } = await this.axios.post(
+      `api/projects/${projectId}/management`
+    );
     return data;
   }
 
@@ -142,6 +146,26 @@ class FrontAPI {
       params: { contributorIds: contributorIdsArray.join() },
     });
     return membersData;
+  }
+
+  async getContributorNotifications(
+    number = 0,
+    size = 2, // console.log
+    sort = '-dismissed,-instantOfCreation'
+  ) {
+    console.log('FRONT-01');
+    const { data } = await this.axios.get(
+      `api/notifications?size=${size}&number=${number}&sort=${sort}`
+    );
+    console.log('FRONT-01');
+    console.log(data);
+    return data;
+  }
+
+  async streamContributorNotifications() {
+    // const baseUrl = this.axios.getCurrentAxiosInstance().defaults.baseURL;
+    let eventSource = new EventSource(`/api/notifications`);
+    return eventSource;
   }
 }
 

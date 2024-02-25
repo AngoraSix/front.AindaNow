@@ -17,6 +17,7 @@ import '../styles/Messages.css';
 import '../styles/Navbar.css';
 import '../styles/Profile.css';
 import '../styles/ProjectCard.css';
+import '../styles/Notifications.css';
 import '../styles/ProjectForm.css';
 import '../styles/ProjectPresentationsList.css';
 import '../styles/ProjectPresentationView.css';
