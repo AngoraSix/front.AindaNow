@@ -5,6 +5,12 @@
   align-items: center;
 }
 
+.ProjectPresentationView__BodyContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
 .MediaHeader__Container {
   position: relative;
   height: 15vh;
@@ -165,12 +171,20 @@
   }
 }
 
+.ProjectPlugins__Container {
+  position: relative;
+  width: 100%;
+  z-index: 2;
+  flex: 1 1 0;
+}
+
 /* Sections Presentation */
 
 .ProjectPresentation__Container {
   position: relative;
   width: 100%;
   z-index: 2;
+  flex: 2 1 0;
 }
 
 .ProjectPresentation__AreaExtension {
