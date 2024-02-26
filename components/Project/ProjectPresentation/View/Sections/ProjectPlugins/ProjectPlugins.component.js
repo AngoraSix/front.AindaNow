@@ -3,44 +3,60 @@ import ProjectPluginsActions from './Actions';
 
 const ProjectPlugins = ({
   projectPresentation,
-  managementData,
+  pluginData,
+  onUpdateManagement,
+  onCreateManagement,
+  onGetManagement,
   isAdmin,
   isLoading,
 }) => {
-  if (!managementData.constitution) {
-    return (
-      <Box className="ProjectPlugins__Container">
-        <Paper>
-          <Box className="ProjectPresentation__SectionsPresentation">
-            <Box className="ProjectPlugins__Body">
-              <Typography
-                className="ProjectPlugins__Heading__Name"
-                variant="h5"
-                component="h1"
-                color="primary.main"
-              >
-                Management
-              </Typography>
-              <Typography variant="body1" component="p">
-                {isLoading
-                  ? 'Loading management data...'
-                  : 'No management data available.'}
-              </Typography>
+  const { management } = pluginData;
 
-              <Typography variant="h6" component="h1" color="primary.main">
-                Actions
-              </Typography>
-              <ProjectPluginsActions
-                projectPresentation={projectPresentation}
-                isAdmin={isAdmin}
-                managementActions={managementData.actions}
-              />
-            </Box>
-          </Box>
-        </Paper>
-      </Box>
-    );
-  }
+  const availableData = management?.data?.constitution && !isLoading;
+
+  const getBody = () => {
+    if (availableData) {
+      return (
+        <Box>
+          <Typography variant="body1" component="p">
+            This project is currently on {management?.data?.status} status.
+          </Typography>
+
+          <Typography variant="body1" component="p">
+            Bylaws:
+          </Typography>
+          <ol>
+            {management?.data?.constitution?.bylaws?.map((bylaw, i) => (
+              <li key={i}>
+                <Typography variant="body1" component="p">
+                  {bylaw?.scope}: {bylaw?.definition}
+                </Typography>
+              </li>
+            ))}
+          </ol>
+          <Typography variant="h6" component="h1" color="primary.main">
+            Actions
+          </Typography>
+        </Box>
+      );
+    } else if (isLoading) {
+      return (
+        <Box>
+          <Typography variant="body1" component="p">
+            loading ...
+          </Typography>
+        </Box>
+      );
+    } else {
+      return (
+        <Box>
+          <Typography variant="body1" component="p">
+            No management data available
+          </Typography>
+        </Box>
+      );
+    }
+  };
 
   return (
     <Box className="ProjectPlugins__Container">
@@ -55,29 +71,21 @@ const ProjectPlugins = ({
             >
               Management
             </Typography>
-            <Typography variant="body1" component="p">
-              This project is currently on {managementData?.status} status.
-            </Typography>
 
-            <Typography variant="body1" component="p">
-              Bylaws:
-            </Typography>
-            <ol>
-              {managementData?.constitution?.bylaws?.map((bylaw, i) => (
-                <li key={i}>
-                  <Typography variant="body1" component="p">
-                    {bylaw?.scope}: {bylaw?.definition}
-                  </Typography>
-                </li>
-              ))}
-            </ol>
-            <Typography variant="h6" component="h1" color="primary.main">
-              Actions
-            </Typography>
+            {getBody()}
+
             <ProjectPluginsActions
               projectPresentation={projectPresentation}
+              actions={{
+                ...management?.actions,
+              }}
+              onActionDataChange={() => {}}
+              onCreateManagement={onCreateManagement}
+              onUpdateManagement={onUpdateManagement}
+              onGetManagement={onGetManagement}
+              actionFormData={{}}
               isAdmin={isAdmin}
-              managementActions={managementData.actions}
+              isLoading={isLoading}
             />
           </Box>
         </Box>

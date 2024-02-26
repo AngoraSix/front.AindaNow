@@ -1,3 +1,3 @@
-import ProjectPluginsActions from './ProjectPluginsActions.container';
+import ProjectPluginsActions from './ProjectPluginsActions.component';
 
 export default ProjectPluginsActions;

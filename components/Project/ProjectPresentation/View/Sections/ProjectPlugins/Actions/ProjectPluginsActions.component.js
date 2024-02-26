@@ -16,7 +16,6 @@ const ProjectPluginsActions = ({
   onCreateManagement,
   onUpdateManagement,
   onGetManagement,
-  managementData,
   actionFormData,
   actions,
   isLoading,
@@ -105,7 +104,6 @@ const ProjectPluginsActions = ({
       </LoadingButton>
     </Tooltip>
   );
-
 
   const ACTION_COMPONENTS = {
     [PROJECT_PLUGINS_SUPPORTED_ACTIONS.CREATE_MANAGEMENT]:

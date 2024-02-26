@@ -22,7 +22,6 @@ export const updateProjectPluginsActions = (payload) => ({
 export const INITIAL_STATE = {
   actionData: {},
   projectPluginsActions: {},
-  clubActions: {},
   managementActions: {},
 };
 

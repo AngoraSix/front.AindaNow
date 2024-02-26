@@ -1,25 +1,60 @@
 import api from '../../../../../../api';
 import { useState, useEffect } from 'react';
 import { processHateoasActions } from '../../../../../../utils/rest/hateoas/hateoasUtils';
-import { useLoading } from '../../../../../../hooks/app';
+import { useLoading, useNotifications } from '../../../../../../hooks/app';
 import { useActiveSession } from '../../../../../../hooks/oauth';
+import { useTranslation } from 'react-i18next';
 import logger from '../../../../../../utils/logger';
 import ProjectPlugins from './ProjectPlugins.component';
 
 const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
-  const [managementData, setManagementData] = useState({});
-
+  const { t } = useTranslation('project-presentations.view');
   const { doLoad } = useLoading();
   const { session } = useActiveSession(true);
-  const [isLoading, setIsLoading] = useState(true);
   const activeSession = session && !session.error;
+  const [isLoading, setIsLoading] = useState(true);
+  const { onError, onSuccess } = useNotifications();
+
+  const [pluginData, setPluginData] = useState({
+    management: {
+      data: {},
+      actions: {},
+    },
+  });
+
+  const processManagementResponse = (response) => {
+    const managementActions = processHateoasActions(response);
+
+    const management = {
+      data: {
+        constitution: response.constitution,
+        status: response.status,
+        id: response.id,
+        projectId: response.projectId,
+      },
+      actions: managementActions,
+    };
+
+    setPluginData((prev) => {
+      prev.management = management;
+      return prev;
+    });
+  };
+
+  const fetchManagement = async () => {
+    const managementResponse = await api.front.getProjectManagement(
+      projectPresentation.projectId
+    );
+    processManagementResponse(managementResponse);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       doLoad(true);
       setIsLoading(true);
+
       try {
-        await Promise.all([_processManagementResponse()]);
+        await Promise.all([fetchManagement()]);
       } catch (err) {
         if (err.response?.status !== 404 && activeSession) {
           logger.error(
@@ -37,26 +72,52 @@ const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeSession, projectPresentation.projectId]);
 
-  const _processManagementResponse = async () => {
-    const managementResponse = await api.front.getProjectManagement(
-      projectPresentation.projectId
-    );
-    const managementActions = processHateoasActions(managementResponse);
-    const data = {
-      constitution: managementResponse.constitution,
-      status: managementResponse.status,
-      id: managementResponse.id,
-      projectId: managementResponse.projectId,
-      actions: managementActions,
-    };
-    setManagementData(data);
+  const onCreateManagement = async () => {
+    doLoad(true);
+    setIsLoading(true);
+
+    try {
+      const managementResponse = await api.front.createProjectManagementById(
+        projectPresentation.projectId
+      );
+
+      processManagementResponse(managementResponse);
+
+      onSuccess(
+        t(
+          'project-presentations.actions.create-project-management.notifications.success.created'
+        )
+      );
+    } catch (ex) {
+      onError(
+        `Error creating management project for Prbject - ${
+          ex.response?.data?.message || ex.message
+        }`
+      );
+    } finally {
+      doLoad(false);
+      setIsLoading(false);
+    }
+  };
+
+  const onUpdateManagement = async () => {
+    // todo: update project management
+    console.log('update project management');
+  };
+
+  const onGetManagement = async () => {
+    // todo: get project management
+    console.log('get project management');
   };
 
   return (
     <ProjectPlugins
       projectPresentation={projectPresentation}
       isAdmin={isAdmin}
-      managementData={managementData}
+      pluginData={pluginData}
+      onUpdateManagement={onUpdateManagement}
+      onCreateManagement={onCreateManagement}
+      onGetManagement={onGetManagement}
       isLoading={isLoading}
     />
   );
