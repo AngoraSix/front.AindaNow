@@ -1,6 +1,6 @@
-import { Badge, IconButton } from '@mui/material';
 import NotificationsToReadIcon from '@mui/icons-material/Notifications';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+import { Badge, IconButton } from '@mui/material';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import NotificationsList from './NotificationsList.component';
@@ -12,7 +12,7 @@ const Notifications = ({
   onClose,
   isLoading,
   hasImportantNotification,
-  notificationActions
+  notificationActions,
 }) => {
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
 
@@ -54,7 +54,7 @@ Notifications.propTypes = {
   onClose: PropTypes.func.isRequired,
   onLoadMore: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  notificationActions: PropTypes.object
+  notificationActions: PropTypes.object,
 };
 
 export default Notifications;

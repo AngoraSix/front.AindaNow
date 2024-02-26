@@ -18,7 +18,7 @@ export default class Notification {
       alertLevel,
       instantOfIssue,
       needsExplicitDismiss,
-      dismissed,
+      dismissedForUser,
     } = notificationObject;
     this.id = id;
     this.targetId = targetId;
@@ -34,7 +34,7 @@ export default class Notification {
     this.alertLevel = alertLevel;
     this.instantOfIssue = instantOfIssue && moment(instantOfIssue);
     this.needsExplicitDismiss = needsExplicitDismiss;
-    this.dismissed = dismissed;
+    this.dismissedForUser = dismissedForUser;
     this.actions = processHateoasActions(notificationObject);
   }
 }

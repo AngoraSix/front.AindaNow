@@ -166,6 +166,14 @@ class FrontAPI {
     let eventSource = new EventSource(`${baseUrl}api/notifications`);
     return eventSource;
   }
+
+  async dismissContributorNotifications() {
+    const { data } = await this.axios.patch(
+      `api/notifications`,
+      createPatchBody(PATCH_SUPPORTED_OPERATIONS.REPLACE, 'dismissed', true)
+    );
+    return data;
+  }
 }
 
 export default FrontAPI;

@@ -37,16 +37,16 @@
   margin-bottom: 10px;
 }
 
-.NotificationItem__Text { 
+.NotificationItem__TextContainer {
   min-width: 80%;
 }
 
-.NotificationItem__Title { 
+.NotificationItem__Title {
   margin-right: 8%;
   font-size: 1.1rem;
 }
 
-.NotificationItem__Message{
+.NotificationItem__Message {
   font-size: 0.95rem;
 }
 
@@ -56,7 +56,7 @@
 }
 
 .NotificationItem--dismissed {
-  background-color: #808080;
+  background-color: #b2b2b2;
   transition: background-color 1s;
   -webkit-transition: background-color 1s;
 }
@@ -90,7 +90,7 @@
 }
 
 .NotificationItem .NotificationItem__Actions__Button--dismissed {
-  background-color: #808080;
+  background-color: #b2b2b2;
 }
 
 @media (min-width: 768px) {
@@ -111,7 +111,7 @@
   }
 
   .NotificationsList.NotificationsList__Panel::-webkit-scrollbar-thumb {
-    background-color: #47626B;
+    background-color: #47626b;
     border-radius: 6px;
   }
 }

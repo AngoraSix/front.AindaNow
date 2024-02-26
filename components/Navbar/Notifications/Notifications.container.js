@@ -34,7 +34,7 @@ const NotificationsContainer = ({}) => {
           };
 
           eventSource.onerror = (e) => {
-            logger.error(`Error on EvenSource: ${e}`);
+            logger.error(`Error on EvenSource: ${JSON.stringify(e)}`);
             eventSource.close();
           };
           return () => {
@@ -68,11 +68,13 @@ const NotificationsContainer = ({}) => {
       actions: notificationsActions,
     } = hateoasCollectionDto;
     let notificationsList = state.notifications;
+    let notificationIds = state.notificationIds;
 
     notificationsData.forEach((notification) => {
-      notification.dismissed
+      notification.dismissedForUser
         ? notificationsList.dismissed.push(notification)
         : notificationsList.toRead.push(notification);
+      notificationIds.push(notification.id);
     });
     dispatch(
       updateAllAction({
@@ -80,6 +82,7 @@ const NotificationsContainer = ({}) => {
         notifications: notificationsList,
         initialized: true,
         actions: notificationsActions,
+        notificationIds,
         ...notificationsMetadata,
       })
     );
@@ -87,8 +90,10 @@ const NotificationsContainer = ({}) => {
   };
 
   const dismissAllUserNotifications = async () => {
-    api.notifications.dismissNotifications(true);
-    dispatch(dismissNotificationsAction());
+    if (state.totalToRead > 0) {
+      api.front.dismissContributorNotifications();
+      dispatch(dismissNotificationsAction());
+    }
   };
 
   const loadMoreNotifications = async () => {

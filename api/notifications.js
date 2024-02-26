@@ -59,6 +59,24 @@ class NotificationsAPI {
     );
     return eventSource;
   }
+
+  async patchNotifications(patchBody, token) {
+    const headers = this.axios.getCommonHeaders();
+    const authHeaders = this.axios.getAuthorizationHeaders(token, false);
+    const infraHeaders = await obtainInfraHeaders(
+      config.infra,
+      config.api.serverBaseURL
+    );
+
+    const response = await this.axios.patch(`/notifications`, patchBody, {
+      headers: {
+        ...headers,
+        ...authHeaders,
+        ...infraHeaders,
+      },
+    });
+    return response;
+  }
 }
 
 export default NotificationsAPI;

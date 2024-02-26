@@ -44,7 +44,6 @@ const NotificationItem = ({ notification, onNotificationAction }) => {
     notification.alertLevel &&
     ALERT_LEVEL_ICON_MAPPING[notification.alertLevel.toUpperCase()];
 
-  //console.log translate this error
   const notificationTitle =
     notification.title?.i18n?.[locale] ||
     notification.title?.i18n?.[en] ||
@@ -67,9 +66,6 @@ const NotificationItem = ({ notification, onNotificationAction }) => {
           backgroundColor: notification.dismissedForUser
             ? null
             : theme.palette.primary.light,
-          borderColor:
-            (notificationColorId && theme.palette[notificationColorId].main) ||
-            theme.palette.primary.dark,
         }}
         alignItems="flex-start"
       >
@@ -87,11 +83,7 @@ const NotificationItem = ({ notification, onNotificationAction }) => {
           )}
         </ListItemAvatar>
         <ListItemText
-          className={`NotificationItem__Text ${
-            notification.dismissedForUser
-              ? 'NotificationItem__Text--dismissed'
-              : ''
-          }`}
+          className={`NotificationItem__TextContainer`}
           primary={
             <React.Fragment>
               <NotificationIcon
@@ -100,8 +92,12 @@ const NotificationItem = ({ notification, onNotificationAction }) => {
                 fontSize="small"
               />
               <Typography
+                className={`NotificationItem__Title NotificationItem__Text ${
+                  notification.dismissedForUser
+                    ? 'NotificationItem__Text--dismissed'
+                    : ''
+                }`}
                 variant="subtitle1"
-                className="NotificationItem__Title"
               >
                 {notificationTitle}
               </Typography>
@@ -111,7 +107,7 @@ const NotificationItem = ({ notification, onNotificationAction }) => {
             <Typography
               component="span"
               variant="body2"
-              className={`NotificationItem__Message ${
+              className={`NotificationItem__Message NotificationItem__Title NotificationItem__Text ${
                 notification.dismissedForUser
                   ? 'NotificationItem__Text--dismissed'
                   : ''

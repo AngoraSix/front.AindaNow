@@ -39,6 +39,7 @@ export const INITIAL_STATE = {
     toRead: [],
     dismissed: [],
   },
+  notificationIds: [],
   number: 0,
   totalToRead: 0,
   total: 0,
@@ -68,6 +69,10 @@ const NotificationsReducer = (state = INITIAL_STATE, action) => {
       };
     case NEW_NOTIFICATION:
       const notification = action.payload;
+      if (state.notificationIds.includes(notification.id)) {
+        // disregard update
+        return state;
+      }
       const updatedNotifications = _obtainUpdatedNotifications(
           notification,
           state.notifications
@@ -89,6 +94,7 @@ const NotificationsReducer = (state = INITIAL_STATE, action) => {
         totalToRead: updatedTotalToRead,
         extraSkip: updatedSkip,
         total: updatedTotal,
+        notificationIds: [...state.notificationIds, notification.id],
         hasImportantNotification:
           _checkImportantNotifications(updatedNotifications),
       };
@@ -139,49 +145,12 @@ const NotificationsReducer = (state = INITIAL_STATE, action) => {
   }
 };
 
-const _obtainUpdatedNotifications = (
-  notification,
-  notifications,
-  operationType = 'console.log'
-) => {
+const _obtainUpdatedNotifications = (notification, notifications) => {
   let updatedNotifications = {
     toRead: [...notifications.toRead],
     dismissed: [...notifications.dismissed],
   };
-  if (true) {
-    // operationType === NEW_NOTIFICATION_OPERATION_TYPES.ADD) { //console.log
-    updatedNotifications.toRead.unshift(notification);
-    return updatedNotifications;
-  } else if (operationType === NEW_NOTIFICATION_OPERATION_TYPES.UPDATE) {
-    const indexToRead = updatedNotifications.toRead.findIndex(
-      (n) => n.id === notification.id
-    );
-    if (indexToRead !== -1) {
-      if (notification.dismissedForUser) {
-        updatedNotifications.toRead = updatedNotifications.toRead.filter(
-          (n) => n.id !== notification.id
-        );
-        updatedNotifications.dismissed.unshift(notification);
-      } else {
-        updatedNotifications.toRead[indexToRead] = notification;
-      }
-      return updatedNotifications;
-    }
-    const indexDismissed = updatedNotifications.dismissed.findIndex(
-      (n) => n.id === notification.id
-    );
-    if (indexDismissed !== -1) {
-      if (!notification.dismissedForUser) {
-        updatedNotifications.dismissed = updatedNotifications.dismissed.filter(
-          (n) => n.id !== notification.id
-        );
-        updatedNotifications.toRead.unshift(notification);
-      } else {
-        updatedNotifications.dismissed[indexToRead] = notification;
-      }
-      return updatedNotifications;
-    }
-  }
+  updatedNotifications.toRead.unshift(notification);
   return updatedNotifications;
 };
 
