@@ -83,7 +83,6 @@ const ProjectCard = ({ projectPresentation }) => {
           'ProjectCard__Container--no-images': !mainImage,
           'ProjectCard__Container--active': isActive,
         })}
-        // component="a"
         onMouseEnter={handleCardHover(true)}
         onMouseLeave={handleCardHover(false)}
       >

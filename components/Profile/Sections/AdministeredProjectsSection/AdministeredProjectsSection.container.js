@@ -3,7 +3,7 @@ import React, { useEffect, useReducer } from 'react';
 import api from '../../../../api/';
 import { useLoading, useNotifications } from '../../../../hooks/app';
 import Club from '../../../../models/Club';
-import { processHateoasCollection } from '../../../../utils/rest/hateoas/hateoasUtils';
+import { mapToHateoasCollectionDto } from '../../../../utils/rest/hateoas/hateoasUtils';
 import AdministeredProjectsSection from './AdministeredProjectsSection.component';
 import AdministeredProjectsSectionsReducer, {
   INITIAL_STATE,
@@ -37,10 +37,10 @@ const AdministeredProjectsSectionContainer = ({
         const administeredClubsResponse =
           await api.front.getAdministeredProjectsClubs(contributorId);
 
-        const clubsInfo = processHateoasCollection(
+        const clubsInfo = mapToHateoasCollectionDto(
           administeredClubsResponse,
           Club
-        );
+        ).collection;
 
         dispatch(
           initAdministeredProjectsInfo({

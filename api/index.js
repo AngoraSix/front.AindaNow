@@ -1,12 +1,13 @@
 import config from '../config';
 import BaseAPI from './BaseAPI';
+import ClubsAPI from './club';
 import ContributorsAPI from './contributors';
 import FrontAPI from './front';
+import ManagementAPI from './management';
 import MediaAPI from './media';
+import NotificationsAPI from './notifications';
 import ProjectsAPI from './projects';
 import ThirdPartiesAPI from './thirdparties';
-import ClubsAPI from './club';
-import ManagementAPI from './management';
 
 class API {
   constructor() {
@@ -37,6 +38,10 @@ class API {
     return this.contributorsAPI;
   }
 
+  get notifications() {
+    return this.notificationsAPI;
+  }
+
   get thirdParties() {
     return this.thirdPartiesAPI;
   }
@@ -45,19 +50,28 @@ class API {
     this.axios = new BaseAPI({
       serverBaseURL: config.api.serverBaseURL,
       browserBaseURL: config.api.browserBaseURL,
-      infraConfigs: config.infra
+      infraConfigs: config.infra,
     });
     this.frontAPI = new FrontAPI(
       new BaseAPI({
         baseURL: '/',
-      })
+      }),
+      config.api.frontLocalhost
     );
     this.projectsAPI = new ProjectsAPI(_getServiceAPI('projects', this.axios));
     this.clubsAPI = new ClubsAPI(_getServiceAPI('clubs', this.axios));
-    this.managementAPI = new ManagementAPI(_getServiceAPI('management', this.axios));
-    this.mediaAPI = new MediaAPI(_getServiceAPI('media', this.axios), config.api.mediaOverrideBaseURL);
+    this.managementAPI = new ManagementAPI(
+      _getServiceAPI('management', this.axios)
+    );
+    this.mediaAPI = new MediaAPI(
+      _getServiceAPI('media', this.axios),
+      config.api.mediaOverrideBaseURL
+    );
     this.contributorsAPI = new ContributorsAPI(
       _getServiceAPI('contributors', this.axios)
+    );
+    this.notificationsAPI = new NotificationsAPI(
+      _getServiceAPI('notifications', this.axios)
     );
     this.thirdPartiesAPI = new ThirdPartiesAPI();
   }

@@ -3,8 +3,9 @@ import createPatchBody, {
 } from '../utils/rest/patch/patchOperations';
 
 class FrontAPI {
-  constructor(axiosInstance) {
+  constructor(axiosInstance, localhost = 'https://localhost/') {
     this.axios = axiosInstance;
+    this.localhost = localhost;
   }
 
   async updateProfileField(
@@ -113,12 +114,16 @@ class FrontAPI {
   }
 
   async getProjectManagement(projectId) {
-    const { data } = await this.axios.get(`api/projects/${projectId}/management`);
+    const { data } = await this.axios.get(
+      `api/projects/${projectId}/management`
+    );
     return data;
   }
 
   async createProjectManagementById(projectId) {
-    const { data } = await this.axios.post(`api/projects/${projectId}/management`);
+    const { data } = await this.axios.post(
+      `api/projects/${projectId}/management`
+    );
     return data;
   }
 
@@ -149,6 +154,32 @@ class FrontAPI {
       params: { contributorIds: contributorIdsArray.join() },
     });
     return membersData;
+  }
+
+  async getContributorNotifications({
+    number = 0,
+    extraSkip = 0,
+    size = 20,
+    sort = '<dismissed,>instantOfCreation',
+  }) {
+    const { data } = await this.axios.get(
+      `api/notifications?size=${size}&number=${number}&sort=${sort}&extraSkip=${extraSkip}`
+    );
+    return data;
+  }
+
+  streamContributorNotifications() {
+    const baseUrl = this.localhost;
+    let eventSource = new EventSource(`${baseUrl}api/notifications`);
+    return eventSource;
+  }
+
+  async dismissContributorNotifications() {
+    const { data } = await this.axios.patch(
+      `api/notifications`,
+      createPatchBody(PATCH_SUPPORTED_OPERATIONS.REPLACE, 'dismissed', true)
+    );
+    return data;
   }
 }
 
