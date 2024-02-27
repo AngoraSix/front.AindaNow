@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { processHateoasActions } from '../../../../../../utils/rest/hateoas/hateoasUtils';
 import { useLoading, useNotifications } from '../../../../../../hooks/app';
 import { useActiveSession } from '../../../../../../hooks/oauth';
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from 'next-i18next';
 import logger from '../../../../../../utils/logger';
 import ProjectPlugins from './ProjectPlugins.component';
 

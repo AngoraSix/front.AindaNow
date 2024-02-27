@@ -14,5 +14,12 @@
     "project-presentations.actions.dialog.inputs.contact": "Contacto",
     "project-presentations.actions.dialog.commands.cancel": "Cancelar",
     "project-presentations.actions.dialog.commands.done": "Listo",
-    "project-presentations.actions.show-interest.notifications.success.registered": "Registro actualizado"
+    "project-presentations.actions.show-interest.notifications.success.registered": "Registro actualizado",
+    "project-presentations.actions": "Acciones",
+    "project-presentations.plugins.mgmt.bylaws": "Reglas",
+    "project-presentations.plugins.mgmt.nobylaws": "Sin establecer",
+    "project-presentations.plugins.mgmt": "Gestion",
+    "project-presentations.plugins.loading": "cargando",
+    "project-presentations.plugins.mgmt.status": "Estado",
+    "project-presentations.plugins.mgmt.nodata": "Sin establecer"
 }

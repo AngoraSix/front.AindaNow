@@ -175,13 +175,14 @@
   position: relative;
   width: 100%;
   z-index: 2;
+  height: 100%;
   flex: 1 1 0;
 }
 
 .ProjectPlugins__Body {
   width: 100%;
-  margin: 10px;
-  min-height: 50vh;
+  padding: 0 2vw;
+  padding-bottom: 2vw;
 }
 
 .ProjectPlugins__Heading__Name {
@@ -195,7 +196,7 @@
   position: relative;
   width: 100%;
   z-index: 2;
-  flex: 2 1 0;
+  flex: 3 1 0;
 }
 
 .ProjectPresentation__AreaExtension {

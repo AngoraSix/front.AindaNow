@@ -1,4 +1,5 @@
 import { Box, Paper, Typography } from '@mui/material';
+import { useTranslation } from 'next-i18next';
 import ProjectPluginsActions from './Actions';
 
 const ProjectPlugins = ({
@@ -10,6 +11,7 @@ const ProjectPlugins = ({
   isAdmin,
   isLoading,
 }) => {
+  const { t } = useTranslation('project-presentations.view');
   const { management } = pluginData;
 
   const availableData = management?.data?.constitution && !isLoading;
@@ -19,23 +21,27 @@ const ProjectPlugins = ({
       return (
         <Box>
           <Typography variant="body1" component="p">
-            This project is currently on {management?.data?.status} status.
+            {t('project-presentations.plugins.mgmt.status')}
+            {': '}
+            {management?.data?.status}
           </Typography>
 
           <Typography variant="body1" component="p">
-            Bylaws:
+            {t('project-presentations.plugins.mgmt.bylaws')}:
           </Typography>
           <ol>
-            {management?.data?.constitution?.bylaws?.map((bylaw, i) => (
-              <li key={i}>
-                <Typography variant="body1" component="p">
-                  {bylaw?.scope}: {bylaw?.definition}
-                </Typography>
-              </li>
-            ))}
+            {management?.data?.constitution?.bylaws?.length
+              ? management?.data?.constitution?.bylaws?.map((bylaw, i) => (
+                  <li key={i}>
+                    <Typography variant="body1" component="p">
+                      {bylaw?.scope}: {bylaw?.definition}
+                    </Typography>
+                  </li>
+                ))
+              : t('project-presentations.plugins.mgmt.nobylaws')}
           </ol>
           <Typography variant="h6" component="h1" color="primary.main">
-            Actions
+            {t('project-presentations.actions')}
           </Typography>
         </Box>
       );
@@ -43,7 +49,7 @@ const ProjectPlugins = ({
       return (
         <Box>
           <Typography variant="body1" component="p">
-            loading ...
+            {t('project-presentations.plugins.loading')}...
           </Typography>
         </Box>
       );
@@ -51,7 +57,7 @@ const ProjectPlugins = ({
       return (
         <Box>
           <Typography variant="body1" component="p">
-            No management data available
+            {t('project-presentations.plugins.mgmt.nodata')}
           </Typography>
         </Box>
       );
@@ -61,6 +67,14 @@ const ProjectPlugins = ({
   return (
     <Box className="ProjectPlugins__Container">
       <Paper>
+        <Typography
+          className="ProjectPresentation__Heading__Name SectionPresentation__Project__Name"
+          variant="h3"
+          component="h1"
+          color="primary.main"
+        >
+          Plugins
+        </Typography>
         <Box className="ProjectPresentation__SectionsPresentation">
           <Box className="ProjectPlugins__Body">
             <Typography
@@ -69,7 +83,7 @@ const ProjectPlugins = ({
               component="h1"
               color="primary.main"
             >
-              Management
+              {t('project-presentations.plugins.mgmt')}
             </Typography>
 
             {getBody()}
