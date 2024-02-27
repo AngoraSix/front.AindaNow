@@ -1,4 +1,5 @@
 import { SessionProvider as NextAuthProvider } from 'next-auth/react';
+import { appWithTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from 'redux';
@@ -9,27 +10,27 @@ import reducers from '../store/reducers';
 import '../styles/App.css';
 import '../styles/Commons.css';
 import '../styles/Editable.css';
-import '../styles/globals.css';
 import '../styles/InputDialogs.css';
 import '../styles/Layouts.css';
 import '../styles/Media.css';
 import '../styles/Messages.css';
 import '../styles/Navbar.css';
+import '../styles/Notifications.css';
 import '../styles/Profile.css';
 import '../styles/ProjectCard.css';
 import '../styles/ProjectForm.css';
-import '../styles/ProjectPresentationsList.css';
 import '../styles/ProjectPresentationView.css';
+import '../styles/ProjectPresentationsList.css';
+import '../styles/globals.css';
 import { getEnv } from '../utils/env';
-import { appWithTranslation } from 'next-i18next';
-import App from "next/app"
+global.EventSource = require('eventsource');
 
 const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
   const store = createStore(reducers, preloadedState);
 
   config.applyEnvConfig(env);
   api.applyEnvConfig(env);
-  
+
   return (
     <ReduxProvider store={store}>
       <NextAuthProvider session={pageProps.session} refetchInterval={1 * 30}>

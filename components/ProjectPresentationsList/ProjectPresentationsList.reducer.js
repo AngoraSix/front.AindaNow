@@ -4,8 +4,8 @@ export const updateDataAction = (payload) => ({ type: UPDATE_DATA, payload });
 
 export const INITIAL_STATE = {
   total: 0,
-  page: 1,
-  limit: 10,
+  number: 0,
+  size: 20,
   search: '',
   projectPresentationsList: [],
 };

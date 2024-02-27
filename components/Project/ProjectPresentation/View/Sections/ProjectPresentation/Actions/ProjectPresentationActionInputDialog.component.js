@@ -25,7 +25,7 @@ const ProjectPresentationActionInputDialog = ({
   handleDialogClose,
   actionData,
   onActionInputChange,
-  title,
+  titleKey,
   onSubmit,
 }) => {
   const { t } = useTranslation('project-presentations.view');
@@ -38,7 +38,7 @@ const ProjectPresentationActionInputDialog = ({
       maxWidth="xl"
       TransitionComponent={Transition}
     >
-      <DialogTitle>{title}</DialogTitle>
+      <DialogTitle>{t(titleKey)}</DialogTitle>
       <DialogContent>
         {open &&
           actionInputs.map((action) => (
@@ -82,7 +82,7 @@ ProjectPresentationActionInputDialog.defaultProps = {
   open: false,
   actionInputs: [],
   actionData: {},
-  title: 'Required Data',
+  titleKey: 'project-presentations.actions.dialog.title',
 };
 
 ProjectPresentationActionInputDialog.propTypes = {

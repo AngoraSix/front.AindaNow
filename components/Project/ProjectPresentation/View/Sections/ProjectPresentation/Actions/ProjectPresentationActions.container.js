@@ -10,7 +10,7 @@ import Club from '../../../../../../../models/Club';
 import logger from '../../../../../../../utils/logger';
 import {
   processHateoasActions,
-  processHateoasCollection,
+  mapToHateoasCollectionDto,
 } from '../../../../../../../utils/rest/hateoas/hateoasUtils';
 import ProjectPresentationActions from './ProjectPresentationActions.component';
 import { GENERAL_CLUBS_ACTIONS_KEY } from './ProjectPresentationActions.properties';
@@ -77,7 +77,7 @@ const ProjectPresentationActionsContainer = ({
       projectPresentation.projectId
     );
     const generalActions = processHateoasActions(allClubsResponse);
-    const clubs = processHateoasCollection(allClubsResponse, Club);
+    const clubs = mapToHateoasCollectionDto(allClubsResponse, Club).collection;
     const clubActions = clubs.reduce((combinedActions, club) => {
       Object.assign(combinedActions, {
         [club.type]: club.actions,

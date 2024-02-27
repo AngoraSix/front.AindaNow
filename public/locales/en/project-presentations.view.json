@@ -11,6 +11,7 @@
     "project-presentations.actions.get-project-management.tooltip": "Get Project Management",
     "project-presentations.actions.update-project-management.tooltip": "Update Project Management",
     "project-presentations.actions.create-project-management.notifications.success.created": "Created Project Management successfully",
+    "project-presentations.actions.dialog.title": "Required Data",
     "project-presentations.actions.dialog.inputs.contact": "Contact",
     "project-presentations.actions.dialog.commands.cancel": "Cancel",
     "project-presentations.actions.dialog.commands.done": "Done",

@@ -24,6 +24,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import config from '../../config';
 import { ROUTES, resolveRoute } from '../../constants';
+import Notifications from './Notifications';
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -178,7 +179,7 @@ const Navbar = () => {
                 </Button>
               </Link>
             </Box>
-
+            {/* LANGUAGE */}
             <Box className="Navbar__Language" sx={{ flexGrow: 0 }}>
               <Tooltip title={t('navbar.language.tooltip')}>
                 <Button
@@ -218,7 +219,9 @@ const Navbar = () => {
                 ))}
               </Menu>
             </Box>
-
+            {/* NOTIFICATIONS */}
+            <Notifications />
+            {/* PROFILE ICON */}
             {session ? (
               <Box sx={{ flexGrow: 0 }}>
                 <Tooltip title={t('navbar.settings.tooltip')}>

@@ -61,6 +61,11 @@ async function refreshAccessToken(token) {
     }
 
     let accessTokenBody = response.data;
+
+    if (oauthFrameworkConfig.debug) {
+      logger.info(`Refreshed Access Token: ${accessTokenBody.access_token}`);
+    }
+
     return {
       accessToken: accessTokenBody.access_token,
       accessTokenExpires: moment().unix() + accessTokenBody.expires_in,

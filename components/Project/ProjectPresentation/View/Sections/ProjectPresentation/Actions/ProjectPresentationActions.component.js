@@ -1,3 +1,4 @@
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
 import EditIcon from '@mui/icons-material/Edit';
@@ -115,7 +116,6 @@ const ProjectPresentationActions = ({
     </Tooltip>
   );
 
-
   const editButtons = (
     <Tooltip
       key="editButtons"
@@ -176,7 +176,6 @@ const ProjectPresentationActions = ({
       <ButtonsSkeleton />
     </Box>
   );
-  // </Box>
 };
 
 ProjectPresentationActions.defaultProps = {
