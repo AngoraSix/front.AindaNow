@@ -22,5 +22,8 @@
     "project-presentations.plugins.mgmt": "Management",
     "project-presentations.plugins.loading": "loading",
     "project-presentations.plugins.mgmt.status": "Status",
+    "project-presentations.plugins.mgmt.status.OPERATIONAL": "Operational",
+    "project-presentations.plugins.mgmt.status.STARTUP": "Startup",
+    "project-presentations.plugins.mgmt.status.IDEA": "Idea",
     "project-presentations.plugins.mgmt.nodata": "No Current Data"
 }
