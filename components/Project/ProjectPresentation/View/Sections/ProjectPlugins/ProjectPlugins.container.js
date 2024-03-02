@@ -1,4 +1,5 @@
 import api from '../../../../../../api';
+import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { processHateoasActions } from '../../../../../../utils/rest/hateoas/hateoasUtils';
 import { useLoading, useNotifications } from '../../../../../../hooks/app';
@@ -121,6 +122,15 @@ const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
       isLoading={isLoading}
     />
   );
+};
+
+ProjectPluginsContainer.defaultProps = {
+  isAdmin: false,
+};
+
+ProjectPluginsContainer.propTypes = {
+  isAdmin: PropTypes.bool,
+  projectPresentation: PropTypes.object.isRequired,
 };
 
 export default ProjectPluginsContainer;

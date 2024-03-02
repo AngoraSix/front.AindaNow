@@ -1,5 +1,6 @@
 import { Box, Paper, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
+import PropTypes from 'prop-types';
 import ProjectPluginsActions from './Actions';
 import ListSkeleton from '../../../../../common/Skeletons/ListSkeleton.component';
 
@@ -95,6 +96,22 @@ const ProjectPlugins = ({
       </Paper>
     </Box>
   );
+};
+
+ProjectPlugins.defaultProps = {
+  isAdmin: false,
+  projectPresentationActions: {},
+};
+
+ProjectPlugins.propTypes = {
+  pluginData: PropTypes.object,
+  onUpdateManagement: PropTypes.func,
+  onCreateManagement: PropTypes.func,
+  onGetManagement: PropTypes.func,
+  isLoading: PropTypes.bool,
+  isAdmin: PropTypes.bool,
+  projectPresentation: PropTypes.object.isRequired,
+  projectPresentationActions: PropTypes.object,
 };
 
 export default ProjectPlugins;
