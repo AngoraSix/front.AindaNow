@@ -10,6 +10,7 @@
   padding: 1.5rem;
   color: #ffffff;
   backface-visibility: hidden;
+  border-radius: 10px;
 }
 
 .ProjectCard__Container::before,
@@ -26,21 +27,21 @@
   background: linear-gradient(
     to top,
     hsl(0 0% 0% / 0.79) 0%,
-    hsl(0 0% 0% / 0.787) 7.8%,
-    hsl(0 0% 0% / 0.779) 14.4%,
-    hsl(0 0% 0% / 0.765) 20.2%,
-    hsl(0 0% 0% / 0.744) 25.3%,
-    hsl(0 0% 0% / 0.717) 29.9%,
-    hsl(0 0% 0% / 0.683) 34.3%,
-    hsl(0 0% 0% / 0.641) 38.7%,
-    hsl(0 0% 0% / 0.592) 43.3%,
-    hsl(0 0% 0% / 0.534) 48.4%,
-    hsl(0 0% 0% / 0.468) 54.1%,
-    hsl(0 0% 0% / 0.393) 60.6%,
-    hsl(0 0% 0% / 0.31) 68.3%,
-    hsl(0 0% 0% / 0.216) 77.3%,
-    hsl(0 0% 0% / 0.113) 87.7%,
-    hsl(0 0% 0% / 0) 100%
+    hsl(0 0% 0% / 0.787) 3.9%,
+    hsl(0 0% 0% / 0.779) 7.2%,
+    hsl(0 0% 0% / 0.765) 10.1%,
+    hsl(0 0% 0% / 0.744) 12.6%,
+    hsl(0 0% 0% / 0.717) 14.9%,
+    hsl(0 0% 0% / 0.683) 17.1%,
+    hsl(0 0% 0% / 0.641) 19.3%,
+    hsl(0 0% 0% / 0.592) 21.6%,
+    hsl(0 0% 0% / 0.534) 24.2%,
+    hsl(0 0% 0% / 0.468) 27.0%,
+    hsl(0 0% 0% / 0.393) 30.3%,
+    hsl(0 0% 0% / 0.31) 34.15%,
+    hsl(0 0% 0% / 0.216) 38.6%,
+    hsl(0 0% 0% / 0.113) 43.8%,
+    hsl(0 0% 0% / 0) 50%
   );
   transition: 300ms opacity linear;
   z-index: 1;
@@ -69,52 +70,29 @@
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
   justify-content: space-between;
   padding: 0.5em 0;
   text-align: center;
   z-index: 2;
-  transform: none;
-  transition: 450ms transform ease-in-out;
-  transition-delay: 200ms;
 }
 
 .ProjectCard__DescriptionSection .ProjectCard__DescriptionSection__Title {
-  font-size: 1.7rem;
+  font-size: 1.4rem;
   line-height: 1.2;
   font-weight: 900;
   letter-spacing: 0.03ch;
-  transition: 300ms opacity linear;
-  transition-delay: 200ms;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+  text-wrap: balance;
   min-height: 2rem;
   text-shadow: 0 0 10px black;
-}
-
-.ProjectCard__DescriptionSection .ProjectCard__DescriptionSection__Text {
-  font-size: 1.2rem;
-  font-weight: 500;
-  opacity: 1;
-  transition: 300ms opacity linear;
-  transition-delay: 200ms;
-  margin: auto 0;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  line-clamp: 5;
-  -webkit-box-orient: vertical;
 }
 
 .ProjectCard__Container:focus {
   outline: 0.5rem solid #fafafa;
   outline-offset: -0.5rem;
-}
-
-.ProjectCard__Container:hover .ProjectCard__DescriptionSection {
-  transform: translateY(80%);
 }
 
 .ProjectCard__Container--active:hover::after,

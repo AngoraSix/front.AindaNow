@@ -97,12 +97,6 @@ const ProjectCard = ({ projectPresentation }) => {
           >
             {projectPresentation.project.name}
           </Typography>
-          <Typography
-            className="ProjectCard__DescriptionSection__Text"
-            variant="caption"
-          >
-            {projectPresentation.sections[0].description}
-          </Typography>
         </Box>
         <Image
           src={mainImage}
