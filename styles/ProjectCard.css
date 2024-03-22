@@ -36,7 +36,7 @@
     hsl(0 0% 0% / 0.641) 19.3%,
     hsl(0 0% 0% / 0.592) 21.6%,
     hsl(0 0% 0% / 0.534) 24.2%,
-    hsl(0 0% 0% / 0.468) 27.0%,
+    hsl(0 0% 0% / 0.468) 27%,
     hsl(0 0% 0% / 0.393) 30.3%,
     hsl(0 0% 0% / 0.31) 34.15%,
     hsl(0 0% 0% / 0.216) 38.6%,
@@ -87,7 +87,8 @@
   overflow: hidden;
   text-wrap: balance;
   min-height: 2rem;
-  text-shadow: 0 0 10px black;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4), -2px -2px 5px rgba(0, 0, 0, 0.4),
+    2px -2px 5px rgba(0, 0, 0, 0.4), -2px 2px 5px rgba(0, 0, 0, 0.4);
 }
 
 .ProjectCard__Container:focus {
