@@ -6,7 +6,8 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ROUTES, resolveRoute } from '../../../../../constants';
+import { ROUTES } from '../../../../../constants';
+import { resolveRoute } from '../../../../../utils/api/apiHelper';
 
 const ProjectPresentationDialogNavbar = ({ projectId, isEmbeddedDialog }) => {
   const { t } = useTranslation('project-presentations.edit');

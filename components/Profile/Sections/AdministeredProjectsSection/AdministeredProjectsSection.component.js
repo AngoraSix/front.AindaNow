@@ -23,8 +23,8 @@ import config from '../../../../config';
 import {
   PROFILE_ATTRIBUTES,
   ROUTES,
-  resolveRoute,
 } from '../../../../constants';
+import { resolveRoute } from '../../../../utils/api/apiHelper';
 import ListSkeleton from '../../../common/Skeletons/ListSkeleton.component';
 
 const AdministeredProjectsSection = ({

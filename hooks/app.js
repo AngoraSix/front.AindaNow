@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { appIsLoading } from '../store/app';
 import { useSnackbar } from 'notistack';
-import { useRef, useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 
 export const useLoading = () => {
   const reduxDispath = useDispatch();
@@ -39,7 +39,6 @@ export const useNotifications = () => {
   };
 };
 
-
 export const useDebounce = () => {
   const [debouncedId, setDebouncedId] = useState(null);
 
@@ -68,3 +67,4 @@ export const useDebounce = () => {
     debounce,
   };
 };
+

@@ -15,7 +15,8 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { resolveRoute, ROUTES } from '../../../../../constants';
+import { ROUTES } from '../../../../../constants';
+import { resolveRoute } from '../../../../../utils/api/apiHelper';
 import PresentationSectionPreview from './PresentationSectionPreview.component';
 
 const ProjectCorePresentationsHolder = ({ project, isMobile }) => {

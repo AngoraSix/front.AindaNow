@@ -20,3 +20,11 @@ export const obtainValidatedToken = async (req) => {
 export const resolveLocale = (destination, { locale, defaultLocale }) => {
   return locale != defaultLocale ? `/${locale}${destination}` : destination;
 };
+
+export const resolveRoute = (route, ...args) => {
+  return args.reduce(
+    // replace each path pattern
+    (url, replaceString) => url.replace(/:\w+/, replaceString),
+    route
+  );
+};

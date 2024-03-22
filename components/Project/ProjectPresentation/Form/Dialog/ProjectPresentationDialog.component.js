@@ -5,7 +5,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { resolveRoute, ROUTES } from '../../../../../constants';
+import { ROUTES } from '../../../../../constants';
+import { resolveRoute } from '../../../../../utils/api/apiHelper';
 import ProjectPresentationDialogNavbar from './ProjectPresentationDialogNavbar.component';
 
 const SlideTransition = React.forwardRef(function Transition(props, ref) {

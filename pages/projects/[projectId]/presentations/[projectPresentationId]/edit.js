@@ -52,8 +52,8 @@ const EditProjectPresentationPage = ({
         </Box>
       </DefaultLayout>
     );
-  };
-  
+  }
+
   return (
     <DefaultLayout
       headData={{
@@ -101,7 +101,9 @@ export const getServerSideProps = async (ctx) => {
     );
     isAdmin =
       session?.user.id != null &&
-      projectPresentation.admins?.some(a => a.contributorId == session.user.id) &&
+      projectPresentation.admins?.some(
+        (a) => a.contributorId == session.user.id
+      ) &&
       projectPresentation?.projectId === projectId;
     props = {
       ...props,

@@ -15,5 +15,15 @@
     "project-presentations.actions.dialog.inputs.contact": "Contact",
     "project-presentations.actions.dialog.commands.cancel": "Cancel",
     "project-presentations.actions.dialog.commands.done": "Done",
-    "project-presentations.actions.show-interest.notifications.success.registered": "Updated interest successfully"
+    "project-presentations.actions.show-interest.notifications.success.registered": "Updated interest successfully",
+    "project-presentations.actions": "Actions",
+    "project-presentations.plugins.mgmt.bylaws": "Bylaws",
+    "project-presentations.plugins.mgmt.nobylaws": "No Current Bylaws",
+    "project-presentations.plugins.mgmt": "Management",
+    "project-presentations.plugins.loading": "loading",
+    "project-presentations.plugins.mgmt.status": "Status",
+    "project-presentations.plugins.mgmt.status.OPERATIONAL": "Operational",
+    "project-presentations.plugins.mgmt.status.STARTUP": "Startup",
+    "project-presentations.plugins.mgmt.status.IDEA": "Idea",
+    "project-presentations.plugins.mgmt.nodata": "No Current Data"
 }

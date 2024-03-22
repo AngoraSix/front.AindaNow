@@ -23,8 +23,6 @@ export default function Document() {
           content={head.image.logo}
         />
         <meta property="fb:app_id" key="fb.id" content={head.facebookAppId}/>
-        
-        {/* <script src="/eventsource-polyfill.js" async/> */}
       </Head>
       <body>
         <Main />

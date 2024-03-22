@@ -3,9 +3,10 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useReducer } from 'react';
 import api from '../../../../api';
-import { resolveRoute, ROUTES } from '../../../../constants';
+import { ROUTES } from '../../../../constants';
 import { useLoading, useNotifications } from '../../../../hooks/app';
 import ProjectPresentation from '../../../../models/ProjectPresentation';
+import { resolveRoute } from '../../../../utils/api/apiHelper';
 import { toType } from '../../../../utils/helpers';
 import logger from '../../../../utils/logger';
 import { uploadAllMedia } from '../../../../utils/media/mediaProcessor';
@@ -13,9 +14,9 @@ import ProjectPresentationDialog from './Dialog';
 import ProjectPresentationForm from './ProjectPresentationForm.component';
 import ProjectPresentationFormReducer, {
   INITIAL_STATE,
-  updatedCompletedFormSection,
   updateFieldsAction,
   updateFormWasSubmitted,
+  updatedCompletedFormSection,
 } from './ProjectPresentationForm.reducer';
 
 const ProjectPresentationFormContainer = ({
@@ -74,7 +75,9 @@ const ProjectPresentationFormContainer = ({
             project.id
           );
 
-        onSuccess(t('project-presentations.edit.form.notifications.success.saved'));
+        onSuccess(
+          t('project-presentations.edit.form.notifications.success.saved')
+        );
 
         const viewURL = isTriggeredAction
           ? resolveRoute(ROUTES.projects.edit, project.id)

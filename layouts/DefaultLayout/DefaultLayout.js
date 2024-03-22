@@ -1,4 +1,4 @@
-import { Paper } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -13,7 +13,7 @@ const DefaultLayout = ({ children, className, headData, contained = true }) => {
   const ChildrenContainer = contained ? Paper : 'div';
 
   return (
-    <div className={`DefaultLayout DefaultLayout__Container ${className}`}>
+    <Box className={`DefaultLayout DefaultLayout__Container ${className}`}>
       <Head>
         <title>{head.title}</title>
         <meta property="og:title" key="og.title" content={head.title} />
@@ -33,7 +33,7 @@ const DefaultLayout = ({ children, className, headData, contained = true }) => {
       <ChildrenContainer className={`${className}__Body`}>
         {children}
       </ChildrenContainer>
-    </div>
+    </Box>
   );
 };
 

@@ -1,18 +1,16 @@
-import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
 import EditIcon from '@mui/icons-material/Edit';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
 import GroupRemoveIcon from '@mui/icons-material/GroupRemove';
-import SettingsIcon from '@mui/icons-material/Settings';
-import ShowChartIcon from '@mui/icons-material/ShowChart';
 import LoadingButton from '@mui/lab/LoadingButton';
 import { Box, Tooltip } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { ROUTES, resolveRoute } from '../../../../../../../constants';
+import { ROUTES } from '../../../../../../../constants';
+import { resolveRoute } from '../../../../../../../utils/api/apiHelper';
 import ButtonsSkeleton from '../../../../../../common/Skeletons/ButtonsSkeleton.component';
 import ProjectPresentationActionInputDialog from './ProjectPresentationActionInputDialog.component';
 import { PROJECT_PRESENTATION_SUPPORTED_ACTIONS } from './ProjectPresentationActions.properties';
@@ -23,9 +21,6 @@ const ProjectPresentationActions = ({
   onWithdrawInterest,
   onActionDataChange,
   onRegisterAllClubs,
-  onCreateManagement,
-  onUpdateManagement,
-  onGetManagement,
   actionFormData,
   actions,
   isLoading,
@@ -57,15 +52,6 @@ const ProjectPresentationActions = ({
         break;
       case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.REGISTER_ALL_CLUBS:
         onRegisterAllClubs();
-        break;
-      case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT:
-        onCreateManagement();
-        break;
-      case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT:
-        onGetManagement();
-        break;
-      case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT:
-        onUpdateManagement();
         break;
       case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT:
         router.push(
@@ -130,63 +116,6 @@ const ProjectPresentationActions = ({
     </Tooltip>
   );
 
-  const createProjectManagementButtons = (
-    <Tooltip
-      key="createProjectManagementButtons"
-      title={t(
-        'project-presentations.actions.create-project-management.tooltip'
-      )}
-    >
-      <LoadingButton
-        className="ProjectPresentation__Heading__Actions__CreateProjectManagement"
-        variant="contained"
-        onClick={onActionSelected(
-          PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT
-        )}
-      >
-        <AutoGraphIcon />
-      </LoadingButton>
-    </Tooltip>
-  );
-
-  const getProjectManagementButtons = (
-    <Tooltip
-      key="getProjectManagementButtons"
-      title={t('project-presentations.actions.get-project-management.tooltip')}
-    >
-      <LoadingButton
-        className="ProjectPresentation__Heading__Actions__GetProjectManagement"
-        variant="contained"
-        onClick={onActionSelected(
-          PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT
-        )}
-        disabled
-      >
-        <ShowChartIcon />
-      </LoadingButton>
-    </Tooltip>
-  );
-
-  const updateProjectManagementButtons = (
-    <Tooltip
-      key="updateProjectManagementButtons"
-      title={t(
-        'project-presentations.actions.update-project-management.tooltip'
-      )}
-    >
-      <LoadingButton
-        className="ProjectPresentation__Heading__Actions__UpdateProjectManagement"
-        variant="contained"
-        onClick={onActionSelected(
-          PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT
-        )}
-        disabled
-      >
-        <SettingsIcon />
-      </LoadingButton>
-    </Tooltip>
-  );
-
   const editButtons = (
     <Tooltip
       key="editButtons"
@@ -209,12 +138,6 @@ const ProjectPresentationActions = ({
       registerAllClubsButtons,
     [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.WITHDRAW_INTEREST]:
       withdrawInterestButtons,
-    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.CREATE_MANAGEMENT]:
-      createProjectManagementButtons,
-    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.GET_MANAGEMENT]:
-      getProjectManagementButtons,
-    [PROJECT_PRESENTATION_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT]:
-      updateProjectManagementButtons,
   };
 
   return !isLoading ? (
@@ -269,9 +192,6 @@ ProjectPresentationActions.propTypes = {
   onShowInterest: PropTypes.func.isRequired,
   onWithdrawInterest: PropTypes.func.isRequired,
   onRegisterAllClubs: PropTypes.func.isRequired,
-  onCreateManagement: PropTypes.func.isRequired,
-  onUpdateManagement: PropTypes.func.isRequired,
-  onGetManagement: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   actionFormData: PropTypes.object,
 };
