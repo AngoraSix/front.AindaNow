@@ -23,7 +23,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import config from '../../config';
-import { ROUTES, resolveRoute } from '../../constants';
+import { ROUTES } from '../../constants';
+import { resolveRoute } from '../../utils/api/apiHelper';
 import Notifications from './Notifications';
 
 const Navbar = () => {
@@ -88,8 +89,8 @@ const Navbar = () => {
               <Image
                 className="Navbar__Logo"
                 src={config.site.head.image.logo}
-                alt="AngoraSix"
-                title="AngoraSix"
+                alt="AindaNow"
+                title="AindaNow"
                 placeholder="blur"
                 blurDataURL={config.site.head.image.logo}
                 sx={{ priority: { xs: false, md: true } }}
@@ -154,8 +155,8 @@ const Navbar = () => {
               <Image
                 className="Navbar__Logo"
                 src={config.site.head.image.logo}
-                alt="AngoraSix"
-                title="AngoraSix"
+                alt="AindaNow"
+                title="AindaNow"
                 placeholder="blur"
                 blurDataURL={config.site.head.image.logo}
                 sx={{ priority: { xs: true, md: false } }}

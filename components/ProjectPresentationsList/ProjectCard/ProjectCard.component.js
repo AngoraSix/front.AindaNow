@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
-import { MEDIA_TYPES, ROUTES, resolveRoute } from '../../../constants';
+import { MEDIA_TYPES, ROUTES } from '../../../constants';
+import { resolveRoute } from '../../../utils/api/apiHelper';
 import YoutubePreview from '../../common/Media/Previews/YoutubePreview';
 
 const _allMedia = (projectPresentation) => {

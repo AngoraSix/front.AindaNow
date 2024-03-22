@@ -1,10 +1,12 @@
+import { useTranslation } from 'next-i18next';
+import { useEffect, useState } from 'react';
 import api from '../../../../../../api';
-import { useState, useEffect } from 'react';
-import { processHateoasActions } from '../../../../../../utils/rest/hateoas/hateoasUtils';
+import config from '../../../../../../config';
 import { useLoading, useNotifications } from '../../../../../../hooks/app';
 import { useActiveSession } from '../../../../../../hooks/oauth';
-import { useTranslation } from 'next-i18next';
+import { resolveRoute } from '../../../../../../utils/api/apiHelper';
 import logger from '../../../../../../utils/logger';
+import { processHateoasActions } from '../../../../../../utils/rest/hateoas/hateoasUtils';
 import ProjectPlugins from './ProjectPlugins.component';
 
 const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
@@ -108,6 +110,13 @@ const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
   const onGetManagement = async () => {
     // todo: get project management
     console.log('get project management');
+    window.open(
+      `${resolveRoute(
+        `${config.thirdPartiesConfig.angorasix.host}${config.thirdPartiesConfig.angorasix.viewProjectManagementPath}`,
+        pluginData.management.data.projectId,
+        pluginData.management.data.id
+      )}`
+    );
   };
 
   return (

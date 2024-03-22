@@ -5,9 +5,9 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import api from '../../../api';
 import FormSkeleton from '../../../components/common/Skeletons/FormSkeleton.component';
-import { resolveRoute, ROUTES } from '../../../constants';
+import { ROUTES } from '../../../constants';
 import DefaultLayout from '../../../layouts/DefaultLayout';
-import { resolveLocale } from '../../../utils/api/apiHelper';
+import { resolveLocale, resolveRoute } from '../../../utils/api/apiHelper';
 import logger from '../../../utils/logger';
 
 const ProjectViewPage = ({}) => {

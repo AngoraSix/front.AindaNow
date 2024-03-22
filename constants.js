@@ -9,14 +9,6 @@ export const PROFILE_ATTRIBUTES = {
   },
 };
 
-export const resolveRoute = (route, ...args) => {
-  return args.reduce(
-    // replace each path pattern
-    (url, replaceString) => url.replace(/:\w+/, replaceString),
-    route
-  );
-};
-
 export const ROUTES = {
   projects: {
     new: '/projects/new',

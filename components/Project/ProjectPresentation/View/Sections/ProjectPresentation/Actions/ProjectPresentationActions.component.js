@@ -1,4 +1,3 @@
-import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import ConfirmationNumberIcon from '@mui/icons-material/ConfirmationNumber';
 import DoNotTouchIcon from '@mui/icons-material/DoNotTouch';
 import EditIcon from '@mui/icons-material/Edit';
@@ -10,7 +9,8 @@ import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { ROUTES, resolveRoute } from '../../../../../../../constants';
+import { ROUTES } from '../../../../../../../constants';
+import { resolveRoute } from '../../../../../../../utils/api/apiHelper';
 import ButtonsSkeleton from '../../../../../../common/Skeletons/ButtonsSkeleton.component';
 import ProjectPresentationActionInputDialog from './ProjectPresentationActionInputDialog.component';
 import { PROJECT_PRESENTATION_SUPPORTED_ACTIONS } from './ProjectPresentationActions.properties';
