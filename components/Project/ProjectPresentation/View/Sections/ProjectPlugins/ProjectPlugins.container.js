@@ -108,9 +108,7 @@ const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
     console.log('update project management');
   };
 
-  const onGetManagement = async () => {
-    // todo: get project management
-    console.log('get project management');
+  const onGoToManagement = async () => {
     window.open(
       `${resolveRoute(
         `${config.thirdPartiesConfig.angorasix.host}${config.thirdPartiesConfig.angorasix.viewProjectManagementPath}`,
@@ -127,7 +125,7 @@ const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
       pluginData={pluginData}
       onUpdateManagement={onUpdateManagement}
       onCreateManagement={onCreateManagement}
-      onGetManagement={onGetManagement}
+      onGoToManagement={onGoToManagement}
       isLoading={isLoading}
     />
   );

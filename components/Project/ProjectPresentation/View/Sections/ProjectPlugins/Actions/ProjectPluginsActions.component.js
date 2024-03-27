@@ -15,7 +15,7 @@ const ProjectPluginsActions = ({
   onActionDataChange,
   onCreateManagement,
   onUpdateManagement,
-  onGetManagement,
+  onGoToManagement,
   actionFormData,
   actions,
   isLoading,
@@ -42,7 +42,7 @@ const ProjectPluginsActions = ({
         onCreateManagement();
         break;
       case PROJECT_PLUGINS_SUPPORTED_ACTIONS.GET_MANAGEMENT:
-        onGetManagement();
+        onGoToManagement();
         break;
       case PROJECT_PLUGINS_SUPPORTED_ACTIONS.UPDATE_MANAGEMENT:
         onUpdateManagement();
@@ -165,7 +165,7 @@ ProjectPluginsActions.propTypes = {
   onActionDataChange: PropTypes.func.isRequired,
   onCreateManagement: PropTypes.func.isRequired,
   onUpdateManagement: PropTypes.func.isRequired,
-  onGetManagement: PropTypes.func.isRequired,
+  onGoToManagement: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   actionFormData: PropTypes.object,
 };

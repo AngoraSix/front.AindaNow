@@ -9,7 +9,7 @@ const ProjectPlugins = ({
   pluginData,
   onUpdateManagement,
   onCreateManagement,
-  onGetManagement,
+  onGoToManagement,
   isAdmin,
   isLoading,
 }) => {
@@ -84,7 +84,7 @@ const ProjectPlugins = ({
                   onActionDataChange={() => {}}
                   onCreateManagement={onCreateManagement}
                   onUpdateManagement={onUpdateManagement}
-                  onGetManagement={onGetManagement}
+                  onGoToManagement={onGoToManagement}
                   actionFormData={{}}
                   isAdmin={isAdmin}
                   isLoading={isLoading}
@@ -107,7 +107,7 @@ ProjectPlugins.propTypes = {
   pluginData: PropTypes.object,
   onUpdateManagement: PropTypes.func,
   onCreateManagement: PropTypes.func,
-  onGetManagement: PropTypes.func,
+  onGoToManagement: PropTypes.func,
   isLoading: PropTypes.bool,
   isAdmin: PropTypes.bool,
   projectPresentation: PropTypes.object.isRequired,
