@@ -17,3 +17,6 @@ Run `npm run debug` and then attach vscode debugger with the following config:
     ]
 }
 ```
+
+# Generate secrets
+`openssl rand -base64 32`
