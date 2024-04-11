@@ -1,6 +1,8 @@
 {
     "project-presentations.view.page.title.template": ":projectPresentation",
     "project-presentations.view.page.description.template": "Vista de Presentación de Proyecto: :projectPresentation",
+    "project-presentations.tabs.mgmt": "Administracion",
+    "project-presentations.tabs.presentation": "Presentación",
     "project-presentations.actions.noactions.tooltip": "Sin acciones disponibles",
     "project-presentations.actions.show-interest.tooltip": "Estoy interesado!",
     "project-presentations.actions.withdraw-interest.tooltip": "Quitar interés",
