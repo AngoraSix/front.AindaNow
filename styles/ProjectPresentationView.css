@@ -5,10 +5,12 @@
   align-items: center;
 }
 
-.ProjectPresentationView__BodyContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
+@media (min-width: 600px) {
+  .ProjectPresentationView__BodyContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
 }
 
 .MediaHeader__Container {
@@ -182,13 +184,23 @@
 
 .ProjectPlugins__Body {
   width: 100%;
-  padding: 0 2vw;
-  padding-bottom: 2vw;
+  padding: 20px;
+  border-color: #A9BEC5;
+  border-radius: 6px;
+  border-style: solid;
+  border-width: 1px;
 }
 
 .ProjectPlugins__Heading__Name {
   text-align: center;
   width: 100%;
+}
+
+@media (min-width: 600px) {
+  .ProjectPlugins__Body {
+    margin: 15vh 15px 0;
+    padding: 15px;
+  }
 }
 
 /* Sections Presentation */

@@ -1,4 +1,4 @@
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import ListSkeleton from '../../../../../common/Skeletons/ListSkeleton.component';
@@ -23,7 +23,7 @@ const ProjectPlugins = ({
 
     if (availableData) {
       return (
-        <Box>
+        <Box className="ProjectPlugins__Body__Container">
           <Typography variant="body1" component="p">
             {t('project-presentations.plugins.mgmt.status')}
             {': '}
@@ -48,7 +48,7 @@ const ProjectPlugins = ({
       );
     } else {
       return (
-        <Box>
+        <Box className="ProjectPlugins__Body__Container">
           <Typography variant="body1" component="p">
             {t('project-presentations.plugins.mgmt.nodata')}
           </Typography>
@@ -59,41 +59,39 @@ const ProjectPlugins = ({
 
   return (
     <Box className="ProjectPlugins__Container">
-      <Paper>
-        <Box className="ProjectPresentation__SectionsPresentation">
-          <Box className="ProjectPlugins__Body">
-            <Typography
-              className="ProjectPlugins__Heading__Name"
-              variant="h6"
-              component="h1"
-              color="primary.main"
-            >
-              {t('project-presentations.plugins.mgmt')}
-            </Typography>
+      <Box className="ProjectPresentation__SectionsPresentation">
+        <Box className="ProjectPlugins__Body">
+          <Typography
+            className="ProjectPlugins__Heading__Name"
+            variant="h6"
+            component="h1"
+            color="primary.main"
+          >
+            {t('project-presentations.plugins.mgmt')}
+          </Typography>
 
-            {isLoading ? (
-              <ListSkeleton />
-            ) : (
-              <Box>
-                {getBody()}
-                <ProjectPluginsActions
-                  projectPresentation={projectPresentation}
-                  actions={{
-                    ...mgmtActions,
-                  }}
-                  onActionDataChange={() => {}}
-                  onCreateManagement={onCreateManagement}
-                  onUpdateManagement={onUpdateManagement}
-                  onGoToManagement={onGoToManagement}
-                  actionFormData={{}}
-                  isAdmin={isAdmin}
-                  isLoading={isLoading}
-                />
-              </Box>
-            )}
-          </Box>
+          {isLoading ? (
+            <ListSkeleton />
+          ) : (
+            <Box>
+              {getBody()}
+              <ProjectPluginsActions
+                projectPresentation={projectPresentation}
+                actions={{
+                  ...mgmtActions,
+                }}
+                onActionDataChange={() => {}}
+                onCreateManagement={onCreateManagement}
+                onUpdateManagement={onUpdateManagement}
+                onGoToManagement={onGoToManagement}
+                actionFormData={{}}
+                isAdmin={isAdmin}
+                isLoading={isLoading}
+              />
+            </Box>
+          )}
         </Box>
-      </Paper>
+      </Box>
     </Box>
   );
 };
