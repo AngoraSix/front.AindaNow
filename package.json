@@ -3,13 +3,14 @@
   "version": "0.2.2",
   "private": true,
   "scripts": {
-    "dev": "next dev -p 9090",
+    "dev": "next dev -p 10701",
     "lint": "next lint",
-    "debug": "cross-env NODE_OPTIONS='--inspect' next dev -p 9090",
+    "debug": "cross-env NODE_OPTIONS='--inspect' next dev -p 10701",
     "other:debug": "NODE_OPTIONS='--inspect' next dev -p 8088",
     "build": "next build",
     "start": "next start -p 80",
-    "start:local": "WEBPACK_CONFIG_FILE=all NODE_OPTIONS='--preserve-symlinks-main --preserve-symlinks'  && next dev -p 9090"
+    "start:local": "WEBPACK_CONFIG_FILE=all NODE_OPTIONS='--preserve-symlinks-main --preserve-symlinks'  && next dev -p 10701",
+    "start:local:win": "set WEBPACK_CONFIG_FILE=all && set NODE_OPTIONS='--preserve-symlinks-main --preserve-symlinks'  && next dev -p 10701"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",

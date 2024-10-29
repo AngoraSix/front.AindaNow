@@ -112,7 +112,6 @@ const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
     window.open(
       `${resolveRoute(
         `${config.thirdPartiesConfig.angorasix.host}${config.thirdPartiesConfig.angorasix.viewProjectManagementPath}`,
-        pluginData.management.data.projectId,
         pluginData.management.data.id
       )}`
     );
