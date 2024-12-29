@@ -1,0 +1,50 @@
+.Feature__Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Landing__Feature__Image__Container {
+  position: relative;
+  height: 80vw;
+  width: 80vw;
+}
+
+.ShowMoreButton_Container {
+  position: sticky;
+  padding: 0.5em;
+  background-color: white;
+  bottom: 0;
+}
+
+.Landing__Feature__Text__Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 600px) {
+  .Feature__Container {
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 1.5rem 4rem;
+  }
+
+  .Landing__Feature__Image__Container {
+    position: relative;
+    height: 30vh;
+    width: 30vh;
+    min-width: 30vh;
+  }
+
+  .ShowMoreButton_Container {
+    display: flex;
+    margin: 1em;
+  }
+
+  .Landing__Feature__Text__Container {
+    margin: 0 2em;
+  }
+}

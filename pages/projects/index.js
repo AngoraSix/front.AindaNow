@@ -3,12 +3,12 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import PropTypes from 'prop-types';
 import React from 'react';
-import api from '../api';
-import ProjectPresentationsList from '../components/ProjectPresentationsList';
-import ProjectsLayout from '../layouts/ProjectsLayout/ProjectsLayout';
-import logger from '../utils/logger';
+import api from '../../api';
+import ProjectPresentationsList from '../../components/ProjectPresentationsList';
+import ProjectsLayout from '../../layouts/ProjectsLayout/ProjectsLayout';
+import logger from '../../utils/logger';
 
-const HomePage = ({ projectPresentationsList }) => {
+const ProjectPresentationsListingPage = ({ projectPresentationsList }) => {
   const { t } = useTranslation('project-presentations.list');
 
   return (
@@ -25,11 +25,11 @@ const HomePage = ({ projectPresentationsList }) => {
   );
 };
 
-HomePage.defaultProps = {
+ProjectPresentationsListingPage.defaultProps = {
   projectPresentationsList: [],
 };
 
-HomePage.propTypes = {
+ProjectPresentationsListingPage.propTypes = {
   projectPresentationsList: PropTypes.array,
 };
 
@@ -62,4 +62,4 @@ export const getServerSideProps = async (ctx) => {
   };
 };
 
-export default HomePage;
+export default ProjectPresentationsListingPage;

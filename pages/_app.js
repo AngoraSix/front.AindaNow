@@ -11,6 +11,7 @@ import '../styles/App.css';
 import '../styles/Commons.css';
 import '../styles/Editable.css';
 import '../styles/InputDialogs.css';
+import '../styles/Landing.css';
 import '../styles/Layouts.css';
 import '../styles/Media.css';
 import '../styles/Messages.css';
