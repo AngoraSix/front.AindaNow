@@ -1,4 +1,4 @@
-const LOGO_IMAGE_URI = '/logos/an-white-500.png';
+const LOGO_IMAGE_URI = '/logos/a6-white-500.png';
 
 class Site {
   constructor(env) {

@@ -1,0 +1,116 @@
+.Feature__Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.Feature__Container:nth-child(odd) {
+  background-color: rgba(198, 212, 217, 0.2);
+}
+
+.Lanading__Title {
+  text-align: center;
+}
+
+.Landing__Feature__Image__Container {
+  position: relative;
+  height: 80vw;
+  width: 80vw;
+}
+
+.ShowMoreButton_Container {
+  position: sticky;
+  padding: 1em 0.5em 0.5em;
+  background-color: white;
+  bottom: 0;
+}
+
+.Landing__Feature__Text__Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Lanading__Feature__Title {
+  text-align: center;
+}
+
+.Lanading__Feature__Description {
+  text-align: justify;
+}
+
+@media (min-width: 600px) {
+  .Lanading__Title {
+    margin-top: 1em;
+  }
+
+  .Feature__Container {
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+    margin: 1.5rem 4rem;
+
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 8px;
+    border-color: #C6D4D9;
+
+    padding: 1.5rem;
+  }
+
+  .Feature__Container:nth-child(odd) {
+    margin: 3rem 15% 3rem 3rem;
+    padding: 1rem;
+    background-color: transparent;
+  }
+
+  .Feature__Container:nth-child(even) {
+    flex-direction: row-reverse;
+    margin: 3rem 3rem 3rem 15%;
+    background-color: rgba(198, 212, 217, 0.2);
+  }
+
+  .Feature__Container:nth-child(odd) .Lanading__Feature__Title {
+    text-align: left;
+  }
+  
+  .Feature__Container:nth-child(even) .Lanading__Feature__Title {
+    text-align: right;
+  }
+
+  .Landing__Feature__Image__Container {
+    position: relative;
+    height: 30vh;
+    width: 30vh;
+    min-width: 30vh;
+  }
+
+  .ShowMoreButton_Container {
+    display: flex;
+    margin: 1em;
+  }
+
+  .Landing__Feature__Text__Container {
+    margin: auto 2em;
+    align-items: start;
+  }
+
+  .Feature__Container:nth-child(even) .Landing__Feature__Text__Container {
+    align-items: end;
+    text-align: right;
+  }
+
+  .ShowMoreButton_Container {
+    padding: 0.5em 15%;
+  }
+}
+
+
+@media (min-width: 900px) {
+  .ShowMoreButton_Container {
+    padding: 0.5em 35%;
+  }
+}

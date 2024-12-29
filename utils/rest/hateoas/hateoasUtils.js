@@ -23,7 +23,7 @@ export const processHateoasActions = (hateoasResponse = {}) => {
   return actions || {};
 };
 
-const hateoasPropertyToFieldMakerField = (hateoasProperty) => ({
+export const hateoasPropertyToFieldMakerField = (hateoasProperty) => ({
   key: hateoasProperty.name,
   label: hateoasProperty.name,
   type: hateoasProperty.type,

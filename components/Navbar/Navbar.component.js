@@ -100,7 +100,9 @@ const Navbar = () => {
                   2.5em"
               />
             </Box>
-            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
+            {/* console.log("TODO Ren-enable this, disabled just for Landing experiment") */}
+            <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}></Box>
+            {/* <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -144,7 +146,7 @@ const Navbar = () => {
                   </Typography>
                 </MenuItem>
               </Menu>
-            </Box>
+            </Box> */}
             <Box
               className="Navbar__Logo__Container"
               sx={{
@@ -168,7 +170,9 @@ const Navbar = () => {
               />
             </Box>
 
-            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+            {/* console.log("TODO Ren-enable this, disabled just for Landing experiment") */}
+            <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}> </Box>
+            {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
               <Link href={ROUTES.projects.presentations.list}>
                 <Button
                   className="Navbar__Menu__Item"
@@ -179,7 +183,7 @@ const Navbar = () => {
                   {t('navbar.menu.projects')}
                 </Button>
               </Link>
-            </Box>
+            </Box> */}
             {/* LANGUAGE */}
             <Box className="Navbar__Language" sx={{ flexGrow: 0 }}>
               <Tooltip title={t('navbar.language.tooltip')}>
