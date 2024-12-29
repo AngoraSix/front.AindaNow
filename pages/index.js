@@ -10,8 +10,8 @@ const HomePage = ({ }) => {
   return (
     <DefaultLayout
       headData={{
-        title: t('project-presentations.list.page.title'),
-        description: t('project-presentations.list.page.description'),
+        title: t('landing.list.page.title'),
+        description: t('landing.list.page.description'),
       }}
     >
       <Landing />
