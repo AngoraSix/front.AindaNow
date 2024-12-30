@@ -22,7 +22,7 @@ export default function Document() {
           key="og.image"
           content={head.image.logo}
         />
-        <meta property="fb:app_id" key="fb.id" content={head.facebookAppId}/>
+        <meta property="fb:app_id" key="fb.id" content={head.facebookAppId} />
       </Head>
       <body>
         <Main />

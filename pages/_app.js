@@ -24,6 +24,7 @@ import '../styles/ProjectPresentationView.css';
 import '../styles/ProjectPresentationsList.css';
 import '../styles/globals.css';
 import { getEnv } from '../utils/env';
+import Script from 'next/script'
 global.EventSource = require('eventsource');
 
 const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
@@ -32,14 +33,28 @@ const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
   config.applyEnvConfig(env);
   api.applyEnvConfig(env);
 
+  console.log("EN TODOOOO");
+  console.log(config.thirdParties.googleAnalytics.id)
+
   return (
-    <ReduxProvider store={store}>
-      <NextAuthProvider session={pageProps.session} refetchInterval={1 * 30}>
-        <A6App>
-          <Component {...pageProps} />
-        </A6App>
-      </NextAuthProvider>
-    </ReduxProvider>
+    <>
+      <ReduxProvider store={store}>
+        <NextAuthProvider session={pageProps.session} refetchInterval={1 * 30}>
+          <A6App>
+            <Component {...pageProps} />
+          </A6App>
+        </NextAuthProvider>
+      </ReduxProvider>
+      {/* Google tag */}
+      <Script async src={`https://www.googletagmanager.com/gtag/js?id=${config.thirdParties.googleAnalytics.id}`}></Script>
+      <Script id="ga-script">
+        {`window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments)}
+        gtag('js', new Date());
+
+        gtag('config', '${config.thirdParties.googleAnalytics.id}');`}
+      </Script>
+    </>
   );
 };
 
