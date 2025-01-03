@@ -20,7 +20,7 @@
   width: 80vw;
 }
 
-.ShowMoreButton_Container {
+.LearnMoreButton_Container {
   position: sticky;
   padding: 1em 0.5em 0.5em;
   background-color: white;
@@ -50,7 +50,7 @@
   .Feature__Container {
     flex-direction: row;
     justify-content: start;
-    align-items: start;
+    align-items: center;
     margin: 1.5rem 4rem;
 
     border-style: solid;
@@ -88,7 +88,7 @@
     min-width: 30vh;
   }
 
-  .ShowMoreButton_Container {
+  .LearnMoreButton_Container {
     display: flex;
     margin: 1em;
   }
@@ -103,14 +103,14 @@
     text-align: right;
   }
 
-  .ShowMoreButton_Container {
+  .LearnMoreButton_Container {
     padding: 0.5em 15%;
   }
 }
 
 
 @media (min-width: 900px) {
-  .ShowMoreButton_Container {
+  .LearnMoreButton_Container {
     padding: 0.5em 35%;
   }
 }

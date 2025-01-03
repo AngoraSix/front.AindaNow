@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Link, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import React from 'react';
@@ -16,7 +16,7 @@ const Lanading = ({ }) => {
   return (
     <Box className="Lanading Lanading__Container">
       <Box className="Landing__Title__Container">
-        <Typography variant="h5" color="primary" className="Lanading__Title">{t('landing.list.page.title')}</Typography>
+        <Typography variant="h5" color="primary" className="Lanading__Title">{t('landing.page.title')}</Typography>
       </Box>
       <Box className="Feature__Container">
         <Box className="Landing__Feature__Image__Container">
@@ -87,21 +87,23 @@ const Lanading = ({ }) => {
           <Typography variant="caption" className="Lanading__Feature__Description">{t('landing.features.findcontributors.text')}</Typography>
         </Box>
       </Box>
-      <Box className="ShowMoreButton_Container">
-        <Button
-          // onClick={(event) => {
-          //   if (Object.values(completedSections).some((v) => !v)) {
-          //     setFormWasSubmitted(true);
-          //     event.preventDefault();
-          //   }
-          // }}
-          // type="submit"
-          color="primary"
-          variant="contained"
-          fullWidth
-        >
-          {t('landing.showmorebutton')}
-        </Button>
+      <Box className="LearnMoreButton_Container">
+        <Link href={"/learn-more"}>
+          <Button
+            // onClick={(event) => {
+            //   if (Object.values(completedSections).some((v) => !v)) {
+            //     setFormWasSubmitted(true);
+            //     event.preventDefault();
+            //   }
+            // }}
+            // type="submit"
+            color="primary"
+            variant="contained"
+            fullWidth
+          >
+            {t('landing.learnmorebutton')}
+          </Button>
+        </Link>
       </Box>
     </Box>
   );
