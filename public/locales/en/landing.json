@@ -12,5 +12,35 @@
     "learnmore.page.title": "Learn More",
     "learnmore.page.description": "Learn more about the features and benefits of our platform.",
     "learnmore.save.success": "Your response has been registered successfully.",
-    "learnmore.save.error": "We're having issues at this moment, please try again in a moment."
+    "learnmore.save.error": "We're having issues at this moment, please try again in a moment.",
+    "learnmore.form.submit": "Submit",
+
+    "learnmore.form.fields.emailorwhapp.label": "Email or WhatsApp",
+
+    "learnmore.form.fields.role.label": "What is your role in the organization?",
+    "learnmore.form.fields.roles.admin": "Administrator",
+    "learnmore.form.fields.roles.ceo": "CEO",
+    "learnmore.form.fields.roles.collaborator": "Collaborator",
+    "learnmore.form.fields.roles.externaladvisor": "External Advisor",
+
+    
+    "learnmore.form.fields.size.selectlabel": "Company Size",
+    "learnmore.form.fields.size.selectplaceholder": "Choose one",
+    "learnmore.form.fields.size.one": "Just me (1 person)",
+    "learnmore.form.fields.size.two-five": "2-5 people",
+    "learnmore.form.fields.size.six-ten": "6-10 people",
+    "learnmore.form.fields.size.eleven-fifty": "11-50 people",
+    "learnmore.form.fields.size.fiftyone-twohundred": "51-200 people",
+    "learnmore.form.fields.size.more": "Over 200 people",
+
+
+    "learnmore.form.fields.features.title": "Prioritize Key Features",
+    "learnmore.form.fields.features.instructions": "Drag to reorder or add your own ideas.",
+    "learnmore.form.fields.features.efforttracking": "Effort-Based Contribution Tracking",
+    "learnmore.form.fields.features.transparency": "Transparent Governance Tools",
+    "learnmore.form.fields.features.memberengagement": "Member Engagement & Participation",
+    "learnmore.form.fields.features.newfeature": "Add a New Feature",
+    "learnmore.form.fields.features.addButton": "Add",
+
+    "learnmore.form.fields.challenge.label": "What is your biggest challenge in the organization?"
 }

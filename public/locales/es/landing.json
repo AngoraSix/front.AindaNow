@@ -12,5 +12,33 @@
     "learnmore.page.title": "Más información",
     "learnmore.page.description": "Obtén más información sobre las características y beneficios de nuestra plataforma.",
     "learnmore.save.success": "Tu respuesta se ha registrado con éxito.",
-    "learnmore.save.error": "Estamos teniendo problemas en este momento, por favor intentá nuevamente en un momento."
+    "learnmore.save.error": "Estamos teniendo problemas en este momento, por favor intentá nuevamente en un momento.",
+    "learnmore.form.submit": "Enviar",
+
+    "learnmore.form.fields.emailorwhapp.label": "Email o WhatsApp",
+
+    "learnmore.form.fields.role.label": "¿Cuál es tu rol en la organización?",
+    "learnmore.form.fields.roles.admin": "Administrador",
+    "learnmore.form.fields.roles.ceo": "CEO",
+    "learnmore.form.fields.roles.collaborator": "Colaborador",
+    "learnmore.form.fields.roles.externaladvisor": "Asesor externo",
+
+    "learnmore.form.fields.size.selectlabel": "Tamaño de tu organización",
+    "learnmore.form.fields.size.selectplaceholder": "Selecciona una opción",
+    "learnmore.form.fields.size.one": "Solo (1 persona)",
+    "learnmore.form.fields.size.two-five": "2-5 personas",
+    "learnmore.form.fields.size.six-ten": "6-10 personas",
+    "learnmore.form.fields.size.eleven-fifty": "11-50 personas",
+    "learnmore.form.fields.size.fiftyone-twohundred": "51-200 personas",
+    "learnmore.form.fields.size.more": "Más de 200 personas",
+
+    "learnmore.form.fields.features.title": "Prioriza características clave",
+    "learnmore.form.fields.features.instructions": "Arrastra para reordenar o añade tus propias ideas.",
+    "learnmore.form.fields.features.efforttracking": "Seguimiento de contribuciones basadas en esfuerzo",
+    "learnmore.form.fields.features.transparency": "Herramientas de gobernanza transparente",
+    "learnmore.form.fields.features.memberengagement": "Participación y compromiso de miembros",
+    "learnmore.form.fields.features.newfeature": "Agrega una nueva característica",
+    "learnmore.form.fields.features.addButton": "Agregar",
+
+    "learnmore.form.fields.challenge.label": "¿Cuál es tu mayor desafío en la organización?"
 }   
