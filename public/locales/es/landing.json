@@ -17,9 +17,9 @@
 
     "learnmore.form.fields.emailorwhapp.label": "Email o WhatsApp",
 
-    "learnmore.form.fields.role.label": "¿Cuál es tu rol en la organización?",
+    "learnmore.form.fields.role.label": "¿Cuál es tu rol en la organización? (puede indicar un rol personalizado)",
     "learnmore.form.fields.roles.admin": "Administrador",
-    "learnmore.form.fields.roles.ceo": "CEO",
+    "learnmore.form.fields.roles.directive": "Directivo",
     "learnmore.form.fields.roles.collaborator": "Colaborador",
     "learnmore.form.fields.roles.externaladvisor": "Asesor externo",
 

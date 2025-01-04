@@ -145,6 +145,7 @@ const LearnMore = ({
           {/* Add New Feature */}
           <Box display="flex" gap={2} mb={3}>
             <TextField
+              className='LearnMore__NewFeatureInput'
               label={t('learnmore.form.fields.features.newfeature')}
               variant="outlined"
               size="small"
@@ -170,20 +171,7 @@ const LearnMore = ({
           </Box>
 
           <Button
-            // onClick={onSubmit}
             type='submit'
-            //   if (Object.values(completedSections).some((v) => !v)) {
-            //     setFormWasSubmitted(true);
-            //     event.preventDefault();
-            //   }
-            // }}
-            // type="submit"
-
-            // className="g-recaptcha"
-            // data-sitekey={config.thirdParties.googleRecaptcha.key}
-            // data-callback='onSubmit'
-            // data-action={LEARN_MORE_CONSTANTS.LS1_EXPERIMENT_CAPTCHA_ACTION_KEY}
-
             color="primary"
             variant="contained"
             fullWidth

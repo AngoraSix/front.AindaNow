@@ -32,7 +32,7 @@ const LearnMoreContainer = ({
   // Predefined suggestions in Spanish. Could replace with t('common:roles.xxx').
   const roleOptions = [
     { label: t('learnmore.form.fields.roles.admin') },
-    { label: t('learnmore.form.fields.roles.ceo') },
+    { label: t('learnmore.form.fields.roles.directive') },
     { label: t('learnmore.form.fields.roles.collaborator') },
     { label: t('learnmore.form.fields.roles.externaladvisor') },
   ];
@@ -82,9 +82,7 @@ const LearnMoreContainer = ({
         // Possibly also ask for email, or any other fields
       };
 
-      console.log('Survey Data:', formData);
-
-      const surveyResponseResponse = await api.front.saveSurveyResponse(
+      await api.front.saveSurveyResponse(
         formData,
         LEARN_MORE_CONSTANTS.LS1_EXPERIMENT_KEY
       );
