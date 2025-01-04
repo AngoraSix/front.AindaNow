@@ -1,6 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import api from '../../../api';
+import config from '../../../config';
 import { useLoading, useNotifications } from '../../../hooks/app';
 import logger from '../../../utils/logger';
 import LearnMore from './LearnMore.component';
@@ -66,8 +67,13 @@ const LearnMoreContainer = ({
     event.preventDefault();
     doLoad(true);
     try {
+      const grecaptchaToken = await grecaptcha.execute(
+        config.thirdParties.googleRecaptcha.key,
+        { action: LEARN_MORE_CONSTANTS.LS1_EXPERIMENT_CAPTCHA_ACTION_KEY }
+      );
       // Gather all data
       const formData = {
+        grecaptchaToken,
         email,
         role,
         companySize,

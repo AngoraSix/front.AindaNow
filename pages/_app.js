@@ -33,9 +33,6 @@ const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
   config.applyEnvConfig(env);
   api.applyEnvConfig(env);
 
-  console.log("EN TODOOOO");
-  console.log(config.thirdParties.googleAnalytics.id)
-
   return (
     <>
       <ReduxProvider store={store}>
@@ -54,6 +51,9 @@ const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
 
         gtag('config', '${config.thirdParties.googleAnalytics.id}');`}
       </Script>
+      {/* Google reCaptcha */}
+      <Script async defer src={`https://www.google.com/recaptcha/api.js?render=${config.thirdParties.googleRecaptcha.key}`}></Script>
+      {/* <Script async defer src={`https://www.google.com/recaptcha/api.js`}></Script> */}
     </>
   );
 };

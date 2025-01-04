@@ -13,6 +13,7 @@ import { useTranslation } from 'next-i18next';
 import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import config from '../../../config';
 import DraggableFeatureItem from './DraggableFeatureItem';
 import { LEARN_MORE_CONSTANTS } from './LearnMore.properties';
 
@@ -177,6 +178,12 @@ const LearnMore = ({
             //   }
             // }}
             // type="submit"
+
+            // className="g-recaptcha"
+            // data-sitekey={config.thirdParties.googleRecaptcha.key}
+            // data-callback='onSubmit'
+            // data-action={LEARN_MORE_CONSTANTS.LS1_EXPERIMENT_CAPTCHA_ACTION_KEY}
+
             color="primary"
             variant="contained"
             fullWidth

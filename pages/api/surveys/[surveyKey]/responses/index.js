@@ -1,11 +1,18 @@
 import api from '../../../../../api';
+import config from '../../../../../config';
 import { obtainValidatedToken } from '../../../../../utils/api/apiHelper';
 import InternalServerError from '../../../../../utils/errors/InternalServerError';
 import MethodNotAllowedError from '../../../../../utils/errors/MethodNotAllowedError';
 import logger from '../../../../../utils/logger';
+import { isValidRecaptchaToken } from '../../../../../utils/recaptcha/recaptchaUtils';
 
 const page = async (req, res) => {
     if (req.method === 'POST') {
+        const { grecaptchaToken } = req.body;
+        if (!grecaptchaToken || !isValidRecaptchaToken(grecaptchaToken)) {
+            return res.status(400).json({ error: 'Missing/Invalid Google reCAPTCHA token' });
+        }
+
         const validatedToken = await obtainValidatedToken(req);
         try {
             const data = await api.surveys.saveSurveyResponse(
