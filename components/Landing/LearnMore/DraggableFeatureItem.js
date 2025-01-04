@@ -59,6 +59,7 @@ export default function DraggableFeatureItem({
 
     return (
         <Paper
+            className='LearnMore__FeatureItem'
             ref={dragDropRef}
             sx={{
                 p: 2,
@@ -72,8 +73,8 @@ export default function DraggableFeatureItem({
             }}
         >
             <Box display="flex" justifyContent="space-between" alignItems="center">
-                <Typography variant="body1">{t(feature.labelKey)}</Typography>
-                <Box>
+                <Typography className='LearnMore__FeatureItem__Text' variant="body1">{t(feature.labelKey)}</Typography>
+                <Box className='LearnMore__FeatureItem__Icons'>
                     {/* Up button */}
                     <IconButton
                         size="small"

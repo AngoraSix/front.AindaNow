@@ -90,13 +90,6 @@ const Lanading = ({ }) => {
       <Box className="LearnMoreButton_Container">
         <Link href={"/learn-more"}>
           <Button
-            // onClick={(event) => {
-            //   if (Object.values(completedSections).some((v) => !v)) {
-            //     setFormWasSubmitted(true);
-            //     event.preventDefault();
-            //   }
-            // }}
-            // type="submit"
             color="primary"
             variant="contained"
             fullWidth

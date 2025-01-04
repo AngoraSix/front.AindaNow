@@ -42,6 +42,31 @@
   text-align: justify;
 }
 
+.LearnMore__Title {
+  text-align: center;
+  margin: 0.5em;
+}
+
+.LearnMore__ShortText {
+  text-align: center;
+  margin: 2em 1em;
+}
+
+.LearnMore__Form__Image__Container {
+  position: relative;
+  height: 80vw;
+  width: 80vw;
+}
+
+/* .LearnMore__Form{
+  width: 100%;
+} */
+
+.LearnMore__FeatureItem__Icons {
+  display: flex;
+  flex-direction: column;
+}
+
 @media (min-width: 600px) {
   .Lanading__Title {
     margin-top: 1em;
@@ -76,7 +101,7 @@
   .Feature__Container:nth-child(odd) .Lanading__Feature__Title {
     text-align: left;
   }
-  
+
   .Feature__Container:nth-child(even) .Lanading__Feature__Title {
     text-align: right;
   }
@@ -107,8 +132,29 @@
     padding: 0.5em 15%;
   }
 
-  .LearnMore__NewFeatureInput{
+  .LearnMore__NewFeatureInput {
     flex-grow: 1;
+  }
+
+  .LearnMore__Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .LearnMore__Form__Image__Container {
+    position: relative;
+    height: 40vh;
+    width: 40vh;
+    min-width: 40vh;
+  }
+
+  .LearnMore__Form{
+    width: 80%;
+  }
+
+  .LearnMore__FeatureItem__Icons {
+    flex-direction: row;
   }
 }
 

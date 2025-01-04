@@ -10,16 +10,18 @@ import {
   Typography
 } from '@mui/material';
 import { useTranslation } from 'next-i18next';
+import Image from 'next/image';
 import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import config from '../../../config';
 import DraggableFeatureItem from './DraggableFeatureItem';
 import { LEARN_MORE_CONSTANTS } from './LearnMore.properties';
 
+
+const LEARNMORE_FORM_CONTRIBUTE_IMAGE = '/landing/learnmore/contribute.gif';
+const LEARNMORE_FORM_CONTRIBUTE_IMAGE_500 = '/landing/learnmore/contribute-500.gif';
+
 const LearnMore = ({
-  // formData,
-  // onFieldChange,
   email,
   setEmail,
   role,
@@ -42,7 +44,28 @@ const LearnMore = ({
   return (
     <DndProvider backend={HTML5Backend}>
       <Box className="LearnMore LearnMore__Container">
-        <Box component="form" onSubmit={onSubmit}>
+        <Box className="LearnMore__Title__Container">
+          <Typography variant="h5" color="primary" className="LearnMore__Title">{t('learnmore.form.title')}</Typography>
+        </Box>
+        <Box className="LearnMore__Form__Image__Container">
+          <Image
+            className="LearnMore__Form__Image"
+            src={LEARNMORE_FORM_CONTRIBUTE_IMAGE}
+            alt="Contribute"
+            title="Contribute"
+            placeholder="blur"
+            blurDataURL={LEARNMORE_FORM_CONTRIBUTE_IMAGE_500}
+            sx={{ priority: { xs: false, md: true } }}
+            fill
+            sizes="(max-width: 1000px) 1000px,
+                  // (max-width: 1000px) 1000px,
+                  1000px"
+          />
+        </Box>
+        <Box className="LearnMore__ShortText__Container">
+          <Typography variant="subtitle1" color="primary.dark" className="LearnMore__ShortText">{t('learnmore.form.shorttext')}</Typography>
+        </Box>
+        <Box className="LearnMore__Form" component="form" onSubmit={onSubmit}>
           {/* 1) Role (Autocomplete, freeSolo) */}
           <Box mb={3}>
             <Autocomplete
