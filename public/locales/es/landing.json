@@ -12,14 +12,24 @@
     "learnmore.page.title": "Más información",
     "learnmore.page.description": "Obtén más información sobre las características y beneficios de nuestra plataforma.",
     "learnmore.form.title": "Construyamos un Futuro Cooperativo Juntos",
-    "learnmore.form.shorttext": "Tu ayuda puede impulsar los próximos pasos de esta plataforma: ya sea que te involucres a fondo o simplemente compartas una breve opinión, tu aporte nos ayuda a crear herramientas que realmente importan.",
+    "learnmore.form.shorttext": "¡Estamos trabajando, y tu ayuda puede impulsar los próximos pasos de esta plataforma!",
     "learnmore.save.success": "Tu respuesta se ha registrado con éxito.",
     "learnmore.save.error": "Estamos teniendo problemas en este momento, por favor intentá nuevamente en un momento.",
     "learnmore.form.submit": "Enviar",
 
+    "learnmore.form.steps.1": "Información básica",
+    "learnmore.form.steps.2": "Prioridad de funcionalidad",
+    "learnmore.form.steps.3": "Desafíos e ideas",
+    "learnmore.form.steps.back": "Atrás",
+    "learnmore.form.steps.next": "Siguiente",
+
+    "learnmore.form.step.description.1": "Todos los campos son opcionales. Empecemos con lo básico.",
+    "learnmore.form.step.description.2": "Arrastra para indicar qué es más prioritario o agrega tus propias ideas.",
+    "learnmore.form.step.description.3": "Cuéntanos tus desafíos y necesidades. Queremos crear una plataforma que te ayude a superarlos.",
+
     "learnmore.form.fields.emailorwhapp.label": "Email o WhatsApp",
 
-    "learnmore.form.fields.role.label": "¿Cuál es tu rol en la organización? (puede indicar un rol personalizado)",
+    "learnmore.form.fields.role.label": "¿Cuál es tu rol en la organización?",
     "learnmore.form.fields.roles.admin": "Administrador",
     "learnmore.form.fields.roles.directive": "Directivo",
     "learnmore.form.fields.roles.collaborator": "Colaborador",
@@ -34,8 +44,6 @@
     "learnmore.form.fields.size.fiftyone-twohundred": "51-200 personas",
     "learnmore.form.fields.size.more": "Más de 200 personas",
 
-    "learnmore.form.fields.features.title": "Prioriza características clave",
-    "learnmore.form.fields.features.instructions": "Arrastra para reordenar o añade tus propias ideas.",
     "learnmore.form.fields.features.efforttracking": "Seguimiento de contribuciones basadas en esfuerzo",
     "learnmore.form.fields.features.transparency": "Herramientas de gobernanza transparente",
     "learnmore.form.fields.features.memberengagement": "Participación y compromiso de miembros",

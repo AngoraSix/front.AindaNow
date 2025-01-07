@@ -1,6 +1,7 @@
-import { Box, Button, Link, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 const FEATURE_EFFORT_TRACKING_IMAGE = '/landing/features/efforttracking.gif';

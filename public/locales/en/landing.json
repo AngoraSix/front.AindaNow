@@ -12,14 +12,24 @@
     "learnmore.page.title": "Learn More",
     "learnmore.page.description": "Learn more about the features and benefits of our platform.",
     "learnmore.form.title": "Shape a Cooperative Future Together",
-    "learnmore.form.shorttext": "Your feedback can power this platform’s next steps! Whether you dive in deeply or just share a quick thought, every insight helps us create tools that truly matter.",
+    "learnmore.form.shorttext": "We're working, and your feedback can power this platform’s next steps!",
     "learnmore.save.success": "Your response has been registered successfully.",
     "learnmore.save.error": "We're having issues at this moment, please try again in a moment.",
     "learnmore.form.submit": "Submit",
 
+    "learnmore.form.steps.1": "Basic Info",
+    "learnmore.form.steps.2": "Feature Priority",
+    "learnmore.form.steps.3": "Challenges & Ideas",
+    "learnmore.form.steps.back": "Back",
+    "learnmore.form.steps.next": "Next",
+
+    "learnmore.form.step.description.1": "All fields are optional, but the more information you provide, the better we can tailor the platform to your needs. Let’s start with some basic details.",
+    "learnmore.form.step.description.2": "Drag to indicate what’s most important, or add your own ideas.",
+    "learnmore.form.step.description.3": "Tell us more about your challenges and needs so we can build a platform that helps you overcome them.",
+
     "learnmore.form.fields.emailorwhapp.label": "Email or WhatsApp",
 
-    "learnmore.form.fields.role.label": "What is your role in the organization? (can indicate a custom role)",
+    "learnmore.form.fields.role.label": "What is your role in the organization?",
     "learnmore.form.fields.roles.admin": "Administrator",
     "learnmore.form.fields.roles.directive": "Directive",
     "learnmore.form.fields.roles.collaborator": "Collaborator",
@@ -35,9 +45,6 @@
     "learnmore.form.fields.size.fiftyone-twohundred": "51-200 people",
     "learnmore.form.fields.size.more": "Over 200 people",
 
-
-    "learnmore.form.fields.features.title": "Prioritize Key Features",
-    "learnmore.form.fields.features.instructions": "Drag to reorder or add your own ideas.",
     "learnmore.form.fields.features.efforttracking": "Effort-Based Contribution Tracking",
     "learnmore.form.fields.features.transparency": "Transparent Governance Tools",
     "learnmore.form.fields.features.memberengagement": "Member Engagement & Participation",

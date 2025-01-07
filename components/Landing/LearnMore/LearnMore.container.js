@@ -16,6 +16,10 @@ const LearnMoreContainer = ({
   const { onError, onSuccess } = useNotifications();
   const { doLoad } = useLoading();
 
+  // Step logic
+  const [activeStep, setActiveStep] = useState(0);
+  const totalSteps = 3; // We’ll have 3 steps
+
   // Basic form fields
   const [uniqueId, setUniqueId] = useState(10000);
   const [email, setEmail] = useState('');
@@ -36,6 +40,21 @@ const LearnMoreContainer = ({
     { label: t('learnmore.form.fields.roles.collaborator') },
     { label: t('learnmore.form.fields.roles.externaladvisor') },
   ];
+
+  const handleNext = async () => {
+    // If not on the last step, simply go to the next
+    if (activeStep < totalSteps - 1) {
+      setActiveStep((prev) => prev + 1);
+    } else {
+      // Last step -> Perform final submission
+      await onSubmit();
+    }
+  };
+
+  const handleBack = () => {
+    // Move to the previous step if possible
+    setActiveStep((prev) => (prev > 0 ? prev - 1 : 0));
+  };
 
   // Move feature in the array
   const moveFeature = (fromIndex, toIndex) => {
@@ -98,10 +117,13 @@ const LearnMoreContainer = ({
 
   return (
     <LearnMore
-      // formData={formData}
-      // onFieldChange={onFieldChange}
-      // onSubmit={onSubmit}
+      // Step logic
+      activeStep={activeStep}
+      totalSteps={totalSteps}
+      handleNext={handleNext}
+      handleBack={handleBack}
 
+      // Form fields and functions
       email={email}
       setEmail={setEmail}
       role={role}

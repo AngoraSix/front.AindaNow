@@ -5,10 +5,16 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
+  MobileStepper,
   Select,
+  Step,
+  StepLabel,
+  Stepper,
   TextField,
-  Typography
+  Typography,
+  useMediaQuery
 } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import React from 'react';
@@ -22,6 +28,10 @@ const LEARNMORE_FORM_CONTRIBUTE_IMAGE = '/landing/learnmore/contribute.gif';
 const LEARNMORE_FORM_CONTRIBUTE_IMAGE_500 = '/landing/learnmore/contribute-500.gif';
 
 const LearnMore = ({
+  activeStep,
+  totalSteps,
+  handleNext,
+  handleBack,
   email,
   setEmail,
   role,
@@ -40,33 +50,37 @@ const LearnMore = ({
   onSubmit
 }) => {
   const { t } = useTranslation('landing');
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  return (
-    <DndProvider backend={HTML5Backend}>
-      <Box className="LearnMore LearnMore__Container">
-        <Box className="LearnMore__Title__Container">
-          <Typography variant="h5" color="primary" className="LearnMore__Title">{t('learnmore.form.title')}</Typography>
-        </Box>
-        <Box className="LearnMore__Form__Image__Container">
-          <Image
-            className="LearnMore__Form__Image"
-            src={LEARNMORE_FORM_CONTRIBUTE_IMAGE}
-            alt="Contribute"
-            title="Contribute"
-            placeholder="blur"
-            blurDataURL={LEARNMORE_FORM_CONTRIBUTE_IMAGE_500}
-            sx={{ priority: { xs: false, md: true } }}
-            fill
-            sizes="(max-width: 1000px) 1000px,
-                  // (max-width: 1000px) 1000px,
-                  1000px"
-          />
-        </Box>
-        <Box className="LearnMore__ShortText__Container">
-          <Typography variant="subtitle1" color="primary.dark" className="LearnMore__ShortText">{t('learnmore.form.shorttext')}</Typography>
-        </Box>
-        <Box className="LearnMore__Form" component="form" onSubmit={onSubmit}>
-          {/* 1) Role (Autocomplete, freeSolo) */}
+  // console.log(TODO:)
+  // Offer benefits
+  // Add checkbox to be contacted
+  // require contact or login in that case
+  // autocomplete contact if logged in
+  // update if sent
+  // save has been sent in cookie or smth (with option to re-fill?)
+
+
+  // Renders the form content for the current step
+  const renderStepContent = (step) => {
+    switch (step) {
+      case 0:
+        return (<Box>
+          <Box className="LearnMore__Step__Description__Container">
+            <Typography className="LearnMore__Step__Description" variant="subtitle2">
+              {t(`learnmore.form.step.description.1`)}
+            </Typography>
+          </Box>
+          <Box mb={3}>
+            <TextField
+              fullWidth
+              label={t('learnmore.form.fields.emailorwhapp.label')}
+              variant="outlined"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </Box>
           <Box mb={3}>
             <Autocomplete
               freeSolo
@@ -89,8 +103,6 @@ const LearnMore = ({
               )}
             />
           </Box>
-
-          {/* 3) Company Size (Select with translated labels) */}
           <Box mb={3}>
             <FormControl fullWidth>
               <InputLabel id="company-size-label">
@@ -128,59 +140,52 @@ const LearnMore = ({
               </Select>
             </FormControl>
           </Box>
+        </Box>);
+      case 1:
+        return (
+          <DndProvider backend={HTML5Backend}>
+            <Box>
+              <Box className="LearnMore__Step__Description__Container">
+                <Typography className="LearnMore__Step__Description" variant="subtitle2">
+                  {t(`learnmore.form.step.description.2`)}
+                </Typography>
+              </Box>
 
-
-          {/* 3) Email */}
-          <Box mb={3}>
-            <TextField
-              fullWidth
-              label={t('learnmore.form.fields.emailorwhapp.label')}
-              variant="outlined"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </Box>
-
-          {/* 4) Feature Priority (Drag-and-Drop) */}
-          <Box>
-            <Typography variant="h6" gutterBottom>
-              {t('learnmore.form.fields.features.title')}
+              <Box mb={2}>
+                {features.map((feature, index) => (
+                  <DraggableFeatureItem
+                    key={feature.id}
+                    feature={feature}
+                    index={index}
+                    moveFeature={moveFeature}
+                    removeFeature={removeFeature}
+                    itemType={LEARN_MORE_CONSTANTS.DND_ITEM_TYPE}
+                    featuresCount={features.length}
+                  />
+                ))}
+              </Box>
+              <Box display="flex" gap={2} mb={3}>
+                <TextField
+                  className='LearnMore__NewFeatureInput'
+                  label={t('learnmore.form.fields.features.newfeature')}
+                  variant="outlined"
+                  size="small"
+                  value={newFeature}
+                  onChange={(e) => setNewFeature(e.target.value)}
+                />
+                <Button variant="contained" onClick={handleAddFeature}>
+                  {t('learnmore.form.fields.features.addButton')}
+                </Button>
+              </Box>
+            </Box>
+          </DndProvider>);
+      case 2:
+        return (<Box>
+          <Box className="LearnMore__Step__Description__Container">
+            <Typography className="LearnMore__Step__Description" variant="subtitle2" >
+              {t(`learnmore.form.step.description.3`)}
             </Typography>
-            <Typography variant="body2" gutterBottom>
-              {t('learnmore.form.fields.features.instructions')}
-            </Typography>
           </Box>
-
-          <Box mb={2}>
-            {features.map((feature, index) => (
-              <DraggableFeatureItem
-                key={feature.id}
-                feature={feature}
-                index={index}
-                moveFeature={moveFeature}
-                removeFeature={removeFeature}
-                itemType={LEARN_MORE_CONSTANTS.DND_ITEM_TYPE}
-                featuresCount={features.length}
-              />
-            ))}
-          </Box>
-
-          {/* Add New Feature */}
-          <Box display="flex" gap={2} mb={3}>
-            <TextField
-              className='LearnMore__NewFeatureInput'
-              label={t('learnmore.form.fields.features.newfeature')}
-              variant="outlined"
-              size="small"
-              value={newFeature}
-              onChange={(e) => setNewFeature(e.target.value)}
-            />
-            <Button variant="contained" onClick={handleAddFeature}>
-              {t('learnmore.form.fields.features.addButton')}
-            </Button>
-          </Box>
-
-          {/* 5) Biggest Challenge */}
           <Box mb={3}>
             <TextField
               fullWidth
@@ -193,17 +198,114 @@ const LearnMore = ({
             />
           </Box>
 
-          <Button
+          {/* <Button
             type='submit'
             color="primary"
             variant="contained"
             fullWidth
           >
             {t('learnmore.form.submit')}
+          </Button> */}
+        </Box>);
+      default:
+        return <Box>{'Unknown Step'}</Box>;
+    }
+  };
+
+  // Renders step navigation depending on desktop vs mobile
+  const renderStepper = (stepContent) => {
+    const isLastStep = activeStep === totalSteps - 1;
+    const isFirstStep = activeStep === 0;
+    return isMobile ? (
+      <Box>
+        <Box className="LearnMore__Stepper__Steps__Container">
+          {stepContent}
+        </Box>
+        <MobileStepper
+          variant="text"
+          steps={totalSteps}
+          position="static"
+          activeStep={activeStep}
+          nextButton={
+            <Button
+              color={isLastStep ? "primary" : 'inherit'}
+              variant={isLastStep ? "contained" : "text"}
+              size="small"
+              onClick={isLastStep ? onSubmit : handleNext}>
+              {isLastStep ? t('learnmore.form.submit') : t('learnmore.form.steps.next')}
+            </Button>
+          }
+          backButton={
+            <Button size="small" onClick={handleBack} disabled={isFirstStep}>
+              {t('learnmore.form.steps.back')}
+            </Button>
+          }
+        />
+      </Box>
+    ) : (
+      <>
+        <Stepper className="LearnMore__Stepper__Desktop" activeStep={activeStep} sx={{ mb: 2 }}>
+          {Array.from({ length: totalSteps }).map((_, index) => (
+            <Step key={index}>
+              <StepLabel>{t(`learnmore.form.steps.${index + 1}`)}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+
+
+        <Box className="LearnMore__Stepper__Steps__Container">
+          {stepContent}
+        </Box>
+
+        {/* Desktop Next/Back buttons */}
+        <Box className="LearnMore__Stepper__Desktop__Actions" mb={2}>
+          <Button disabled={isFirstStep} onClick={handleBack}>
+            {t('learnmore.form.steps.back')}
+          </Button>
+          <Button
+            color={isLastStep ? "primary" : 'inherit'}
+            variant={isLastStep ? "contained" : "text"}
+            onClick={isLastStep ? onSubmit : handleNext}
+          >
+            {isLastStep ? t('learnmore.form.submit') : t('learnmore.form.steps.next')}
           </Button>
         </Box>
+      </>
+    );
+  };
+
+
+  return (
+    <Box className="LearnMore LearnMore__Container">
+      <Box className="LearnMore__Title__Container">
+        <Typography variant="h5" color="primary" className="LearnMore__Title">{t('learnmore.form.title')}</Typography>
       </Box>
-    </DndProvider>
+      <Box className="LearnMore__Form__Image__Container">
+        <Image
+          className="LearnMore__Form__Image"
+          src={LEARNMORE_FORM_CONTRIBUTE_IMAGE}
+          alt="Contribute"
+          title="Contribute"
+          placeholder="blur"
+          blurDataURL={LEARNMORE_FORM_CONTRIBUTE_IMAGE_500}
+          sx={{ priority: { xs: false, md: true } }}
+          fill
+          sizes="(max-width: 1000px) 1000px,
+                  // (max-width: 1000px) 1000px,
+                  1000px"
+        />
+      </Box>
+      <Box className="LearnMore__ShortText__Container">
+        <Typography variant="subtitle1" color="primary.dark" className="LearnMore__ShortText">
+          {t('learnmore.form.shorttext')}
+        </Typography>
+      </Box>
+      {renderStepper(renderStepContent(activeStep))}
+      {/* <Box className="LearnMore__Form" component="form" onSubmit={onSubmit}>
+
+              
+            </Box> */}
+    </Box>
   )
 };
 
