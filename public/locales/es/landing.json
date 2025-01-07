@@ -55,5 +55,10 @@
     "learnmore.form.fields.features.newfeature": "Agrega otra característica que quieras",
     "learnmore.form.fields.features.addButton": "Agregar",
 
-    "learnmore.form.fields.challenge.label": "¿Cuál es tu mayor desafío en la organización?"
+    "learnmore.form.fields.challenge.label": "¿Cuál es tu mayor desafío en la organización?",
+    "learnmore.completed.shorttext.contact": "¡Genial! Pronto nos pondremos en contacto para darte acceso anticipado y novedades.",
+    "learnmore.completed.shorttext.nocontact": "¡Gracias por tu aporte! Esto ayudará a darle forma a nuestra plataforma.",
+  
+    "learnmore.completed.fillagain.text": "¿Querés modificar tus respuestas o completar el formulario otra vez?",
+    "learnmore.completed.fillagain.label": "Volver a completar"
 }   

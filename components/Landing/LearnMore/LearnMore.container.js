@@ -1,6 +1,7 @@
+import Cookies from 'js-cookie';
 import { useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import api from '../../../api';
 import config from '../../../config';
 import { useLoading, useNotifications } from '../../../hooks/app';
@@ -12,8 +13,7 @@ const LearnMoreContainer = ({
 }) => {
   const { t } = useTranslation('landing');
 
-
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   const { onError, onSuccess } = useNotifications();
   const { doLoad } = useLoading();
@@ -34,6 +34,7 @@ const LearnMoreContainer = ({
     { id: 3, labelKey: 'learnmore.form.fields.features.memberengagement' },
   ]);
   const [newFeature, setNewFeature] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const [wantsContact, setWantsContact] = useState(true);
   const [showEmailError, setShowEmailError] = useState(false);
 
@@ -44,6 +45,17 @@ const LearnMoreContainer = ({
     { label: t('learnmore.form.fields.roles.collaborator') },
     { label: t('learnmore.form.fields.roles.externaladvisor') },
   ];
+
+  // 1. On mount, check cookies
+  useEffect(() => {
+    const completedCookie = Cookies.get('learnMoreCompleted');
+    const contactCookie = Cookies.get('learnMoreWantsContact');
+
+    if (completedCookie === 'true') {
+      setIsSubmitted(true);
+      setWantsContact(contactCookie === 'true');
+    }
+  }, []);
 
   const handleNext = async () => {
     if (activeStep === 0 && wantsContact && !email.trim()) {
@@ -118,6 +130,10 @@ const LearnMoreContainer = ({
         LEARN_MORE_CONSTANTS.LS1_EXPERIMENT_KEY
       );
 
+      Cookies.set('learnMoreCompleted', 'true', { expires: 30 }); // expires in 30 days
+      Cookies.set('learnMoreWantsContact', wantsContact ? 'true' : 'false', { expires: 30 });
+
+      setIsSubmitted(true);
       onSuccess(t('learnmore.save.success'));
     } catch (err) {
       logger.error(err);
@@ -125,6 +141,21 @@ const LearnMoreContainer = ({
     }
 
     doLoad(false);
+  };
+
+  // 3. Provide a function to "refill" the form
+  const handleRefillForm = () => {
+    // Remove cookies
+    Cookies.remove('learnMoreCompleted');
+    Cookies.remove('learnMoreWantsContact');
+    // Reset local states
+    setIsSubmitted(false);
+    setWantsContact(false);
+    // Also reset other form fields if desired:
+    // setEmail(''); setRole(''); setCompanySize(''); etc.
+    setEmail(session?.user?.email || '');
+    setWantsContact(true);
+    setActiveStep(0); // back to step 0 if using multi-step
   };
 
   return (
@@ -156,6 +187,8 @@ const LearnMoreContainer = ({
       setWantsContact={setWantsContact}
       showEmailError={showEmailError}
       setShowEmailError={setShowEmailError}
+      onRefillForm={handleRefillForm}
+      isSubmitted={isSubmitted}
     />
   );
 };

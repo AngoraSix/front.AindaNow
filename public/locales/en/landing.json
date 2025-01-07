@@ -56,5 +56,12 @@
     "learnmore.form.fields.features.newfeature": "Add a New Feature",
     "learnmore.form.fields.features.addButton": "Add",
 
-    "learnmore.form.fields.challenge.label": "What is your biggest challenge in the organization?"
+    "learnmore.form.fields.challenge.label": "What is your biggest challenge in the organization?",
+
+
+    "learnmore.completed.shorttext.contact": "Great! We'll be in touch soon with early access and updates!",
+    "learnmore.completed.shorttext.nocontact": "Thanks for your input! This will help shape our platform.",
+
+    "learnmore.completed.fillagain.text": "Want to modify your answers or fill it out again?",
+    "learnmore.completed.fillagain.label": "Re-fill Form"
 }

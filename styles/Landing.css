@@ -84,6 +84,28 @@
   font-size: 0.9rem;
 }
 
+.LearnMoreCompletedScreen__Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.LearnMoreCompletedScreen__Image__Container {
+  position: relative;
+  height: 80vw;
+  width: 80vw;
+}
+
+.LearnMoreCompletedScreen__ShortText {
+  margin: 1em 0.5em;
+}
+
+.LearnMoreCompletedScreen__FillAgain__Text {
+  margin: 1em 0 1.5em;
+}
+
 @media (min-width: 600px) {
   .Lanading__Title {
     margin-top: 1em;
@@ -180,6 +202,13 @@
 
   .LearnMore__WantsContact__FormControlLabel .MuiFormControlLabel-label {
     font-size: 1.1rem;
+  }
+
+  .LearnMoreCompletedScreen__Image__Container {
+    position: relative;
+    height: 50vh;
+    width: 50vh;
+    min-width: 50vh;
   }
 }
 

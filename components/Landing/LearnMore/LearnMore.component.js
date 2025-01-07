@@ -22,6 +22,7 @@ import Image from 'next/image';
 import React from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import CompletedScreen from './CompletedScreen.component';
 import DraggableFeatureItem from './DraggableFeatureItem';
 import { LEARN_MORE_CONSTANTS } from './LearnMore.properties';
 
@@ -53,18 +54,19 @@ const LearnMore = ({
   showEmailError,
   setShowEmailError,
   handleAddFeature,
-  onSubmit
+  onSubmit,
+  onRefillForm,
+  isSubmitted,
 }) => {
   const { t } = useTranslation('landing');
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  // console.log(TODO:)
-  // require contact or login in that case
-  // autocomplete contact if logged in  
-  // update if sent
-  // save has been sent in cookie or smth (with option to re-fill?)
-
+  if (isSubmitted) {
+    return (
+      <CompletedScreen wantsContact={wantsContact} onRefillForm={onRefillForm} />
+    );
+  }
 
   // Renders the form content for the current step
   const renderStepContent = (step) => {
@@ -116,7 +118,7 @@ const LearnMore = ({
             />
           </Box>
           <Box mb={3}>
-            
+
           </Box>
           <Box mb={3}>
             <Autocomplete
@@ -234,15 +236,6 @@ const LearnMore = ({
               onChange={(e) => setBiggestChallenge(e.target.value)}
             />
           </Box>
-
-          {/* <Button
-            type='submit'
-            color="primary"
-            variant="contained"
-            fullWidth
-          >
-            {t('learnmore.form.submit')}
-          </Button> */}
         </Box>);
       default:
         return <Box>{'Unknown Step'}</Box>;
@@ -338,10 +331,6 @@ const LearnMore = ({
         </Typography>
       </Box>
       {renderStepper(renderStepContent(activeStep))}
-      {/* <Box className="LearnMore__Form" component="form" onSubmit={onSubmit}>
-
-              
-            </Box> */}
     </Box>
   )
 };
