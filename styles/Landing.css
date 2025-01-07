@@ -37,6 +37,7 @@
 
 .Lanading__Feature__Title {
   text-align: center;
+  margin: 0 0 1em 0;
 }
 
 .Lanading__Feature__Description {
@@ -49,7 +50,7 @@
 }
 
 .LearnMore__ShortText {
-  text-align: center;
+  text-align: justify;
   margin: 2em 1em;
 }
 
@@ -70,7 +71,7 @@
 }
 
 .LearnMore__Step__Description {
-  text-align: center;
+  text-align: justify;
   margin: 2rem 0.5rem;
   font-size: medium;
 }
@@ -89,7 +90,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
+  text-align: justify;
 }
 
 .LearnMoreCompletedScreen__Image__Container {

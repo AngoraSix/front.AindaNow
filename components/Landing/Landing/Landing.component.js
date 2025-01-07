@@ -17,7 +17,7 @@ const Lanading = ({ }) => {
   return (
     <Box className="Lanading Lanading__Container">
       <Box className="Landing__Title__Container">
-        <Typography variant="h5" color="primary" className="Lanading__Title">{t('landing.page.title')}</Typography>
+        <Typography variant="h5" className="Lanading__Title">{t('landing.page.title')}</Typography>
       </Box>
       <Box className="Feature__Container">
         <Box className="Landing__Feature__Image__Container">
@@ -37,7 +37,6 @@ const Lanading = ({ }) => {
         </Box>
         <Box className="Landing__Feature__Text__Container">
           <Typography variant="subtitle1"
-            color="primary.dark"
             className="Lanading__Feature__Title">{t('landing.features.efforttracking.title')}</Typography>
           <Typography variant="caption" className="Lanading__Feature__Description">{t('landing.features.efforttracking.text')}</Typography>
         </Box>
@@ -60,7 +59,6 @@ const Lanading = ({ }) => {
         </Box>
         <Box className="Landing__Feature__Text__Container">
           <Typography variant="subtitle1"
-            color="primary.dark"
             className="Lanading__Feature__Title">{t('landing.features.governance.title')}</Typography>
           <Typography variant="caption" className="Lanading__Feature__Description">{t('landing.features.governance.text')}</Typography>
         </Box>
@@ -83,7 +81,6 @@ const Lanading = ({ }) => {
         </Box>
         <Box className="Landing__Feature__Text__Container">
           <Typography variant="subtitle1"
-            color="primary.dark"
             className="Lanading__Feature__Title">{t('landing.features.findcontributors.title')}</Typography>
           <Typography variant="caption" className="Lanading__Feature__Description">{t('landing.features.findcontributors.text')}</Typography>
         </Box>
@@ -91,7 +88,6 @@ const Lanading = ({ }) => {
       <Box className="LearnMoreButton_Container">
         <Link href={"/learn-more"}>
           <Button
-            color="primary"
             variant="contained"
             fullWidth
           >

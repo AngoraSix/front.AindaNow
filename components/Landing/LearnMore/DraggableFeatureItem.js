@@ -96,7 +96,6 @@ export default function DraggableFeatureItem({
                     {/* Delete button */}
                     <IconButton
                         onClick={() => removeFeature(feature.id)}
-                        color="primary"
                         size="small"
                     >
                         <DeleteIcon fontSize="small" />

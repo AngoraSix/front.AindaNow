@@ -258,7 +258,6 @@ const LearnMore = ({
           activeStep={activeStep}
           nextButton={
             <Button
-              color={isLastStep ? "primary" : 'inherit'}
               variant={isLastStep ? "contained" : "text"}
               size="small"
               onClick={isLastStep ? onSubmit : handleNext}>
@@ -293,7 +292,6 @@ const LearnMore = ({
             {t('learnmore.form.steps.back')}
           </Button>
           <Button
-            color={isLastStep ? "primary" : 'inherit'}
             variant={isLastStep ? "contained" : "text"}
             onClick={isLastStep ? onSubmit : handleNext}
           >
@@ -308,7 +306,7 @@ const LearnMore = ({
   return (
     <Box className="LearnMore LearnMore__Container">
       <Box className="LearnMore__Title__Container">
-        <Typography variant="h5" color="primary" className="LearnMore__Title">{t('learnmore.form.title')}</Typography>
+        <Typography variant="h5" className="LearnMore__Title">{t('learnmore.form.title')}</Typography>
       </Box>
       <Box className="LearnMore__Form__Image__Container">
         <Image
@@ -326,7 +324,7 @@ const LearnMore = ({
         />
       </Box>
       <Box className="LearnMore__ShortText__Container">
-        <Typography variant="subtitle1" color="primary.dark" className="LearnMore__ShortText">
+        <Typography variant="subtitle1" className="LearnMore__ShortText">
           {t('learnmore.form.shorttext')}
         </Typography>
       </Box>
