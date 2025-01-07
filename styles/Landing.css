@@ -73,11 +73,15 @@
   text-align: center;
   margin: 2rem 0.5rem;
   font-size: medium;
-}	
+}
 
 .LearnMore_Stepper_Desktop__Actions {
   display: flex;
   justify-content: space-between;
+}
+
+.LearnMore__WantsContact__FormControlLabel .MuiFormControlLabel-label {
+  font-size: 0.9rem;
 }
 
 @media (min-width: 600px) {
@@ -172,6 +176,10 @@
 
   .LearnMore__Stepper__Steps__Container {
     width: 80%;
+  }
+
+  .LearnMore__WantsContact__FormControlLabel .MuiFormControlLabel-label {
+    font-size: 1.1rem;
   }
 }
 

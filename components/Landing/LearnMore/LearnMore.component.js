@@ -2,7 +2,9 @@ import {
   Autocomplete,
   Box,
   Button,
+  Checkbox,
   FormControl,
+  FormControlLabel,
   InputLabel,
   MenuItem,
   MobileStepper,
@@ -46,6 +48,10 @@ const LearnMore = ({
   removeFeature,
   newFeature,
   setNewFeature,
+  wantsContact,
+  setWantsContact,
+  showEmailError,
+  setShowEmailError,
   handleAddFeature,
   onSubmit
 }) => {
@@ -54,10 +60,8 @@ const LearnMore = ({
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // console.log(TODO:)
-  // Offer benefits
-  // Add checkbox to be contacted
   // require contact or login in that case
-  // autocomplete contact if logged in
+  // autocomplete contact if logged in  
   // update if sent
   // save has been sent in cookie or smth (with option to re-fill?)
 
@@ -78,8 +82,41 @@ const LearnMore = ({
               label={t('learnmore.form.fields.emailorwhapp.label')}
               variant="outlined"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => {
+                setEmail(e.target.value);
+                // If they start typing, we can optionally clear the error:
+                if (showEmailError && e.target.value.trim()) {
+                  setShowEmailError(false);
+                }
+              }}
+              error={showEmailError} // shows red border if required but empty
+              helperText={
+                showEmailError
+                  ? t('learnmore.form.fields.emailorwhapp.helperText')
+                  : ""
+              }
             />
+            <FormControlLabel
+              className='LearnMore__WantsContact__FormControlLabel'
+              control={
+                <Checkbox
+                  // size="small"
+                  sx={{ '& .MuiSvgIcon-root': { fontSize: 23 } }}
+                  checked={wantsContact}
+                  onChange={(e) => {
+                    setWantsContact(e.target.checked);
+                    // If the user unchecks, remove the error
+                    if (!e.target.checked) {
+                      setShowEmailError(false);
+                    }
+                  }}
+                />
+              }
+              label={t('learnmore.form.fields.wantscontact.label')}
+            />
+          </Box>
+          <Box mb={3}>
+            
           </Box>
           <Box mb={3}>
             <Autocomplete

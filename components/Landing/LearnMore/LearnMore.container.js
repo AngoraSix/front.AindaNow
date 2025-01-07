@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 import api from '../../../api';
@@ -9,9 +10,10 @@ import { LEARN_MORE_CONSTANTS } from './LearnMore.properties';
 
 const LearnMoreContainer = ({
 }) => {
-  // const [formData, setFormData] = useState({});
-
   const { t } = useTranslation('landing');
+
+
+  const { data: session, status } = useSession();
 
   const { onError, onSuccess } = useNotifications();
   const { doLoad } = useLoading();
@@ -22,7 +24,7 @@ const LearnMoreContainer = ({
 
   // Basic form fields
   const [uniqueId, setUniqueId] = useState(10000);
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState(session?.user?.email || '');
   const [role, setRole] = useState('');
   const [companySize, setCompanySize] = useState('');
   const [biggestChallenge, setBiggestChallenge] = useState('');
@@ -32,6 +34,8 @@ const LearnMoreContainer = ({
     { id: 3, labelKey: 'learnmore.form.fields.features.memberengagement' },
   ]);
   const [newFeature, setNewFeature] = useState('');
+  const [wantsContact, setWantsContact] = useState(true);
+  const [showEmailError, setShowEmailError] = useState(false);
 
   // Predefined suggestions in Spanish. Could replace with t('common:roles.xxx').
   const roleOptions = [
@@ -42,6 +46,13 @@ const LearnMoreContainer = ({
   ];
 
   const handleNext = async () => {
+    if (activeStep === 0 && wantsContact && !email.trim()) {
+      // Show the error
+      setShowEmailError(true);
+      // set some error or show a notification, or do nothing but return
+      onError(t(t('learnmore.form.steps.1.next.error')));
+      return;
+    }
     // If not on the last step, simply go to the next
     if (activeStep < totalSteps - 1) {
       setActiveStep((prev) => prev + 1);
@@ -97,6 +108,7 @@ const LearnMoreContainer = ({
         role,
         companySize,
         biggestChallenge,
+        wantsContact,
         featurePriorities: features.map((f) => f.label),
         // Possibly also ask for email, or any other fields
       };
@@ -140,6 +152,10 @@ const LearnMoreContainer = ({
       setNewFeature={setNewFeature}
       handleAddFeature={handleAddFeature}
       onSubmit={onSubmit}
+      wantsContact={wantsContact}
+      setWantsContact={setWantsContact}
+      showEmailError={showEmailError}
+      setShowEmailError={setShowEmailError}
     />
   );
 };

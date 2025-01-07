@@ -1,6 +1,5 @@
 import LanguageIcon from '@mui/icons-material/Language';
 import LoginIcon from '@mui/icons-material/Login';
-import MenuIcon from '@mui/icons-material/Menu';
 import {
   AppBar,
   Avatar,
@@ -86,19 +85,21 @@ const Navbar = () => {
                 display: { xs: 'none', md: 'flex' },
               }}
             >
-              <Image
-                className="Navbar__Logo"
-                src={config.site.head.image.logo}
-                alt="AindaNow"
-                title="AindaNow"
-                placeholder="blur"
-                blurDataURL={config.site.head.image.logo}
-                sx={{ priority: { xs: false, md: true } }}
-                fill
-                sizes="(max-width: 768px) 2.5em,
+              <Link href="/">
+                <Image
+                  className="Navbar__Logo"
+                  src={config.site.head.image.logo}
+                  alt="AindaNow"
+                  title="AindaNow"
+                  placeholder="blur"
+                  blurDataURL={config.site.head.image.logo}
+                  sx={{ priority: { xs: false, md: true } }}
+                  fill
+                  sizes="(max-width: 768px) 2.5em,
                   (max-width: 1200px) 2.5em,
                   2.5em"
-              />
+                />
+              </Link>
             </Box>
             {/* console.log("TODO Ren-enable this, disabled just for Landing experiment") */}
             <Box sx={{ flexGrow: 0, display: { xs: 'flex', md: 'none' } }}></Box>
@@ -154,22 +155,27 @@ const Navbar = () => {
                 display: { xs: 'flex', md: 'none' },
               }}
             >
-              <Image
-                className="Navbar__Logo"
-                src={config.site.head.image.logo}
-                alt="AindaNow"
-                title="AindaNow"
-                placeholder="blur"
-                blurDataURL={config.site.head.image.logo}
-                sx={{ priority: { xs: true, md: false } }}
-                fill
-                object-fit="contain"
-                sizes="(max-width: 768px) 2.5em,
+
+              <Link
+                href="/"
+              >
+                <Image
+                  className="Navbar__Logo"
+                  src={config.site.head.image.logo}
+                  alt="AindaNow"
+                  title="AindaNow"
+                  placeholder="blur"
+                  blurDataURL={config.site.head.image.logo}
+                  sx={{ priority: { xs: true, md: false } }}
+                  fill
+                  object-fit="contain"
+                  sizes="(max-width: 768px) 2.5em,
                   (max-width: 1200px) 2.5em,
                   2.5em"
-              />
-            </Box>
+                />
 
+              </Link>
+            </Box>
             {/* console.log("TODO Ren-enable this, disabled just for Landing experiment") */}
             <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}> </Box>
             {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -304,7 +310,7 @@ const Navbar = () => {
 
       {/* Another Toolbar just to fit the fixed position of Navbar */}
       <Toolbar />
-    </React.Fragment>
+    </React.Fragment >
   );
 };
 

@@ -12,7 +12,7 @@
     "learnmore.page.title": "Más información",
     "learnmore.page.description": "Obtén más información sobre las características y beneficios de nuestra plataforma.",
     "learnmore.form.title": "Construyamos un Futuro Cooperativo Juntos",
-    "learnmore.form.shorttext": "¡Estamos trabajando, y tu ayuda puede impulsar los próximos pasos de esta plataforma!",
+    "learnmore.form.shorttext": "¡Estamos trabajando, y tu ayuda puede impulsar los próximos pasos de esta plataforma!¡Completá el formulario para obtener acceso anticipado a la plataforma y muchos beneficios más!",
     "learnmore.save.success": "Tu respuesta se ha registrado con éxito.",
     "learnmore.save.error": "Estamos teniendo problemas en este momento, por favor intentá nuevamente en un momento.",
     "learnmore.form.submit": "Enviar",
@@ -23,11 +23,16 @@
     "learnmore.form.steps.back": "Atrás",
     "learnmore.form.steps.next": "Siguiente",
 
+    "learnmore.form.steps.1.next.error": "Por favor, completá tu correo o Whatsapp si querés ser contactado.",
+
     "learnmore.form.step.description.1": "Todos los campos son opcionales. Empecemos con lo básico.",
     "learnmore.form.step.description.2": "Arrastra para indicar qué es más prioritario o agrega tus propias ideas.",
     "learnmore.form.step.description.3": "Cuéntanos tus desafíos y necesidades. Queremos crear una plataforma que te ayude a superarlos.",
 
     "learnmore.form.fields.emailorwhapp.label": "Email o WhatsApp",
+    "learnmore.form.fields.emailorwhapp.helperText": "Este campo es obligatorio, solo para poder ser contactado.",
+
+    "learnmore.form.fields.wantscontact.label": "¡Quiero que me contacten para obtener acceso anticipado y beneficios!",
 
     "learnmore.form.fields.role.label": "¿Cuál es tu rol en la organización?",
     "learnmore.form.fields.roles.admin": "Administrador",
