@@ -10,8 +10,7 @@ const AppContainer = (props) => {
   const router = useRouter();
   const { isLoading, doLoad } = useLoading();
 
-  // console.log("TODO UNCOMMENT THIS, REMOVED ONLY FOR LANDING PAGe EXPERIMENT")
-  // useAndCheckActiveToken();
+  useAndCheckActiveToken();
 
   useEffect(() => {
     const startLoading = () => {

@@ -1,11 +1,13 @@
 import api from '../../api';
 import config from '../../config';
 
-export const isValidRecaptchaToken = async (grecaptchaToken) => {
-  const captchaResponse = await api.thirdParties.verifyGoogleRecaptchaToken(grecaptchaToken);
+export const validateRecaptchaToken = async (req) => {
+  let isValidRecaptchaToken = false;
+  const { grecaptchaToken, ...reqBody } = req.body;
+  if (grecaptchaToken) {
+    const captchaResponse = await api.thirdParties.verifyGoogleRecaptchaToken(grecaptchaToken);
 
-  if (!captchaResponse.success || captchaResponse.score < config.thirdParties.googleRecaptcha.minScore) {
-    throw new Error('Invalid reCAPTCHA token');
+    isValidRecaptchaToken = captchaResponse.success || captchaResponse.score > config.thirdParties.googleRecaptcha.minScore
   }
-  return true;
+  return [isValidRecaptchaToken, reqBody];
 };

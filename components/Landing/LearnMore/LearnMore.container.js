@@ -121,7 +121,7 @@ const LearnMoreContainer = ({
         companySize,
         biggestChallenge,
         wantsContact,
-        featurePriorities: features.map((f) => f.label),
+        featurePriorities: features.map((f) => f.labelKey),
         // Possibly also ask for email, or any other fields
       };
 
