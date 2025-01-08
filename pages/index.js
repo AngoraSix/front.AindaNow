@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
-import Landing from '../components/Landing';
+import Landing from '../components/Landing/Landing';
 import DefaultLayout from '../layouts/DefaultLayout';
 
 const HomePage = ({ }) => {
@@ -10,8 +10,8 @@ const HomePage = ({ }) => {
   return (
     <DefaultLayout
       headData={{
-        title: t('landing.list.page.title'),
-        description: t('landing.list.page.description'),
+        title: t('landing.page.title'),
+        description: t('landing.page.description'),
       }}
     >
       <Landing />

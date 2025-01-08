@@ -1,6 +1,7 @@
 import config from '../config';
 import BaseAPI from './BaseAPI';
 import ClubsAPI from './club';
+import SurveysAPI from './surveys';
 import ContributorsAPI from './contributors';
 import FrontAPI from './front';
 import ManagementAPI from './management';
@@ -28,6 +29,10 @@ class API {
 
   get clubs() {
     return this.clubsAPI;
+  }
+
+  get surveys() {
+    return this.SurveysAPI;
   }
 
   get media() {
@@ -60,6 +65,7 @@ class API {
     );
     this.projectsAPI = new ProjectsAPI(_getServiceAPI('projects', this.axios));
     this.clubsAPI = new ClubsAPI(_getServiceAPI('clubs', this.axios));
+    this.SurveysAPI = new SurveysAPI(_getServiceAPI('surveys', this.axios));
     this.managementAPI = new ManagementAPI(
       _getServiceAPI('management', this.axios)
     );

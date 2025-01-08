@@ -1,11 +1,64 @@
 {
-    "landing.list.page.title": "¡Potencia tu cooperativa!",
-    "landing.list.page.description": "Potencia tu cooperativa con herramientas para la gestión, la transparencia y la participación",
-    "landing.features.efforttracking.title": "Monitorea las contribuciones y distribuye los beneficios de manera justa",
+    "landing.page.title": "¡Potenciá tu cooperativa!",
+    "landing.page.description": "Potenciá tu cooperativa con herramientas para la gestión, la transparencia y la participación",
+    "landing.features.efforttracking.title": "Monitoreá las contribuciones y distribuye los beneficios de manera justa",
     "landing.features.efforttracking.text": "Determinar el aporte de cada colaborador es fundamental para una cooperativa próspera y equitativa. Nuestra plataforma ayuda a los gestores a evaluar el valor que aportan los participantes y a distribuir los beneficios de una manera justa. Al situar la equidad como principio central, fortalecerás la confianza y la unidad en todo el proyecto.",
-    "landing.features.governance.title": "Toma decisiones con apertura y claridad",
-    "landing.features.governance.text": "Da voz a todos en tu organización mediante votaciones abiertas, reportes claros y supervisión compartida. Nuestras herramientas de gobernanza aseguran que los miembros comprendan cómo se toman las decisiones, promoviendo la integridad y la responsabilidad en cada paso. Fomenta una cultura que adopte la transparencia como principio rector.",
+    "landing.features.governance.title": "Tomá decisiones con apertura y claridad",
+    "landing.features.governance.text": "Dá voz a todos en tu organización mediante votaciones abiertas, reportes claros y supervisión compartida. Nuestras herramientas de gobernanza aseguran que los miembros comprendan cómo se toman las decisiones, promoviendo la integridad y la responsabilidad en cada paso. Fomenta una cultura que adopte la transparencia como principio rector.",
     "landing.features.findcontributors.title": "Encuentra y une a las personas adecuadas para que esa gran idea prospere",
     "landing.features.findcontributors.text": "En una cooperativa, el éxito florece cuando las personas comparten valores y trabajan en sintonía. Nuestra plataforma te ayuda a encontrar y unir a colaboradores de ideas afines que creen en la misión colectiva, garantizando que todos puedan contribuir y hacer realidad esa idea transformadora.",
-    "landing.showmorebutton": "Más información"
-}
+    "landing.learnmorebutton": "Más información",
+
+    "learnmore.page.title": "Más información",
+    "learnmore.page.description": "Obtén más información sobre las características y beneficios de nuestra plataforma.",
+    "learnmore.form.title": "Construyamos un Futuro Cooperativo Juntos",
+    "learnmore.form.shorttext": "¡Estamos trabajando, y tu ayuda puede impulsar los próximos pasos de esta plataforma! Completá el formulario para obtener acceso anticipado a la plataforma y muchos beneficios más.",
+    "learnmore.save.success": "Tu respuesta se ha registrado con éxito.",
+    "learnmore.save.error": "Estamos teniendo problemas en este momento, por favor intentá nuevamente en un momento.",
+    "learnmore.form.submit": "Enviar",
+
+    "learnmore.form.steps.1": "Información básica",
+    "learnmore.form.steps.2": "Prioridad de funcionalidad",
+    "learnmore.form.steps.3": "Desafíos e ideas",
+    "learnmore.form.steps.back": "Atrás",
+    "learnmore.form.steps.next": "Siguiente",
+
+    "learnmore.form.steps.1.next.error": "Por favor, completá tu correo o Whatsapp si querés ser contactado.",
+
+    "learnmore.form.step.description.1": "Todos los campos son opcionales. Empecemos con lo básico.",
+    "learnmore.form.step.description.2": "Arrastra para indicar qué es más prioritario o agrega tus propias ideas.",
+    "learnmore.form.step.description.3": "Cuéntanos tus desafíos y necesidades. Queremos crear una plataforma que te ayude a superarlos.",
+
+    "learnmore.form.fields.emailorwhapp.label": "Email o WhatsApp",
+    "learnmore.form.fields.emailorwhapp.helperText": "Este campo es obligatorio, solo para poder ser contactado.",
+
+    "learnmore.form.fields.wantscontact.label": "¡Quiero que me contacten para obtener acceso anticipado y beneficios!",
+
+    "learnmore.form.fields.role.label": "¿Cuál es tu rol en la organización?",
+    "learnmore.form.fields.roles.admin": "Administrador",
+    "learnmore.form.fields.roles.directive": "Directivo",
+    "learnmore.form.fields.roles.collaborator": "Colaborador",
+    "learnmore.form.fields.roles.externaladvisor": "Asesor externo",
+
+    "learnmore.form.fields.size.selectlabel": "Tamaño de tu organización",
+    "learnmore.form.fields.size.selectplaceholder": "Selecciona una opción",
+    "learnmore.form.fields.size.one": "Solo (1 persona)",
+    "learnmore.form.fields.size.two-five": "2-5 personas",
+    "learnmore.form.fields.size.six-ten": "6-10 personas",
+    "learnmore.form.fields.size.eleven-fifty": "11-50 personas",
+    "learnmore.form.fields.size.fiftyone-twohundred": "51-200 personas",
+    "learnmore.form.fields.size.more": "Más de 200 personas",
+
+    "learnmore.form.fields.features.efforttracking": "Seguimiento de contribuciones basadas en esfuerzo",
+    "learnmore.form.fields.features.transparency": "Herramientas de gobernanza transparente",
+    "learnmore.form.fields.features.memberengagement": "Participación y compromiso de miembros",
+    "learnmore.form.fields.features.newfeature": "Agrega otra característica que quieras",
+    "learnmore.form.fields.features.addButton": "Agregar",
+
+    "learnmore.form.fields.challenge.label": "¿Cuál es tu mayor desafío en la organización?",
+    "learnmore.completed.shorttext.contact": "¡Genial! Pronto nos pondremos en contacto para darte acceso anticipado y novedades.",
+    "learnmore.completed.shorttext.nocontact": "¡Gracias por tu aporte! Esto ayudará a darle forma a nuestra plataforma.",
+  
+    "learnmore.completed.fillagain.text": "¿Querés modificar tus respuestas o completar el formulario otra vez?",
+    "learnmore.completed.fillagain.label": "Volver a completar"
+}   

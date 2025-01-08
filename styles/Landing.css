@@ -20,11 +20,12 @@
   width: 80vw;
 }
 
-.ShowMoreButton_Container {
+.LearnMoreButton_Container {
   position: sticky;
   padding: 1em 0.5em 0.5em;
   background-color: white;
   bottom: 0;
+  justify-content: center;
 }
 
 .Landing__Feature__Text__Container {
@@ -36,10 +37,74 @@
 
 .Lanading__Feature__Title {
   text-align: center;
+  margin: 0 0 1em 0;
 }
 
 .Lanading__Feature__Description {
   text-align: justify;
+}
+
+.LearnMore__Title {
+  text-align: center;
+  margin: 0.5em;
+}
+
+.LearnMore__ShortText {
+  text-align: justify;
+  margin: 2em 1em;
+}
+
+.LearnMore__Form__Image__Container {
+  position: relative;
+  height: 80vw;
+  width: 80vw;
+}
+
+.LearnMore__FeatureItem__Icons {
+  display: flex;
+  flex-direction: column;
+}
+
+.LearnMore__Stepper__Steps__Container {
+  min-height: 20rem;
+  width: 100%;
+}
+
+.LearnMore__Step__Description {
+  text-align: justify;
+  margin: 2rem 0.5rem;
+  font-size: medium;
+}
+
+.LearnMore_Stepper_Desktop__Actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.LearnMore__WantsContact__FormControlLabel .MuiFormControlLabel-label {
+  font-size: 0.9rem;
+}
+
+.LearnMoreCompletedScreen__Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: justify;
+}
+
+.LearnMoreCompletedScreen__Image__Container {
+  position: relative;
+  height: 80vw;
+  width: 80vw;
+}
+
+.LearnMoreCompletedScreen__ShortText {
+  margin: 1em 0.5em;
+}
+
+.LearnMoreCompletedScreen__FillAgain__Text {
+  margin: 1em 0 1.5em;
 }
 
 @media (min-width: 600px) {
@@ -50,7 +115,7 @@
   .Feature__Container {
     flex-direction: row;
     justify-content: start;
-    align-items: start;
+    align-items: center;
     margin: 1.5rem 4rem;
 
     border-style: solid;
@@ -76,7 +141,7 @@
   .Feature__Container:nth-child(odd) .Lanading__Feature__Title {
     text-align: left;
   }
-  
+
   .Feature__Container:nth-child(even) .Lanading__Feature__Title {
     text-align: right;
   }
@@ -88,7 +153,7 @@
     min-width: 30vh;
   }
 
-  .ShowMoreButton_Container {
+  .LearnMoreButton_Container {
     display: flex;
     margin: 1em;
   }
@@ -103,14 +168,54 @@
     text-align: right;
   }
 
-  .ShowMoreButton_Container {
+  .LearnMoreButton_Container {
     padding: 0.5em 15%;
+  }
+
+  .LearnMore__NewFeatureInput {
+    flex-grow: 1;
+  }
+
+  .LearnMore__Container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .LearnMore__Form__Image__Container {
+    position: relative;
+    height: 40vh;
+    width: 40vh;
+    min-width: 40vh;
+  }
+
+  .LearnMore__Form {
+    width: 80%;
+  }
+
+  .LearnMore__FeatureItem__Icons {
+    flex-direction: row;
+  }
+
+  .LearnMore__Stepper__Steps__Container {
+    width: 80%;
+  }
+
+  .LearnMore__WantsContact__FormControlLabel .MuiFormControlLabel-label {
+    font-size: 1.1rem;
+  }
+
+  .LearnMoreCompletedScreen__Image__Container {
+    position: relative;
+    height: 50vh;
+    width: 50vh;
+    min-width: 50vh;
   }
 }
 
 
 @media (min-width: 900px) {
-  .ShowMoreButton_Container {
+  .LearnMoreButton_Container {
     padding: 0.5em 35%;
   }
 }

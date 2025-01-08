@@ -1,11 +1,67 @@
 {
-    "landing.list.page.title": "Empower Your Cooperative!",
-    "landing.list.page.description": "Empower Your Cooperative with Tools for Management, Transparency, and Participation.",
+    "landing.page.title": "Empower Your Cooperative!",
+    "landing.page.description": "Empower Your Cooperative with Tools for Management, Transparency, and Participation.",
     "landing.features.efforttracking.title": "Track Contributions & Distribute Benefits Fairly",
     "landing.features.efforttracking.text": "Acknowledging each collaborator’s effort is vital for a just and thriving cooperative. Our platform helps managers assess the value participants bring, so benefits can be allocated equitably. By making fairness a central principle, you strengthen trust and unity across the entire project.",
     "landing.features.governance.title": "Make Decisions with Openness and Clarity",
     "landing.features.governance.text": "Empower every voice in your organization through open voting, clear reporting, and shared oversight. Our governance toolkit ensures members understand how choices are made, promoting integrity and accountability at every step. Foster a culture that embraces transparency as a guiding principle.",
     "landing.features.findcontributors.title": "Find and Unite the Right People to Make That Great Idea Thrive",
     "landing.features.findcontributors.text": "In a cooperative, success flourishes when people share values and work in harmony. Our platform helps you find and unite like-minded collaborators who believe in the collective mission—ensuring everyone can contribute and bring that transformative idea to life.",
-    "landing.showmorebutton": "Learn More"
+    "landing.learnmorebutton": "Learn More",
+
+    "learnmore.page.title": "Learn More",
+    "learnmore.page.description": "Learn more about the features and benefits of our platform.",
+    "learnmore.form.title": "Shape a Cooperative Future Together",
+    "learnmore.form.shorttext": "“We’re hard at work, and your help can drive the next steps of this platform! Fill out the form to get early access and plenty of other perks!”",
+    "learnmore.save.success": "Your response has been registered successfully.",
+    "learnmore.save.error": "We're having issues at this moment, please try again in a moment.",
+    "learnmore.form.submit": "Submit",
+
+    "learnmore.form.steps.1": "Basic Info",
+    "learnmore.form.steps.2": "Feature Priority",
+    "learnmore.form.steps.3": "Challenges & Ideas",
+    "learnmore.form.steps.back": "Back",
+    "learnmore.form.steps.next": "Next",
+
+    "learnmore.form.steps.1.next.error": "Please provide your contact information if you want to be contacted.",
+
+    "learnmore.form.step.description.1": "All fields are optional, but the more information you provide, the better we can tailor the platform to your needs. Let’s start with some basic details.",
+    "learnmore.form.step.description.2": "Drag to indicate what’s most important, or add your own ideas.",
+    "learnmore.form.step.description.3": "Tell us more about your challenges and needs so we can build a platform that helps you overcome them.",
+
+    "learnmore.form.fields.emailorwhapp.label": "Email or WhatsApp",
+    "learnmore.form.fields.emailorwhapp.helperText": "This field is required if you want to be contacted.",
+
+    "learnmore.form.fields.wantscontact.label": "“I’d like to be contacted for early access and benefits!",
+
+    "learnmore.form.fields.role.label": "What is your role in the organization?",
+    "learnmore.form.fields.roles.admin": "Administrator",
+    "learnmore.form.fields.roles.directive": "Directive",
+    "learnmore.form.fields.roles.collaborator": "Collaborator",
+    "learnmore.form.fields.roles.externaladvisor": "External Advisor",
+
+    
+    "learnmore.form.fields.size.selectlabel": "Company Size",
+    "learnmore.form.fields.size.selectplaceholder": "Choose one",
+    "learnmore.form.fields.size.one": "Just me (1 person)",
+    "learnmore.form.fields.size.two-five": "2-5 people",
+    "learnmore.form.fields.size.six-ten": "6-10 people",
+    "learnmore.form.fields.size.eleven-fifty": "11-50 people",
+    "learnmore.form.fields.size.fiftyone-twohundred": "51-200 people",
+    "learnmore.form.fields.size.more": "Over 200 people",
+
+    "learnmore.form.fields.features.efforttracking": "Effort-Based Contribution Tracking",
+    "learnmore.form.fields.features.transparency": "Transparent Governance Tools",
+    "learnmore.form.fields.features.memberengagement": "Member Engagement & Participation",
+    "learnmore.form.fields.features.newfeature": "Add a New Feature",
+    "learnmore.form.fields.features.addButton": "Add",
+
+    "learnmore.form.fields.challenge.label": "What is your biggest challenge in the organization?",
+
+
+    "learnmore.completed.shorttext.contact": "Great! We'll be in touch soon with early access and updates!",
+    "learnmore.completed.shorttext.nocontact": "Thanks for your input! This will help shape our platform.",
+
+    "learnmore.completed.fillagain.text": "Want to modify your answers or fill it out again?",
+    "learnmore.completed.fillagain.label": "Re-fill Form"
 }

@@ -64,6 +64,11 @@ class FrontAPI {
     return data;
   }
 
+  async saveSurveyResponse(surveyResponseBody, surveyKey) {
+    const { data } = await this.axios.post(`api/surveys/${surveyKey}/responses`, surveyResponseBody);
+    return data;
+  }
+
   async saveProjectPresentation(
     projectPresentationBody,
     projectPresentationId,
@@ -71,13 +76,13 @@ class FrontAPI {
   ) {
     const { data } = projectPresentationId
       ? await this.axios.put(
-          `api/projects/${projectId}/presentations/${projectPresentationId}`,
-          projectPresentationBody
-        )
+        `api/projects/${projectId}/presentations/${projectPresentationId}`,
+        projectPresentationBody
+      )
       : await this.axios.post(
-          `api/projects/${projectId}/presentations`,
-          projectPresentationBody
-        );
+        `api/projects/${projectId}/presentations`,
+        projectPresentationBody
+      );
     return data;
   }
 
