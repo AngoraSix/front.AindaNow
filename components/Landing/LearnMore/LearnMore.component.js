@@ -27,8 +27,8 @@ import DraggableFeatureItem from './DraggableFeatureItem';
 import { LEARN_MORE_CONSTANTS } from './LearnMore.properties';
 
 
-const LEARNMORE_FORM_CONTRIBUTE_IMAGE = '/landing/learnmore/contribute.gif';
-const LEARNMORE_FORM_CONTRIBUTE_IMAGE_500 = '/landing/learnmore/contribute-500.gif';
+const LEARNMORE_FORM_CONTRIBUTE_IMAGE = 'http://34.49.93.68/landing/learnmore/contribute.gif';
+const LEARNMORE_FORM_CONTRIBUTE_IMAGE_500 = 'http://34.49.93.68/landing/learnmore/contribute-500.gif';
 
 const LearnMore = ({
   activeStep,

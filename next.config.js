@@ -15,7 +15,7 @@ module.exports = {
 
   i18n,
   images: {
-    domains: ['storage.googleapis.com', 'i.ytimg.com', 'googleusercontent.com', 'localhost', 'gateway'],
+    domains: ['34.49.93.68', 'storage.googleapis.com', 'i.ytimg.com', 'googleusercontent.com', 'localhost', 'gateway'], // 34.49.93.68 is the CDN (load balancer) for the Storage Bucket
   },
   output: 'standalone',
 };
