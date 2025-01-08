@@ -8,8 +8,8 @@ import Image from 'next/image';
 import React from 'react';
 
 
-const LEARNMORE_FORM_COMPLETED_IMAGE = '/landing/learnmore/completed.gif';
-const LEARNMORE_FORM_COMPLETED_IMAGE_500 = '/landing/learnmore/completed-500.gif';
+const LEARNMORE_FORM_COMPLETED_IMAGE = 'http://34.49.93.68/landing/learnmore/completed.gif';
+const LEARNMORE_FORM_COMPLETED_IMAGE_500 = 'http://34.49.93.68/landing/learnmore/completed-500.gif';
 
 const CompletedScreen = ({ wantsContact, onRefillForm }) => {
   const { t } = useTranslation('landing');

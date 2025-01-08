@@ -4,12 +4,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
-const FEATURE_EFFORT_TRACKING_IMAGE = '/landing/features/efforttracking.gif';
-const FEATURE_EFFORT_TRACKING_IMAGE_500 = '/landing/features/efforttracking-500.gif';
-const FEATURE_GOVERNANCE_IMAGE = '/landing/features/governance.gif';
-const FEATURE_GOVERNANCE_IMAGE_500 = '/landing/features/governance-500.gif';
-const FEATURE_FIND_CONTRIBUTORS_IMAGE = '/landing/features/findcontributors.gif';
-const FEATURE_FIND_CONTRIBUTORS_IMAGE_500 = '/landing/features/findcontributors-500.gif';
+const FEATURE_EFFORT_TRACKING_IMAGE = 'http://34.49.93.68/landing/features/efforttracking.gif';
+const FEATURE_EFFORT_TRACKING_IMAGE_500 = 'http://34.49.93.68/landing/features/efforttracking-500.gif';
+const FEATURE_GOVERNANCE_IMAGE = 'http://34.49.93.68/landing/features/governance.gif';
+const FEATURE_GOVERNANCE_IMAGE_500 = 'http://34.49.93.68/landing/features/governance-500.gif';
+const FEATURE_FIND_CONTRIBUTORS_IMAGE = 'http://34.49.93.68/landing/features/findcontributors.gif';
+const FEATURE_FIND_CONTRIBUTORS_IMAGE_500 = 'http://34.49.93.68/landing/features/findcontributors-500.gif';
 
 const Lanading = ({ }) => {
   const { t } = useTranslation('landing');
