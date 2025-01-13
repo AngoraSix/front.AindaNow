@@ -44,6 +44,10 @@
   text-align: justify;
 }
 
+.LearnMore__NewFeature__TextField {
+  flex-grow: 1;
+}
+
 .LearnMore__Title {
   text-align: center;
   margin: 0.5em;
@@ -83,6 +87,12 @@
 
 .LearnMore__WantsContact__FormControlLabel .MuiFormControlLabel-label {
   font-size: 0.9rem;
+}
+
+.LearnMore__DefaultFeature__FormControlLabel .MuiFormControlLabel-label,
+.LearnMore__CustomFeature__FormControlLabel .MuiFormControlLabel-label {
+  font-size: 1.1rem;
+  text-align: justify;
 }
 
 .LearnMoreCompletedScreen__Container {

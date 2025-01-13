@@ -9,6 +9,33 @@ import logger from '../../../utils/logger';
 import LearnMore from './LearnMore.component';
 import { LEARN_MORE_CONSTANTS } from './LearnMore.properties';
 
+const industryKeys = [
+  'learnmore.form.fields.industry.options.agriculture',
+  'learnmore.form.fields.industry.options.services',
+  'learnmore.form.fields.industry.options.manufacturing',
+  'learnmore.form.fields.industry.options.retail',
+  'learnmore.form.fields.industry.options.transportation',
+  'learnmore.form.fields.industry.options.finance',
+  'learnmore.form.fields.industry.options.education',
+  'learnmore.form.fields.industry.options.healthcare',
+  'learnmore.form.fields.industry.options.energy',
+  'learnmore.form.fields.industry.options.nonprofit',
+  'learnmore.form.fields.industry.options.publicsector',
+  'learnmore.form.fields.industry.options.technology',
+  'learnmore.form.fields.industry.options.construction',
+  'learnmore.form.fields.industry.options.media',
+  'learnmore.form.fields.industry.options.tourism'
+];
+
+
+const defaultFeatures = [
+  'learnmore.form.fields.features.efforttracking',
+  'learnmore.form.fields.features.transparency',
+  'learnmore.form.fields.features.memberengagement',
+  'learnmore.form.fields.features.automatedreporting',
+  'learnmore.form.fields.features.contributorengagement'
+];
+
 const LearnMoreContainer = ({
 }) => {
   const { t } = useTranslation('landing');
@@ -27,13 +54,29 @@ const LearnMoreContainer = ({
   const [email, setEmail] = useState(session?.user?.email || '');
   const [role, setRole] = useState('');
   const [companySize, setCompanySize] = useState('');
+  const [industry, setIndustry] = useState('');
   const [biggestChallenge, setBiggestChallenge] = useState('');
-  const [features, setFeatures] = useState([
-    { id: 1, labelKey: 'learnmore.form.fields.features.efforttracking' },
-    { id: 2, labelKey: 'learnmore.form.fields.features.transparency' },
-    { id: 3, labelKey: 'learnmore.form.fields.features.memberengagement' },
-  ]);
+  const [fairPrice, setFairPrice] = useState(null);
+  const priceMarks = [
+    { value: 0, labelKey: 'learnmore.form.fields.pricerange.marks.less10' },
+    { value: 1, labelKey: 'learnmore.form.fields.pricerange.marks.10to20' },
+    { value: 2, labelKey: 'learnmore.form.fields.pricerange.marks.20to35' },
+    { value: 3, labelKey: 'learnmore.form.fields.pricerange.marks.35to50' },
+    { value: 4, labelKey: 'learnmore.form.fields.pricerange.marks.50to80' },
+    { value: 5, labelKey: 'learnmore.form.fields.pricerange.marks.more80' }
+  ];
+
+  const [selectedFeatures, setSelectedFeatures] = useState([]);
+  // User can add a custom feature as plain text (not i18n)
   const [newFeature, setNewFeature] = useState('');
+  const toggleFeature = (featureKeyOrName) => {
+    setSelectedFeatures((prev) => {
+      if (prev.includes(featureKeyOrName)) {
+        return prev.filter((f) => f !== featureKeyOrName);
+      }
+      return [...prev, featureKeyOrName];
+    });
+  };
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [wantsContact, setWantsContact] = useState(true);
   const [showEmailError, setShowEmailError] = useState(false);
@@ -67,8 +110,22 @@ const LearnMoreContainer = ({
     }
     // If not on the last step, simply go to the next
     if (activeStep < totalSteps - 1) {
+      try {
+        window.gtag('event', 'click_next', {
+          step: activeStep
+        });
+      } catch (err) {
+        console.log(err);
+      }
       setActiveStep((prev) => prev + 1);
     } else {
+      try {
+        window.gtag('event', 'submit_form', {
+          step: activeStep
+        });
+      } catch (err) {
+        console.log(err);
+      }
       // Last step -> Perform final submission
       await onSubmit();
     }
@@ -79,30 +136,13 @@ const LearnMoreContainer = ({
     setActiveStep((prev) => (prev > 0 ? prev - 1 : 0));
   };
 
-  // Move feature in the array
-  const moveFeature = (fromIndex, toIndex) => {
-    setFeatures((prev) => {
-      const updated = [...prev];
-      const [movedItem] = updated.splice(fromIndex, 1);
-      updated.splice(toIndex, 0, movedItem);
-      return updated;
-    });
-  };
-
-  // Add new feature
-  const handleAddFeature = () => {
+  const handleAddNewFeature = () => {
     if (!newFeature.trim()) return;
-    setFeatures((prev) => [
-      ...prev,
-      { id: uniqueId + 1, labelKey: newFeature.trim() },
-    ]);
-    setUniqueId((prev) => prev + 1);
+    // Add the user-typed feature as a string
+    if (!selectedFeatures.includes(newFeature)) {
+      setSelectedFeatures((prev) => [...prev, newFeature]);
+    }
     setNewFeature('');
-  };
-
-  // Remove a feature
-  const removeFeature = (featureId) => {
-    setFeatures((prev) => prev.filter((f) => f.id !== featureId));
   };
 
   const onSubmit = async (event) => {
@@ -121,8 +161,9 @@ const LearnMoreContainer = ({
         companySize,
         biggestChallenge,
         wantsContact,
-        featurePriorities: features.map((f) => f.labelKey),
-        // Possibly also ask for email, or any other fields
+        selectedFeatures,
+        fairPrice,
+        industry,
       };
 
       await api.front.saveSurveyResponse(
@@ -166,29 +207,45 @@ const LearnMoreContainer = ({
       handleNext={handleNext}
       handleBack={handleBack}
 
-      // Form fields and functions
+
+
+      // Step 1 fields
       email={email}
       setEmail={setEmail}
+      roleOptions={roleOptions}
       role={role}
       setRole={setRole}
-      roleOptions={roleOptions}
       companySize={companySize}
       setCompanySize={setCompanySize}
-      biggestChallenge={biggestChallenge}
-      setBiggestChallenge={setBiggestChallenge}
-      features={features}
-      moveFeature={moveFeature}
-      removeFeature={removeFeature}
-      newFeature={newFeature}
-      setNewFeature={setNewFeature}
-      handleAddFeature={handleAddFeature}
-      onSubmit={onSubmit}
+      industry={industry}
+      setIndustry={setIndustry}
+      industryKeys={industryKeys}
       wantsContact={wantsContact}
       setWantsContact={setWantsContact}
-      showEmailError={showEmailError}
-      setShowEmailError={setShowEmailError}
+
+      // Step 2
+      defaultFeatures={defaultFeatures}
+      selectedFeatures={selectedFeatures}
+      toggleFeature={toggleFeature}
+      newFeature={newFeature}
+      setNewFeature={setNewFeature}
+      handleAddNewFeature={handleAddNewFeature}
+
+      // Step 3
+      biggestChallenge={biggestChallenge}
+      setBiggestChallenge={setBiggestChallenge}
+      fairPrice={fairPrice}
+      setFairPrice={setFairPrice}
+      priceMarks={priceMarks}
+
+      // Submission
+      onSubmit={onSubmit}
       onRefillForm={handleRefillForm}
       isSubmitted={isSubmitted}
+
+      // others
+      showEmailError={showEmailError}
+      setShowEmailError={setShowEmailError}
     />
   );
 };

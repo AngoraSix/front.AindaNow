@@ -9,6 +9,7 @@ import {
   MenuItem,
   MobileStepper,
   Select,
+  Slider,
   Step,
   StepLabel,
   Stepper,
@@ -20,43 +21,56 @@ import { useTheme } from '@mui/material/styles';
 import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
 import React from 'react';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import CompletedScreen from './CompletedScreen.component';
-import DraggableFeatureItem from './DraggableFeatureItem';
-import { LEARN_MORE_CONSTANTS } from './LearnMore.properties';
 
 
 const LEARNMORE_FORM_CONTRIBUTE_IMAGE = 'http://34.49.93.68/landing/learnmore/contribute.gif';
 const LEARNMORE_FORM_CONTRIBUTE_IMAGE_500 = 'http://34.49.93.68/landing/learnmore/contribute-500.gif';
 
 const LearnMore = ({
+  // Step logic
   activeStep,
   totalSteps,
   handleNext,
   handleBack,
+
+  // Step 1 fields
   email,
   setEmail,
+  roleOptions,
   role,
   setRole,
-  roleOptions,
   companySize,
   setCompanySize,
-  biggestChallenge,
-  setBiggestChallenge,
-  features,
-  moveFeature,
-  removeFeature,
-  newFeature,
-  setNewFeature,
+  industry,
+  setIndustry,
+  industryKeys,
   wantsContact,
   setWantsContact,
-  showEmailError,
-  setShowEmailError,
-  handleAddFeature,
+
+  // Step 2
+  defaultFeatures,
+  selectedFeatures,
+  toggleFeature,
+  newFeature,
+  setNewFeature,
+  handleAddNewFeature,
+
+  // Step 3
+  biggestChallenge,
+  setBiggestChallenge,
+  fairPrice,
+  setFairPrice,
+  priceMarks,
+
+  // submission
   onSubmit,
   onRefillForm,
   isSubmitted,
+
+  // others
+  showEmailError,
+  setShowEmailError,
 }) => {
   const { t } = useTranslation('landing');
   const theme = useTheme();
@@ -102,7 +116,6 @@ const LearnMore = ({
               className='LearnMore__WantsContact__FormControlLabel'
               control={
                 <Checkbox
-                  // size="small"
                   sx={{ '& .MuiSvgIcon-root': { fontSize: 23 } }}
                   checked={wantsContact}
                   onChange={(e) => {
@@ -179,45 +192,97 @@ const LearnMore = ({
               </Select>
             </FormControl>
           </Box>
-        </Box>);
+          <Box mb={3}>
+            <FormControl fullWidth>
+              <InputLabel id="industry-label">
+                {t('learnmore.form.fields.industry.label')}
+              </InputLabel>
+              <Select
+                className='LearnMore__Industry__Select'
+                labelId="industry-label"
+                id="industry-select"
+                value={industry}
+                label={t('learnmore.form.fields.industry.label')}
+                onChange={(e) => setIndustry(e.target.value)}
+              >
+                <MenuItem value="">
+                  <em>{t('learnmore.form.fields.industry.placeholder')}</em>
+                </MenuItem>
+
+                {industryKeys.map((key) => (
+                  <MenuItem key={key} value={key}>
+                    {t(key)}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Box>
+        </Box>
+
+        );
       case 1:
         return (
-          <DndProvider backend={HTML5Backend}>
-            <Box>
-              <Box className="LearnMore__Step__Description__Container">
-                <Typography className="LearnMore__Step__Description" variant="subtitle2">
-                  {t(`learnmore.form.step.description.2`)}
-                </Typography>
-              </Box>
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              {t('learnmore.form.fields.features.title')}
+            </Typography>
+            <Typography variant="body2" gutterBottom>
+              {t('learnmore.form.fields.features.instructions')}
+            </Typography>
 
-              <Box mb={2}>
-                {features.map((feature, index) => (
-                  <DraggableFeatureItem
-                    key={feature.id}
-                    feature={feature}
-                    index={index}
-                    moveFeature={moveFeature}
-                    removeFeature={removeFeature}
-                    itemType={LEARN_MORE_CONSTANTS.DND_ITEM_TYPE}
-                    featuresCount={features.length}
+            {/* Default feature checkboxes */}
+            {defaultFeatures.map((featureKey) => (
+              <FormControlLabel
+                key={featureKey}
+                className='LearnMore__DefaultFeature__FormControlLabel'
+                control={
+                  <Checkbox
+                    checked={selectedFeatures.includes(featureKey)}
+                    onChange={() => toggleFeature(featureKey)}
+                    color="primary"
+                    sx={{ '& .MuiSvgIcon-root': { fontSize: 23 } }}
                   />
-                ))}
-              </Box>
-              <Box display="flex" gap={2} mb={3}>
-                <TextField
-                  className='LearnMore__NewFeatureInput'
-                  label={t('learnmore.form.fields.features.newfeature')}
-                  variant="outlined"
-                  size="small"
-                  value={newFeature}
-                  onChange={(e) => setNewFeature(e.target.value)}
+                }
+                label={t(featureKey)}
+                sx={{ display: 'block', ml: 0 }}
+              />
+            ))}
+
+            {/* Custom user-added features */}
+            {selectedFeatures
+              .filter((f) => !defaultFeatures.includes(f)) // only show custom
+              .map((customF) => (
+                <FormControlLabel
+                  key={customF}
+                  className='LearnMore__CustomFeature__FormControlLabel'
+                  control={
+                    <Checkbox
+                      checked={selectedFeatures.includes(customF)}
+                      onChange={() => toggleFeature(customF)}
+                      color="primary"
+                      sx={{ '& .MuiSvgIcon-root': { fontSize: 23 } }}
+                    />
+                  }
+                  label={customF} // user-typed text
+                  sx={{ display: 'block', ml: 0 }}
                 />
-                <Button variant="contained" onClick={handleAddFeature}>
-                  {t('learnmore.form.fields.features.addButton')}
-                </Button>
-              </Box>
+              ))}
+
+            {/* Add new feature textfield + button */}
+            <Box display="flex" gap={2} mt={2}>
+              <TextField
+                className='LearnMore__NewFeature__TextField'
+                label={t('learnmore.form.fields.features.newfeature')}
+                variant="outlined"
+                size="small"
+                value={newFeature}
+                onChange={(e) => setNewFeature(e.target.value)}
+              />
+              <Button variant="contained" onClick={handleAddNewFeature}>
+                {t('learnmore.form.fields.features.addButton')}
+              </Button>
             </Box>
-          </DndProvider>);
+          </Box>);
       case 2:
         return (<Box>
           <Box className="LearnMore__Step__Description__Container">
@@ -235,6 +300,37 @@ const LearnMore = ({
               value={biggestChallenge}
               onChange={(e) => setBiggestChallenge(e.target.value)}
             />
+          </Box>
+          <Box mb={3}>
+            <Typography variant="subtitle2" gutterBottom>
+              {t('learnmore.form.fields.pricerange.title')}
+            </Typography>
+            <Slider
+              value={fairPrice !== null ? fairPrice : 0}
+              step={1}
+              marks={isMobile ? true : priceMarks.map((m) => ({
+                value: m.value,
+                label: t(m.labelKey)
+              }))}
+              min={0}
+              max={5}
+              onChangeCommitted={(_, newValue) => {
+                setFairPrice(newValue);
+              }}
+            />
+            {fairPrice === null ? (
+              <Typography variant="body2" sx={{ mt: 1 }}>
+                {t('learnmore.form.fields.pricerange.noselection')}
+              </Typography>
+            ) : (
+              <Typography variant="body2" sx={{ mt: 1 }}>
+                {t('learnmore.form.fields.pricerange.selected', {
+                  selectedValue: t(
+                    priceMarks.find((m) => m.value === fairPrice)?.labelKey
+                  )
+                })}
+              </Typography>
+            )}
           </Box>
         </Box>);
       default:
