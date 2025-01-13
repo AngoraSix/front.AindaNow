@@ -39,6 +39,25 @@
     "learnmore.form.fields.roles.directive": "Directivo",
     "learnmore.form.fields.roles.collaborator": "Colaborador",
     "learnmore.form.fields.roles.externaladvisor": "Asesor externo",
+    
+    "learnmore.form.fields.industry.label": "Industria",
+    "learnmore.form.fields.industry.placeholder": "Industria de la organización",
+
+    "learnmore.form.fields.industry.options.agriculture": "Agricultura",
+    "learnmore.form.fields.industry.options.services": "Servicios",
+    "learnmore.form.fields.industry.options.manufacturing": "Manufactura",
+    "learnmore.form.fields.industry.options.retail": "Comercio minorista",
+    "learnmore.form.fields.industry.options.transportation": "Transporte/Logística",
+    "learnmore.form.fields.industry.options.finance": "Finanzas",
+    "learnmore.form.fields.industry.options.education": "Educación",
+    "learnmore.form.fields.industry.options.healthcare": "Salud",
+    "learnmore.form.fields.industry.options.energy": "Energía",
+    "learnmore.form.fields.industry.options.nonprofit": "Organización sin fines de lucro",
+    "learnmore.form.fields.industry.options.publicsector": "Sector público",
+    "learnmore.form.fields.industry.options.technology": "Tecnología",
+    "learnmore.form.fields.industry.options.construction": "Construcción",
+    "learnmore.form.fields.industry.options.media": "Medios/Comunicación",
+    "learnmore.form.fields.industry.options.tourism": "Turismo/Hospitalidad",
 
     "learnmore.form.fields.size.selectlabel": "Tamaño de tu organización",
     "learnmore.form.fields.size.selectplaceholder": "Selecciona una opción",
@@ -49,13 +68,29 @@
     "learnmore.form.fields.size.fiftyone-twohundred": "51-200 personas",
     "learnmore.form.fields.size.more": "Más de 200 personas",
 
-    "learnmore.form.fields.features.efforttracking": "Seguimiento de contribuciones basadas en esfuerzo",
-    "learnmore.form.fields.features.transparency": "Herramientas de gobernanza transparente",
-    "learnmore.form.fields.features.memberengagement": "Participación y compromiso de miembros",
+    "learnmore.form.fields.features.title": "¿Qué características te importan más?",
+    "learnmore.form.fields.features.instructions": "Marca las casillas de las características que consideres más importantes.",
+
+    "learnmore.form.fields.features.efforttracking": "Contabilización y seguimiento de contribuciones",
+    "learnmore.form.fields.features.transparency": "Compartir información y reportes para una gestión transparente",
+    "learnmore.form.fields.features.memberengagement": "Herramientas para decisiones descentralizadas",
+    "learnmore.form.fields.features.automatedreporting": "Reportes y balances automatizados",
+    "learnmore.form.fields.features.contributorengagement": "Conectar con nuevos contribuidores",
     "learnmore.form.fields.features.newfeature": "Agrega otra característica que quieras",
     "learnmore.form.fields.features.addButton": "Agregar",
 
     "learnmore.form.fields.challenge.label": "¿Cuál es tu mayor desafío en la organización?",
+    
+    "learnmore.form.fields.pricerange.title": "¿Cuánto podrías invertir en las funcionalidades que indicaste?",
+    "learnmore.form.fields.pricerange.noselection": "Sin seleccion.",
+    "learnmore.form.fields.pricerange.selected": "Seleccionaste: {{selectedValue}} por mes",
+    "learnmore.form.fields.pricerange.marks.less10": "Menos de $10.000",
+    "learnmore.form.fields.pricerange.marks.10to20": "$10.000 - $20.000",
+    "learnmore.form.fields.pricerange.marks.20to35": "$20.000 - $35.000",
+    "learnmore.form.fields.pricerange.marks.35to50": "$35.000 - $50.000",
+    "learnmore.form.fields.pricerange.marks.50to80": "$50.000 - $80.000",
+    "learnmore.form.fields.pricerange.marks.more80": "Más de $80.000",
+
     "learnmore.completed.shorttext.contact": "¡Genial! Pronto nos pondremos en contacto para darte acceso anticipado y novedades.",
     "learnmore.completed.shorttext.nocontact": "¡Gracias por tu aporte! Esto ayudará a darle forma a nuestra plataforma.",
   
