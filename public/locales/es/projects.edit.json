@@ -26,5 +26,5 @@
     "projects.edit.form.steps.step.media.title": "Multimedia",
     "projects.edit.form.steps.step.params.title": "Parámetros",
     "projects.edit.form.notifications.success.saved": "Proyecto guardado exitosamente",
-    "projects.edit.form.notifications.success.saved-with-clubs-error": "Proyecto guardado exitosamente - Registre Clubs para permitir a contribuyentes que se unan al proyecto"
+    "projects.edit.form.notifications.success.saved-with-clubs-error": "Proyecto guardado exitosamente - Registre Clubs para permitir a contribuidores que se unan al proyecto"
 }
