@@ -318,7 +318,7 @@ const LearnMore = ({
                 setFairPrice(newValue);
               }}
             />
-            {fairPrice === null ? (
+            {fairPrice === 0 ? (
               <Typography variant="body2" sx={{ mt: 1 }}>
                 {t('learnmore.form.fields.pricerange.noselection')}
               </Typography>

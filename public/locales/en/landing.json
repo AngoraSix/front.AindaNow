@@ -82,8 +82,9 @@
     "learnmore.form.fields.challenge.label": "What is your biggest challenge in the organization?",
 
     "learnmore.form.fields.pricerange.title": "How much could you invest for the features you indicated?",
-    "learnmore.form.fields.pricerange.noselection": "No selection yet.",
+    "learnmore.form.fields.pricerange.noselection": "You selected: No response",
     "learnmore.form.fields.pricerange.selected": "You selected: {{selectedValue}} monthly",
+    "learnmore.form.fields.pricerange.marks.na": "No response",
     "learnmore.form.fields.pricerange.marks.less10": "Less than $10.000",
     "learnmore.form.fields.pricerange.marks.10to20": "$10.000 - $20.000",
     "learnmore.form.fields.pricerange.marks.20to35": "$20.000 - $35.000",
