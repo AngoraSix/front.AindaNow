@@ -23,7 +23,7 @@ const theme = createTheme({
     MuiMobileStepper: {
       styleOverrides: {
         dotActive: {
-          backgroundColor: '#47626B',
+          backgroundColor: '#0A2239',
         },
       },
     },
