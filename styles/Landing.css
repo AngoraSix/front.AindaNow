@@ -95,6 +95,10 @@
   text-align: justify;
 }
 
+.LearnMore__PricingRange_Container{
+  margin: 3rem 0 2rem;
+}
+
 .LearnMoreCompletedScreen__Container {
   display: flex;
   flex-direction: column;
@@ -117,6 +121,24 @@
   margin: 1em 0 1.5em;
 }
 
+.LandingFooter__Container {
+  background-color: black;
+  min-height: 3rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.LandingFooter__PoweredBy {
+  margin: 0.75rem 0 0.375rem;
+}
+
+.LandingFooter__Contact {
+  margin: 0.375rem 0 0.75rem;
+}
+
 @media (min-width: 600px) {
   .Lanading__Title {
     margin-top: 1em;
@@ -131,7 +153,7 @@
     border-style: solid;
     border-width: 1px;
     border-radius: 8px;
-    border-color: #C6D4D9;
+    border-color: #0A2239;
 
     padding: 1.5rem;
   }
@@ -228,4 +250,23 @@
   .LearnMoreButton_Container {
     padding: 0.5em 35%;
   }
+
+  /* 
+  .LandingFooter__Container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  .LandingFooter__PoweredBy {
+    margin: 0;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%)
+  }
+
+  .LandingFooter__Contact {
+    margin: 0 5rem 0 auto;
+  } */
 }

@@ -2,20 +2,21 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import Landing from '../components/Landing/Landing';
-import DefaultLayout from '../layouts/DefaultLayout';
+import LandingLayout from '../layouts/LandingLayout/LandingLayout';
 
 const HomePage = ({ }) => {
   const { t } = useTranslation('landing');
 
   return (
-    <DefaultLayout
+    <LandingLayout
       headData={{
         title: t('landing.page.title'),
         description: t('landing.page.description'),
       }}
+      contained={false}
     >
       <Landing />
-    </DefaultLayout>
+    </LandingLayout>
   );
 };
 

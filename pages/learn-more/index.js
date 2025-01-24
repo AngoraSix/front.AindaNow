@@ -3,7 +3,7 @@ import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import LearnMore from '../../components/Landing/LearnMore';
-import DefaultLayout from '../../layouts/DefaultLayout';
+import LandingLayout from '../../layouts/LandingLayout';
 import logger from '../../utils/logger';
 
 const LearnMorePage = ({ surveysListResponseData, session }) => {
@@ -21,14 +21,15 @@ const LearnMorePage = ({ surveysListResponseData, session }) => {
   //   );
   // }
   return (
-    <DefaultLayout
+    <LandingLayout
       headData={{
         title: t('learnmore.page.title'),
         description: t('learnmore.page.description'),
       }}
+      contained={true}
     >
       <LearnMore />
-    </DefaultLayout>
+    </LandingLayout>
   );
 };
 

@@ -1,6 +1,10 @@
 {
     "landing.page.title": "Empower Your Cooperative!",
     "landing.page.description": "Empower Your Cooperative with Tools for Management, Transparency, and Participation.",
+
+    "landing.footer.poweredby": "Powered by AngoraSix",
+    "landing.footer.contact": "Contact: team@angorasix.com",
+
     "landing.features.efforttracking.title": "Track Contributions & Distribute Benefits Fairly",
     "landing.features.efforttracking.text": "Acknowledging each collaborator’s effort is vital for a just and thriving cooperative. Our platform helps managers assess the value participants bring, so benefits can be allocated equitably. By making fairness a central principle, you strengthen trust and unity across the entire project.",
     "landing.features.governance.title": "Make Decisions with Openness and Clarity",
@@ -20,6 +24,8 @@
     "learnmore.form.steps.1": "Basic Info",
     "learnmore.form.steps.2": "Feature Priority",
     "learnmore.form.steps.3": "Challenges & Ideas",
+    "learnmore.form.steps.count.1": "Step 1 of 2",
+    "learnmore.form.steps.count.2": "Step 2 of 2",
     "learnmore.form.steps.back": "Back",
     "learnmore.form.steps.next": "Next",
 
@@ -82,14 +88,14 @@
     "learnmore.form.fields.challenge.label": "What is your biggest challenge in the organization?",
 
     "learnmore.form.fields.pricerange.title": "How much could you invest for the features you indicated?",
-    "learnmore.form.fields.pricerange.noselection": "No selection yet.",
+    "learnmore.form.fields.pricerange.noselection": "You selected: No response",
     "learnmore.form.fields.pricerange.selected": "You selected: {{selectedValue}} monthly",
-    "learnmore.form.fields.pricerange.marks.less10": "Less than $10.000",
-    "learnmore.form.fields.pricerange.marks.10to20": "$10.000 - $20.000",
-    "learnmore.form.fields.pricerange.marks.20to35": "$20.000 - $35.000",
-    "learnmore.form.fields.pricerange.marks.35to50": "$35.000 - $50.000",
-    "learnmore.form.fields.pricerange.marks.50to80": "$50.000 - $80.000",
-    "learnmore.form.fields.pricerange.marks.more80": "More than $80.000",
+    "learnmore.form.fields.pricerange.marks.na": "No response",
+    "learnmore.form.fields.pricerange.marks.less15": "<$15k",
+    "learnmore.form.fields.pricerange.marks.15to35": "$15k-$35k",
+    "learnmore.form.fields.pricerange.marks.35to60": "$35k-$60k",
+    "learnmore.form.fields.pricerange.marks.60to100": "$60k-$100k",
+    "learnmore.form.fields.pricerange.marks.more100": ">$100k",
 
 
     "learnmore.completed.shorttext.contact": "Great! We'll be in touch soon with early access and updates!",

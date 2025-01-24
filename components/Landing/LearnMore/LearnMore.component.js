@@ -57,8 +57,6 @@ const LearnMore = ({
   handleAddNewFeature,
 
   // Step 3
-  biggestChallenge,
-  setBiggestChallenge,
   fairPrice,
   setFairPrice,
   priceMarks,
@@ -239,7 +237,6 @@ const LearnMore = ({
                   <Checkbox
                     checked={selectedFeatures.includes(featureKey)}
                     onChange={() => toggleFeature(featureKey)}
-                    color="primary"
                     sx={{ '& .MuiSvgIcon-root': { fontSize: 23 } }}
                   />
                 }
@@ -259,7 +256,6 @@ const LearnMore = ({
                     <Checkbox
                       checked={selectedFeatures.includes(customF)}
                       onChange={() => toggleFeature(customF)}
-                      color="primary"
                       sx={{ '& .MuiSvgIcon-root': { fontSize: 23 } }}
                     />
                   }
@@ -282,57 +278,38 @@ const LearnMore = ({
                 {t('learnmore.form.fields.features.addButton')}
               </Button>
             </Box>
+            <Box className="LearnMore__PricingRange_Container" mb={3}>
+              <Typography variant="subtitle2" gutterBottom>
+                {t('learnmore.form.fields.pricerange.title')}
+              </Typography>
+              <Slider
+                value={fairPrice !== null ? fairPrice : 0}
+                step={1}
+                marks={isMobile ? true : priceMarks.map((m) => ({
+                  value: m.value,
+                  label: t(m.labelKey)
+                }))}
+                min={0}
+                max={5}
+                onChangeCommitted={(_, newValue) => {
+                  setFairPrice(newValue);
+                }}
+              />
+              {fairPrice === 0 ? (
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  {t('learnmore.form.fields.pricerange.noselection')}
+                </Typography>
+              ) : (
+                <Typography variant="body2" sx={{ mt: 1 }}>
+                  {t('learnmore.form.fields.pricerange.selected', {
+                    selectedValue: t(
+                      priceMarks.find((m) => m.value === fairPrice)?.labelKey
+                    )
+                  })}
+                </Typography>
+              )}
+            </Box>
           </Box>);
-      case 2:
-        return (<Box>
-          <Box className="LearnMore__Step__Description__Container">
-            <Typography className="LearnMore__Step__Description" variant="subtitle2" >
-              {t(`learnmore.form.step.description.3`)}
-            </Typography>
-          </Box>
-          <Box mb={3}>
-            <TextField
-              fullWidth
-              label={t('learnmore.form.fields.challenge.label')}
-              multiline
-              rows={3}
-              variant="outlined"
-              value={biggestChallenge}
-              onChange={(e) => setBiggestChallenge(e.target.value)}
-            />
-          </Box>
-          <Box mb={3}>
-            <Typography variant="subtitle2" gutterBottom>
-              {t('learnmore.form.fields.pricerange.title')}
-            </Typography>
-            <Slider
-              value={fairPrice !== null ? fairPrice : 0}
-              step={1}
-              marks={isMobile ? true : priceMarks.map((m) => ({
-                value: m.value,
-                label: t(m.labelKey)
-              }))}
-              min={0}
-              max={5}
-              onChangeCommitted={(_, newValue) => {
-                setFairPrice(newValue);
-              }}
-            />
-            {fairPrice === null ? (
-              <Typography variant="body2" sx={{ mt: 1 }}>
-                {t('learnmore.form.fields.pricerange.noselection')}
-              </Typography>
-            ) : (
-              <Typography variant="body2" sx={{ mt: 1 }}>
-                {t('learnmore.form.fields.pricerange.selected', {
-                  selectedValue: t(
-                    priceMarks.find((m) => m.value === fairPrice)?.labelKey
-                  )
-                })}
-              </Typography>
-            )}
-          </Box>
-        </Box>);
       default:
         return <Box>{'Unknown Step'}</Box>;
     }
@@ -393,6 +370,13 @@ const LearnMore = ({
           >
             {isLastStep ? t('learnmore.form.submit') : t('learnmore.form.steps.next')}
           </Button>
+        </Box>
+
+
+        <Box className="LearnMore__Stepper__Steps__Count">
+          <Typography variant='subtitle2'>
+            {t(`learnmore.form.steps.count.${activeStep + 1}`)}
+          </Typography>
         </Box>
       </>
     );

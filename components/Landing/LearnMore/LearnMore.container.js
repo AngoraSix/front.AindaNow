@@ -47,23 +47,21 @@ const LearnMoreContainer = ({
 
   // Step logic
   const [activeStep, setActiveStep] = useState(0);
-  const totalSteps = 3; // We’ll have 3 steps
+  const totalSteps = 2; // We’ll have 3 steps
 
   // Basic form fields
-  const [uniqueId, setUniqueId] = useState(10000);
   const [email, setEmail] = useState(session?.user?.email || '');
   const [role, setRole] = useState('');
   const [companySize, setCompanySize] = useState('');
   const [industry, setIndustry] = useState('');
-  const [biggestChallenge, setBiggestChallenge] = useState('');
-  const [fairPrice, setFairPrice] = useState(null);
+  const [fairPrice, setFairPrice] = useState(0);
   const priceMarks = [
-    { value: 0, labelKey: 'learnmore.form.fields.pricerange.marks.less10' },
-    { value: 1, labelKey: 'learnmore.form.fields.pricerange.marks.10to20' },
-    { value: 2, labelKey: 'learnmore.form.fields.pricerange.marks.20to35' },
-    { value: 3, labelKey: 'learnmore.form.fields.pricerange.marks.35to50' },
-    { value: 4, labelKey: 'learnmore.form.fields.pricerange.marks.50to80' },
-    { value: 5, labelKey: 'learnmore.form.fields.pricerange.marks.more80' }
+    { value: 0, labelKey: 'learnmore.form.fields.pricerange.marks.na' },
+    { value: 1, labelKey: 'learnmore.form.fields.pricerange.marks.less15' },
+    { value: 2, labelKey: 'learnmore.form.fields.pricerange.marks.15to35' },
+    { value: 3, labelKey: 'learnmore.form.fields.pricerange.marks.35to60' },
+    { value: 4, labelKey: 'learnmore.form.fields.pricerange.marks.60to100' },
+    { value: 5, labelKey: 'learnmore.form.fields.pricerange.marks.more100' },
   ];
 
   const [selectedFeatures, setSelectedFeatures] = useState([]);
@@ -111,21 +109,12 @@ const LearnMoreContainer = ({
     // If not on the last step, simply go to the next
     if (activeStep < totalSteps - 1) {
       try {
-        window.gtag('event', 'click_next', {
-          step: activeStep
-        });
+        window.gtag('event', `click_next_${activeStep}`, {});
       } catch (err) {
         console.log(err);
       }
       setActiveStep((prev) => prev + 1);
     } else {
-      try {
-        window.gtag('event', 'submit_form', {
-          step: activeStep
-        });
-      } catch (err) {
-        console.log(err);
-      }
       // Last step -> Perform final submission
       await onSubmit();
     }
@@ -149,6 +138,11 @@ const LearnMoreContainer = ({
     event.preventDefault();
     doLoad(true);
     try {
+      window.gtag('event', 'submit_form', {});
+    } catch (err) {
+      console.log(err);
+    }
+    try {
       const grecaptchaToken = await grecaptcha.execute(
         config.thirdParties.googleRecaptcha.key,
         { action: LEARN_MORE_CONSTANTS.LS1_EXPERIMENT_CAPTCHA_ACTION_KEY }
@@ -159,7 +153,6 @@ const LearnMoreContainer = ({
         email,
         role,
         companySize,
-        biggestChallenge,
         wantsContact,
         selectedFeatures,
         fairPrice,
@@ -230,10 +223,6 @@ const LearnMoreContainer = ({
       newFeature={newFeature}
       setNewFeature={setNewFeature}
       handleAddNewFeature={handleAddNewFeature}
-
-      // Step 3
-      biggestChallenge={biggestChallenge}
-      setBiggestChallenge={setBiggestChallenge}
       fairPrice={fairPrice}
       setFairPrice={setFairPrice}
       priceMarks={priceMarks}
