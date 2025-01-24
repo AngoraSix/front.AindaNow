@@ -4,19 +4,20 @@ import InternalServerError from '../../../utils/errors/InternalServerError';
 import MethodNotAllowedError from '../../../utils/errors/MethodNotAllowedError';
 import logger from '../../../utils/logger';
 
-const page =  async (req, res) => {
+const page = async (req, res) => {
   if (req.method === 'GET') {
     // Get contributors
     const validatedToken = await obtainValidatedToken(req);
     const contributorIds = req.query.contributorIds?.split(',') || [
       validatedToken.user.id,
     ];
+
     try {
-      const contributorsData = await Promise.all(
-        contributorIds.map((id) => {
-          return api.contributors.getContributor(id, validatedToken);
-        })
-      );
+      const contributorsData =
+        await api.contributors.listContributors(
+          contributorIds,
+          validatedToken
+        );
       res.status(200).json(contributorsData);
     } catch (err) {
       const errorMessage = `Error retriving contributors data [${req.method}]`,
