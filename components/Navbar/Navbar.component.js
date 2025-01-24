@@ -24,7 +24,7 @@ import React, { useState } from 'react';
 import config from '../../config';
 import { ROUTES } from '../../constants';
 import { resolveRoute } from '../../utils/api/apiHelper';
-import Notifications from './Notifications';
+// import Notifications from './Notifications';
 
 const Navbar = () => {
   const { data: session, status } = useSession();
@@ -231,7 +231,8 @@ const Navbar = () => {
               </Menu>
             </Box>
             {/* NOTIFICATIONS */}
-            <Notifications />
+            {/* console.log("TODO Ren-enable this, disabled just for Landing experiment") */}
+            {/* <Notifications /> */}
             {/* PROFILE ICON */}
             {session ? (
               <Box sx={{ flexGrow: 0 }}>
@@ -264,7 +265,8 @@ const Navbar = () => {
                   open={Boolean(anchorElUser)}
                   onClose={handleCloseUserMenu}
                 >
-                  <Link
+                  {/* console.log("TODO Ren-enable this, disabled just for Landing experiment") */}
+                  {/* <Link
                     href={resolveRoute(ROUTES.profile.view, session.user?.id)}
                   >
                     <MenuItem key="profile">
@@ -272,7 +274,7 @@ const Navbar = () => {
                         {t('navbar.settings.menu.profile')}
                       </Typography>
                     </MenuItem>
-                  </Link>
+                  </Link> */}
                   <MenuItem key="logout" onClick={() => signOut()}>
                     <Typography textAlign="center">
                       {t('navbar.settings.menu.logout')}

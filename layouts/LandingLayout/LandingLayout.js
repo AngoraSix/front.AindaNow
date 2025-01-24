@@ -1,15 +1,19 @@
+import { Box, Paper } from '@mui/material';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React from 'react';
+import LandingFooter from '../../components/Landing/LandingFooter';
+import Navbar from '../../components/Navbar';
 import config from '../../config';
 
-const LandingLayout = ({ children, className, headData }) => {
+const LandingLayout = ({ children, className, headData, contained = true }) => {
   const head = {
     ...config.site.head,
     ...headData,
   };
+  const ChildrenContainer = contained ? Paper : 'div';
   return (
-    <div className={`LandingLayout LandingLayout__Container ${className}`}>
+    <Box className={`LandingLayout LandingLayout__Container ${className}`}>
       <Head>
         <title>{head.title}</title>
         <meta property="og:title" key="og.title" content={head.title} />
@@ -25,8 +29,12 @@ const LandingLayout = ({ children, className, headData }) => {
           content={head.image.logo}
         />
       </Head>
-      <div className="LandingLayout__Body">{children}</div>
-    </div>
+      <Navbar />
+      <ChildrenContainer className={`${className}__Body`}>
+        {children}
+      </ChildrenContainer>
+      <LandingFooter />
+    </Box>
   );
 };
 

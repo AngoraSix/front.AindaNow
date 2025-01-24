@@ -1,6 +1,10 @@
 {
     "landing.page.title": "¡Potenciá tu cooperativa!",
     "landing.page.description": "Potenciá tu cooperativa con herramientas para la gestión, la transparencia y la participación",
+
+    "landing.footer.poweredby": "Powered by AngoraSix",
+    "landing.footer.contact": "Contacto: team@angorasix.com",
+
     "landing.features.efforttracking.title": "Monitoreá las contribuciones y distribuye los beneficios de manera justa",
     "landing.features.efforttracking.text": "Determinar el aporte de cada colaborador es fundamental para una cooperativa próspera y equitativa. Nuestra plataforma ayuda a los gestores a evaluar el valor que aportan los participantes y a distribuir los beneficios de una manera justa. Al situar la equidad como principio central, fortalecerás la confianza y la unidad en todo el proyecto.",
     "landing.features.governance.title": "Tomá decisiones con apertura y claridad",
@@ -20,6 +24,8 @@
     "learnmore.form.steps.1": "Información básica",
     "learnmore.form.steps.2": "Prioridad de funcionalidad",
     "learnmore.form.steps.3": "Desafíos e ideas",
+    "learnmore.form.steps.count.1": "Paso 1 de 2",
+    "learnmore.form.steps.count.2": "Paso 2 de 2",
     "learnmore.form.steps.back": "Atrás",
     "learnmore.form.steps.next": "Siguiente",
 
@@ -81,16 +87,15 @@
 
     "learnmore.form.fields.challenge.label": "¿Cuál es tu mayor desafío en la organización?",
     
-    "learnmore.form.fields.pricerange.title": "¿Cuánto podrías invertir en las funcionalidades que indicaste?",
+    "learnmore.form.fields.pricerange.title": "¿Cuánto podrías invertir en las funcionalidades que indicaste? (en Pesos)",
     "learnmore.form.fields.pricerange.noselection": "Seleccionaste: Sin respuesta",
     "learnmore.form.fields.pricerange.selected": "Seleccionaste: {{selectedValue}} por mes",
     "learnmore.form.fields.pricerange.marks.na": "Sin respuesta",
-    "learnmore.form.fields.pricerange.marks.less10": "Menos de $10.000",
-    "learnmore.form.fields.pricerange.marks.10to20": "$10.000 - $20.000",
-    "learnmore.form.fields.pricerange.marks.20to35": "$20.000 - $35.000",
-    "learnmore.form.fields.pricerange.marks.35to50": "$35.000 - $50.000",
-    "learnmore.form.fields.pricerange.marks.50to80": "$50.000 - $80.000",
-    "learnmore.form.fields.pricerange.marks.more80": "Más de $80.000",
+    "learnmore.form.fields.pricerange.marks.less15": "<$15k",
+    "learnmore.form.fields.pricerange.marks.15to35": "$15k-$35k",
+    "learnmore.form.fields.pricerange.marks.35to60": "$35k-$60k",
+    "learnmore.form.fields.pricerange.marks.60to100": "$60k-$100k",
+    "learnmore.form.fields.pricerange.marks.more100": ">$100k",
 
     "learnmore.completed.shorttext.contact": "¡Genial! Pronto nos pondremos en contacto para darte acceso anticipado y novedades.",
     "learnmore.completed.shorttext.nocontact": "¡Gracias por tu aporte! Esto ayudará a darle forma a nuestra plataforma.",

@@ -47,23 +47,21 @@ const LearnMoreContainer = ({
 
   // Step logic
   const [activeStep, setActiveStep] = useState(0);
-  const totalSteps = 3; // We’ll have 3 steps
+  const totalSteps = 2; // We’ll have 3 steps
 
   // Basic form fields
   const [email, setEmail] = useState(session?.user?.email || '');
   const [role, setRole] = useState('');
   const [companySize, setCompanySize] = useState('');
   const [industry, setIndustry] = useState('');
-  const [biggestChallenge, setBiggestChallenge] = useState('');
   const [fairPrice, setFairPrice] = useState(0);
   const priceMarks = [
     { value: 0, labelKey: 'learnmore.form.fields.pricerange.marks.na' },
-    { value: 1, labelKey: 'learnmore.form.fields.pricerange.marks.less10' },
-    { value: 2, labelKey: 'learnmore.form.fields.pricerange.marks.10to20' },
-    { value: 3, labelKey: 'learnmore.form.fields.pricerange.marks.20to35' },
-    { value: 4, labelKey: 'learnmore.form.fields.pricerange.marks.35to50' },
-    { value: 5, labelKey: 'learnmore.form.fields.pricerange.marks.50to80' },
-    { value: 6, labelKey: 'learnmore.form.fields.pricerange.marks.more80' }
+    { value: 1, labelKey: 'learnmore.form.fields.pricerange.marks.less15' },
+    { value: 2, labelKey: 'learnmore.form.fields.pricerange.marks.15to35' },
+    { value: 3, labelKey: 'learnmore.form.fields.pricerange.marks.35to60' },
+    { value: 4, labelKey: 'learnmore.form.fields.pricerange.marks.60to100' },
+    { value: 5, labelKey: 'learnmore.form.fields.pricerange.marks.more100' },
   ];
 
   const [selectedFeatures, setSelectedFeatures] = useState([]);
@@ -155,7 +153,6 @@ const LearnMoreContainer = ({
         email,
         role,
         companySize,
-        biggestChallenge,
         wantsContact,
         selectedFeatures,
         fairPrice,
@@ -226,10 +223,6 @@ const LearnMoreContainer = ({
       newFeature={newFeature}
       setNewFeature={setNewFeature}
       handleAddNewFeature={handleAddNewFeature}
-
-      // Step 3
-      biggestChallenge={biggestChallenge}
-      setBiggestChallenge={setBiggestChallenge}
       fairPrice={fairPrice}
       setFairPrice={setFairPrice}
       priceMarks={priceMarks}
