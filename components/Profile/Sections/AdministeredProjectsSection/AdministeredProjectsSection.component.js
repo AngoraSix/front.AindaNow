@@ -61,7 +61,7 @@ const AdministeredProjectsSection = ({
           align="center"
           variant="h6"
           component="h2"
-          color="primary.main"
+          color="primary"
         >
           {t('profile.administered-projects.title')}
         </Typography>
@@ -147,7 +147,7 @@ const AdministeredProjectsSection = ({
         maxWidth="sm"
         fullWidth
       >
-        <DialogTitle color="primary.main">
+        <DialogTitle color="primary">
           {t('profile.administered-projects.candidates.title')}
         </DialogTitle>
         <Box className="AdministeredProjects__Listing__MembersListing__Container">

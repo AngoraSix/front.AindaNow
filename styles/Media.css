@@ -6,7 +6,7 @@
   justify-content: space-evenly;
   align-items: center;
   border-style: solid;
-  border-color: #a9bec5;
+  border-color: #0A2239;
   border-radius: 10px;
   border-width: medium;
   transition: border-color 0.3s ease-in;
@@ -38,7 +38,7 @@
 .MediaList__Add__Options .MediaList__New__Option {
   position: absolute;
   top: -0.25em;
-  background-color: #a9bec5;
+  background-color: #0A2239;
   color: #fff;
 }
 
@@ -316,7 +316,7 @@
 
 .MediaPreview__Image__ZoomIcon {
   position: absolute;
-  background-color: #a9bec590;
+  background-color: #0A223990;
   border: medium solid #47626b;
   color: #47626b;
   bottom: 1.25em;

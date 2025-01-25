@@ -87,12 +87,12 @@
   overflow: hidden;
   text-wrap: balance;
   min-height: 2rem;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4), -2px -2px 5px rgba(0, 0, 0, 0.4),
-    2px -2px 5px rgba(0, 0, 0, 0.4), -2px 2px 5px rgba(0, 0, 0, 0.4);
+  text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7), -2px -2px 5px rgba(255, 255, 255, 0.7),
+    2px -2px 5px rgba(255, 255, 255, 0.7), -2px 2px 5px rgba(255, 255, 255, 0.7);
 }
 
 .ProjectCard__Container:focus {
-  outline: 0.5rem solid #fafafa;
+  outline: 0.5rem solid #ffffff;
   outline-offset: -0.5rem;
 }
 

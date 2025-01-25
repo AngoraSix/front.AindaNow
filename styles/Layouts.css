@@ -1,6 +1,6 @@
 /* Default */
 .DefaultLayout__Container {
-  background: #fafafa;
+  background: #ffffff;
 }
 
 .DefaultLayout__Page__Body {
@@ -22,7 +22,7 @@
 
 /* Landing */
 .DefaultLayout__Container {
-  background: #fafafa;
+  background: #ffffff;
 }
 
 /* Projects List */
@@ -46,31 +46,4 @@
   .ProjectPresentationViewLayout__Page__Body {
     padding: 45px 20px;
   }
-}
-
-/* Landing */
-.LandingLayout__Container {
-  background: #fff;
-}
-
-.LandingLayout__Page__Body {
-  display: block;
-  padding: 45px 16px 24px;
-  margin: -20px auto 20px;
-  min-width: 300px;
-  width: calc(100% - 20px);
-  min-height: calc(100vh - 80px);
-  display: block;
-}
-
-@media (min-width: 600px) {
-  .LandingLayout__Page__Body {
-    padding: 45px 20px;
-    width: 90%;
-  }
-}
-
-/* Landing */
-.LandingLayout__Container {
-  background: #fff;
 }
