@@ -21,7 +21,7 @@ const ProjectPresentation = ({
             className="ProjectPresentation__Heading__Name SectionPresentation__Project__Name"
             variant="h3"
             component="h1"
-            color="primary.main"
+            color="primary"
           >
             {projectPresentation.project.name}
           </Typography>

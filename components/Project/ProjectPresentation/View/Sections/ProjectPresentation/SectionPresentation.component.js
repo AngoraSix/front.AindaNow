@@ -10,7 +10,7 @@ const SectionPresentation = ({ sectionTitle, description, mainMedia }) => {
         className="SectionPresentation__Title"
         variant="h4"
         component="h2"
-        color="primary.main"
+        color="primary"
       >
         {sectionTitle}
       </Typography>

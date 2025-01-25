@@ -50,7 +50,7 @@ const SectionTabs = ({
     <Tabs
       orientation="vertical"
       variant="scrollable"
-      indicatorColor="secondary"
+      indicatorColor="primary"
       value={activeSectionindex}
       onChange={selectSection}
       aria-label="Vertical tabs example"

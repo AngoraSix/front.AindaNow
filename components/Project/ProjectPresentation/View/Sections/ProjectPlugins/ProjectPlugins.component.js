@@ -65,7 +65,7 @@ const ProjectPlugins = ({
             className="ProjectPlugins__Heading__Name"
             variant="h6"
             component="h1"
-            color="primary.main"
+            color="primary"
           >
             {t('project-presentations.plugins.mgmt')}
           </Typography>
