@@ -1,22 +1,26 @@
+import { getSession } from 'next-auth/react';
 import { useTranslation } from 'next-i18next';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
-import Landing from '../components/Landing/Landing';
-import LandingLayout from '../layouts/LandingLayout/LandingLayout';
+import api from '../api';
+import ProjectPresentationsList from '../components/ProjectPresentationsList';
+import ProjectsLayout from '../layouts/ProjectsLayout/ProjectsLayout';
+import logger from '../utils/logger';
 
-const HomePage = ({ }) => {
-  const { t } = useTranslation('landing');
+const HomePage = ({ projectPresentationsList }) => {
+  const { t } = useTranslation('project-presentations.list');
 
   return (
-    <LandingLayout
+    <ProjectsLayout
       headData={{
-        title: t('landing.page.title'),
-        description: t('landing.page.description'),
+        title: t('project-presentations.list.page.title'),
+        description: t('project-presentations.list.page.description'),
       }}
-      contained={false}
     >
-      <Landing />
-    </LandingLayout>
+      <ProjectPresentationsList
+        projectPresentationsList={projectPresentationsList}
+      />
+    </ProjectsLayout>
   );
 };
 
@@ -27,12 +31,29 @@ HomePage.propTypes = {
 };
 
 export const getServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
   let props = {
     ...(await serverSideTranslations(ctx.locale, [
       'common',
-      'landing',
+      'project-presentations.list',
     ])),
   };
+
+  try {
+    const validatedToken =
+      session?.error !== 'RefreshAccessTokenError' ? session : null;
+    const projectPresentationsList =
+      await api.projects.fetchProjectPresentations(
+        session?.user?.attributes,
+        validatedToken
+      );
+    props = {
+      ...props,
+      projectPresentationsList,
+    };
+  } catch (err) {
+    logger.error('err', err);
+  }
   return {
     props,
   };

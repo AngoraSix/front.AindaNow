@@ -3,7 +3,7 @@
   width: 90%;
   margin: 1em auto;
   padding: 2rem 2rem;
-  border: 3px solid #c6d4d9;
+  border: 3px solid #1B5993;
   border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
   letter-spacing: 0.3ch;
   background: #ffffff;
@@ -12,7 +12,7 @@
 
 .ProjectForm__Description::before {
   content: '';
-  border: 2px solid #a9bec5;
+  border: 2px solid #0A2239;
   display: block;
   width: 100%;
   height: 100%;

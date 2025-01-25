@@ -1,5 +1,6 @@
 import { SessionProvider as NextAuthProvider } from 'next-auth/react';
 import { appWithTranslation } from 'next-i18next';
+import Script from 'next/script';
 import PropTypes from 'prop-types';
 import { Provider as ReduxProvider } from 'react-redux';
 import { createStore } from 'redux';
@@ -11,7 +12,6 @@ import '../styles/App.css';
 import '../styles/Commons.css';
 import '../styles/Editable.css';
 import '../styles/InputDialogs.css';
-import '../styles/Landing.css';
 import '../styles/Layouts.css';
 import '../styles/Media.css';
 import '../styles/Messages.css';
@@ -24,7 +24,6 @@ import '../styles/ProjectPresentationView.css';
 import '../styles/ProjectPresentationsList.css';
 import '../styles/globals.css';
 import { getEnv } from '../utils/env';
-import Script from 'next/script'
 global.EventSource = require('eventsource');
 
 const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {

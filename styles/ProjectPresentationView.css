@@ -102,11 +102,11 @@
 }
 
 .MediaCard__Overlay.Light {
-  background-color: #c6d4d9;
+  background-color: #1B5993;
 }
 
 .MediaCard__Overlay.Regular {
-  background-color: #a9bec5;
+  background-color: #0A2239;
 }
 
 .MediaCard__Overlay.Dark {
@@ -185,7 +185,7 @@
 .ProjectPlugins__Body {
   width: 100%;
   padding: 20px;
-  border-color: #A9BEC5;
+  border-color: #0A2239;
   border-radius: 6px;
   border-style: solid;
   border-width: 1px;
@@ -296,7 +296,7 @@
 .SectionTabs__Container {
   min-width: 20vw;
   min-height: 50vh;
-  background-color: #a9bec5;
+  background-color: #0A2239;
   border-radius: 4px;
   padding: 3em 0;
 }
