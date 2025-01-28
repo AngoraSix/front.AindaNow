@@ -57,9 +57,6 @@ const page = async (req, res) => {
       res.status(internalServerErr.status).json(internalServerErr.asObject());
     }
   } else if (req.method === 'PATCH') {
-    // const env = getEnv();
-    // config.applyEnvConfig(env);
-    // api.applyEnvConfig(env);
     const validatedToken = await obtainValidatedToken(req);
     try {
       const { data } = await api.notifications.patchNotifications(

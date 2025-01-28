@@ -1,4 +1,4 @@
-export const getEnv = () => {
+export const getPublicEnv = () => {
   const AN_APP_PREFIX = 'AN_PUBLIC_APP_';
   const AN_ENV_KEYS = Object.keys(process.env).filter((key) =>
     key.toLowerCase().startsWith(AN_APP_PREFIX.toLowerCase())
