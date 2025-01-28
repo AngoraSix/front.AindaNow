@@ -23,7 +23,7 @@ import '../styles/ProjectForm.css';
 import '../styles/ProjectPresentationView.css';
 import '../styles/ProjectPresentationsList.css';
 import '../styles/globals.css';
-import { getEnv, removeSecrets } from '../utils/env';
+import { getPublicEnv, removeSecrets } from '../utils/env';
 global.EventSource = require('eventsource');
 
 const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
@@ -57,7 +57,6 @@ const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
       </Script>
       {/* Google reCaptcha */}
       <Script async defer src={`https://www.google.com/recaptcha/api.js?render=${config.thirdParties.googleRecaptcha.key}`}></Script>
-      {/* <Script async defer src={`https://www.google.com/recaptcha/api.js`}></Script> */}
     </>
   );
 };
@@ -76,7 +75,7 @@ AindaNowWebApp.propTypes = {
 };
 
 AindaNowWebApp.getInitialProps = async ({ }) => {
-  const env = getEnv();
+  const env = getPublicEnv();
 
   config.applyEnvConfig(env);
   api.applyEnvConfig(env);

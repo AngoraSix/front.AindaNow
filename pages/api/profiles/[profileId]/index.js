@@ -1,17 +1,10 @@
 import { getToken } from 'next-auth/jwt';
+import api from '../../../../api';
 import { oauthFrameworkConfig } from '../../../../config/oauth';
 import MethodNotAllowedError from '../../../../utils/errors/MethodNotAllowedError';
-import { getEnv } from '../../../../utils/env';
-import api from '../../../../api';
-import config from '../../../../config';
-import JSONPatch from '../../../../utils/rest/patch/JSONPatch';
-import createPatchBody from '../../../../utils/rest/patch/patchOperations';
 
 const page = async (req, res) => {
   if (req.method === 'PATCH') {
-    const env = getEnv();
-    config.applyEnvConfig(env);
-    api.applyEnvConfig(env);
     const token = await getToken({
       req,
       secret: oauthFrameworkConfig.jwt.secret,
@@ -25,7 +18,7 @@ const page = async (req, res) => {
         validatedToken
       );
       res.status(200).json({ data });
-    } catch (err) {}
+    } catch (err) { }
   } else {
     const mnaError = new MethodNotAllowedError(
       `No API support for ${req.method} HTTP method`,

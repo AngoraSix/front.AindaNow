@@ -2,9 +2,7 @@ import multer from 'multer';
 import { getToken } from 'next-auth/jwt';
 import nextConnect from 'next-connect';
 import api from '../../../api';
-import serviceConfig from '../../../config';
 import { oauthFrameworkConfig } from '../../../config/oauth';
-import { getEnv } from '../../../utils/env';
 import InternalServerError from '../../../utils/errors/InternalServerError';
 import MethodNotAllowedError from '../../../utils/errors/MethodNotAllowedError';
 import logger from '../../../utils/logger';
@@ -41,9 +39,6 @@ export const config = {
 
 // Process a POST request
 apiRoute.post(async (req, res) => {
-  const env = getEnv();
-  serviceConfig.applyEnvConfig(env);
-  api.applyEnvConfig(env);
   const token = await getToken({
     req,
     secret: oauthFrameworkConfig.jwt.secret,
