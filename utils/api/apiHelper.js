@@ -5,9 +5,10 @@ import { oauthFrameworkConfig } from '../../config/oauth';
 import { getEnv } from '../env';
 
 export const obtainValidatedToken = async (req) => {
-  const env = getEnv();
-  config.applyEnvConfig(env);
-  api.applyEnvConfig(env);
+  // const env = getEnv();
+  // config.applyEnvConfig(env);
+  // api.applyEnvConfig(env);
+  debugger;
   const token = await getToken({
     req,
     secret: oauthFrameworkConfig.jwt.secret,

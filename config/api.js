@@ -1,29 +1,32 @@
+import { getFromEnvsOrElse } from "../utils/config";
+
 class Api {
   constructor(env) {
-    this.serverBaseURL = env.API_SERVER_BASE_URL || 'https://gerserver.com.ar/';
+    this.serverBaseURL = getFromEnvsOrElse(env, 'AN_APP_API_SERVICE_BASE_URL', 'https://gerserver.com.ar/');
     this.browserBaseURL =
-      env.API_BROWSER_BASE_URL || 'https://gerbrowser.com.ar/';
+      getFromEnvsOrElse(env, 'AN_PUBLIC_APP_API_BROWSER_BASE_URL', 'https://gerbrowser.com.ar/');
     this.servicesOverrideBaseURLs = {
-      projects: env.API_PROJECTS_SERVER_BASE_URL,
-      media: env.AN_FRONT_API_MEDIA_SERVER_BASE_URL,
-      contributors: env.API_CONTRIBUTORS_SERVER_BASE_URL,
-      surveys: env.API_SURVEYS_SERVER_BASE_URL,
+      projects: getFromEnvsOrElse(env, 'AN_APP_API_PROJECTS_SERVICE_BASE_URL'),
+      media: getFromEnvsOrElse(env, 'AN_PUBLIC_APP_API_MEDIA_SERVICE_BASE_URL'),
+      contributors: getFromEnvsOrElse(env, 'AN_APP_API_CONTRIBUTORS_SERVICE_BASE_URL'),
+      surveys: getFromEnvsOrElse(env, 'AN_APP_API_SURVEYS_SERVICE_BASE_URL'),
     };
     this.servicesAPIGatewayPath = {
-      projects: env.API_PROJECTS_SERVER_APIGATEWAY_PATH || '/projects',
-      media: env.API_MEDIA_SERVER_APIGATEWAY_PATH || '/media',
+      projects: getFromEnvsOrElse(env, 'AN_APP_API_PROJECTS_SERVICE_APIGATEWAY_PATH', '/projects'),
+      media: getFromEnvsOrElse(env, 'AN_APP_API_MEDIA_SERVICE_APIGATEWAY_PATH', '/media'),
       contributors:
-        env.API_CONTRIBUTORS_SERVER_APIGATEWAY_PATH || '/contributors',
+        getFromEnvsOrElse(env, 'AN_APP_API_CONTRIBUTORS_SERVICE_APIGATEWAY_PATH', '/contributors'),
       surveys:
-          env.API_SURVEYS_SERVER_APIGATEWAY_PATH || '/surveys',
+        getFromEnvsOrElse(env, 'AN_APP_API_SURVEYS_SERVICE_APIGATEWAY_PATH', '/surveys'),
+      notifications:
+        getFromEnvsOrElse(env, 'AN_APP_API_NOTIFICATIONS_SERVICE_APIGATEWAY_PATH', '/notifications'),
     };
     this.servicesAPIParams = {
       clubsWellKnownContributorCandidatesType:
-        env.APIPARAMS_CLUBS_WELLKNOWN_CONTRIBUTORCANDIDATES ||
-        'contributor-candidates',
+        getFromEnvsOrElse(env, 'AN_APP_API_PARAMS_CLUBS_WELLKNOWN_CONTRIBUTORCANDIDATES', 'contributor-candidates'),
     };
-    this.mediaOverrideBaseURL = env.AN_FRONT_PUBLIC_MEDIA_SERVER_BASE_URL;
-    this.frontLocalhost = env.API_EVENTSOURCE_LOCALHOST || 'https://localhost/';
+    this.mediaOverrideBaseURL = getFromEnvsOrElse(env, 'AN_PUBLIC_APP_API_MEDIA_SERVICE_OVERRIDE_URL');
+    this.frontLocalhost = getFromEnvsOrElse(env, 'AN_PUBLIC_APP_API_EVENTSOURCE_LOCALHOST', 'https://localhost/');
   }
 }
 

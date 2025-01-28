@@ -40,8 +40,6 @@ const Navbar = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [anchorElLanguage, setAnchorElLanguage] = useState(null);
 
-  console.log(ROUTES.projects.presentations.list);
-
   const handleChange = async (selectedLocale) => {
     if (selectedLocale != locale) {
       Cookies.set('NEXT_LOCALE', selectedLocale);

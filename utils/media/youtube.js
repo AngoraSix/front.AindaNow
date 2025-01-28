@@ -14,7 +14,7 @@ const _extractId = (value) => {
 };
 
 const _requestThumbnail = async (videoId) => {
-  return await api.thirdParties.fetchYoutubeVideoTumbnail(videoId);
+  return await api.front.getYoutubeVideoTumbnail(videoId);
 };
 
 export const processYoutubeUrl = async (value) => {

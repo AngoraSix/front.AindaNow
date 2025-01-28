@@ -186,6 +186,13 @@ class FrontAPI {
     );
     return data;
   }
+
+  async getYoutubeVideoTumbnail(videoId) {
+    const { data } = await this.axios.get(
+      `api/thirdparties/youtube/video/${videoId}`,
+    );
+    return data;
+  }
 }
 
 export default FrontAPI;

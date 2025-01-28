@@ -14,7 +14,7 @@ class ThirdPartiesAPI {
    * @param {*} param0 filter to be used in the search
    * @returns list of videos matching filter
    */
-  async searchVideoData({ id }) {
+  async _searchVideoData({ id }) {
     const resolvedUrl = config.thirdParties.youtube.videoApiUrlTemplate
       .replace(':videoId', id)
       .replace(':apiKey', config.thirdParties.youtube.apiKey);
@@ -22,13 +22,13 @@ class ThirdPartiesAPI {
     return data.items;
   }
 
-  async fetchYoutubeVideoData(id) {
-    const foundVideos = await this.searchVideoData({ id });
+  async _fetchYoutubeVideoData(id) {
+    const foundVideos = await this._searchVideoData({ id });
     return foundVideos[0];
   }
 
   async fetchYoutubeVideoTumbnail(id) {
-    const foundVideo = await this.fetchYoutubeVideoData(id);
+    const foundVideo = await this._fetchYoutubeVideoData(id);
     const videoThumbnail =
       foundVideo?.snippet.thumbnails.standard?.url ||
       foundVideo?.snippet.thumbnails.medium?.url ||
