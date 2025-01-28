@@ -23,7 +23,7 @@ class NotificationsAPI {
     );
 
     const { data } = await this.axios.get(
-      `/notifications?pageSize=${size}&page=${number}&sort=${sort}&extraSkip=${extraSkip}`,
+      `/?pageSize=${size}&page=${number}&sort=${sort}&extraSkip=${extraSkip}`,
       {
         headers: {
           ...headers,
@@ -68,7 +68,7 @@ class NotificationsAPI {
       config.api.serverBaseURL
     );
 
-    const response = await this.axios.patch(`/notifications`, patchBody, {
+    const response = await this.axios.patch(`/`, patchBody, {
       headers: {
         ...headers,
         ...authHeaders,

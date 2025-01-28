@@ -1,6 +1,5 @@
 export const oauthFrameworkConfig = {
   debug:
-    process.env.AN_APP_OAUTH_FW_DEBUG &&
     process.env.AN_APP_OAUTH_FW_DEBUG === 'true',
   jwt: {
     secret: process.env.AN_APP_OAUTH_JWT_SECRET || 'jw7Secre7',

@@ -23,7 +23,7 @@ import '../styles/ProjectForm.css';
 import '../styles/ProjectPresentationView.css';
 import '../styles/ProjectPresentationsList.css';
 import '../styles/globals.css';
-import { getEnv } from '../utils/env';
+import { getEnv, removeSecrets } from '../utils/env';
 global.EventSource = require('eventsource');
 
 const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
@@ -31,6 +31,11 @@ const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
 
   config.applyEnvConfig(env);
   api.applyEnvConfig(env);
+
+  console.log("GERGERGER");
+  console.log(env);
+  console.log(config.thirdParties.googleAnalytics.id);
+  console.log(process.env.AN_PUBLIC_APP_THIRDPARTIES_GOOGLEANALYTICS_ID)
 
   return (
     <>
@@ -70,8 +75,7 @@ AindaNowWebApp.propTypes = {
   env: PropTypes.object,
 };
 
-AindaNowWebApp.getInitialProps = async ({ ctx }) => {
-  // const nextProps = App.getInitialProps(ctx);
+AindaNowWebApp.getInitialProps = async ({ }) => {
   const env = getEnv();
 
   config.applyEnvConfig(env);
@@ -82,9 +86,8 @@ AindaNowWebApp.getInitialProps = async ({ ctx }) => {
   const preloadedState = store.getState();
 
   return {
-    // ...nextProps,
     preloadedState,
-    env,
+    env: removeSecrets(env), // Just for a double-check before passing to front, there should be no AN_PUBLIC_APP_ keys at this point
   };
 };
 
