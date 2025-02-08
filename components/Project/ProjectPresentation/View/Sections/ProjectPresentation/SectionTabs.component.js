@@ -50,14 +50,14 @@ const SectionTabs = ({
     <Tabs
       orientation="vertical"
       variant="scrollable"
-      indicatorColor="primary"
+      indicatorColor="secondary"
       value={activeSectionindex}
       onChange={selectSection}
-      aria-label="Vertical tabs example"
+      aria-label="Vertical tabs"
       sx={{ borderRight: 1, borderColor: 'divider' }}
     >
       {projectPresentation.sections.map((s, i) => (
-        <Tab key={i} label={s.title} />
+        <Tab className="SectionTabs__Tab" key={i} label={s.title} />
       ))}
     </Tabs>
   );

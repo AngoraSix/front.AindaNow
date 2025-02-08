@@ -32,11 +32,6 @@ const AindaNowWebApp = ({ Component, pageProps, preloadedState, env }) => {
   config.applyEnvConfig(env);
   api.applyEnvConfig(env);
 
-  console.log("GERGERGER");
-  console.log(env);
-  console.log(config.thirdParties.googleAnalytics.id);
-  console.log(process.env.AN_PUBLIC_APP_THIRDPARTIES_GOOGLEANALYTICS_ID)
-
   return (
     <>
       <ReduxProvider store={store}>
