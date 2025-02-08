@@ -305,8 +305,14 @@
   margin: 0.5em 2vw 0 2vw;
 }
 
-.SectionTabs__Container .Mui-selected {
-  background-color: #fff;
+.SectionTabs__Container .SectionTabs__Tab {
+  color: #ffffff;
+  min-width: 100%;
+}
+
+.SectionTabs__Container .SectionTabs__Tab.Mui-selected {
+  background-color: #AFC1D6;
+  color: #000000;
 }
 
 .SectionPresentation__Title {
