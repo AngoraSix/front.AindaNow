@@ -7,9 +7,11 @@ import api from '../../api';
 import ProjectPresentationsList from '../../components/ProjectPresentationsList';
 import ProjectsLayout from '../../layouts/ProjectsLayout/ProjectsLayout';
 import logger from '../../utils/logger';
+import { useActiveSession } from '../../hooks/oauth';
 
 const ProjectPresentationsListingPage = ({ projectPresentationsList }) => {
   const { t } = useTranslation('project-presentations.list');
+  useActiveSession(true);
 
   return (
     <ProjectsLayout
