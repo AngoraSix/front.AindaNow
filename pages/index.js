@@ -4,11 +4,13 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import React from 'react';
 import api from '../api';
 import ProjectPresentationsList from '../components/ProjectPresentationsList';
+import { useActiveSession } from '../hooks/oauth';
 import ProjectsLayout from '../layouts/ProjectsLayout/ProjectsLayout';
 import logger from '../utils/logger';
 
 const HomePage = ({ projectPresentationsList }) => {
   const { t } = useTranslation('project-presentations.list');
+  useActiveSession(true);
 
   return (
     <ProjectsLayout

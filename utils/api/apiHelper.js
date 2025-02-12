@@ -2,7 +2,6 @@ import { getToken } from 'next-auth/jwt';
 import { oauthFrameworkConfig } from '../../config/oauth';
 
 export const obtainValidatedToken = async (req) => {
-  debugger;
   const token = await getToken({
     req,
     secret: oauthFrameworkConfig.jwt.secret,

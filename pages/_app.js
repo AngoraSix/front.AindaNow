@@ -69,7 +69,7 @@ AindaNowWebApp.propTypes = {
   env: PropTypes.object,
 };
 
-AindaNowWebApp.getInitialProps = async ({ }) => {
+AindaNowWebApp.getInitialProps = async () => {
   const env = getPublicEnv();
 
   config.applyEnvConfig(env);
