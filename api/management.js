@@ -37,7 +37,12 @@ class ManagementAPI {
 
     let initialMgmt = {
       constitution: {
-        bylaws: [],
+        bylaws: [
+          {
+            scope: 'OWNERSHIP_IS_A6MANAGED',
+            definition: true
+          }
+        ],
       },
       status: config.servicesDefaults.mgmt.mgmtInitialStatus,
     };
