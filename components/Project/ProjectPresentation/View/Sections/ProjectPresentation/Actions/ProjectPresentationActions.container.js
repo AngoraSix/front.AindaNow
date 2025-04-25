@@ -133,7 +133,7 @@ const ProjectPresentationActionsContainer = ({
     }
   };
 
-  const onRegisterAllClubs = async () => {
+  const onRegisterAllProjectClubs = async () => {
     doLoad(true);
     setIsLoading(true);
     try {
@@ -168,7 +168,7 @@ const ProjectPresentationActionsContainer = ({
       onShowInterest={onShowInterest}
       onWithdrawInterest={onWithdrawInterest}
       onActionDataChange={onFormChange}
-      onRegisterAllClubs={onRegisterAllClubs}
+      onRegisterAllProjectClubs={onRegisterAllProjectClubs}
       actionFormData={projectPresentationActionData.actionData}
       isAdmin={isAdmin}
       isLoading={isLoading}

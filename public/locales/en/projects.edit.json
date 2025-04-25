@@ -25,6 +25,5 @@
     "projects.edit.form.steps.step.params.description.full": "These will help make the project easily discoverable by those in tune with your idea...",
     "projects.edit.form.steps.step.media.title": "Media",
     "projects.edit.form.steps.step.params.title": "Parameters",
-    "projects.edit.form.notifications.success.saved": "Project saved successfully",
-    "projects.edit.form.notifications.success.saved-with-clubs-error": "Project saved successfully - Register Clubs to allow contributors join the project"
+    "projects.edit.form.notifications.success.saved": "Project saved successfully"
 }
