@@ -47,17 +47,8 @@ const ProjectFormContainer = ({ project, ...args }) => {
         projectToSubmit,
         project?.id
       );
-
-      try {
-        if (!project?.id) {
-          await api.front.registerAllProjectClubs(projectResponse.id);
-        }
-        onSuccess(t('projects.edit.form.notifications.success.saved'));
-      } catch (clubsErr) {
-        onSuccess(
-          t('projects.edit.form.notifications.success.saved-with-clubs-error')
-        );
-      }
+      
+      onSuccess(t('projects.edit.form.notifications.success.saved'));
 
       if (!project?.id) {
         const viewURL = resolveRoute(

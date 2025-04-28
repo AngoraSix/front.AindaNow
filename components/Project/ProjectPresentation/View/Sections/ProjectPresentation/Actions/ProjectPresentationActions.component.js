@@ -20,7 +20,7 @@ const ProjectPresentationActions = ({
   onShowInterest,
   onWithdrawInterest,
   onActionDataChange,
-  onRegisterAllClubs,
+  onRegisterAllProjectClubs,
   actionFormData,
   actions,
   isLoading,
@@ -51,7 +51,7 @@ const ProjectPresentationActions = ({
         onWithdrawInterest();
         break;
       case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.REGISTER_ALL_CLUBS:
-        onRegisterAllClubs();
+        onRegisterAllProjectClubs();
         break;
       case PROJECT_PRESENTATION_SUPPORTED_ACTIONS.EDIT:
         router.push(
