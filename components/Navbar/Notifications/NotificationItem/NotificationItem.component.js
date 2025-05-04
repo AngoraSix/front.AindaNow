@@ -43,15 +43,14 @@ const NotificationItem = ({ notification, onNotificationAction }) => {
   const NotificationIcon =
     notification.alertLevel &&
     ALERT_LEVEL_ICON_MAPPING[notification.alertLevel.toUpperCase()];
-
   const notificationTitle =
     notification.title?.i18n?.[locale] ||
-    notification.title?.i18n?.[en] ||
+    notification.title?.i18n?.['en'] ||
     notification.title?.i18n?.[0] ||
     'Error reading title';
   const notificationMessage =
     notification.message?.i18n?.[locale] ||
-    notification.message?.i18n?.[en] ||
+    notification.message?.i18n?.['en'] ||
     notification.message?.i18n?.[0] ||
     'Error reading message';
   const imageUrl =

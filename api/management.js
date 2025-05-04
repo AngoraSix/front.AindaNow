@@ -37,12 +37,14 @@ class ManagementAPI {
 
     let initialMgmt = {
       constitution: {
-        bylaws: [
-          {
-            scope: 'OWNERSHIP_IS_A6MANAGED',
+        bylaws: {
+          OWNERSHIP_IS_A6MANAGED: {
             definition: true
-          }
-        ],
+          },
+          FINANCIAL_CURRENCIES: {
+            definition: ["ARS", "USD"]
+          },
+        },
       },
       status: config.servicesDefaults.mgmt.mgmtInitialStatus,
     };

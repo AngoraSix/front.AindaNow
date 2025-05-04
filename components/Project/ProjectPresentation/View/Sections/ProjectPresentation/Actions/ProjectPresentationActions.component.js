@@ -191,7 +191,7 @@ ProjectPresentationActions.propTypes = {
   onActionDataChange: PropTypes.func.isRequired,
   onShowInterest: PropTypes.func.isRequired,
   onWithdrawInterest: PropTypes.func.isRequired,
-  onRegisterAllClubs: PropTypes.func.isRequired,
+  onRegisterAllProjectClubs: PropTypes.func.isRequired,
   actions: PropTypes.object.isRequired,
   actionFormData: PropTypes.object,
 };

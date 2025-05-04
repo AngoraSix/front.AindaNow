@@ -30,7 +30,7 @@ class ClubsAPI {
     );
 
     const { data: patchResult } = await this.axios.patch(
-      `/clubs/well-known/project/${projectId}/${clubType}`,
+      `/well-known/project/${projectId}/${clubType}`,
       createPatchBody(FRONT_TO_PATCH_OPERATIONS_MAPPING[operation], 'members', {
         contributorId: token.user.id,
         data,
@@ -55,7 +55,7 @@ class ClubsAPI {
     );
 
     const { data } = await this.axios.get(
-      `/clubs/well-known/project/${projectId}/${clubType}`,
+      `/well-known/project/${projectId}/${clubType}`,
       {
         headers: {
           ...headers,
@@ -75,7 +75,7 @@ class ClubsAPI {
       config.api.serverBaseURL
     );
 
-    const { data } = await this.axios.get(`/clubs/well-known/project/${projectId}`, {
+    const { data } = await this.axios.get(`/well-known/project/${projectId}`, {
       headers: {
         ...headers,
         ...authHeaders,
@@ -94,7 +94,7 @@ class ClubsAPI {
     );
 
     const { data } = await this.axios.post(
-      `/clubs/well-known/project/${projectId}`,
+      `/well-known/project/${projectId}`,
       {},
       {
         headers: {
@@ -115,7 +115,7 @@ class ClubsAPI {
       config.api.serverBaseURL
     );
 
-    const { data } = await this.axios.get('/clubs/well-known/', {
+    const { data } = await this.axios.get('/well-known/', {
       params: { adminId: adminId },
       headers: {
         ...headers,
