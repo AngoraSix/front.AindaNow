@@ -165,7 +165,7 @@ class FrontAPI {
     number = 0,
     extraSkip = 0,
     size = 20,
-    sort = '<dismissed,>instantOfCreation',
+    sort = '<dismissed,>creationInstant',
   }) {
     const { data } = await this.axios.get(
       `api/notifications?size=${size}&number=${number}&sort=${sort}&extraSkip=${extraSkip}`

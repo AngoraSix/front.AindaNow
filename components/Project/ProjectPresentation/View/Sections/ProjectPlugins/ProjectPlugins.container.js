@@ -93,7 +93,7 @@ const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
       );
     } catch (ex) {
       onError(
-        `Error creating management project for Prbject - ${
+        `Error creating management project for Project - ${
           ex.response?.data?.message || ex.message
         }`
       );

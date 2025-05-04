@@ -20,10 +20,12 @@ class Api {
         getFromEnvsOrElse(env, 'AN_APP_API_SURVEYS_SERVICE_APIGATEWAY_PATH', '/surveys'),
       notifications:
         getFromEnvsOrElse(env, 'AN_APP_API_NOTIFICATIONS_SERVICE_APIGATEWAY_PATH', '/notifications'),
+      clubs:
+        getFromEnvsOrElse(env, 'AN_APP_API_CLUBS_SERVICE_APIGATEWAY_PATH', '/clubs'),
     };
     this.servicesAPIParams = {
       clubsWellKnownContributorCandidatesType:
-        getFromEnvsOrElse(env, 'AN_APP_API_PARAMS_CLUBS_WELLKNOWN_CONTRIBUTORCANDIDATES', 'contributor-candidates'),
+        getFromEnvsOrElse(env, 'AN_APP_API_PARAMS_CLUBS_WELLKNOWN_CONTRIBUTORCANDIDATES', 'CONTRIBUTOR_CANDIDATES'),
     };
     this.mediaOverrideBaseURL = getFromEnvsOrElse(env, 'AN_PUBLIC_APP_API_MEDIA_SERVICE_OVERRIDE_URL');
     this.frontLocalhost = getFromEnvsOrElse(env, 'AN_PUBLIC_APP_API_EVENTSOURCE_LOCALHOST', 'https://localhost/');
