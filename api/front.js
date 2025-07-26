@@ -125,13 +125,6 @@ class FrontAPI {
     return data;
   }
 
-  async createProjectManagementById(projectId) {
-    const { data } = await this.axios.post(
-      `api/projects/${projectId}/management`
-    );
-    return data;
-  }
-
   async registerAllProjectClubs(projectId) {
     const { data } = await this.axios.post(`api/clubs/well-known/${projectId}`);
     return data;

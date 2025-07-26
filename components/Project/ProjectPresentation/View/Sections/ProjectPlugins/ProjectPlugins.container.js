@@ -1,7 +1,7 @@
 import { useTranslation } from 'next-i18next';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import api from '../../../../../../api';
-import PropTypes from 'prop-types';
 import config from '../../../../../../config';
 import { useLoading, useNotifications } from '../../../../../../hooks/app';
 import { useActiveSession } from '../../../../../../hooks/oauth';
@@ -61,8 +61,7 @@ const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
       } catch (err) {
         if (err.response?.status !== 404 && activeSession) {
           logger.error(
-            `Error retrieving management - ${
-              err.response?.data?.message || err.message
+            `Error retrieving management - ${err.response?.data?.message || err.message
             }`
           );
         }
@@ -76,31 +75,12 @@ const ProjectPluginsContainer = ({ projectPresentation, isAdmin }) => {
   }, [activeSession, projectPresentation.projectId]);
 
   const onCreateManagement = async () => {
-    doLoad(true);
-    setIsLoading(true);
-
-    try {
-      const managementResponse = await api.front.createProjectManagementById(
+    window.open(
+      `${resolveRoute(
+        `${config.thirdPartiesConfig.angorasix.host}${config.thirdPartiesConfig.angorasix.NoewProjectManagementForProjectPath}`,
         projectPresentation.projectId
-      );
-
-      processManagementResponse(managementResponse);
-
-      onSuccess(
-        t(
-          'project-presentations.actions.create-project-management.notifications.success.created'
-        )
-      );
-    } catch (ex) {
-      onError(
-        `Error creating management project for Project - ${
-          ex.response?.data?.message || ex.message
-        }`
-      );
-    } finally {
-      doLoad(false);
-      setIsLoading(false);
-    }
+      )}`
+    );
   };
 
   const onUpdateManagement = async () => {

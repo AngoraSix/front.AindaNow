@@ -13,7 +13,7 @@ class SurveysAPI {
       config.infra,
       this.axios.getBaseURL()
     );
-
+    
     const { data: savedSurvey } = await this.axios.post(
       `/${surveyKey}/responses`,
       surveyResponse,
