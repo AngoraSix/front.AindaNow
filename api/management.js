@@ -6,14 +6,14 @@ class ManagementAPI {
     this.axios = axiosInstance;
   }
 
-  async getProjectManagement(projectId, token) {
+  async getProjectManagementByProjectId(projectId, token) {
     const headers = this.axios.getCommonHeaders();
     const authHeaders = this.axios.getAuthorizationHeaders(token);
     const infraHeaders = await obtainInfraHeaders(
       config.infra,
       config.api.serverBaseURL
     );
-
+    console.log("TESTESTESTSTS", projectId);
     const { data } = await this.axios.get(`/projects/${projectId}/management`, {
       headers: {
         ...headers,
@@ -24,44 +24,7 @@ class ManagementAPI {
         return status < 400 || status == 404; // 404 is valid for project admin contributors (creation actions)
       },
     });
-    return data;
-  }
-
-  async createProjectManagementById(projectId, token) {
-    const headers = this.axios.getCommonHeaders();
-    const authHeaders = this.axios.getAuthorizationHeaders(token);
-    const infraHeaders = await obtainInfraHeaders(
-      config.infra,
-      config.api.serverBaseURL
-    );
-
-    let initialMgmt = {
-      constitution: {
-        bylaws: {
-          OWNERSHIP_IS_A6MANAGED: {
-            definition: true
-          },
-          FINANCIAL_CURRENCIES: {
-            definition: ["ARS", "USD"]
-          },
-        },
-      },
-      status: config.servicesDefaults.mgmt.mgmtInitialStatus,
-    };
-
-    let axiosConfig = {
-      headers: {
-        ...headers,
-        ...authHeaders,
-        ...infraHeaders,
-      },
-    };
-
-    const { data } = await this.axios.post(
-      `/projects/${projectId}/management`,
-      initialMgmt,
-      axiosConfig
-    );
+    console.log("GERGERGERGER", data);
     return data;
   }
 }

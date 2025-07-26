@@ -17,6 +17,7 @@ class ThirdParties {
     this.angorasix = {
       host: getFromEnvsOrElse(env, 'AN_PUBLIC_APP_THIRDPARTIES_ANGORASIX_HOST', 'http://localhost:10700'),
       viewProjectManagementPath: getFromEnvsOrElse(env, 'AN_PUBLIC_APP_THIRDPARTIES_ANGORASIX_VIEW_PROJECTMGMT', '/managements/:mgmtId'),
+      NoewProjectManagementForProjectPath: getFromEnvsOrElse(env, 'AN_PUBLIC_APP_THIRDPARTIES_ANGORASIX_NEW_PROJECTMGMT_FORPROJECT', '/projects/:projectId/management/new'),
     };
     this.googleAnalytics = {
       id: getFromEnvsOrElse(env, 'AN_PUBLIC_APP_THIRDPARTIES_GOOGLEANALYTICS_ID', 'googleAnalytics123'),
